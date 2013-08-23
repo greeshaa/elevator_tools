@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateStreets < ActiveRecord::Migration
   def change
     create_table :streets do |t|

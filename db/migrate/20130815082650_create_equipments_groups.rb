@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateEquipmentsGroups < ActiveRecord::Migration
   def change
     create_table :equipments_groups do |t|

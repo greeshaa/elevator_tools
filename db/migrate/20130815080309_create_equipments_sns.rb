@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateEquipmentsSns < ActiveRecord::Migration
   def change
     create_table :equipments_sns do |t|

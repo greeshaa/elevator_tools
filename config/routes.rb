@@ -1,5 +1,17 @@
+# -*- encoding : utf-8 -*-
 ElevatorTools::Application.routes.draw do
-  root :to => 'sessions#new'
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
+  root :to => 'sessions#new'#'static_pages#main'
+
+  match '/main',   to: 'static_pages#main'
+  match '/about',   to: 'static_pages#about'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
