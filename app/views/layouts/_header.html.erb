@@ -11,8 +11,11 @@
               Справочники <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
+              <li><%= link_to "Описание", handbook_path %></li>
+              <li><%= link_to "Оборудование", equipment_index_path %></li>
               <li><%= link_to "Адреса", streets_path %></li>
-              <li><%= link_to "Узлы", "#" %></li>
+              <li><%= link_to "Узлы", nodes_path %></li>
+              <li><%= link_to "Лифты", "#" %></li>
             </ul>
           </li>
           <li id="fat-menu" class="dropdown">

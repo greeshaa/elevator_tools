@@ -17,7 +17,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :runame, :password, :password_confirmation
   has_secure_password
-  has_many :microposts, dependent: :destroy
+  #has_many :microposts, dependent: :destroy
 
   before_save { name.downcase! }
   before_save { email.downcase! }

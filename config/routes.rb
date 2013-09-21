@@ -5,7 +5,6 @@ ElevatorTools::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
-  resources :microposts, only: [:create, :destroy]
   resources :streets
   resources :builds
   resources :nodes
@@ -23,13 +22,17 @@ ElevatorTools::Application.routes.draw do
 
   match '/main',   to: 'static_pages#main'
   match '/about',   to: 'static_pages#about'
+  match '/handbook',   to: 'static_pages#handbook'
 
   match '/add_street',  to: 'streets#new'
   match '/add_build',  to: 'builds#new'
   match '/add_node',  to: 'nodes#new'
-  get "streets/show"
-  get "streets/index"
-  get "builds/index"
+  match '/add_equipment', to: 'equipment#new'
+
+
+  #get "streets/show"
+  #get "streets/index"
+  #get "builds/index"
 
 
 

@@ -8,7 +8,4 @@ protect_from_forgery
     sign_out
     super
   end
-  
-
-
 end

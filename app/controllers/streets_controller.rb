@@ -3,7 +3,6 @@
 class StreetsController < ApplicationController
 before_filter :signed_in_user
 
-
   def show
     @street = Street.find(params[:id])
     @builds = @street.builds.paginate(page: params[:page])

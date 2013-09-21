@@ -13,6 +13,10 @@
 
 # -*- encoding : utf-8 -*-
 class Node < ActiveRecord::Base
-  attr_accessible :description, :name
-  belongs_to :build
+  attr_accessible :name, :description, :street_id, :build_id
+  #belongs_to :build
+  #belongs_to :street
+
+  cattr_reader :per_page
+  @@per_page = 10
 end

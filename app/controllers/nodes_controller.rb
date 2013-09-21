@@ -1,5 +1,7 @@
+# -*- encoding : utf-8 -*-
+
 class NodesController < ApplicationController
-	before_filter :signed_in_user
+before_filter :signed_in_user
 
   def show
   	@node = Node.find(params[:id])
@@ -9,7 +11,17 @@ class NodesController < ApplicationController
 
   def new
   	@node = Node.new
-  	@street = Street.all
+  end
+
+  def create
+    @node = Node.new(params[:node])
+    if @node.save
+      okmessage = "УМ " + @node.name + " успешно добавлен."
+      flash[:success] = okmessage
+      redirect_to @node
+    else
+      render 'new'
+    end
   end
 
   def index

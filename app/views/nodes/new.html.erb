@@ -11,8 +11,11 @@
       <%= f.label :description, "Расположение оборудования:" %>
       <%= f.text_field :description %>
 
-      <%= f.label :street_id, "улица" %>
-      <%= f.select (:street_id, street.name) %>
+      <%= f.label :street_id, "Улица" %>
+      <%= f.text_field :street_id %>
+
+      <%= f.label :build_id, "Здание" %>
+      <%= f.text_field :build_id %>
 
       <%= f.submit "Добавить", class: "btn btn-large btn-primary" %>
     <% end %>

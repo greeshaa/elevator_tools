@@ -1,0 +1,14 @@
+<% provide(:title, 'Добавление устройства') %>
+<h1>Добавление устройства</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@equipment) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name, "Название устройства:" %>
+      <%= f.text_field :name %>
+
+      <%= f.submit "Добавить", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

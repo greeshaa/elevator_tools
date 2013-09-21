@@ -1,0 +1,13 @@
+ru:
+  activerecord:
+    models:
+      street: Улица
+    attributes:
+      profile:
+        name: "Название улицы"
+    models:
+      user: Пользователь
+    attributes:
+      profile:
+        name: "Отображаемое имя"
+        phone: Телефон

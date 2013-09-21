@@ -11,8 +11,10 @@
 
 # -*- encoding : utf-8 -*-
 class Build < ActiveRecord::Base
-	attr_accessible :name, :street_id
-	validates :name, presence: true
+    attr_accessible :name, :street_id
+    validates :name, presence: true
     belongs_to :street
     has_many :nodes
+    cattr_reader :per_page
+    @@per_page = 10
 end
