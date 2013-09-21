@@ -1,0 +1,21 @@
+<% provide(:title, @street.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+     <h1>Доступные адреса</h1>
+    </section>
+  </aside>
+</div>
+
+<ul class="users">
+  <%= render @builds %>
+</ul>
+
+<table>
+    <tr>
+    	<td><%= link_to "Показать все улицы", streets_path, class: "btn btn-large btn-primary" %></td>
+    	<td><%= link_to "Редактировать улицу", '#', class: "btn btn-large btn-primary" %></td>
+        <td><%= link_to "Добавить здание", add_build_path, class: "btn btn-large btn-primary" %></td>
+    </tr>
+</table>
+

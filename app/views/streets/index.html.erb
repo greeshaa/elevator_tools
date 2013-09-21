@@ -1,0 +1,12 @@
+<% provide(:title, 'Улицы') %>
+<h1>Улицы</h1>
+
+<td><%= link_to "Добавить улицу", add_street_path, class: "btn btn-large btn-primary" %></td>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @streets %>
+</ul>
+
+<%= will_paginate %> 

@@ -6,7 +6,15 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Главная", main_path %></li>
-          <li><%= link_to "О портале", about_path %></li>
+          <li id="fat-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Справочники <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Адреса", streets_path %></li>
+              <li><%= link_to "Узлы", "#" %></li>
+            </ul>
+          </li>
           <li id="fat-menu" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Пользователи <b class="caret"></b>

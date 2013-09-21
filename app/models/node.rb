@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: nodes
@@ -8,8 +7,12 @@
 #  description :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  street_id   :integer
+#  build_id    :integer
 #
 
+# -*- encoding : utf-8 -*-
 class Node < ActiveRecord::Base
   attr_accessible :description, :name
+  belongs_to :build
 end

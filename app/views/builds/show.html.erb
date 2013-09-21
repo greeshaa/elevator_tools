@@ -1,0 +1,25 @@
+<% provide(:title, @street.name + ', ' + @build.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1><%= @street.name %>, <%= @build.name %></h1>
+    </section>
+  </aside>
+</div>
+<h2>Существующие УМ</h2>
+<ul class="users">
+  <%= render @nodes %>
+</ul>
+<h2>Обслуживаемые лифты</h2>
+<ul class="users">
+
+</ul>
+<table>
+  <tr>
+    <td><%= link_to "Показать все здания", builds_path, class: "btn btn-large btn-primary" %></td>
+    <td><%= link_to "Редактировать здание", '#', class: "btn btn-large btn-primary" %></td>
+    <td><%= link_to "Добавить узел", add_node_path, class: "btn btn-large btn-primary" %></td>
+  </tr>
+</table>
+
+

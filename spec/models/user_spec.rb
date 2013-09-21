@@ -8,6 +8,9 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string(255)
+#  remember_token  :string(255)
+#  runame          :string(255)
+#  admin           :boolean          default(FALSE)
 #
 
 # -*- encoding : utf-8 -*-
@@ -15,18 +18,20 @@
 require 'spec_helper'
 
 describe User do
-  before { @user = User.new(name: "first.last", email: "user@example.com",
+  before { @user = User.new(name: "login", runame: "first.last", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar") }
 
   subject { @user }
 
   it { should respond_to(:name) }
+  it { should respond_to(:runame) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:microposts) }
 
   it { should be_valid }
 
@@ -124,6 +129,30 @@ describe User do
   describe "remember token" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
+  end
+
+  describe "micropost associations" do
+
+    before { @user.save }
+    let!(:older_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right microposts in the right order" do
+      @user.microposts.should == [newer_micropost, older_micropost]
+    end
+    
+    it "should destroy associated microposts" do
+      microposts = @user.microposts.dup
+      @user.destroy
+      microposts.should_not be_empty
+      microposts.each do |micropost|
+        Micropost.find_by_id(micropost.id).should be_nil
+      end
+    end
   end
 
 end

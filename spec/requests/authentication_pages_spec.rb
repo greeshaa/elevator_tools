@@ -32,7 +32,7 @@ describe "Authentication" do
       let(:user) { FactoryGirl.create(:user) }
       before { sign_in user }
 
-      it { should have_selector('title', text: user.name) }
+      it { should have_selector('title', text: user.runame) }
       it { should have_link('Профиль', href: user_path(user)) }
       it { should have_link('Настройки', href: edit_user_path(user)) }
       it { should have_link('Выйти', href: signout_path) }

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: builds
@@ -7,8 +6,10 @@
 #  name       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  street_id  :integer
 #
 
+# -*- encoding : utf-8 -*-
 require 'spec_helper'
 
 describe Build do

@@ -1,0 +1,58 @@
+<% provide(:title, @node.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @node.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+<div>
+
+  <table>
+    <tr>
+      <td>
+        <table border=1>
+    <thead>
+      <td>Адрес:</td>
+      <td>ул.<%= @street.name %>, д. <%= @build.name %></td>
+    </thead>
+      <tr>
+        <td>Расположение оборудования:</td>
+        <td><%= @node.description %></td>
+      </tr>
+      <tr>
+        <td>Основной ip-адрес / провайдер</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Резервный ip-адрес / провайдер</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Подробные сетевые параметры</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Порты обмена данными данные/звук</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Установленное оборудование:</td>
+        <td></td>
+      </tr>
+  </table>
+</div>
+
+    <table>
+    	<tr>
+    		<td>
+    			<%= link_to "Показать все узлы", '#', class: "btn btn-large btn-primary" %>
+    		</td>
+    		<td>
+    			<%= link_to "Редактировать узел", '#', class: "btn btn-large btn-primary" %>
+    		</td>
+    	</tr>
+    </table>

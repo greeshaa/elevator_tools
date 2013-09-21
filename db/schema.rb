@@ -11,16 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823163048) do
+ActiveRecord::Schema.define(:version => 20130921131225) do
 
   create_table "builds", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "street_id"
   end
+
+  add_index "builds", ["street_id"], :name => "index_builds_on_street_id"
 
   create_table "equipment", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "equipment_items", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -45,11 +53,27 @@ ActiveRecord::Schema.define(:version => 20130823163048) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "lifts", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "microposts", :force => true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"
+
   create_table "nodes", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "street_id"
+    t.integer  "build_id"
   end
 
   create_table "streets", :force => true do |t|
@@ -60,10 +84,10 @@ ActiveRecord::Schema.define(:version => 20130823163048) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.string   "email"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.string   "password_digest"
+    t.string   "email"
     t.string   "remember_token"
     t.string   "runame"
     t.boolean  "admin",           :default => false

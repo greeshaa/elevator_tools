@@ -1,3 +1,140 @@
+<% provide(:title, 'Главная') %>
+<div>
+	<p>Статистика</p>
+	<table border=1>
+			<tr>
+				<td><%= link_to "Количество УМ", nodes_path %></td>
+				<td><%= Node.count %></td>
+			</tr>
+			<tr>
+				<td><%= link_to "Количество улиц", streets_path %> </td>
+				<td><%= Street.count %></td>
+			</tr>
+			<tr>
+				<td>Количество домов</td>
+				<td><%= Build.count %></td>
+			</tr>
+			<tr>
+				<td>Количество обслуживаемых лифтов</td>
+				<td></td>
+			</tr>
+	</table>
+	<p>Оборудование</p>
+	<table>
+		<tr>
+			<td>
+				<table border=1>
+		<thead>
+			<td>Всего</td>
+			<td>На складе</td>
+			<td>В работе</td>
+			<td>В ремонте</td>
+		</thead>
+			<tr>
+				<td>Моноблок Eth</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>КЛШ Pro</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>КСЛ Eth</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>ММИ</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Cmotech CNU-550 Pro</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>D-link DIR-100</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+	</table>
+			</td>
+			<td>
+				<table border=1>
+		<thead>
+			<td>Всего</td>
+			<td>На складе</td>
+			<td>В работе</td>
+			<td>В ремонте</td>
+		</thead>
+			
+			<tr>
+				<td>ЛБ 6.0 Pro Otis</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>ЛБ 6.0 Pro УК/УКЛ</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>ЛБ 6.0 Otis</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>ЛБ 6.0 УК/УКЛ</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>ЛБ 6.0 ШУЛК-32</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>ЛБ КДК</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+	</table>
+			</td>
+		</tr>
+	</table>	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---
 <div class="center hero-unit">
 	<h1>Корпоративный портал</h1>
 	<h2><a href="http://www.tomsklift.ru">ЗАО Томсклифтремонт</a></h2>
@@ -5,4 +142,4 @@
 	<h6>Вход только для сотрудников компании.</h6>
 </div>
 
-<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+--->

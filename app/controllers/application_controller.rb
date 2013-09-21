@@ -9,8 +9,6 @@ protect_from_forgery
     super
   end
   
-  def signed_in_user
-    redirect_to signin_url, notice: "Пожалуйста, авторизируйтесь!" unless signed_in?
-  end
+
 
 end

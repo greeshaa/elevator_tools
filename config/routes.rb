@@ -1,16 +1,37 @@
 # -*- encoding : utf-8 -*-
 ElevatorTools::Application.routes.draw do
-  resources :users
+
+  
+
   resources :sessions, only: [:new, :create, :destroy]
+  resources :users
+  resources :microposts, only: [:create, :destroy]
+  resources :streets
+  resources :builds
+  resources :nodes
+  resources :equipment
+
+  # unless signed_in?
+    root :to => 'sessions#new'
+  #  root :to => 'static_pages#main'
+  # end
+  
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  root :to => 'sessions#new'#'static_pages#main'
-
   match '/main',   to: 'static_pages#main'
   match '/about',   to: 'static_pages#about'
+
+  match '/add_street',  to: 'streets#new'
+  match '/add_build',  to: 'builds#new'
+  match '/add_node',  to: 'nodes#new'
+  get "streets/show"
+  get "streets/index"
+  get "builds/index"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
