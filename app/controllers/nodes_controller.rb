@@ -10,7 +10,9 @@ before_filter :signed_in_user
   end
 
   def new
-  	@node = Node.new
+    @node = Node.new
+    @streets = Street.all
+    @builds = Build.all #find_by_id(:street_id)
   end
 
   def create

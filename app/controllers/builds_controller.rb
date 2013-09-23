@@ -6,7 +6,7 @@ before_filter :signed_in_user
   def show
   	@build = Build.find(params[:id])
   	@street = Street.find_by_id(@build.street_id)
-    @nodes = @build.nodes.paginate(page: params[:page])
+      @nodes = @build.nodes.paginate(page: params[:page])
   end
 
   def new

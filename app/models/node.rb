@@ -14,8 +14,8 @@
 # -*- encoding : utf-8 -*-
 class Node < ActiveRecord::Base
   attr_accessible :name, :description, :street_id, :build_id
-  #belongs_to :build
-  #belongs_to :street
+  belongs_to :build
+  belongs_to :street
 
   cattr_reader :per_page
   @@per_page = 10

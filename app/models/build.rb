@@ -14,7 +14,7 @@ class Build < ActiveRecord::Base
     attr_accessible :name, :street_id
     validates :name, presence: true
     belongs_to :street
-    has_many :nodes
+    has_one :node
     cattr_reader :per_page
     @@per_page = 10
 end
