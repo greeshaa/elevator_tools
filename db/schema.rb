@@ -11,7 +11,63 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921131225) do
+ActiveRecord::Schema.define(:version => 20131019083519) do
+
+  create_table "builds", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "street_id"
+  end
+
+  create_table "equipment", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "lifts", :force => true do |t|
+    t.integer  "node_id"
+    t.integer  "porch_id"
+    t.integer  "build_id"
+    t.integer  "street_id"
+    t.string   "regnum"
+    t.string   "sernum"
+    t.string   "manufacturer"
+    t.integer  "capacity"
+    t.integer  "stopscount"
+    t.string   "owner"
+    t.string   "contract"
+    t.integer  "introduced_at"
+    t.integer  "overhaul_at"
+    t.integer  "standart_life"
+    t.integer  "end_of_service_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "lifttype"
+  end
+
+  create_table "nodes", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "street_id"
+    t.integer  "build_id"
+  end
+
+  create_table "porches", :force => true do |t|
+    t.integer  "build_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "streets", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -31,41 +87,6 @@ ActiveRecord::Schema.define(:version => 20130921131225) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "streets", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "builds", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "street_id"
-  end
-
-  add_index "builds", ["street_id"], :name => "index_builds_on_street_id"
-
-  create_table "equipment", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "lifts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "nodes", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "street_id"
-    t.integer  "build_id"
   end
 
 end

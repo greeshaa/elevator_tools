@@ -11,10 +11,10 @@
       <%= f.label :description, "Расположение оборудования:" %>
       <%= f.text_field :description %>
 
-      <%= f.label :description, "Улица:" %>
+      <%= f.label :street_id, "Улица:" %>
       <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name) %>
 
-      <%= f.label :description, "Здание:" %>
+      <%= f.label :build_id, "Здание:" %>
       <%= f.select :build_id, options_from_collection_for_select(@builds, :id, :name) %>
 
       <script>

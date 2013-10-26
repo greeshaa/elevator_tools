@@ -17,7 +17,7 @@
         <table border=1>
     <thead>
       <td>Адрес:</td>
-      <td>ул.<%= @street.name %>, д. <%= @build.name %></td>
+      <td>ул.<%= @street %>, д. <%= @build.name %></td>
     </thead>
       <tr>
         <td>Расположение оборудования:</td>
@@ -49,10 +49,10 @@
     <table>
     	<tr>
     		<td>
-    			<%= link_to "Показать все узлы", '#', class: "btn btn-large btn-primary" %>
+    			<%= link_to "Показать все узлы", nodes_path, class: "btn btn-mini" %>
     		</td>
     		<td>
-    			<%= link_to "Редактировать узел", '#', class: "btn btn-large btn-primary" %>
+    			<%= link_to "Редактировать узел", edit_node_path, class: "btn btn-mini" %>
     		</td>
     	</tr>
     </table>

@@ -13,7 +13,10 @@ class Street < ActiveRecord::Base
   attr_accessible :name
   validates :name, presence: true, uniqueness: true
   has_many :builds
-  has_many :nodes, through: :builds
-  cattr_reader :per_page
-  @@per_page = 10
+  #has_many :nodes #, through: :builds
+
+
+  
+  # cattr_reader :per_page
+  # @@per_page = 16
 end

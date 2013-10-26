@@ -1,0 +1,45 @@
+<% provide(:title, @lift.regnum) %>
+<div class="span10">
+ <h4>Данный лифт относится к <%= link_to @node.name, @node %>, который расположен на <%= @node.street.name %>, <%= @node.build.name %></h4>
+<table class="table table-hover table-condensed table-bordered">
+    <thead>
+      <td>Адрес</td>
+      <td>Подъезд</td>
+      <td>Рег. номер</td>
+      <td>Зав. номер</td>
+      <td>Изготовитель</td>
+      <td>Тип лифта</td>
+      <td>Грузоп-сть</td>
+      <td>Кол-во остановок</td>
+      <td>Собственник</td>
+      <td>Договор</td>
+      <td>Год ввода </td>
+      <td>Год модернизации</td>
+      <td>Норм. срок службы</td>
+      <td>Год вывода </td>
+    </thead>
+    <tr>
+        <td>ул.<%= @street.name %>, д. <%= @build.name %></td>
+        <td><%= @porch.name %></td>
+        <td><%= @lift.regnum %></td>
+        <td><%= @lift.sernum %></td>
+        <td><%= @lift.manufacturer %></td>
+        <td><%= @lift.lifttype %></td>
+        <td><%= @lift.capacity %></td>
+        <td><%= @lift.stopscount %></td>
+        <td><%= @lift.owner %></td>
+        <td><%= @lift.contract %></td>
+        <td><%= @lift.introduced_at %></td>
+        <td><%= @lift.overhaul_at %></td>
+        <td><%= @lift.standart_life %></td>
+        <td><%= @lift.end_of_service_at %></td>
+    </tr>
+</table>
+<table>
+    	<tr>
+    		<td><%= link_to "Показать все лифты дома", '#', class: "btn btn-small" %></td>
+           <td><%= link_to "Показать все лифты узла", '#', class: "btn btn-small" %></td>
+    		<td><%= link_to "Редактировать информацию о лифте", '#', class: "btn btn-small" %></td>
+    	</tr>
+</table>
+</div>

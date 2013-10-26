@@ -1,0 +1,12 @@
+<% provide(:title, 'Лифты') %>
+<h1>Лифты</h1>
+
+<td><%= link_to "Добавить Лифт", add_lift_path, class: "btn btn-mini" %></td>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @lifts %>
+</ul>
+
+<%= will_paginate %> 

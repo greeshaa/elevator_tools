@@ -5,18 +5,21 @@ before_filter :signed_in_user
 
   def show
   	@build = Build.find(params[:id])
-  	@street = Street.find_by_id(@build.street_id)
-      @nodes = @build.nodes.paginate(page: params[:page])
+      @street = @build.street.name
+      @node = @build.node
+      @porches = @build.porches#.paginate(page: params[:page])
+      @streets = @build.street.id.to_s
   end
 
   def new
   	@build = Build.new
+     @streets = Street.all
   end
 
   def create
     @build = Build.new(params[:build])
     if @build.save
-    	okmessage = "Здание " + @build.name + " успешно добавлено."
+    	okmessage = "Здание "  + @build.name + " успешно добавлено."
       flash[:success] = okmessage
       redirect_to @build
     else
@@ -25,6 +28,6 @@ before_filter :signed_in_user
   end
 
   def index
-  	#@builds = Build.paginate(page: params[:page])
+  	@builds = Build.all #paginate(page: params[:page])
   end
 end

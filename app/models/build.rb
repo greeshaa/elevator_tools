@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: builds
@@ -14,7 +15,12 @@ class Build < ActiveRecord::Base
     attr_accessible :name, :street_id
     validates :name, presence: true
     belongs_to :street
-    has_one :node
-    cattr_reader :per_page
-    @@per_page = 10
+    belongs_to :node
+    #has_many :nodes
+    has_many :porches
+    #has_one :node
+
+
+    #cattr_reader :per_page
+    #@@per_page = 10
 end

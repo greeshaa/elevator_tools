@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: nodes
@@ -11,12 +12,15 @@
 #  build_id    :integer
 #
 
-# -*- encoding : utf-8 -*-
 class Node < ActiveRecord::Base
   attr_accessible :name, :description, :street_id, :build_id
+  belongs_to :porch
   belongs_to :build
   belongs_to :street
+  has_many :lifts
+  has_many :builds
+  has_many :equip_pool
 
   cattr_reader :per_page
-  @@per_page = 10
+  @@per_page = 16
 end

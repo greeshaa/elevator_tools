@@ -5,8 +5,10 @@ before_filter :signed_in_user
 
   def show
   	@node = Node.find(params[:id])
-  	@street = Street.find_by_id(@node.street_id) 
-  	@build = Build.find_by_id(@node.build_id)  	
+      @porch = @node.porch
+      @build = @node.build
+      @street = @node.street.name
+  	
   end
 
   def new
@@ -28,5 +30,16 @@ before_filter :signed_in_user
 
   def index
   	@nodes = Node.paginate(page: params[:page])
+      @build = @nodes.build
+  end
+
+  def update
+    @node = Node.find(params[:id])
+    if @node.update_attributes(params[:node])
+      flash[:success] = "УМ " + @node.name + " обновлен"
+      redirect_to @node
+    else
+      render 'edit'
+    end
   end
 end

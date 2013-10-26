@@ -1,0 +1,23 @@
+<% provide(:title, @street + ', ' + @build.name + ' - ' + @porch.name ) %>
+<div class="span8">
+<div class="row">
+  <aside class="span8">
+    <section>
+      <h1><%= @street %>, <%= @build.name %></h1>
+      <h4>Данный адрес относится к <%= link_to @node.name, @node %>, который расположен на <%= @node.street.name %>, <%= @node.build.name %></h4>
+      <h5><%= @porch.name %></h5>
+    </section>
+  </aside>
+</div>
+<h2>Обслуживаемые лифты</h2>
+<ul class="users">
+ <%= render @lifts %>
+</ul>
+<table>
+  <tr>
+    <td><%= link_to "Показать все здания", builds_path, class: "btn btn-mini" %></td>
+    <td><%= link_to "Редактировать здание", '#', class: "btn btn-mini" %></td>
+    <td><%= link_to "Добавить узел", add_node_path, class: "btn btn-mini" %></td>
+  </tr>
+</table>
+</div>

@@ -1,24 +1,5 @@
 <% provide(:title, 'Главная') %>
-<div>
-	<p>Статистика</p>
-	<table border=1>
-			<tr>
-				<td><%= link_to "Количество УМ", nodes_path %></td>
-				<td><%= Node.count %></td>
-			</tr>
-			<tr>
-				<td><%= link_to "Количество улиц", streets_path %> </td>
-				<td><%= Street.count %></td>
-			</tr>
-			<tr>
-				<td>Количество домов</td>
-				<td><%= Build.count %></td>
-			</tr>
-			<tr>
-				<td>Количество обслуживаемых лифтов</td>
-				<td></td>
-			</tr>
-	</table>
+<div class="span8">
 	<p>Оборудование</p>
 	<table>
 		<tr>
@@ -118,16 +99,27 @@
 		</tr>
 	</table>	
 </div>
-
-
-
-
-
-
-
-
-
-
+<div class="span3 offset9">
+	<p>Статистика</p>
+	<table border=1>
+			<tr>
+				<td><%= link_to "Количество УМ", nodes_path %></td>
+				<td><%= Node.count %></td>
+			</tr>
+			<tr>
+				<td><%= link_to "Количество улиц", streets_path %> </td>
+				<td><%= Street.count %></td>
+			</tr>
+			<tr>
+				<td>Количество домов</td>
+				<td><%= Build.count %></td>
+			</tr>
+			<tr>
+				<td><%= link_to "Количество обслуживаемых лифтов", lifts_path %></td>
+				<td><%= Lift.count %></td>
+			</tr>
+	</table>
+</div>
 
 
 

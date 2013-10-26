@@ -1,0 +1,23 @@
+<% provide(:title, 'Добавление нового лифта') %>
+<h1>Добавление нового лифта</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@lift) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :regnum, "Номер лифта:" %>
+      <%= f.number_field :regnum %>
+
+      <%= f.label :street_id, "Улица:" %>
+      <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name) %>
+
+      <%= f.label :build_id, "Здание:" %>
+      <%= f.select :build_id, options_from_collection_for_select(@builds, :id, :name) %>
+
+      <%= f.label :porch_id, "Подъезд:" %>
+      <%= f.select :porch_id, options_from_collection_for_select(@porch, :id, :name) %>
+
+      <%= f.submit "Добавить", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

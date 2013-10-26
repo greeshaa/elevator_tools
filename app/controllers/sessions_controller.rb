@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by_name(params[:session][:name].downcase)
     if user && user.authenticate(params[:session][:password])
       sign_in user
-      redirect_to user #main_path
+      redirect_to main_path
     else
       flash.now[:error] = 'Неверная комбинация "Имя пользователя/Пароль"' # Not quite right!
       render 'new'

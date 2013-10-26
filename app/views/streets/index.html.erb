@@ -1,12 +1,9 @@
 <% provide(:title, 'Улицы') %>
+<div class="span8">
 <h1>Улицы</h1>
-
-<td><%= link_to "Добавить улицу", add_street_path, class: "btn btn-large btn-primary" %></td>
-
-<%= will_paginate %>
+<div align: "right"><td><%= link_to "Добавить улицу", add_street_path, class: "btn btn-mini" %></td></div>
 
 <ul class="users">
   <%= render @streets %>
 </ul>
-
-<%= will_paginate %> 
+</div>

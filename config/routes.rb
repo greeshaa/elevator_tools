@@ -9,6 +9,9 @@ ElevatorTools::Application.routes.draw do
   resources :builds
   resources :nodes
   resources :equipment
+  resources :lifts
+  resources :porches
+
 
   # unless signed_in?
     root :to => 'sessions#new'
@@ -28,6 +31,7 @@ ElevatorTools::Application.routes.draw do
   match '/add_build',  to: 'builds#new'
   match '/add_node',  to: 'nodes#new'
   match '/add_equipment', to: 'equipment#new'
+  match '/add_lift', to: 'lifts#new'
 
 
   #get "streets/show"

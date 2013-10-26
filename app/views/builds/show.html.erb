@@ -1,25 +1,26 @@
-<% provide(:title, @street.name + ', ' + @build.name) %>
+<% provide(:title, @street + ', ' + @build.name) %>
+<div class="span8">
 <div class="row">
   <aside class="span4">
     <section>
-      <h1><%= @street.name %>, <%= @build.name %></h1>
+      <h1><%= @street %>, <%= @build.name %></h1>
     </section>
   </aside>
 </div>
-<h2>Существующие УМ</h2>
-<ul class="users">
-  <%= render @nodes %>
-</ul>
-<h2>Обслуживаемые лифты</h2>
-<ul class="users">
 
+
+<h4>Данный адрес относится к <%= link_to @node.name, @node %>, который расположен на <%= @node.street.name %>, <%= @node.build.name %></h4>
+
+<h2>Подъезды</h2>
+<ul class="users">
+  <%= render @porches %>
 </ul>
+
 <table>
   <tr>
-    <td><%= link_to "Показать все здания", builds_path, class: "btn btn-large btn-primary" %></td>
-    <td><%= link_to "Редактировать здание", '#', class: "btn btn-large btn-primary" %></td>
-    <td><%= link_to "Добавить узел", add_node_path, class: "btn btn-large btn-primary" %></td>
+    <td><%= link_to "Показать все здания улицы", '/streets/' + @streets, class: "btn btn-small" %></td>
+    <td><%= link_to "Редактировать здание", '#', class: "btn btn-small" %></td>
+    <td><%= link_to "Добавить подъезд", '#', class: "btn btn-small" %></td>
   </tr>
 </table>
-
-
+</div>

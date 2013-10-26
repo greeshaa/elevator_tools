@@ -38,7 +38,7 @@ before_filter :signed_in_user
   end
 
   def index
-    @streets = Street.paginate(page: params[:page])
+    @streets = Street.all #paginate(page: params[:page])
   end
 
 end
