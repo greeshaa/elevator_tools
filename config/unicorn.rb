@@ -1,4 +1,4 @@
-root = "/home/rorbot/apps/elevator_tools/current"
+root = "/var/www/rorbot/apps/elevator_tools/current"
 working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"

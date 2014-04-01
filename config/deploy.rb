@@ -6,7 +6,7 @@ server "78.139.199.30", :web, :app, :db, primary: true
 set :application, "elevator_tools"
 set :user, "rorbot"
 set :port, 22
-set :deploy_to, "/home/#{user}/apps/#{application}"
+set :deploy_to, "/var/www/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
