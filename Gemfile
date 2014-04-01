@@ -29,7 +29,7 @@ group :development, :test do
 end	
 
 group :test do
-	#gem 'mysql2'
+	gem 'mysql2'
 	gem 'capybara', '1.1.2'
 	gem 'rb-fsevent', '0.9.1', :require => false
 	gem 'growl', '1.0.3'
@@ -56,8 +56,8 @@ group :assets do
   #gem 'less-rails'
   #gem 'libv8', '3.16.14.3'
   gem 'bootstrap-sass', '~> 3.1.1'
-  gem 'twitter-bootswatch-rails', '~> 3.1.1'
-  gem 'twitter-bootswatch-rails-helpers'
+  #gem 'twitter-bootswatch-rails', '~> 3.1.1'
+  #gem 'twitter-bootswatch-rails-helpers'
   #gem "select2-rails"
   
   
