@@ -1,3 +1,8 @@
-<li>
-      <%= link_to lift.regnum, lift %>
-</li>
+<tr>
+   <td class="col-md-3">
+      <%= lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name%>
+   </td>
+   <td>
+      <%= link_to 'Лифт ' + lift.function + ' - ' + lift.capacity.to_s + ' кг. - '  + lift.stopscount.to_s + ' остановок', lift %>
+    </td>
+</tr>

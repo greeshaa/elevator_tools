@@ -1,0 +1,24 @@
+<% provide(:title, 'Перемещение оборудования') %>
+<h1>Перемещение оборудования</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@e_move) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :equipment_id, "Устройство:" %>
+      <%= f.select :equipment_id, options_from_collection_for_select(@equipment, :id, :name) %>
+
+      <%= f.label :node_id, "Улица:" %>
+      <%= f.select :node_id, options_from_collection_for_select(@node, :id, :name) %>
+
+      <%= f.label :movement, "Описание перемещения:"  %>
+      <%= f.text_field :movement %>
+
+      <%= f.label :reason, "Причина перемещения:" %>
+      <%= f.text_field :reason %>
+
+      <%= f.submit "Добавить", class: "btn btn-mini" %>
+    <% end %>
+  </div>
+</div>
+# Поступление на склад, Перемещение на склад, Перемещение на адрес, Перемещение в ремонт, Списание

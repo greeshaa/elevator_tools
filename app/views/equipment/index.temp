@@ -1,0 +1,6 @@
+<h4>Оборудование зарегистрированное в системе:</h4>
+<%= will_paginate  %>
+<table class="table table-striped table-bordered table-condensed">
+  <%= render @equipment %>
+</table>
+<%= will_paginate %>

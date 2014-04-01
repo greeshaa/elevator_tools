@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-
 class PorchesController < ApplicationController
 before_filter :signed_in_user
 
@@ -20,17 +19,18 @@ before_filter :signed_in_user
   end
 
   def create
-    @node = Node.new(params[:node])
-    if @node.save
-      okmessage = "УМ " + @node.name + " успешно добавлен."
+    @porch = Porch.new(params[:porch])
+    if @porch.save
+      okmessage = "УМ " + @porch.name + " успешно добавлен."
       flash[:success] = okmessage
-      redirect_to @node
+      redirect_to @build
     else
       render 'new'
     end
   end
 
   def index
-  	@nodes = Node.paginate(page: params[:page])
+  	@porches = Porch.all 
   end
+
 end

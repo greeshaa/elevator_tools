@@ -1,28 +1,28 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: lifts
 #
-#  id                :integer          not null, primary key
-#  node_id           :integer
-#  porch_id          :integer
-#  build_id          :integer
-#  street_id         :integer
-#  regnum            :string(255)
-#  sernum            :string(255)
-#  manufacturer      :string(255)
-#  capacity          :integer
-#  stopscount        :integer
-#  owner             :string(255)
-#  contract          :string(255)
-#  introduced_at     :integer
-#  overhaul_at       :integer
-#  standart_life     :integer
-#  end_of_service_at :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  lifttype          :string(255)
+#  id                          :integer          not null, primary key
+#  node_id                     :integer
+#  porch_id                    :integer
+#  regnum                      :string(255)
+#  sernum                      :string(255)
+#  stopscount                  :integer
+#  introduced_at               :integer
+#  overhaul_at                 :integer
+#  standart_life               :integer
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  position                    :string(255)
+#  lift_type_id                :integer
+#  elevator_control_station_id :integer
+#  contract_id                 :integer
+#  mechanic_id                 :integer
+#  inspection_at               :date
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 

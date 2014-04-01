@@ -10,8 +10,10 @@
 #  updated_at  :datetime         not null
 #  street_id   :integer
 #  build_id    :integer
+#  porch_id    :integer
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 

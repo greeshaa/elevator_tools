@@ -11,8 +11,9 @@
 #
 
 class Porch < ActiveRecord::Base
-  attr_accessible  :name, :builds_id
+  attr_accessible  :name, :build_id
   belongs_to :build
+  belongs_to :street
   has_one :node
   has_many :lifts
 end

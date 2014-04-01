@@ -1,11 +1,14 @@
 # -*- encoding : utf-8 -*-
-
 class StreetsController < ApplicationController
 before_filter :signed_in_user
 
+  def index
+    @streets = Street.search(params[:search]).sort_by(&:"#{:name}")
+  end
+
   def show
     @street = Street.find(params[:id])
-    @builds = @street.builds.paginate(page: params[:page])
+    @builds = @street.builds.order(:name).paginate(page: params[:page])
   end
 
   def new
@@ -36,9 +39,4 @@ before_filter :signed_in_user
       render 'edit'
     end
   end
-
-  def index
-    @streets = Street.all #paginate(page: params[:page])
-  end
-
 end

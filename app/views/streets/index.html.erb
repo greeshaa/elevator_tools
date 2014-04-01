@@ -1,9 +1,26 @@
-<% provide(:title, 'Улицы') %>
-<div class="span8">
-<h1>Улицы</h1>
-<div align: "right"><td><%= link_to "Добавить улицу", add_street_path, class: "btn btn-mini" %></td></div>
-
-<ul class="users">
-  <%= render @streets %>
-</ul>
+<% provide(:title, 'Список улиц') %>
+<%= form_tag(streets_path, method:"get", class:"form-inline col-md-10 col-md-offset-1", role:"form") do %>
+  <legend>Улицы</legend>
+  <div class="input-group input-group-sm col-md-7">
+    <label class="sr-only" for="search">streets</label>
+    <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по названию улицы"}) %>
+    <div class="input-group-btn">
+      <%= submit_tag("Найти", class:"btn btn-default") %>
+      <div class="btn-group">
+        <%= link_to "Добавить улицу", add_street_path, class: "btn btn-default btn-sm" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div>
+  <div class="col-md-10 col-md-offset-1 list" >
+    <table class="col-md-7 table-bordered table-condensed table-striped">
+      <tr>
+        <th>Название улицы</th>
+        <th>Здания</th>
+        <th>Лифты</th>
+      </tr>
+      <%= render @streets %>
+    </table>
+  </div>
 </div>

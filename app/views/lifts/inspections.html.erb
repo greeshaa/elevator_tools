@@ -1,0 +1,44 @@
+<% provide(:title, 'Освидетельствование лифтов') %>
+  <div class="row">
+   <div class="">
+      <table class="table table-striped table-bordered table-condensed">
+        <tr>
+          <th>Лифт</th>
+          <th>Район</th>
+          <th>Собственник</th>
+          <th>№ договора</th>
+          <th>ЗАО/ООО</th>
+          <th>Экспертная организация</th>
+          <th>Оплата</th>
+          <th>Запланированная дата</th>
+          <th>Фактическая дата</th>
+        </tr>
+        <% @lifts.each do |lift| %>
+        <tr>
+          <td class="title_left">
+            <%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %> 
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <% if lift.inspections.last.nil? %>
+          <td colspan="2">
+              
+          </td>
+          <% else %>
+          <% if lift.inspections.last.plained_at.nil? %>
+          <td></td>
+          <% else %>
+          <td><%= lift.inspections.last.plained_at.strftime("%d.%m.%Y") %></td>
+          <% end %>
+          <td><%= lift.inspections.last.inspection_at.strftime("%d.%m.%Y") %>
+          </td>     
+          <% end %>
+        </tr>
+        <% end %>   
+      </table>
+    </div>
+   </div>

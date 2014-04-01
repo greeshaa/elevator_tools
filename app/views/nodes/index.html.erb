@@ -1,12 +1,23 @@
-<% provide(:title, 'Узлы') %>
-<h1>Узловые модули</h1>
-
-<td><%= link_to "Добавить УМ", add_node_path, class: "btn btn-small btn-primary" %></td>
-
-<%= will_paginate %>
-
-<ul class="users">
-  <%= render @nodes %>
-</ul>
-
-<%= will_paginate %> 
+<% provide(:title, 'Узловые модули') %>
+<%= form_tag(nodes_path, method:"get", class:"form-inline col-md-10 col-md-offset-1", role:"form") do %>
+	<legend>Узловые модули</legend>
+	<div class="input-group input-group-sm col-md-7">
+    <label class="sr-only" for="search">nodes</label>
+    <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по номеру УМ"}) %>
+    <div class="input-group-btn">
+    	<%= submit_tag("Найти", class:"btn btn-default") %>
+    	<div class="btn-group">
+        <%= link_to "Добавить УМ", add_node_path, class: "btn btn-default btn-sm" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div>
+	<div class="col-md-10 col-md-offset-1 list" >
+		<table class="col-md-7 table-bordered table-condensed table-striped">
+			<% unless @nodes.nil? %>
+				<%= render @nodes %>
+			<% end %>
+		</table>
+	</div>
+</div>

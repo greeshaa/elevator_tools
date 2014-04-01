@@ -1,22 +1,22 @@
 # -*- encoding : utf-8 -*-
 ElevatorTools::Application.routes.draw do
 
-  
+    root :to => 'static_pages#main'
+
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
+  resources :address
   resources :streets
   resources :builds
-  resources :nodes
-  resources :equipment
-  resources :lifts
   resources :porches
-
-
-  # unless signed_in?
-    root :to => 'sessions#new'
-  #  root :to => 'static_pages#main'
-  # end
+  resources :lifts 
+  resources :nodes
+  resources :equipment_types
+  resources :equipment_lists
+  resources :equipment
+  resources :equipment_movements
+  
   
 
   match '/signup',  to: 'users#new'
@@ -26,13 +26,22 @@ ElevatorTools::Application.routes.draw do
   match '/main',   to: 'static_pages#main'
   match '/about',   to: 'static_pages#about'
   match '/handbook',   to: 'static_pages#handbook'
+  match '/test',   to: 'static_pages#test'
+  match 'lifts_inspections',   to: 'lifts#inspections'
+  match 'equipment_search', to: 'equipment#search'
+  match 'equipment_store', to: 'equipment#store'
+  match 'equipment_broken', to: 'equipment#broken'
+
 
   match '/add_street',  to: 'streets#new'
+  match '/list_street',  to: 'streets#list'
   match '/add_build',  to: 'builds#new'
   match '/add_node',  to: 'nodes#new'
-  match '/add_equipment', to: 'equipment#new'
   match '/add_lift', to: 'lifts#new'
-
+  match '/add_e_type', to: 'equipment_types#new'
+  match '/add_e_list', to: 'equipment_lists#new'
+  match '/add_equipment', to: 'equipment#new'
+  match 'equipment/:id/move_equipment', to: 'equipment_movements#new', :as => :move_equipment
 
   #get "streets/show"
   #get "streets/index"

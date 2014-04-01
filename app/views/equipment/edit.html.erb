@@ -5,10 +5,19 @@
     <%= form_for(@equipment) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name, "Название устройства:" %>
-      <%= f.text_field :name %>
+      <%= f.label :equipment_list_id, "Устройство:" %>
+      <%= f.select :equipment_list_id,  options_from_collection_for_select(@e_lists, :id, :name) %>
 
-      <%= f.submit "Изменить", class: "btn btn-large btn-primary" %>
+      <%= f.label :factory_sn, "Серийный номер:" %>
+      <%= f.text_field :factory_sn %>
+
+      <%= f.label :sn, "Инвентарный номер:" %>
+      <%= f.text_field :sn %>
+
+      <%= f.label :notes, "Описание:" %>
+      <%= f.text_area(:notes, rows: 6)  %>
+
+      <%= f.submit "Изменить", class: "btn btn-mini" %>
     <% end %>
   </div>
 </div>

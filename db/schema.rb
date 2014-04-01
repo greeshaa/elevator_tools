@@ -11,40 +11,139 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131019083519) do
+ActiveRecord::Schema.define(:version => 20140312152130) do
 
   create_table "builds", :force => true do |t|
+    t.integer  "street_id"
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "node_id"
+    t.integer  "porch_count"
+  end
+
+  create_table "contracts", :force => true do |t|
+    t.integer  "partner_id"
+    t.string   "number"
+    t.date     "signed_at"
+    t.date     "lifetime"
+    t.string   "note"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "destinations", :force => true do |t|
+    t.integer  "node_id"
+    t.integer  "lift_id"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "street_id"
+  end
+
+  create_table "elevator_control_stations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "equipment", :force => true do |t|
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "equipment_list_id"
+    t.string   "factory_sn"
+    t.date     "installed_at"
+    t.string   "notes"
+    t.integer  "destination_id"
+    t.integer  "node_id"
+    t.integer  "lift_id"
+  end
+
+  create_table "equipment_lists", :force => true do |t|
+    t.integer  "equipment_type_id"
+    t.string   "manufacturer"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "equipment_movements", :force => true do |t|
+    t.integer  "destination_id"
+    t.integer  "equipment_id"
+    t.string   "movement"
+    t.string   "reason"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "user_id"
+    t.integer  "node_id"
+  end
+
+  create_table "equipment_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "inspections", :force => true do |t|
+    t.integer  "lift_id"
+    t.date     "inspection_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "lift_types", :force => true do |t|
+    t.integer  "manufacturer_id"
+    t.string   "model"
+    t.string   "function"
+    t.string   "doors"
+    t.integer  "capacity"
+    t.integer  "speed"
+    t.integer  "elevation"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "lifts", :force => true do |t|
     t.integer  "node_id"
     t.integer  "porch_id"
-    t.integer  "build_id"
-    t.integer  "street_id"
     t.string   "regnum"
     t.string   "sernum"
-    t.string   "manufacturer"
-    t.integer  "capacity"
     t.integer  "stopscount"
-    t.string   "owner"
-    t.string   "contract"
     t.integer  "introduced_at"
     t.integer  "overhaul_at"
     t.integer  "standart_life"
-    t.integer  "end_of_service_at"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.string   "lifttype"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.string   "position"
+    t.integer  "lift_type_id"
+    t.integer  "elevator_control_station_id"
+    t.integer  "contract_id"
+    t.integer  "mechanic_id"
+    t.date     "inspection_at"
+    t.date     "made_at"
+    t.integer  "manufacturer_id"
+    t.string   "manufacturer"
+    t.string   "model"
+    t.string   "function"
+    t.string   "doors"
+    t.integer  "capacity"
+    t.integer  "speed",                       :limit => 3
+    t.integer  "elevation",                   :limit => 3
+  end
+
+  create_table "manufacturers", :force => true do |t|
+    t.string   "short_name"
+    t.string   "full_name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "mechanics", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "nodes", :force => true do |t|
@@ -54,6 +153,13 @@ ActiveRecord::Schema.define(:version => 20131019083519) do
     t.datetime "updated_at",  :null => false
     t.integer  "street_id"
     t.integer  "build_id"
+    t.integer  "porch_id"
+  end
+
+  create_table "partners", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "porches", :force => true do |t|
@@ -61,6 +167,36 @@ ActiveRecord::Schema.define(:version => 20131019083519) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "primary_ip_addresses", :force => true do |t|
+    t.string   "ip"
+    t.string   "mask"
+    t.string   "gate"
+    t.integer  "provider_id"
+    t.integer  "node_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "providers", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "contact"
+    t.string   "note"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "secondary_ip_addresses", :force => true do |t|
+    t.string   "ip"
+    t.string   "mask"
+    t.string   "gate"
+    t.integer  "provider_id"
+    t.integer  "node_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "streets", :force => true do |t|
@@ -78,6 +214,9 @@ ActiveRecord::Schema.define(:version => 20131019083519) do
     t.string   "remember_token"
     t.string   "runame"
     t.boolean  "admin",           :default => false
+    t.boolean  "foreman"
+    t.boolean  "lask"
+    t.boolean  "management"
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true

@@ -1,32 +1,26 @@
 <% provide(:title, 'Добавление узлового модуля') %>
-<h1>Добавление узлового модуля</h1>
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@node, :remote => true) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :name, "Номер узлового модуля:" %>
-      <%= f.text_field :name %>
-
-      <%= f.label :description, "Расположение оборудования:" %>
-      <%= f.text_field :description %>
-
-      <%= f.label :street_id, "Улица:" %>
-      <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name) %>
-
-      <%= f.label :build_id, "Здание:" %>
-      <%= f.select :build_id, options_from_collection_for_select(@builds, :id, :name) %>
-
-      <script>
-            var changeStreets = function () {
-            location.href='?street_id=' + streetsSelect.options[streetsSelect.selectedIndex].value;
-            };
-            var streetsSelect = document.getElementById('node_street_id');
-
-            streetsSelect.onchange = changeStreets;
-      </script>
-
-      <%= f.submit "Добавить", class: "btn btn-large btn-primary" %>
-    <% end %>
+<%= form_for(@node, html:{class:"form-horizontal col-md-10 col-md-offset-1", role:"form"} ) do |f| %>
+<fieldset>
+  <legend>Добавление узлового модуля</legend>
+  <div class="container">
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+  <%= f.label :name, "Номер узлового модуля:" %>
+  <%= f.text_field :name, class:"form-control", placeholder:"Номер узлового модуля" %>
   </div>
-</div>
+  <div class="form-group">
+  <%= f.label :description, "Расположение оборудования:" %>
+  <%= f.text_field :description, class:"form-control", placeholder:"Расположение оборудования" %>
+  </div>
+  <div class="form-group">
+  <%= f.label :street_id, "Улица:" %>
+  <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name) %>
+  </div>
+  <div class="form-group">
+  <%= f.label :build_id, "Здание:" %>
+  <%= f.select :build_id, options_from_collection_for_select(@builds, :id, :name) %>
+  </div>
+  <%= f.submit "Добавить", class: "btn btn-default" %>
+</div>  
+</fieldset>
+<% end %>

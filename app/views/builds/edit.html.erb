@@ -1,0 +1,23 @@
+<% provide(:title, 'Редактирование здания') %>
+<h1>Редактирование здания</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@build) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :street_id, "Улица:" %>
+      <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name) %>
+
+      <%= f.label :name, "Номер здания:" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :porch_count, "Количество подъездов:" %>
+      <%= f.text_field :porch_count %>
+
+      <%= f.label :node_id, "Улица:" %>
+      <%= f.select :node_id, options_from_collection_for_select(@nodes, :id, :name) %>
+
+      <%= f.submit "Сохранить", class: "btn btn-mini" %>
+    <% end %>
+  </div>
+</div>

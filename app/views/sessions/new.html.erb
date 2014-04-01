@@ -1,16 +1,8 @@
 <% provide(:title, "Вход") %>
-<h1>Вход</h1>
-
-<div class="row">
-	<div class="span6 offset3">
- 		<%= form_for(:session, url: sessions_path) do |f| %>
- 			<%= f.label :name, "Имя пользователя" %>
- 			<%= f.text_field :name %>
-
- 			<%= f.label :password, "Пароль" %>
- 			<%= f.password_field :password %>
-
- 			<%= f.submit "Войти", class: "btn btn-large btn-primary" %>
- 		<% end %>
- 	</div>
+<div class="form-signin">
+ 	<%= form_for(:session, url: sessions_path) do |f| %>
+ 	<%= f.text_field :name, placeholder: "Имя пользователя", autofocus: true, class: "form-control" %>	
+ 	<%= f.password_field :password, placeholder: "Пароль", class: "form-control" %>	
+ 	<%= f.submit "Войти", class: "btn btn-lg btn-primary btn-block" %>
+ 	<% end %>
 </div>

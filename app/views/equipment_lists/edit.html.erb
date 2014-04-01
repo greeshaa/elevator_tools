@@ -1,0 +1,23 @@
+<% provide(:title, 'Изменение описания оборудования') %>
+<h1>Изменение описания оборудования</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@e_list) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :equipment_type_id, "Категория оборудования:" %>
+      <%= f.select :equipment_type_id, options_from_collection_for_select(@e_types, :id, :name) %>
+
+      <%= f.label :manufacturer, "Производитель:" %>
+      <%= f.text_field :manufacturer %>
+
+      <%= f.label :name, "Название:" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :description, "Описание:" %>
+      <%= f.text_area(:description, rows: 6)  %>  
+
+      <%= f.submit "Обновить", class: "btn btn-mini" %>
+    <% end %>
+  </div>
+</div>

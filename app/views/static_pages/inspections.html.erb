@@ -1,0 +1,31 @@
+<% provide(:title, 'Освидетельствование лифтов') %>
+  <div class="row">
+   <div class="">
+      <table class="table table-striped table-bordered table-condensed">
+        <tr>
+          <th>Лифт</th>
+          <th>Дата последнего освидетельствования</th>
+          <th>Дата следующего освидетельствования</th>
+        </tr>
+        <% @lifts.each do |lift| %>
+        <tr>
+          <td class="title_left">
+            <%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %> 
+          </td>
+          <% if Date.parse(lift.inspection_at.to_s) == Date.parse('1970-01-01') %>
+          <td><span class="label label-warning">Дата последнего освидетельствования неизвестна.</span></td> 
+          <td><span class="label label-warning">Проверьте дату последнего освидетельствования.</span></td> 
+          <% else %>
+          <td><%= lift.inspection_at.strftime("%d.%m.%Y") %></td>
+              <% if Date.parse(lift.inspection_at.next_year.to_s) < Date.parse(Time.now.beginning_of_year.to_s) %>
+              <td><span class="label label-warning">Проверьте дату последнего освидетельствования.</span></td>
+              <% else %>
+              <td><%= lift.inspection_at.next_year.strftime("%d.%m.%Y")  %></td>  
+              <% end %>
+          
+          <% end %>
+        </tr>
+        <% end %>   
+      </table>
+    </div>
+   </div>

@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-
 module SessionsHelper
 
   def sign_in(user)
@@ -23,8 +22,12 @@ module SessionsHelper
     user == current_user
   end
 
-    def signed_in_user
-    redirect_to signin_url, notice: "Пожалуйста, авторизируйтесь!" unless signed_in?
+  def signed_in_user
+    #redirect_to signin_url, warning: "Пожалуйста, авторизируйтесь!" unless signed_in?
+    unless signed_in?
+      flash[:warning] = "Пожалуйста, авторизируйтесь!"
+      redirect_to signin_url
+    end
   end
 
   def sign_out

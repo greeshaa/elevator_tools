@@ -1,0 +1,8 @@
+<% provide(:title, 'Перемещения оборудования') %>
+<div class="span8">
+<h1>Перемещения оборудования</h1>
+<ul class="users">
+  <%= render @e_moves %>
+</ul>
+<div style="float:right"><%= link_to "Переместить оборудование", add_e_type_path, class: "btn btn-mini" %></div>
+</div>

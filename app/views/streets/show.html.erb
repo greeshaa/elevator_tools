@@ -1,24 +1,17 @@
 <% provide(:title, @street.name) %>
-<div class="span8">
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h3><%=@street.name%></h3>
-     <h5>Доступные адреса:</h5>
-    </section>
-  </aside>
-</div>
-
-<ul class="users">
-  <%= render @builds %>
-</ul>
-
-<table>
-    <tr>
-    	<td><%= link_to "Показать все улицы", streets_path, class: "btn btn-mini" %></td>
-    	<td><%= link_to "Редактировать улицу", edit_street_path, class: "btn btn-mini" %></td>
-      <td><%= link_to "Добавить здание", add_build_path, class: "btn btn-mini" %></td>
-    </tr>
-</table>
-
-</div>
+  <div class="col-md-10 col-md-offset-1">
+    <legend><%=@street.name%></legend>
+      <div class="btn-group btn-group-sm col-md-7">
+        <%= link_to "Список всех улиц", streets_path, class: "btn btn-default" %>
+        <%= link_to "Редактировать улицу", edit_street_path, class: "btn btn-default" %>
+        <%= link_to "Добавить здание", add_build_path, class: "btn btn-default" %>
+      </div>
+    <div class="col-md-6">
+      <legend>Доступные адреса:</legend>
+      <div>
+        <ul class="list-group">
+          <%= render @builds %>
+        </ul>  
+      </div>
+    </div>    
+  </div>

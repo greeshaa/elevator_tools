@@ -1,26 +1,30 @@
 <% provide(:title, @street + ', ' + @build.name) %>
-<div class="span8">
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1><%= @street %>, <%= @build.name %></h1>
-    </section>
-  </aside>
-</div>
-
-
-<h4>Данный адрес относится к <%= link_to @node.name, @node %>, который расположен на <%= @node.street.name %>, <%= @node.build.name %></h4>
-
-<h2>Подъезды</h2>
-<ul class="users">
-  <%= render @porches %>
-</ul>
-
-<table>
-  <tr>
-    <td><%= link_to "Показать все здания улицы", '/streets/' + @streets, class: "btn btn-small" %></td>
-    <td><%= link_to "Редактировать здание", '#', class: "btn btn-small" %></td>
-    <td><%= link_to "Добавить подъезд", '#', class: "btn btn-small" %></td>
-  </tr>
-</table>
+<div class="col-md-10 col-md-offset-1">
+  <legend><%= @street %>, <%= @build.name %></legend>
+      <% if @node == nil %>
+        <span class="label">Дом еще не привязан к какому-либо УМ</span>
+      <% elsif @node.porch_id == nil %>
+        <% if @node.id == 66 %>
+          <span class="label label-warning">Адрес не выводится в ЦД.</span>
+        <% else %>
+          <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу 
+                              <%= @node.street.name %>, <%= @node.build.name %></p>
+        <span class="label label-warning">Внимание! Необходимо проверить привязку УМ к подъезду.</span>
+        <% end %>
+      <% else %>
+      <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>, 
+                        <%= @node.build.name %> в <%= @node.porch.name %> <p>
+      <% end %>
+      <p>Подъездов в доме: <%= link_to @build.porch_count.to_s, '#' %></p>
+      <legend>Обслуживаемые лифты</legend>
+        <ul>
+          <% @build.lifts.each do |lift| %>
+            <li><%= lift.porch.name + ' - ' %> <%= link_to 'Лифт ' + lift.function + ' - ' + lift.capacity.to_s + ' кг. - '  + lift.stopscount.to_s + ' остановок', lift %>
+            </li>
+          <% end %>
+        </ul>
+  <div class="btn-group btn-group-sm col-md-7">
+        <%= link_to "Показать все здания улицы", '/streets/' + @streets, class: "btn btn-default" %>
+        <%= link_to "Редактировать здание", edit_build_path, class: "btn btn-default" %>
+  </div>
 </div>

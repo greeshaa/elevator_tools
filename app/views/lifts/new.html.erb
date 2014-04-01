@@ -4,20 +4,25 @@
   <div class="span6 offset3">
     <%= form_for(@lift) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :regnum, "Номер лифта:" %>
-      <%= f.number_field :regnum %>
-
-      <%= f.label :street_id, "Улица:" %>
-      <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name) %>
-
-      <%= f.label :build_id, "Здание:" %>
-      <%= f.select :build_id, options_from_collection_for_select(@builds, :id, :name) %>
-
-      <%= f.label :porch_id, "Подъезд:" %>
-      <%= f.select :porch_id, options_from_collection_for_select(@porch, :id, :name) %>
-
-      <%= f.submit "Добавить", class: "btn btn-large btn-primary" %>
+      <div>
+        <%= f.label :street, "Улица:" %>
+        <%= f.collection_select :street, Street.order(:name), :id, :name, prompt: 'Выберите улицу...' %>
+      </div>
+      <div>
+        <%= f.label :build, "Здание:" %>
+        <%= f.grouped_collection_select :build, Street.order(:name), :builds, :name, :id, :name, prompt: 'Выберите здание...' %>
+      </div>
+      <div>
+        <%= f.label :porch_id, "Подъезд:" %>
+        <%= f.grouped_collection_select :porch_id, Build.order(:name), :porches, :name, :id, :name, prompt: 'Выберите подъезд...' %>
+      </div>
+      <div>
+        <%= f.label :regnum, "Регистрационный номер:" %>
+        <%= f.number_field :regnum %>
+      </div>
+      <div>
+        <%= f.submit "Добавить", class: "btn btn-large btn-primary" %>
+      </div>      
     <% end %>
   </div>
 </div>

@@ -1,13 +1,145 @@
 <% provide(:title, 'Оборудование') %>
-<h1>Оборудование</h1>
-
-<td><%= link_to "Добавить устройство", add_equipment_path, class: "btn btn-large btn-primary" %></td>
-
-
-<%= will_paginate %>
-
-<ul class="users">
-  <%= render @equipment %>
-</ul>
-
-<%= will_paginate %>
+<%= form_tag({:controller => "equipment", :action => "search"}, :method => "get", :class => "form-inline col-md-10 col-md-offset-1", role:"form") do %>
+<legend>Оборудование</legend>
+<div class="input-group input-group-sm col-md-8">
+	<label class="sr-only" for="search">equipment</label>
+	<%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по серийному номеру или названию оборудования"} ) %>
+	<div class="input-group-btn">
+    <%= submit_tag("Найти", class:"btn btn-default") %>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+       	Склад <span class="caret"></span>
+ 			</button>
+ 			<ul class="dropdown-menu">
+ 				<li><%= link_to "Добавить устройство", add_equipment_path %></li>
+ 				<li class="divider"></li>
+				<li><%= link_to "Исправное", equipment_store_path %></li>
+				<li><%= link_to "Неисправное", equipment_broken_path %></li>
+				<li class="divider"></li>
+				<li><%= link_to "Типы", equipment_lists_path %></li>
+				<li><%= link_to "Категории", equipment_types_path %></li>
+ 			</ul>
+  	</div>
+	</div>
+</div>
+<% end %>
+<div>
+  <div class="col-md-10 col-md-offset-1 list" >
+<table class="col-md-8 table-striped table-bordered table-condensed ">
+	<caption><b>Статистика использования оборудования</b></caption>
+	<tr>
+		<td></td>
+		<td class="title_top">Всего</td>
+		<td class="title_top">Склад</td>
+		<td class="title_top">В работе</td>
+		<td class="title_top">Неисправно</td>
+		<td class="title_top">В ремонте</td>
+	</tr>
+	<tr>
+		<td class="title_left">Общее количество оборудования</td>
+		<td><%= @equip_all %></td>
+		<td><%= @equip_store %></td>
+		<td><%= @equip_work %></td>
+		<td><%= @equip_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">Моноблок Eth</td>
+		<td><%= @mono_all %></td>
+		<td><%= @mono_store %></td>
+		<td><%= @mono_work %></td>
+		<td><%= @mono_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">КЛШ Pro</td>
+		<td><%= @klshpro_all %></td>
+		<td><%= @klshpro_store %></td>
+		<td><%= @klshpro_work %></td>
+		<td><%= @klshpro_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">КСЛ Eth</td>
+		<td><%= @ksl_all %></td>
+		<td><%= @ksl_store %></td>
+		<td><%= @ksl_work %></td>
+		<td><%= @ksl_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">ММИ</td>
+		<td><%= @mmi_all %></td>
+		<td><%= @mmi_store %></td>
+		<td><%= @mmi_work %></td>
+		<td><%= @mmi_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">Cmotech CNU-550 Pro</td>
+		<td><%= @cnu_all %></td>
+		<td><%= @cnu_store %></td>
+		<td><%= @cnu_work %></td>
+		<td><%= @cnu_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">D-link DIR-100</td>
+		<td><%= @dir100_all %></td>
+		<td><%= @dir100_store %></td>
+		<td><%= @dir100_work %></td>
+		<td><%= @dir100_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">D-link DSL-2500U annex A</td>
+		<td><%= @adsla_all %></td>
+		<td><%= @adsla_store %></td>
+		<td><%= @adsla_work %></td>
+		<td><%= @adsla_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">D-link DSL-2500U annex B</td>
+		<td><%= @adslb_all %></td>
+		<td><%= @adslb_store %></td>
+		<td><%= @adslb_work %></td>
+		<td><%= @adslb_service %></td>
+	</tr>
+	<tr>
+		<td class="title_left">ЛБ 6.0 Pro Otis</td>
+		<td><%= @lbprootis %></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="title_left">ЛБ 6.0 CM3 Otis</td>
+		<td><%= @lb6cm3otis %></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="title_left">ЛБ 6.0 Otis</td>
+		<td><%= @lb6otis %></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="title_left">ЛБ 6.0 УК/УКЛ</td>
+		<td><%= @lb6ukl %></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="title_left">ЛБ 6.0 ШУЛК-32</td>
+		<td><%= @lb6shulk %></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="title_left">ЛБ КДК</td>
+		<td><%= @lbkdk %></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+  </div>
+</div>

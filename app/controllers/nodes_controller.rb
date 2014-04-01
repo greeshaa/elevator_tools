@@ -1,14 +1,16 @@
 # -*- encoding : utf-8 -*-
-
 class NodesController < ApplicationController
 before_filter :signed_in_user
 
   def show
   	@node = Node.find(params[:id])
+    if @node.street.nil?
+    else
       @porch = @node.porch
       @build = @node.build
       @street = @node.street.name
-  	
+      @equipment = @node.equipment
+  	end
   end
 
   def new
@@ -29,8 +31,7 @@ before_filter :signed_in_user
   end
 
   def index
-  	@nodes = Node.paginate(page: params[:page])
-      @build = @nodes.build
+  	@nodes = Node.search(params[:search])
   end
 
   def update

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemoveTypeFromLifts < ActiveRecord::Migration
   def up
     remove_column :lifts, :type

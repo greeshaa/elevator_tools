@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       sign_in user
       redirect_to main_path
     else
-      flash.now[:error] = 'Неверная комбинация "Имя пользователя/Пароль"' # Not quite right!
+      flash.now[:danger] = 'Неверная комбинация "Имя пользователя/Пароль"' # Not quite right!
       render 'new'
     end
   end
