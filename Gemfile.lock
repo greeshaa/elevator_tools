@@ -254,7 +254,6 @@ DEPENDENCIES
   jquery-modal-rails
   jquery-rails
   jquery-ui-rails
-  less-rails
   mysql2
   rails (= 3.2.13)
   rb-fsevent (= 0.9.1)

@@ -53,7 +53,7 @@ group :assets do
   gem 'jquery-modal-rails'
   gem 'jquery-rails'
   gem 'sass-rails', '>= 3.2'
-  gem 'less-rails'
+  #gem 'less-rails'
   #gem 'libv8', '3.16.14.3'
   gem 'bootstrap-sass', '~> 3.1.1'
   gem 'twitter-bootswatch-rails', '~> 3.1.1'
