@@ -8,7 +8,7 @@ before_filter :signed_in_user
 
   def show
     @street = Street.find(params[:id])
-    @builds = @street.builds.order(:name).paginate(page: params[:page])
+    @builds = @street.builds.order(:name)
   end
 
   def new

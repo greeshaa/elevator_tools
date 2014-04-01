@@ -19,29 +19,29 @@ ElevatorTools::Application.routes.draw do
   
   
 
-  match '/signup',  to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+  get '/signup',  to: 'users#new'
+  get '/signin',  to: 'sessions#new'
+  get '/signout', to: 'sessions#destroy', via: :delete
 
-  match '/main',   to: 'static_pages#main'
-  match '/about',   to: 'static_pages#about'
-  match '/handbook',   to: 'static_pages#handbook'
-  match '/test',   to: 'static_pages#test'
-  match 'lifts_inspections',   to: 'lifts#inspections'
-  match 'equipment_search', to: 'equipment#search'
-  match 'equipment_store', to: 'equipment#store'
-  match 'equipment_broken', to: 'equipment#broken'
+  get '/main',   to: 'static_pages#main'
+  get '/about',   to: 'static_pages#about'
+  get '/handbook',   to: 'static_pages#handbook'
+  get '/test',   to: 'static_pages#test'
+  get 'lifts_inspections',   to: 'lifts#inspections'
+  get 'equipment_search', to: 'equipment#search'
+  get 'equipment_store', to: 'equipment#store'
+  get 'equipment_broken', to: 'equipment#broken'
 
 
-  match '/add_street',  to: 'streets#new'
-  match '/list_street',  to: 'streets#list'
-  match '/add_build',  to: 'builds#new'
-  match '/add_node',  to: 'nodes#new'
-  match '/add_lift', to: 'lifts#new'
-  match '/add_e_type', to: 'equipment_types#new'
-  match '/add_e_list', to: 'equipment_lists#new'
-  match '/add_equipment', to: 'equipment#new'
-  match 'equipment/:id/move_equipment', to: 'equipment_movements#new', :as => :move_equipment
+  get '/add_street',  to: 'streets#new'
+  get '/list_street',  to: 'streets#list'
+  get '/add_build',  to: 'builds#new'
+  get '/add_node',  to: 'nodes#new'
+  get '/add_lift', to: 'lifts#new'
+  get '/add_e_type', to: 'equipment_types#new'
+  get '/add_e_list', to: 'equipment_lists#new'
+  get '/add_equipment', to: 'equipment#new'
+  get 'equipment/:id/move_equipment', to: 'equipment_movements#new', :as => :move_equipment
 
   #get "streets/show"
   #get "streets/index"
