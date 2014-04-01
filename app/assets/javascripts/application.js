@@ -14,6 +14,5 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require jquery.modal
-//= require select2
 // Loads all Bootstrap javascripts
 //= require bootstrap
