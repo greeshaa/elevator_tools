@@ -13,6 +13,7 @@
 # Игнорирование всех логов и временных файлов.
 /log/*.log
 /tmp
+/my_temp
 
 config/database.yml 
 
