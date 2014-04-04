@@ -32,7 +32,7 @@ ElevatorTools::Application.routes.draw do
   get 'equipment_store', to: 'equipment#store'
   get 'equipment_broken', to: 'equipment#broken'
 
-
+  get '/address_list', to: 'address#list'
   get '/add_street',  to: 'streets#new'
   get '/list_street',  to: 'streets#list'
   get '/add_build',  to: 'builds#new'

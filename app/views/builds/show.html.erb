@@ -17,12 +17,16 @@
       <% end %>
       <p>Подъездов в доме: <%= link_to @build.porch_count.to_s, '#' %></p>
       <legend>Обслуживаемые лифты</legend>
+      <% if @build.lifts.count == 0 %>
+      <p class="lead">Обслуживаемых лифтов нет.</p>
+      <% else %>
         <ul>
           <% @build.lifts.each do |lift| %>
             <li><%= lift.porch.name + ' - ' %> <%= link_to 'Лифт ' + lift.function + ' - ' + lift.capacity.to_s + ' кг. - '  + lift.stopscount.to_s + ' остановок', lift %>
             </li>
           <% end %>
         </ul>
+      <% end %>
   <div class="btn-group btn-group-sm col-md-7">
         <%= link_to "Показать все здания улицы", '/streets/' + @streets, class: "btn btn-default" %>
         <%= link_to "Редактировать здание", edit_build_path, class: "btn btn-default" %>

@@ -12,7 +12,7 @@ before_filter :signed_in_user
 
   end
   def index
-  	@lifts = Lift.search(params[:search]) #.paginate(page: params[:page])
+  	@lifts = Lift.search(params[:search])
   end
 
   def new
