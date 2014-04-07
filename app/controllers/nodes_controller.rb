@@ -4,6 +4,7 @@ before_filter :signed_in_user
 
   def show
   	@node = Node.find(params[:id])
+    @ipa = @node.ip_address
     if @node.street.nil?
     else
       @porch = @node.porch
@@ -16,13 +17,13 @@ before_filter :signed_in_user
   def new
     @node = Node.new
     @streets = Street.all
-    @builds = Build.all #find_by_id(:street_id)
+    @builds = Build.all
   end
 
   def create
     @node = Node.new(params[:node])
     if @node.save
-      okmessage = "УМ " + @node.name + " успешно добавлен."
+      okmessage = @node.name + " успешно добавлен."
       flash[:success] = okmessage
       redirect_to @node
     else
@@ -34,6 +35,23 @@ before_filter :signed_in_user
   	@nodes = Node.search(params[:search])
   end
 
+  def edit
+    @node = Node.find(params[:id])
+    @streets = Street.all
+    pia = @node.primary_ip_address
+    sia = @node.secondary_ip_address
+    if pia != nil
+      @primary_ip_address = PrimaryIpAddress.where('node_id = ?', @node.id)
+    else
+      @primary_ip_address = @node.create_primary_ip_address(node_id: @node.id)
+    end
+    if sia != nil
+      @secondary_ip_address = SecondaryIpAddress.where('node_id = ?', @node.id)
+    else
+      @secondary_ip_address = @node.create_secondary_ip_address(node_id: @node.id)
+    end
+  end
+
   def update
     @node = Node.find(params[:id])
     if @node.update_attributes(params[:node])
@@ -43,4 +61,6 @@ before_filter :signed_in_user
       render 'edit'
     end
   end
+
+
 end

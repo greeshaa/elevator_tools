@@ -15,7 +15,7 @@
       <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>, 
                         <%= @node.build.name %> в <%= @node.porch.name %> <p>
       <% end %>
-      <p>Подъездов в доме: <%= link_to @build.porch_count.to_s, '#' %></p>
+      <p>Подъездов в здании: <%= link_to @build.porch_count.to_s, '#' %></p>
       <legend>Обслуживаемые лифты</legend>
       <% if @build.lifts.count == 0 %>
       <p class="lead">Обслуживаемых лифтов нет.</p>

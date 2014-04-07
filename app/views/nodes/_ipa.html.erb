@@ -1,0 +1,22 @@
+<% if @ipa.empty? %>
+    <tr>
+        <td colspan = 2>
+          <span class="label label-warning">Нет информации о ip -адресах</span>
+        </td>
+    </tr>
+<% else %>
+<% @ipa.each do |ipa| %>
+<tr>
+	<% if ipa.name == nil %>
+	<td class="col-md-3"><span class="label label-warning">Не указан статус ip -адреса (основной/резервный)</span></td>
+	<% else %>
+	<td class="col-md-3"><%= ipa.name %></td>
+	<% end %>
+	<% if ipa.provider == nil %>
+	<td class="col-md-3"><%= ipa.ip %> | <span class="label label-warning">Нет информации о провайдере</span></td>
+	<% else %>	
+	<td class="col-md-3"><%= ipa.ip %> | <%= ipa.provider.name %></td>
+	<% end %>
+</tr>
+<% end %>
+<% end %>

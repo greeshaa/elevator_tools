@@ -15,6 +15,5 @@
 
 class Provider < ActiveRecord::Base
   attr_accessible :contact, :email, :name, :note, :phone
-  has_many :primary_ip_addresses
-  has_many :secondary_ip_addresses
+  has_many :ip_addresses
 end

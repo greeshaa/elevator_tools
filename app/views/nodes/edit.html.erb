@@ -1,14 +1,38 @@
 <% provide(:title, 'Редактирование УМ') %>
-<h1>Редактирование УМ</h1>
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@node) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
+<div class="col-md-10 col-md-offset-1">
+  <legend>Редактирование УМ</legend>
+  <%= form_for(@node, html:{class: "col-md-4", role:"form"} ) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :name, "Номер узлового модуля:" %>
+      <%= f.text_field :name, class: "form-control input-sm", placeholder:"УМ 254" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, "Расположение оборудования:" %>
+      <%= f.text_field :description, class: "form-control input-sm", placeholder:"МП 1 подъезд (ключ на проходной)" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :street_id, "Улица:" %>
+      <%= f.collection_select(:street_id, Street.order(:name), :id, :name, 
+          {}, html_options = {prompt: 'Выберите улицу', class: "form-control input-sm"}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :build_id, "Здание:" %>
+      <%= f.grouped_collection_select(:build_id, Street.order(:name), :builds, :name, :id, :name, 
+          {}, html_options = {prompt: 'Выберите здание', class: "form-control input-sm"}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :dataport, "Порт данных:" %>
+      <%= f.text_field :dataport, class: "form-control input-sm", placeholder:"44000" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :soundport, "Порт звука:" %>
+      <%= f.text_field :soundport, class: "form-control input-sm", placeholder:"44001" %>
+    </div>
+  
+    <%= f.submit "Изменить", class: "btn btn-default btn-sm" %>
+    </fieldset>
+  <% end %>
 
-      <%= f.label :name, "Название УМ:" %>
-      <%= f.text_field :name %>
-
-      <%= f.submit "Изменить", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
 </div>

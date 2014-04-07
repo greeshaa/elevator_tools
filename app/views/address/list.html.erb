@@ -1,29 +1,27 @@
 <% provide(:title, 'Адреса') %>
 <%= form_tag({:controller => "address", :action => "index"}, :method => "get", :class => "form-inline col-md-10 col-md-offset-1", role:"form") do %>
  		<legend>Адреса</legend>
-    <div class="input-group input-group-sm col-md-8">
+    <div class="input-group input-group-sm col-md-7">
         <label class="sr-only" for="search">search</label>
         <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Партизанская, 8/1"}) %>
         <div class="input-group-btn">
           <%= submit_tag("Найти", class:"btn btn-default") %>
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Добавить
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Адрес",  add_street_path %></li>
-              <li><%= link_to "Улица",  add_street_path %></li>
-              <li><%= link_to "Здание", add_build_path %></li>
-            </ul>
-          </div>
-          <div class="btn-group">
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Списком
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to "Адреса", address_list_path %></li>
               <li><%= link_to "Улицы",  streets_path  %></li>
-              <li><%= link_to "Здания", builds_path %></li>
+              <li><%= link_to "Адреса", address_list_path %></li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Добавить
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Улицу",  add_street_path %></li>
+              <li><%= link_to "Здание", add_build_path %></li>
             </ul>
           </div>
         </div>
@@ -31,7 +29,7 @@
 <% end %>
 <div>
   <div class="col-md-10 col-md-offset-1 list" >
-    <table class="col-md-8 table-bordered table-condensed table-striped">
+    <table class="col-md-7 table-bordered table-condensed table-striped">
       <% unless @address.nil? %>
         <% @address.each do |s, b| %>
         <% b.each do |build| %>

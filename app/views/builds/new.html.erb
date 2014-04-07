@@ -1,25 +1,26 @@
 <% provide(:title, 'Добавление здания') %>
-<%= form_for(@build, html:{class:"col-md-10 col-md-offset-1", role:"form"} ) do |f| %>
-<legend>Добавление здания</legend>
-<%= render 'shared/error_messages', object: f.object %>
-<div class="input-group input-group-sm col-md-7">
-  <label class="sr-only" for="name">name</label>
-  <%= f.text_field :name, class: "form-control", placeholder: "Номер здания" %>
-  <div class="input-group-btn">
-
-
-      
-
+<div class="col-md-10 col-md-offset-1">
+  <legend>Добавление здания</legend>
+  <%= form_for(@build, html:{class: "col-md-4", role: "form"} ) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <fieldset>
+    <div class="form-group">
       <%= f.label :street_id, "Улица:" %>
-      <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name) %>
-
+      <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name), {}, {class: "form-control input-sm"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :name, "Номер здания:" %>
+      <%= f.text_field :name, class: "form-control input-sm", placeholder: "Например: 8/1" %>
+    </div>
+    <div class="form-group">
       <%= f.label :porch_count, "Количество подъездов:" %>
-      <%= f.text_field :porch_count %>
-
-      <%= f.label :node_id, "Улица:" %>
-      <%= f.select :node_id, options_from_collection_for_select(@nodes, :id, :name) %>
-
-      <%= f.submit "Добавить", class: "btn btn-default" %>
-  </div>
+      <%= f.text_field :porch_count, class: "form-control input-sm", placeholder: "Например: 8" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :node_id, "УМ:" %>
+      <%= f.select :node_id, options_from_collection_for_select(@nodes, :id, :name), {}, {class: "form-control input-sm"} %>
+    </div>
+    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
+  </fieldset>
+  <% end %>
 </div>
-<% end %>

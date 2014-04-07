@@ -1,26 +1,27 @@
 <% provide(:title, 'Добавление узлового модуля') %>
-<%= form_for(@node, html:{class:"form-horizontal col-md-10 col-md-offset-1", role:"form"} ) do |f| %>
-<fieldset>
+<div class="col-md-10 col-md-offset-1">
   <legend>Добавление узлового модуля</legend>
-  <div class="container">
+  <%= form_for(@node, html:{class: "col-md-4", role:"form"} ) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="form-group">
-  <%= f.label :name, "Номер узлового модуля:" %>
-  <%= f.text_field :name, class:"form-control", placeholder:"Номер узлового модуля" %>
-  </div>
-  <div class="form-group">
-  <%= f.label :description, "Расположение оборудования:" %>
-  <%= f.text_field :description, class:"form-control", placeholder:"Расположение оборудования" %>
-  </div>
-  <div class="form-group">
-  <%= f.label :street_id, "Улица:" %>
-  <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name) %>
-  </div>
-  <div class="form-group">
-  <%= f.label :build_id, "Здание:" %>
-  <%= f.select :build_id, options_from_collection_for_select(@builds, :id, :name) %>
-  </div>
-  <%= f.submit "Добавить", class: "btn btn-default" %>
-</div>  
-</fieldset>
-<% end %>
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :name, "Номер узлового модуля:" %>
+      <%= f.text_field :name, class: "form-control input-sm", placeholder:"УМ 254" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, "Расположение оборудования:" %>
+      <%= f.text_field :description, class: "form-control input-sm", placeholder:"МП 1 подъезд (ключ на проходной)" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :street_id, "Улица:" %>
+      <%= f.select :street_id, 
+          options_from_collection_for_select(@streets, :id, :name), {}, {class: "form-control input-sm"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :build_id, "Здание:" %>
+      <%= f.grouped_collection_select( :build_id, Street.order(:name), :builds, :name, :id, :name, {}, html_options = {prompt: 'Выберите здание...', class: "form-control input-sm"})   %>
+    </div>
+    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
+    </fieldset>
+  <% end %>
+</div>

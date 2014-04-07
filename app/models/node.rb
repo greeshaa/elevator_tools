@@ -23,8 +23,7 @@ class Node < ActiveRecord::Base
   has_many :equipment
   has_many :lifts
   has_many :builds
-  has_one :primary_ip_address
-  has_one :secondary_ip_address
+  has_many :ip_address
   
 
   cattr_reader :per_page
