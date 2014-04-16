@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- encoding : utf-8 -*-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405092717) do
+ActiveRecord::Schema.define(version: 20140414122216) do
 
   create_table "builds", force: true do |t|
     t.integer  "street_id"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 20140405092717) do
     t.datetime "updated_at",  null: false
     t.integer  "node_id"
     t.integer  "porch_count"
+  end
+
+  create_table "cities", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "contracts", force: true do |t|
@@ -197,6 +203,7 @@ ActiveRecord::Schema.define(version: 20140405092717) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "city_id"
   end
 
   create_table "users", force: true do |t|

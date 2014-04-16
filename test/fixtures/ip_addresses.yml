@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: ip_addresses
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  ip          :string(255)
+#  mask        :string(255)
+#  gate        :string(255)
+#  node_id     :integer
+#  provider_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

@@ -1,6 +1,9 @@
 <% provide(:title, @street + ', ' + @build.name) %>
 <div class="col-md-10 col-md-offset-1">
   <legend><%= @street %>, <%= @build.name %></legend>
+  <% if @build.id == 50 %>
+    <%= render @porches %>
+  <% else %>
       <% if @node == nil %>
         <span class="label">Дом еще не привязан к какому-либо УМ</span>
       <% elsif @node.porch_id == nil %>
@@ -27,7 +30,8 @@
           <% end %>
         </ul>
       <% end %>
-  <div class="btn-group btn-group-sm col-md-7">
+  <% end %>
+  <div class="btn-group btn-group-sm">
         <%= link_to "Показать все здания улицы", '/streets/' + @streets, class: "btn btn-default" %>
         <%= link_to "Редактировать здание", edit_build_path, class: "btn btn-default" %>
   </div>

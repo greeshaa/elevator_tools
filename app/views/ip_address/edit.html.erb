@@ -1,0 +1,19 @@
+<% provide(:title, 'Редактирование ip') %>
+<div class="col-md-10 col-md-offset-1">
+  <legend>Редактирование ip</legend>
+  <%= form_for(@ip_address, html:{class: "col-md-4", role:"form"} ) do |ipa| %>
+
+  <div class="form-group">
+      <%= ipa.label :ip, "ip-адрес:" %>
+      <%= ipa.text_field :ip, class: "form-control input-sm", placeholder:"192.168.0.1" %>
+    </div>
+    <div class="form-group">
+      <%= ipa.label :mask, "Маска подсети:" %>
+      <%= ipa.text_field :mask, class: "form-control input-sm", placeholder:"255.255.255.0" %>
+    </div>
+    <div class="form-group">
+      <%= ipa.label :gate, "Основной шлюз:" %>
+      <%= ipa.text_field :gate, class: "form-control input-sm", placeholder:"192.168.0.254" %>
+    </div>
+    <%= ipa.submit "Изменить", class: "btn btn-default btn-sm" %>
+  <% end %>

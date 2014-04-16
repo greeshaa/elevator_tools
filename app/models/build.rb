@@ -12,14 +12,14 @@
 #  porch_count :integer
 #
 
-
 class Build < ActiveRecord::Base
     attr_accessible :name, :street_id, :porch_count, :node_id
-    validates :name, presence: true
+    validates  :name, presence: true
 
     belongs_to :street
     belongs_to :node
-    has_many :lifts, :through => :porches
-    has_many :porches
+
+    has_many   :porches
+    has_many   :lifts, :through => :porches
 
 end

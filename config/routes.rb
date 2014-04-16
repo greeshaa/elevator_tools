@@ -1,23 +1,7 @@
 # -*- encoding : utf-8 -*-
 ElevatorTools::Application.routes.draw do
 
-    root :to => 'static_pages#main'
-
-
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :users
-  resources :address
-  resources :streets
-  resources :builds
-  resources :porches
-  resources :lifts 
-  resources :nodes
-  resources :equipment_types
-  resources :equipment_lists
-  resources :equipment
-  resources :equipment_movements
-  
-  
+  root :to => 'static_pages#main'
 
   get '/signup',  to: 'users#new'
   get '/signin',  to: 'sessions#new'
@@ -41,11 +25,28 @@ ElevatorTools::Application.routes.draw do
   get '/add_e_type', to: 'equipment_types#new'
   get '/add_e_list', to: 'equipment_lists#new'
   get '/add_equipment', to: 'equipment#new'
-  get 'equipment/:id/move_equipment', to: 'equipment_movements#new', :as => :move_equipment
+  #get 'edit_ip', to: 'nodes#edit_ip', :as => :edit_ip
+  #get 'equipment/:id/move_equipment', to: 'equipment_movements#new', :as => :move_equipment
 
   #get "streets/show"
   #get "streets/index"
   #get "builds/index"
+
+
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users
+  resources :address
+  resources :streets
+  resources :builds
+  resources :porches
+  resources :lifts 
+  resources :nodes do
+      resources :ip_address, shallow: true
+  end
+  resources :equipment_types
+  resources :equipment_lists
+  resources :equipment
+  resources :equipment_movements
 
 
 

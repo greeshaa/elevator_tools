@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemoveNameFromManufacturers < ActiveRecord::Migration
   def up
     remove_column :manufacturers, :name

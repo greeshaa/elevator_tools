@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 root = "/var/www/rorbot/apps/elevator_tools/current"
 working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"

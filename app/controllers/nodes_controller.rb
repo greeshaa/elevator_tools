@@ -4,7 +4,8 @@ before_filter :signed_in_user
 
   def show
   	@node = Node.find(params[:id])
-    @ipa = @node.ip_address
+    @ipa  = @node.ip_addresses
+
     if @node.street.nil?
     else
       @porch = @node.porch
@@ -15,14 +16,17 @@ before_filter :signed_in_user
   end
 
   def new
-    @node = Node.new
     @streets = Street.all
     @builds = Build.all
+    @providers = Provider.all
+    @node = Node.new
+    @node.ip_addresses.build
   end
 
   def create
-    @node = Node.new(params[:node])
+    @node = Node.new(node_params)
     if @node.save
+
       okmessage = @node.name + " успешно добавлен."
       flash[:success] = okmessage
       redirect_to @node
@@ -38,28 +42,27 @@ before_filter :signed_in_user
   def edit
     @node = Node.find(params[:id])
     @streets = Street.all
-    pia = @node.primary_ip_address
-    sia = @node.secondary_ip_address
-    if pia != nil
-      @primary_ip_address = PrimaryIpAddress.where('node_id = ?', @node.id)
-    else
-      @primary_ip_address = @node.create_primary_ip_address(node_id: @node.id)
-    end
-    if sia != nil
-      @secondary_ip_address = SecondaryIpAddress.where('node_id = ?', @node.id)
-    else
-      @secondary_ip_address = @node.create_secondary_ip_address(node_id: @node.id)
-    end
   end
 
   def update
     @node = Node.find(params[:id])
-    if @node.update_attributes(params[:node])
-      flash[:success] = "УМ " + @node.name + " обновлен"
+    if @node.update_attributes(params[:node]) 
+      flash[:success] = @node.name + " обновлен"
       redirect_to @node
     else
       render 'edit'
     end
+  end
+
+  def edit_ip
+    @node = Node.find(params[:id])
+    @ip = @node.ip_addresses    
+  end
+
+  private
+  def node_params
+    params.require(:node).permit(:name, :description, :street_id, :build_id, :porch_id, :dataport, :soundport, 
+      ip_addresses_attributes: [:id, :name, :ip, :mask, :gate, :provider_id])
   end
 
 

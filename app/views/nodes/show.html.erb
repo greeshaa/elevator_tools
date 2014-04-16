@@ -1,57 +1,63 @@
 <% provide(:title, @node.name) %>
-<div class="col-md-10 col-md-offset-1">
   <legend><%=@node.name%></legend>
-  <div class="btn-group btn-group-sm col-md-7">
-    <%= link_to "Показать все узлы", nodes_path, class: "btn btn-default" %>
-    <%= link_to "Редактировать", edit_node_path, class: "btn btn-default" %>
-    <%= link_to "Изменить ip-адрес", '#', class: "btn btn-default" %>
-    <%= link_to "Добавить оборудование", '#' , class: "btn btn-default" %>
+  <div class="btn-group btn-group-sm">
+    <%= link_to "Все узлы", nodes_path, class: "btn btn-default" %>
+    
+    <div class="btn-group">
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Изменить
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Узел",         edit_node_path %></li>
+        <% if @ipa.empty? %>
+        <% else %>
+        <% @ipa.each do |ipa| %>
+        <li><%= link_to ipa.name + " ip-адрес",     edit_ip_address_path(ipa)  %></li>
+        <% end %>
+        <% end %>
+        <li><%= link_to "Оборудование", '#' %></li>
+      </ul>
+    </div>
   </div>
-</div>
-<div class="col-md-10 col-md-offset-1">
   <% if @node.street.nil? %>
     <h4>&nbsp;Группа лифтов, которые не выводятся в ЦД и не принадлежат какому-либо УМ</h4>
   <% else %>
+  <h4>Основные параметры узла</h4>
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-1"><p class="text-muted text-right">Адрес:</p></div>
+    <div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-1">ул.<%= @street %>, д. <%= @build.name %>, 
+      <%= @node.porch.name %></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-1"><p class="text-muted text-right">Расположение:</p></div>
+    <div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-1"><%= @node.description %></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-1"><p class="text-muted text-right">Обслуживает:</p></div>
+    <div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-1"><%= @node.lifts.count %> лифтов</div>
+  </div>
+  <h4>Сетевые параметры узла</h4>
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-1"><p class="text-muted text-right">Порты обмена:</p></div>
+    <div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-1">
+      <% if @node.dataport == nil %>
+      <span class="label label-warning">Порт данных не указан</span>
+      <% else %>
+      данные <%= @node.dataport %>
+      <% end %>
+      /
+      <% if @node.soundport == nil %>
+      <span class="label label-warning">Порт звука не указан</span>
+      <% else %>
+      звук <%= @node.soundport %>
+      <% end %>
+    </div>
+  </div>
+  <%= render "nodes/ipa" %>
+  <h4>Конфигурация ММИ</h4>
   <table class="table table-striped table-bordered table-condensed">
-      <caption><b>Основные параметры узла</b></caption>
       <thead>
-        <td class="col-md-4">Адрес:</td>
-        <td>ул.<%= @street %>, д. <%= @build.name %></td>
-      </thead>
-      <tr>
-        <td>Расположение оборудования:</td>
-        <td><%= @node.description %></td>
-      </tr>
-  </table>
-  <table class="table table-striped table-bordered table-condensed">
-    <caption><b>Сетевые параметры узла</b></caption>
-      <tr>
-        <td>Порты обмена: данные / звук</td>
-        <td>
-          <% if @node.dataport == nil %>
-          <span class="label label-warning">Порт данных не указан</span>
-          <% else %>
-          <%= @node.dataport %>
-          <% end %>
-          /
-          <% if @node.soundport == nil %>
-          <span class="label label-warning">Порт звука не указан</span>
-          <% else %>
-          <%= @node.soundport %>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Используемые ip-адреса:
-        </td>
-      </tr>
-      <%= render "nodes/ipa" %>
-  </table>
-  <table class="table table-striped table-bordered table-condensed">
-      <caption><b>Конфигурация ММИ</b></caption>
-      <thead>
-        <td class="col-md-2">№ слота</td>
+        <td class="col-sm-2">№ слота</td>
         <td>Устройство</td>
         <td>Описание ЛШ</td>
       </thead>
@@ -91,8 +97,8 @@
         <td></td>
       </tr>  
   </table>
+  <h4>Установленное оборудование</h4>
   <table class="table table-striped table-bordered table-condensed">
-      <caption><b>Установленное оборудование</b></caption>
       <thead>
         <td>Оборудование</td>
         <td>Серийный номер</td>
@@ -103,4 +109,3 @@
       </tbody>
   </table>
   <% end %> 
-</div>

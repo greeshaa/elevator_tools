@@ -20,8 +20,18 @@
 #  contract_id                 :integer
 #  mechanic_id                 :integer
 #  inspection_at               :date
+#  made_at                     :date
+#  manufacturer_id             :integer
+#  manufacturer                :string(255)
+#  model                       :string(255)
+#  function                    :string(255)
+#  doors                       :string(255)
+#  capacity                    :integer
+#  speed                       :integer
+#  elevation                   :integer
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 require 'spec_helper'

@@ -20,15 +20,26 @@
 #  contract_id                 :integer
 #  mechanic_id                 :integer
 #  inspection_at               :date
+#  made_at                     :date
+#  manufacturer_id             :integer
+#  manufacturer                :string(255)
+#  model                       :string(255)
+#  function                    :string(255)
+#  doors                       :string(255)
+#  capacity                    :integer
+#  speed                       :integer
+#  elevation                   :integer
 #
+
 class Lift < ActiveRecord::Base
     attr_accessible :node_id, :porch_id, :position, :lift_type_id, :elevator_control_station_id, :regnum, :sernum, 
     				:contract_id, :mechanic_id, :inspection_at, :stopscount, :introduced_at, :overhaul_at, :standart_life
   
     belongs_to :porch
-    belongs_to :node
     belongs_to :build
     belongs_to :street
+    belongs_to :city
+    belongs_to :node
     belongs_to :mechanic
     belongs_to :contract
     belongs_to :elevator_control_station

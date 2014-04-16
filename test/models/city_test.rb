@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'test_helper'
 
-class IpAddressTest < ActiveSupport::TestCase
+class CityTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

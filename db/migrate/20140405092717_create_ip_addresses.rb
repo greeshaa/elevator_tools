@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateIpAddresses < ActiveRecord::Migration
   def change
     create_table :ip_addresses do |t|

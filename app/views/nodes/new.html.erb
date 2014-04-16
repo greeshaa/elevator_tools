@@ -19,8 +19,48 @@
     </div>
     <div class="form-group">
       <%= f.label :build_id, "Здание:" %>
-      <%= f.grouped_collection_select( :build_id, Street.order(:name), :builds, :name, :id, :name, {}, html_options = {prompt: 'Выберите здание...', class: "form-control input-sm"})   %>
+      <%= f.grouped_collection_select(:build_id, Street.order(:name), :builds, :name, :id, :name, {}, html_options = {prompt: 
+        'Выберите здание...', class: "form-control input-sm"}) %>
     </div>
+    <div class="form-group">
+      <%= f.label :porch_id, "Подъезд:" %>
+      <%= f.grouped_collection_select(:porch_id, Build.order(:name), :porches, :name, :id, :name, {}, html_options = {prompt: 
+        'Выберите подъезд...', class: "form-control input-sm"}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :dataport, "Порт данных:" %>
+      <%= f.text_field :dataport, class: "form-control input-sm", placeholder:"44000" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :soundport, "Порт звука:" %>
+      <%= f.text_field :soundport, class: "form-control input-sm", placeholder:"44001" %>
+    </div>
+    <%= f.fields_for :ip_addresses do |ipa| %>
+  <%= render 'shared/error_messages', object: ipa.object %>
+  <fieldset>
+    <div class="form-group">
+      <%= ipa.label :provider_id, "Провайдер:" %>
+      <%= ipa.select :provider_id, 
+          options_from_collection_for_select(@providers, :id, :name), {}, {class: "form-control input-sm"} %>
+    </div>
+    <div class="form-group">
+      <%= ipa.label :name, "Тип адреса:" %>
+      <%= ipa.text_field :name, class: "form-control input-sm", placeholder:"Основной" %>
+    </div>
+    <div class="form-group">
+      <%= ipa.label :ip, "ip-адрес:" %>
+      <%= ipa.text_field :ip, class: "form-control input-sm", placeholder:"192.168.0.1" %>
+    </div>
+    <div class="form-group">
+      <%= ipa.label :mask, "Маска подсети:" %>
+      <%= ipa.text_field :mask, class: "form-control input-sm", placeholder:"255.255.255.0" %>
+    </div>
+    <div class="form-group">
+      <%= ipa.label :gate, "Основной шлюз:" %>
+      <%= ipa.text_field :gate, class: "form-control input-sm", placeholder:"192.168.0.254" %>
+    </div>
+  </fieldset>
+  <% end %>
     <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
     </fieldset>
   <% end %>

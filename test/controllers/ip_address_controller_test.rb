@@ -1,7 +1,6 @@
-# -*- encoding : utf-8 -*-
 require 'test_helper'
 
-class IpAddressTest < ActiveSupport::TestCase
+class IpAddressControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

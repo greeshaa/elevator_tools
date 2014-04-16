@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddColumnsToLiftTypes < ActiveRecord::Migration
   def change
     add_column :lift_types, :model, :string
