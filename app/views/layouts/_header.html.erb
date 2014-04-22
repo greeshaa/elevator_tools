@@ -54,12 +54,12 @@
               <li><%= link_to "Профиль", current_user %></li>
               <li><%= link_to "Настройки", edit_user_path(current_user) %></li>
               <li class="divider"></li>
-              <li><%= link_to "Выйти", signout_path, method: "delete" %></li>
+              <li><%= link_to "Выйти", signout_path, method: :delete %></li>
               <% else %>
               <li><%= link_to "Профиль", current_user %></li>
               <li><%= link_to "Настройки", edit_user_path(current_user) %></li>
               <li class="divider"></li>
-              <li><%= link_to "Выйти", signout_path, method: "delete" %></li>
+              <li><%= link_to "Выйти", signout_path, method: :delete %></li>
               <% end %>
             </ul>
           </li>

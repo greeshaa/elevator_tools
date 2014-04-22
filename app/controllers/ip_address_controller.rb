@@ -1,12 +1,11 @@
 class IpAddressController < ApplicationController
 	
 	def edit
-		#@node = Node.find(params[:id])
 		@ip_address = IpAddress.find(params[:id])
+		@providers = Provider.all
 	end
 
 	def update
-		#@node = Node.find(params[:id])
 		@ip_address = IpAddress.find(params[:id])
 		@node = @ip_address.node
     if @ip_address.update_attributes(params[:ip_address]) 

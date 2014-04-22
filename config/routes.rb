@@ -1,11 +1,27 @@
 # -*- encoding : utf-8 -*-
 ElevatorTools::Application.routes.draw do
 
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users
+  resources :address
+  resources :streets
+  resources :builds
+  resources :porches
+  resources :lifts 
+  resources :nodes do
+      resources :ip_address, shallow: true
+  end
+  resources :equipment_types
+  resources :equipment_lists
+  resources :equipment
+  resources :equipment_movements
+
+
   root :to => 'static_pages#main'
 
-  get '/signup',  to: 'users#new'
-  get '/signin',  to: 'sessions#new'
-  get '/signout', to: 'sessions#destroy', via: :delete
+  get '/signup',  to: 'users#new'        
+  get '/signin',  to: 'sessions#new'     
+  match '/signout', to: 'sessions#destroy', via: :delete
 
   get '/main',   to: 'static_pages#main'
   get '/about',   to: 'static_pages#about'
@@ -31,24 +47,6 @@ ElevatorTools::Application.routes.draw do
   #get "streets/show"
   #get "streets/index"
   #get "builds/index"
-
-
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :users
-  resources :address
-  resources :streets
-  resources :builds
-  resources :porches
-  resources :lifts 
-  resources :nodes do
-      resources :ip_address, shallow: true
-  end
-  resources :equipment_types
-  resources :equipment_lists
-  resources :equipment
-  resources :equipment_movements
-
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
