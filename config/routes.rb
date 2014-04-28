@@ -19,15 +19,16 @@ ElevatorTools::Application.routes.draw do
 
   root :to => 'static_pages#main'
 
-  get '/signup',  to: 'users#new'        
-  get '/signin',  to: 'sessions#new'     
-  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signup',  to: 'users#new',            via: :get
+  match '/signin',  to: 'sessions#new',         via: :get
+  match '/signout', to: 'sessions#destroy',     via: :delete
 
   get '/main',   to: 'static_pages#main'
   get '/about',   to: 'static_pages#about'
   get '/handbook',   to: 'static_pages#handbook'
   get '/test',   to: 'static_pages#test'
   get 'lifts_inspections',   to: 'lifts#inspections'
+  get 'lifts_list',   to: 'lifts#list'
   get 'equipment_search', to: 'equipment#search'
   get 'equipment_store', to: 'equipment#store'
   get 'equipment_broken', to: 'equipment#broken'

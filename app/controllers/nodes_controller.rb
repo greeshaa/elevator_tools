@@ -7,13 +7,17 @@ before_filter :signed_in_user
     @ipa  = @node.ip_addresses
 
     if @node.street.nil?
+      @address = "<h4>&nbsp;Группа лифтов, которые не выводятся в ЦД и не принадлежат какому-либо УМ</h4>"
     else
-      @porch = @node.porch
-      @build = @node.build
-      @street = @node.street.name
-      @equipment = @node.equipment
+      if @node.porch.nil?
+        @address = "ул." + @node.street.name + ", д." + @node.build.name
+      else
+        @address = "ул." + @node.street.name + ", д." + @node.build.name + ", " + @node.porch.name
+      end
   	end
+    @equipment = @node.equipment
   end
+
 
   def new
     @streets = Street.all

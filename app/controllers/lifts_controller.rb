@@ -25,5 +25,9 @@ before_filter :signed_in_user
   def inspections
     @lifts = Lift.all
   end
+
+  def list
+    @lifts = Lift.all
+  end
  
 end
