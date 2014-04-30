@@ -16,10 +16,6 @@
       <%= f.label :porch_count, "Количество подъездов:" %>
       <%= f.text_field :porch_count, class: "form-control input-sm", placeholder: "Например: 8" %>
     </div>
-    <div class="form-group">
-      <%= f.label :node_id, "УМ:" %>
-      <%= f.select :node_id, options_from_collection_for_select(@nodes, :id, :name), {}, {class: "form-control input-sm"} %>
-    </div>
     <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
   </fieldset>
   <% end %>
