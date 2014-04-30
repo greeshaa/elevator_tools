@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414122216) do
+ActiveRecord::Schema.define(version: 20140430104006) do
 
   create_table "builds", force: true do |t|
     t.integer  "street_id"
@@ -53,15 +53,14 @@ ActiveRecord::Schema.define(version: 20140414122216) do
   end
 
   create_table "equipment", force: true do |t|
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "equipment_list_id"
     t.string   "factory_sn"
     t.date     "installed_at"
     t.string   "notes"
-    t.integer  "destination_id"
-    t.integer  "node_id"
-    t.integer  "lift_id"
+    t.integer  "porch_id"
+    t.boolean  "broken",            default: false
   end
 
   create_table "equipment_lists", force: true do |t|

@@ -10,10 +10,12 @@
       <ul class="dropdown-menu">
         <li><%= link_to "Узел",         edit_node_path %></li>
         <% if @ipa.empty? %>
+        <li><%= link_to "Добавить ip-адрес",     new_node_ip_address_path(@node)  %></li>
         <% else %>
         <% @ipa.each do |ipa| %>
         <li><%= link_to ipa.name + " ip-адрес",     edit_ip_address_path(ipa)  %></li>
         <% end %>
+        <li><%= link_to "Добавить ip-адрес",     new_node_ip_address_path(@node)  %></li>
         <% end %>
         <li><%= link_to "Оборудование", '#' %></li>
       </ul>

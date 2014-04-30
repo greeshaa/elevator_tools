@@ -1,0 +1,46 @@
+<% provide(:title, 'Добавление ip') %>
+<div class="col-md-10 col-md-offset-1">
+  <legend>Добавление ip</legend>
+  <%= form_for(@node, html:{class: "col-md-4", role:"form"} ) do |f| %>
+
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :name, "Номер узлового модуля:" %>
+      <%= f.text_field :name, class: "form-control input-sm", placeholder:"УМ 254" %>
+    </div>
+
+  
+
+  <%= f.fields_for :ip_addresses do |ipa| %>
+  <fieldset>
+
+    <div class="form-group">
+      <%= ipa.label :name, "Тип адреса:" %>
+      <%= ipa.text_field :name, class: "form-control input-sm", placeholder:"Основной" %>
+    </div>
+
+  <div class="form-group">
+      <%= ipa.label :provider_id, "Провайдер:" %>
+      <%= ipa.select :provider_id, 
+          options_from_collection_for_select(@providers, :id, :name), {}, {class: "form-control input-sm"} %>
+    </div>
+
+  <div class="form-group">
+      <%= ipa.label :ip, "ip-адрес:" %>
+      <%= ipa.text_field :ip, class: "form-control input-sm", placeholder:"192.168.0.1" %>
+    </div>
+    <div class="form-group">
+      <%= ipa.label :mask, "Маска подсети:" %>
+      <%= ipa.text_field :mask, class: "form-control input-sm", placeholder:"255.255.255.0" %>
+    </div>
+    <div class="form-group">
+      <%= ipa.label :gate, "Основной шлюз:" %>
+      <%= ipa.text_field :gate, class: "form-control input-sm", placeholder:"192.168.0.254" %>
+    </div>
+  </fieldset>
+  <% end %>
+    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
+  </fieldset>
+  
+
+  <% end %>

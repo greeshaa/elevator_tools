@@ -16,7 +16,7 @@
 
 # -*- encoding : utf-8 -*-
 class EquipmentMovement < ActiveRecord::Base
-  attr_accessible :made_at, :movement, :reason, :destination_id
+  attr_accessible :made_at, :movement, :reason, :destination_id, :equipment_id 
   belongs_to :user
   belongs_to :equipment
   belongs_to :destination

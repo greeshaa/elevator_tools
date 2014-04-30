@@ -5,6 +5,11 @@
       <h3><%=@e_list.manufacturer %> <%=@e_list.name  %></h3>
       <h4>Описание</h4>
       <p><%=@e_list.description %></p>
+      <h4>Оборудование зарегистрированное в системе:</h4>
+
+<table class="table table-striped table-bordered table-condensed">
+  <%= render @equip_store %>
+</table>
     </section>
   </aside>
 </div>

@@ -17,15 +17,14 @@
 
 # -*- encoding : utf-8 -*-
 class Equipment < ActiveRecord::Base
-  attr_accessible :equipment_list_id, :sn, :factory_sn, :notes, :destination_id, :installed_at
+  attr_accessible :equipment_list_id, :factory_sn, :notes, :destination_id, :installed_at, :porch_id
 
   before_save { factory_sn.upcase! }
-  before_save { sn.upcase! }
-
+ 
   validates :factory_sn, presence: true, uniqueness: true
 
   belongs_to :equipment_list
-  belongs_to :destination
+  belongs_to :porch
   belongs_to :node
   belongs_to :lift
   has_many 	 :equipment_movements

@@ -4,6 +4,7 @@ before_filter :signed_in_user
 
   def show
     @e_list = EquipmentList.find(params[:id])
+    @equip_store = @e_list.equipment
   end
 
   def new

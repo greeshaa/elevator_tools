@@ -2,7 +2,7 @@
 <div class="col-md-10 col-md-offset-1">
   <legend><%= @equipment.equipment_list.manufacturer + ' ' + @equipment.equipment_list.name%></legend>
   <div class="btn-group btn-group-sm col-md-7">
-    <%= link_to "Показать все #{@equipment.equipment_list.manufacturer} #{@equipment.equipment_list.name}", equipment_index_path, class: "btn btn-default" %>
+    <%= link_to "Показать все #{@equipment.equipment_list.manufacturer} #{@equipment.equipment_list.name}", equipment_list_path(@equipment.equipment_list.id), class: "btn btn-default" %>
     <%= link_to "Изменить данные устройства", edit_equipment_path, class: "btn btn-default" %>
   </div>
 </div>
@@ -15,15 +15,15 @@
     </tr>
     <tr>
       <td>Дата поступления на склад</td>
-      <td></td>
+      <td><%= @equipment.installed_at.strftime("%d.%m.%Y") %></td>
     </tr>
     <tr>
       <td>Расположение</td>
-     <td><%= @equipment.destination.name %></td>
+     <td><%= @equipment.porch.name %></td>
     </tr>
     <tr>
      <td>Адрес</td>
-     <td><%= @equipment.destination.name %></td>
+     <td><%= "ул. " + @equipment.porch.build.street.name + ", д. " + @equipment.porch.build.name %></td>
     </tr>
    <tr>
       <td>Категория</td>
@@ -42,7 +42,7 @@
   <div class="btn-group btn-group-sm col-md-7">
     <%= link_to "Показать все устройства", equipment_index_path, class: "btn btn-default" %>
     <%= link_to "Редактировать устройство", edit_equipment_path, class: "btn btn-default" %>
-    <%= link_to "Переместить устройство",   move_equipment_path, class: "btn btn-default" %>
+    <%= link_to "Переместить устройство",   "#", class: "btn btn-default" %>
   </div>
 </div>
 </div>
