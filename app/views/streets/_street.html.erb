@@ -1,5 +1,5 @@
 <tr>
-	<td><%= link_to street.name, street %></td>
+	<td><%= link_to street.name + " " + street.street_kind.full_name, street %></td>
 	<td><%= street.builds.count.to_s %></td>
 	<td><%= street.lifts.count.to_s %></td>
 </tr>

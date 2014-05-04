@@ -11,15 +11,18 @@
 #
 
 class Street < ActiveRecord::Base
-  attr_accessible :name, :city_id
+  attr_accessible :name, :city_id, :street_kind_id
   validates  :name, presence: true, uniqueness: {case_sensitive: false}, length: { minimum: 5 }
 
   belongs_to :city
-
+  belongs_to :street_kind
   has_many   :builds
   has_many   :porches, through: :builds
   has_many   :lifts, through: :porches
   #has_many :lifts, through: :builds
+
+  accepts_nested_attributes_for :city
+  accepts_nested_attributes_for :street_kind
 
   def self.search(search)
     if search

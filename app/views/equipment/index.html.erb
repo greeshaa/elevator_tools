@@ -45,7 +45,7 @@
 	</tr>
 	<% @equip_count.each do |ec| %>
 	<tr>
-		<td class="title_left"><%= ec[:name] %></td>
+		<td class="title_left"><%= link_to ec[:name], equipment_list_path(ec[:equipment]) %></td>
 		<td class="col-md-1"><%= ec[:all] %></td>
 		<td class="col-md-1"><%= ec[:work] %></td>
 		<td class="col-md-1"><%= ec[:store] %></td>

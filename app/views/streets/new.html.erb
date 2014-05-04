@@ -3,8 +3,19 @@
     <legend>Добавление улицы</legend>
 
       <div class="input-group input-group-sm col-md-7">
+    <div class="form-group">
+      <%= f.label :city_id, "Город:" %>
+      <%= f.select :city_id, options_from_collection_for_select(@city, :id, :name), {}, 
+      													{class: "form-control input-sm"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :street_kind_id, "Тип улицы:" %>
+      <%= f.select :street_kind_id, options_from_collection_for_select(@streetkind, :id, :name), {}, 
+      													{class: "form-control input-sm"} %>
+    </div>
         <label class="sr-only" for="name">name</label>
       	<%= f.text_field :name, class: "form-control", placeholder: "Название улицы" %>
+
         <div class="input-group-btn">
           <%= f.submit "Добавить", class: "btn btn-default" %>
         </div>

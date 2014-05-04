@@ -7,10 +7,7 @@
       
       <h5><%= @porch.name %></h5>
 
-<% if @node.id == 66 %>
-<span class="label label-warning">Адрес не выводится в ЦД.</span>
-<% else %>
-<% if @node == nil %>
+<% if @node.nil? %>
   <pan class="label">Подъезд еще не привязан к какому-либо УМ</span>
 <% elsif @node.porch_id == nil %>
 
@@ -20,7 +17,6 @@
 <% else %>
 <p>Подъезд относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>,
   <%= @node.build.name %> (<%= @node.porch.name %>)<p>
-<% end %>
 <% end %>
     </section>
   </aside>

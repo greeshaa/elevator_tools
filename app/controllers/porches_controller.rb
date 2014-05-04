@@ -3,11 +3,11 @@ class PorchesController < ApplicationController
 before_filter :signed_in_user
 
   def show
-      @porch = Porch.find(params[:id])
-      @lifts = @porch.lifts   
-      @build = @porch.build    
+      @porch  = Porch.find(params[:id])
+      @build  = @porch.build    
       @street = @build.street.name
-      @node = @build.node
+      @node   = @porch.node
+      @lifts  = @porch.lifts 
       
   	
   end

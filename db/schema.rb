@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430104006) do
+ActiveRecord::Schema.define(version: 20140504061154) do
 
   create_table "builds", force: true do |t|
     t.integer  "street_id"
     t.string   "name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "node_id"
     t.integer  "porch_count"
   end
 
@@ -198,11 +197,19 @@ ActiveRecord::Schema.define(version: 20140430104006) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "street_kinds", force: true do |t|
+    t.string   "name"
+    t.string   "full_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "streets", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "city_id"
+    t.integer  "street_kind_id"
   end
 
   create_table "users", force: true do |t|

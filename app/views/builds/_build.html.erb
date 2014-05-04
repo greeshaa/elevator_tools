@@ -1,4 +1,4 @@
 <li class="list-group-item">
     <span class="badge"><%= pluralize(build.lifts.count, "lift") %></span>
-    <%= link_to @street.name + ', ' + build.name, build %> 
+    <%= link_to @street.street_kind.name + ' ' + @street.name + ', ' + build.name, build %> 
 </li>

@@ -14,7 +14,7 @@ before_filter :signed_in_user
     @node = Node.new(node_params)
     if @node.save
 
-      okmessage = @node.name + " успешно добавлен."
+      okmessage = "УМ " + @node.name + " успешно добавлен."
       flash[:success] = okmessage
       redirect_to @node
     else
@@ -39,6 +39,7 @@ before_filter :signed_in_user
 
   def show
     @node = Node.find(params[:id])
+    @node_name = "УМ " + @node.name
     @ipa  = @node.ip_addresses
 
     if @node.street.nil?
@@ -50,7 +51,7 @@ before_filter :signed_in_user
         @address = "ул." + @node.street.name + ", д." + @node.build.name + ", " + @node.porch.name
       end
     end
-    @equipment = @node.equipment
+    @equipment = @node.porch.equipment
   end
 
   def index

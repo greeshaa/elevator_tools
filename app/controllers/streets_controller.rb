@@ -8,17 +8,20 @@ before_filter :signed_in_user
 
   def show
     @street = Street.find(params[:id])
+    @streetkind = @street.street_kind.name
     @builds = @street.builds.order(:name)
   end
 
   def new
   	@street = Street.new
+    @city = City.all
+    @streetkind = StreetKind.all
   end
 
   def create
     @street = Street.new(params[:street])
     if @street.save
-    	okmessage = "Улица " + @street.name + " успешно добавлена."
+    	okmessage = @street.street_kind.name + @street.name + " успешно добавлен(а)."
       flash[:success] = okmessage
       redirect_to @street
     else
@@ -28,12 +31,14 @@ before_filter :signed_in_user
 
   def edit
      @street = Street.find(params[:id])
+     @city = City.all
+    @streetkind = StreetKind.all
   end
 
   def update
     @street = Street.find(params[:id])
     if @street.update_attributes(params[:street])
-      flash[:success] = "Улица " + @street.name + " обновлена"
+      flash[:success] = @street.street_kind.name + @street.name + " успешно обновлен(а)"
       redirect_to @street
     else
       render 'edit'

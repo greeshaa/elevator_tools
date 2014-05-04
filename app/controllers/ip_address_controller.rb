@@ -27,7 +27,7 @@ class IpAddressController < ApplicationController
 		@ip_address = IpAddress.find(params[:id])
 		@node = @ip_address.node
     if @ip_address.update_attributes(params[:ip_address]) 
-      flash[:success] = @ip_address.name + " ip для " + @node.name + " обновлен"
+      flash[:success] = @ip_address.name + " ip для УМ " + @node.name + " обновлен"
       redirect_to @node
     else
       render 'edit'

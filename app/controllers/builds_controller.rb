@@ -3,15 +3,15 @@ class BuildsController < ApplicationController
 before_filter :signed_in_user
 
   def index
-    @builds = Build.all #paginate(page: params[:page])
+    @builds = Build.all
   end
 
   def show
       @build   = Build.find(params[:id])
       @lifts   = @build.lifts
       @street  = @build.street.name
-      @node    = @build.node
-      @porches = @build.porches#.paginate(page: params[:page])
+      @streetkind = @build.street.street_kind.name
+      @porches = @build.porches
       @streets = @build.street.id.to_s
       
   end

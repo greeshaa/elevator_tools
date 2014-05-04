@@ -16,10 +16,10 @@ before_filter :signed_in_user
 		@e_lists = EquipmentList.all
 		@equipment = Equipment.new(params[:equipment])
 		if @equipment.save
-			current_user.equipment_movements.create(destination_id: "1", movement: "Поступление на склад", 
+			current_user.equipment_movements.create(movement: "Поступление на склад", 
 				equipment_id: @equipment.id)
 			@equipment.installed_at = @equipment.created_at.strftime("%d.%m.%Y")
-			@equipment.update_attributes(destination_id: "1", porch_id: "1048")
+			@equipment.update_attributes(porch_id: "1")
 			okmessage = "Устройство успешно добавлено."
 			flash[:success] = okmessage
 			redirect_to @equipment
@@ -61,13 +61,14 @@ before_filter :signed_in_user
 		@equip_count = []
 		e_list = EquipmentList.all
 		e_list.each do |el|
+			equipment = el
 			name    = el.name
 			all     = el.equipment.count
 			work    = el.equipment.where("porch_id > 1").count
 			store   = el.equipment.where("porch_id = 1 AND broken = 'f'").count
 			broken  = el.equipment.where("broken = 't'").count
 			service = el.equipment.where("porch_id > 1 AND broken = 't'").count
-			count   = {name: name, all: all, work: work, store: store, broken: broken, service: service}
+			count   = {equipment: equipment, name: name, all: all, work: work, store: store, broken: broken, service: service}
   			@equip_count.push(count)
 		end
 			

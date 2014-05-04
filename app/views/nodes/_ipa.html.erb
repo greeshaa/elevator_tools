@@ -16,11 +16,13 @@
 	<% end %>
 	<% if ipa.provider == nil %>
 	<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-1">
-		<%= ipa.ip %> | <span class="label label-warning">Нет информации о провайдере</span>
+		<div class="row">
+		<div><%= ipa.ip %></div><div><span class="label label-warning">Нет информации о провайдере</span></div>
+		</div>
 	</div>
 	<% else %>	
 	<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-1">
-		<%= ipa.ip %> | <%= ipa.provider.name %>
+		<div><%= ipa.ip %></div><div><%= ipa.provider.name %></div>
 	</div>
 	<% end %>
 </div>

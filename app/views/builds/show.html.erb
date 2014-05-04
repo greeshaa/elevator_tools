@@ -1,13 +1,15 @@
-<% provide(:title, @street + ', ' + @build.name) %>
+<% provide(:title, @streetkind + ' ' + @street + ', ' + @build.name) %>
 <div class="col-md-10 col-md-offset-1">
-  <legend><%= @street %>, <%= @build.name %></legend>
-  <% if @build.id == 50 %>
+  <legend><%= @streetkind + ' ' + @street %>, <%= @build.name %></legend>
+  <% if @build.id == 1 %>
     <%= render @porches %>
   <% else %>
-      <% if @node == nil %>
-        <span class="label">Дом еще не привязан к какому-либо УМ</span>
+
+
+      <% if @node.nil? %>
+        <span class="label label-warning">Дом еще не привязан к какому-либо УМ</span>
       <% elsif @node.porch_id == nil %>
-        <% if @node.id == 66 %>
+        <% if @node.id == 1 %>
           <span class="label label-warning">Адрес не выводится в ЦД.</span>
         <% else %>
           <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу 
@@ -18,13 +20,17 @@
       <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>, 
                         <%= @node.build.name %> в <%= @node.porch.name %> <p>
       <% end %>
-      <p>Подъездов в здании: <%= link_to @build.porch_count.to_s, '#' %></p>
+
+
+
+
+      <p>Подъездов в здании: <%= @build.porch_count.to_s %></p>
       <legend>Обслуживаемые лифты</legend>
-      <% if @build.lifts.count == 0 %>
+      <% if @lifts.empty? %>
       <p class="lead">Обслуживаемых лифтов нет.</p>
       <% else %>
         <ul>
-          <% @build.lifts.each do |lift| %>
+          <% @lifts.each do |lift| %>
             <li><%= lift.porch.name + ' - ' %> <%= link_to 'Лифт ' + lift.function + ' - ' + lift.capacity.to_s + ' кг. - '  + lift.stopscount.to_s + ' остановок', lift %>
             </li>
           <% end %>
