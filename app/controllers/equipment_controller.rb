@@ -52,10 +52,10 @@ before_filter :signed_in_user
 	def index
 
 		@equip_all     	 = Equipment.count
-		@equip_store   	 = Equipment.count(:conditions => "porch_id = 1 AND broken = 'f'")
+		@equip_store   	 = Equipment.count(:conditions => "porch_id = 1 AND broken = '0'")
 		@equip_work    	 = Equipment.count(:conditions => "porch_id > 1")
-		@equip_broken 	 = Equipment.count(:conditions => "broken = 't'")
-		@equip_service 	 = Equipment.count(:conditions => "porch_id > 1 AND broken = 't'")
+		@equip_broken 	 = Equipment.count(:conditions => "broken = '1'")
+		@equip_service 	 = Equipment.count(:conditions => "porch_id > 1 AND broken = '1'")
 
 		#all Выборка количества устройств в каждой категории
 		@equip_count = []
@@ -65,19 +65,19 @@ before_filter :signed_in_user
 			name    = el.name
 			all     = el.equipment.count
 			work    = el.equipment.where("porch_id > 1").count
-			store   = el.equipment.where("porch_id = 1 AND broken = 'f'").count
-			broken  = el.equipment.where("broken = 't'").count
-			service = el.equipment.where("porch_id > 1 AND broken = 't'").count
+			store   = el.equipment.where("porch_id = 1 AND broken = '0'").count
+			broken  = el.equipment.where("broken = '1'").count
+			service = el.equipment.where("porch_id > 1 AND broken = '1'").count
 			count   = {equipment: equipment, name: name, all: all, work: work, store: store, broken: broken, service: service}
   			@equip_count.push(count)
 		end
 			
 	end
 	def store
-		@equip_store   	 = Equipment.all(:conditions => "porch_id = 1")
+		@equip_store   	 = Equipment.all(:conditions => "porch_id = 1 AND broken = '0'")
 	end
 
 	def broken
-		@equip_store   	 = Equipment.all(:conditions => "broken = 't'")
+		@equip_store   	 = Equipment.all(:conditions => "broken = '1'")
 	end
 end
