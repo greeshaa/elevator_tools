@@ -27,6 +27,7 @@ class Equipment < ActiveRecord::Base
   belongs_to :porch
   belongs_to :node
   belongs_to :lift
+  has_many   :equipment_line_items
   has_many 	 :equipment_movements
 
 

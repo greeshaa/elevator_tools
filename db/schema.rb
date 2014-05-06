@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504061154) do
+ActiveRecord::Schema.define(version: 20140506073353) do
 
   create_table "builds", force: true do |t|
     t.integer  "street_id"
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 20140504061154) do
     t.boolean  "broken",            default: false
   end
 
+  create_table "equipment_line_items", force: true do |t|
+    t.integer  "equipment_id"
+    t.integer  "equipment_move_buffer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "equipment_lists", force: true do |t|
     t.integer  "equipment_type_id"
     t.string   "manufacturer"
@@ -71,15 +78,23 @@ ActiveRecord::Schema.define(version: 20140504061154) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "equipment_move_buffers", force: true do |t|
+    t.integer  "equipment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "equipment_movements", force: true do |t|
-    t.integer  "destination_id"
     t.integer  "equipment_id"
     t.string   "movement"
     t.string   "reason"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.integer  "node_id"
+    t.integer  "porch_id"
+    t.integer  "build_id"
+    t.integer  "street_id"
   end
 
   create_table "equipment_types", force: true do |t|

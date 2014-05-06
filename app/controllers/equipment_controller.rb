@@ -80,4 +80,8 @@ before_filter :signed_in_user
 	def broken
 		@equip_store   	 = Equipment.all(:conditions => "broken = '1'")
 	end
+
+	def relocation
+		@equipment = Equipment.find(params[:id])
+	end
 end

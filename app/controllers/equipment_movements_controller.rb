@@ -8,22 +8,34 @@ before_filter :signed_in_user
 
   def new
     @e_move = EquipmentMovement.new
-    @equipment = Equipment.all
-    @node = Node.all
+    @porch = Porch.all
+    @equipment = Equipment.find(params[:equipment_id])
   end
 
   def create
-     @equipment = Equipment.find(params[:e_move])
-     @node = Node.find(params[:e_move])
-     current_user.equipment_movements.create(destination_id: "2", movement: "Установка на узел", equipment_id: equipment.id)
-    if @e_move.save
-      @node.equipment << @equipment
-    	okmessage = "Оборудование пересено на новый адрес"
-      flash[:success] = okmessage
-      redirect_to @e_move
-    else
-      render 'new'
-    end
+     count = 0
+     porch = Porch.find(params[:equipment_movement][:porch_id])
+     current_equipment_buffer.equipment_line_items.each do |item|
+      @equipment_movement = current_user.equipment_movements.build(params[:equipment_movement])
+      equipment = Equipment.find_by_id(item.equipment.id)
+      @equipment_movement.update_attributes(equipment_id: equipment.id) 
+      porch.equipment << equipment
+      if @equipment_movement.save
+        if count == 0
+          @message = equipment.equipment_list.name + " s/n: " + equipment.factory_sn
+          count +=1
+        else
+          @message += ' и ' + equipment.equipment_list.name + " s/n: " + equipment.factory_sn
+        end
+      end
+     end
+    okmessage = @message + " перенесен(ы) в " + porch.name + ' на ' + porch.build.street.name + ' ' + porch.build.name
+    flash[:success] = okmessage
+
+    @equipment_move_buffer = current_equipment_buffer
+    @equipment_move_buffer.destroy
+    session[:cart_id] = nil
+    redirect_to equipment_index_path
   end
 
   def edit

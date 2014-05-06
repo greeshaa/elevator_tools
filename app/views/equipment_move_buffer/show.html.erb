@@ -1,0 +1,56 @@
+<% provide(:title, 'Перемещение оборудования') %>
+<div class="col-md-10 col-md-offset-1">
+	<legend>Перемещение оборудования</legend>
+	<div class="col-md-7 col-md-offset-1">
+		<div class="row">
+			<table class="table table-striped table-bordered table-condensed">
+				<% @equipment_move_buffer.equipment_line_items.each do |item| %>
+				<tr>
+					<td class="col-md-3">
+						<%= item.equipment.equipment_list.manufacturer + ' ' + item.equipment.equipment_list.name%>
+					</td>
+					<td>
+						<%= item.equipment.factory_sn %>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+		<div class="row">
+		<%= button_to 'Очистить буфер', @equipment_move_buffer, method: :delete, confirm: 'Вы уверены?' %>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <%= form_for(@equipment_movements) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <div class="form-group">
+      <%= f.label :street_id, "Улица:" %>
+      <%= f.select :street_id, 
+          options_from_collection_for_select(@streets, :id, :name), {}, {class: "form-control input-sm"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :build_id, "Здание:" %>
+      <%= f.grouped_collection_select(:build_id, Street.order(:name), :builds, :name, :id, :name, {}, html_options = {prompt: 
+        'Выберите здание...', class: "form-control input-sm"}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :porch_id, "Подъезд:" %>
+      <%= f.grouped_collection_select(:porch_id, Build.order(:name), :porches, :name, :id, :name, {}, html_options = {prompt: 
+        'Выберите подъезд...', class: "form-control input-sm"}) %>
+
+      <%= f.label :movement, "Описание перемещения:"  %>
+      <%= f.text_field :movement %>
+
+      <%= f.label :reason, "Причина перемещения:" %>
+      <%= f.text_field :reason %>
+
+      <%= f.submit "Переместить", class: "btn btn-mini" %>
+    <% end %>
+  </div>
+</div>
+# Поступление на склад, Перемещение на склад, Перемещение на адрес, Перемещение в ремонт, Списание
+</div>

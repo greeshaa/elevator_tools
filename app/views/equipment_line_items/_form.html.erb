@@ -1,0 +1,25 @@
+<%= form_for(@equipment_line_item) do |f| %>
+  <% if @equipment_line_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@equipment_line_item.errors.count, "error") %> prohibited this equipment_line_item from being saved:</h2>
+
+      <ul>
+      <% @equipment_line_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :equipment_id %><br>
+    <%= f.number_field :equipment_id %>
+  </div>
+  <div class="field">
+    <%= f.label :equipment_move_buffer_id %><br>
+    <%= f.number_field :equipment_move_buffer_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

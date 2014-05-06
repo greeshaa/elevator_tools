@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 ElevatorTools::Application.routes.draw do
 
+  
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
   resources :address
@@ -14,6 +16,8 @@ ElevatorTools::Application.routes.draw do
   resources :equipment_types
   resources :equipment_lists
   resources :equipment
+  resources :equipment_line_items
+  resources :equipment_move_buffer
   resources :equipment_movements
 
 
@@ -32,6 +36,7 @@ ElevatorTools::Application.routes.draw do
   get 'equipment_search', to: 'equipment#search'
   get 'equipment_store', to: 'equipment#store'
   get 'equipment_broken', to: 'equipment#broken'
+  #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'
   get '/add_street',  to: 'streets#new'

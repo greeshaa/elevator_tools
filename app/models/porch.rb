@@ -19,4 +19,5 @@ class Porch < ActiveRecord::Base
   has_one  :node
   has_many :lifts
   has_many :equipment
+  has_many :equipment_movements
 end

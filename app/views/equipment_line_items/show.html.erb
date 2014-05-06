@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Equipment:</strong>
+  <%= @equipment_line_item.equipment_id %>
+</p>
+
+<p>
+  <strong>Equipment move buffer:</strong>
+  <%= @equipment_line_item.equipment_move_buffer_id %>
+</p>
+
+<%= link_to 'Edit', edit_equipment_line_item_path(@equipment_line_item) %> |
+<%= link_to 'Back', equipment_line_items_path %>

@@ -1,0 +1,29 @@
+<h1>Listing equipment_line_items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Equipment</th>
+      <th>Equipment move buffer</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @equipment_line_items.each do |equipment_line_item| %>
+      <tr>
+        <td><%= equipment_line_item.equipment_id %></td>
+        <td><%= equipment_line_item.equipment_move_buffer_id %></td>
+        <td><%= link_to 'Show', equipment_line_item %></td>
+        <td><%= link_to 'Edit', edit_equipment_line_item_path(equipment_line_item) %></td>
+        <td><%= link_to 'Destroy', equipment_line_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Equipment line item', new_equipment_line_item_path %>
