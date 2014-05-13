@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
 before_filter :signed_in_user
 
   def main
-  	@equipment_movements = EquipmentMovement.order("created_at DESC").last(5)
+  	@equipment_movements = EquipmentMovement.last(5)
   end
 
   def about
