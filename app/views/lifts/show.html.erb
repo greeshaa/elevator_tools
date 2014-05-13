@@ -61,8 +61,16 @@
               Адрес на ЛШ&nbsp;<br/>
             </td>
             <td>
+              <% if @lift.tlr.nil? %>
+              <span class="label label-warning">Нет информации о ЗАО/ООО</span><br/>
+              <% else %>
               <%= @lift.tlr.name %>&nbsp;Томсклифтремонт<br/>
+              <% end %>
+              <% if @lift.district.nil? %>
+              <span class="label label-warning">Нет информации принадлежности к участку</span><br/>
+              <% else %>
               <%= @lift.district.name %>&nbsp;участок<br/>
+              <% end %>
               <% if @lift.mechanic.nil? %>
               <span class="label label-warning">Нет информации о механике</span><br/>
               <% else %>

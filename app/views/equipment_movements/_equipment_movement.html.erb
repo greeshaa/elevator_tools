@@ -4,7 +4,7 @@
 			equipment_movement.equipment.equipment_list.name + ' s/n: ' + 
 			equipment_movement.equipment.factory_sn, equipment_movement %>
 <% else %>
-<%= link_to equipment_movement.created_at + ' ' + 
+<%= link_to equipment_movement.created_at.strftime("%d.%m.%Y") + ' ' + 
 			equipment_movement.movement + ' ' + 
 			equipment_movement.equipment.equipment_list.name + ' s/n: ' + 
 			equipment_movement.equipment.factory_sn, equipment_movement %>
