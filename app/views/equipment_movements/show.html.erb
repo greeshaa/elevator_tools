@@ -1,0 +1,21 @@
+<% provide(:title, @e_move.movement) %>
+<div class="row">
+	<table  class="table table-striped table-bordered table-condensed">
+		<tr>
+			<td>Оборудование</td>
+			<td>Серийный номер</td>
+			<td>Событие</td>
+			<td>Основание</td>
+			<td>Дата</td>
+			<td>Пользователь</td>
+		</tr>
+		<tr>
+			<td><%= @e_move.equipment.equipment_list.name %></td>
+			<td><%= @e_move.equipment.factory_sn %></td>
+			<td><%= @e_move.movement %></td>
+			<td><%= @e_move.reason %></td>
+			<td><%= @e_move.created_at %></td>
+			<td><%= @e_move.user.runame %></td>
+		</tr>
+	</table>
+</div>

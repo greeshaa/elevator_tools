@@ -19,6 +19,7 @@ class Street < ActiveRecord::Base
   has_many   :builds
   has_many   :porches, through: :builds
   has_many   :lifts, through: :porches
+  has_many   :nodes, through: :porches
   #has_many :lifts, through: :builds
 
   accepts_nested_attributes_for :city

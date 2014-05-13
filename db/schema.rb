@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506073353) do
+ActiveRecord::Schema.define(version: 20140507145007) do
 
   create_table "builds", force: true do |t|
-    t.integer  "street_id"
     t.string   "name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "street_id"
     t.integer  "porch_count"
   end
 
@@ -37,12 +37,10 @@ ActiveRecord::Schema.define(version: 20140506073353) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "destinations", force: true do |t|
-    t.integer  "node_id"
-    t.integer  "lift_id"
+  create_table "districts", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "elevator_control_stations", force: true do |t|
@@ -71,8 +69,8 @@ ActiveRecord::Schema.define(version: 20140506073353) do
 
   create_table "equipment_lists", force: true do |t|
     t.integer  "equipment_type_id"
-    t.string   "manufacturer"
     t.string   "name"
+    t.string   "manufacturer"
     t.string   "description"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
@@ -102,6 +100,12 @@ ActiveRecord::Schema.define(version: 20140506073353) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "experts", force: true do |t|
+    t.integer  "partner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "inspections", force: true do |t|
@@ -138,15 +142,15 @@ ActiveRecord::Schema.define(version: 20140506073353) do
   create_table "lifts", force: true do |t|
     t.integer  "node_id"
     t.integer  "porch_id"
+    t.string   "position"
     t.string   "regnum"
     t.string   "sernum"
+    t.string   "function"
     t.integer  "stopscount"
+    t.integer  "capacity"
     t.integer  "introduced_at"
     t.integer  "overhaul_at"
     t.integer  "standart_life"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "position"
     t.integer  "lift_type_id"
     t.integer  "elevator_control_station_id"
     t.integer  "contract_id"
@@ -156,11 +160,15 @@ ActiveRecord::Schema.define(version: 20140506073353) do
     t.integer  "manufacturer_id"
     t.string   "manufacturer"
     t.string   "model"
-    t.string   "function"
     t.string   "doors"
-    t.integer  "capacity"
     t.integer  "speed",                       limit: 3
     t.integer  "elevation",                   limit: 3
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "tlr_id"
+    t.integer  "district_id"
+    t.string   "service_payment"
+    t.integer  "expert_id"
   end
 
   create_table "manufacturers", force: true do |t|
@@ -180,13 +188,13 @@ ActiveRecord::Schema.define(version: 20140506073353) do
   create_table "nodes", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.integer  "street_id"
     t.integer  "build_id"
     t.integer  "porch_id"
     t.integer  "dataport"
     t.integer  "soundport"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "partners", force: true do |t|
@@ -225,6 +233,12 @@ ActiveRecord::Schema.define(version: 20140506073353) do
     t.datetime "updated_at",     null: false
     t.integer  "city_id"
     t.integer  "street_kind_id"
+  end
+
+  create_table "tlrs", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

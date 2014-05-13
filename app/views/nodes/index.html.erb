@@ -16,7 +16,11 @@
 	<div class="col-md-10 col-md-offset-1 list" >
 		<table class="col-md-7 table-bordered table-condensed table-striped">
 			<% unless @nodes.nil? %>
+				<% if @nodes.empty? %>
+				<p class="lead">УМ удовлетворяющие запросу не найдены.</p>
+				<% else %>
 				<%= render @nodes %>
+				<% end %>
 			<% end %>
 		</table>
 	</div>

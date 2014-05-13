@@ -40,9 +40,9 @@
 <div class="col-md-10 col-md-offset-1 list">
 <legend>Перемещение оборудования</legend>
   <div class="btn-group btn-group-sm col-md-7">
-    <%= link_to "Показать все устройства", equipment_index_path, class: "btn btn-default" %>
+    <%= link_to "Показать все устройства",  equipment_index_path, class: "btn btn-default" %>
     <%= link_to "Редактировать устройство", edit_equipment_path, class: "btn btn-default" %>
-    <%= button_to "Переместить устройство",   equipment_line_items_path(equipment_id: @equipment), class: "btn btn-default" %>
+    <%= button_to "Переместить устройство", equipment_line_items_path(equipment_id: @equipment), class: "btn btn-default" %>
   </div>
 </div>
 </div>

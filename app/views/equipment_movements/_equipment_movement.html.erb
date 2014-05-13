@@ -1,3 +1,11 @@
-<li><%= equipment_movement.created_at.strftime("%d.%m.%Y")%></br>
-      <%= equipment_movement.equipment.equipment_list.name + ' s/n: ' + equipment_movement.equipment.factory_sn %></br>
-      <%= link_to equipment_movement.movement, equipment_movement %></li>
+<% if equipment_movement.created_at.nil? %>
+
+<%= link_to equipment_movement.movement + ' ' + 
+			equipment_movement.equipment.equipment_list.name + ' s/n: ' + 
+			equipment_movement.equipment.factory_sn, equipment_movement %>
+<% else %>
+<%= link_to equipment_movement.created_at + ' ' + 
+			equipment_movement.movement + ' ' + 
+			equipment_movement.equipment.equipment_list.name + ' s/n: ' + 
+			equipment_movement.equipment.factory_sn, equipment_movement %>
+<% end %>

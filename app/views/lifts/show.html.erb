@@ -1,6 +1,14 @@
+<% if @lift.porch.nil? %>
+<% provide(:title, 'Неизвестный адрес') %>
+<% else %>
 <% provide(:title, @street.name + ' ' + @build.name  + ' ' + @porch.name) %>
+<% end %>
 <div class="span10">
+<% if @node.nil? %>
+
+<% else %>
  <h4>Лифт относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>, <%= @node.build.name %></h4>
+<% end %>
 <table class="table table-hover table-condensed table-bordered">
 <thead>
         <td>Адрес</td>
@@ -14,21 +22,26 @@
 <tbody>
         <tr>
             <td>
+              <% if @lift.porch.nil? %>
+              <span class="label label-warning">Неизвестный адрес</span>
+              <% else %>
+              <b><%= @city.name %></b><br/>
               ул.&nbsp;<b><%= @street.name %></b>,
               д.&nbsp;<b><%= @build.name %></b><br/>
               <b><%= @porch.name %></b><br/>
+              <% end %>
             </td>
             <td>
-              <% if @lift.manufacturer.length < 3 %>
+              <% if @lift.manufacturer.nil? %>
               <span class="label label-warning">Нет информации о производителе лифта</span>
               <% else %>
               <%= @lift.manufacturer %><br/>
               <% end %>
               <%= @lift.model %><br/>
               <%= @lift.function %><br/>
-              <b><%= @lift.capacity.to_s %></b>&nbsp;кг,
-              <b>&nbsp;<%= @lift.stopscount %></b>&nbsp;остановок<br/>
-              Привод дверей&nbsp;<b><%= @lift.doors %></b>
+              <b><%= @lift.capacity.to_s %></b>&nbsp;кг,<br/>
+              <b><%= @lift.stopscount %></b>&nbsp;остановок<br/>
+              Привод дверей&nbsp;<b><%= @lift.doors %></b><br/>
               Скорость движения кабины <b><%= @lift.speed %></b> м/с<br/>
               Высота подъема <b><%= @lift.elevation %></b> м.<br/>       
             </td>
@@ -39,7 +52,7 @@
             </td>
             <td>
               <% if @lift.elevator_control_station.nil? %>
-              <span class="label label-warning">Нет информации о СУЛ</span>
+              <span class="label label-warning">Нет информации о СУЛ</span><br/>
               <% else %>
               СУЛ&nbsp;<b><%= @lift.elevator_control_station.name %></b><br/>
               <% end %> 
@@ -48,20 +61,28 @@
               Адрес на ЛШ&nbsp;<br/>
             </td>
             <td>
+              <%= @lift.tlr.name %>&nbsp;Томсклифтремонт<br/>
+              <%= @lift.district.name %>&nbsp;участок<br/>
               <% if @lift.mechanic.nil? %>
-              <span class="label label-warning">Нет информации о механике</span>
+              <span class="label label-warning">Нет информации о механике</span><br/>
               <% else %>
-              Участок&nbsp;<br/>
-              Механик&nbsp;<%= @lift.mechanic.name %><br/>
-              <% end %> 
+              Механик:&nbsp;<%= @lift.mechanic.name %><br/>
+              <% end %>
+              Экспертная организация:&nbsp;<%= @lift.expert.partner.name %><br/>
+              ТО оплачивает&nbsp;<%= @lift.service_payment %><br/>
             </td>
             <td>
               <% if @lift.contract.nil? %>
-              <span class="label label-warning">Нет информации о собственнике лифта</span>
+              <span class="label label-warning">Нет информации о собственнике лифта</span><br/>
               <% else %>
-              <%= @lift.contract.partner.name %><br/>
-              № договора&nbsp;<%= @lift.contract.number %><br/>
-              <% end %> 
+                <% if @lift.contract.partner.nil? %>
+                <span class="label label-warning">Нет информации о собственнике лифта</span><br/>
+                договор №&nbsp;<%= @lift.contract.number %>&nbsp;от<br/>
+                <% else %>
+                <%= @lift.contract.partner.name %><br/>
+                договор №&nbsp;<%= @lift.contract.number %>&nbsp;от<br/>
+                <% end %> 
+              <% end %>               
             </td>
             <td>
               Ввод: <b><%= @lift.introduced_at %></b>&nbsp;г.<br/>

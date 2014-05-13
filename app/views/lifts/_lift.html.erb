@@ -1,8 +1,9 @@
 <tr>
-   <td class="col-md-3">
-      <%= lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name%>
+   <td class="col-md-4 col-lg-5">
+   	<% if lift.porch.nil? %>
+   	<span class="label label-warning">Нет информации о расположении лифта</span>
+   	<% else %>
+   	<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
+   	<% end %>
    </td>
-   <td>
-      <%= link_to 'Лифт ' + lift.function + ' - ' + lift.capacity.to_s + ' кг. - '  + lift.stopscount.to_s + ' остановок', lift %>
-    </td>
 </tr>

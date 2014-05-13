@@ -35,7 +35,7 @@
         <% b.each do |build| %>
         <tr>
           <td><%= link_to s.name + ', ' + build.name, build %></td>
-          <td><span class="badge"><%= pluralize(build.lifts.count, "lift") %></span></td>
+          <td><%= pluralize(build.lifts.count, "lift") %></td>
         </tr>
         <% end %>
         <% end %>

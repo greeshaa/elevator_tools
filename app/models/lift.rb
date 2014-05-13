@@ -38,10 +38,13 @@ class Lift < ActiveRecord::Base
     belongs_to :porch
     belongs_to :build
     belongs_to :street
+    belongs_to :district
     belongs_to :city
     belongs_to :node
     belongs_to :mechanic
     belongs_to :contract
+    belongs_to :expert
+    belongs_to :tlr
     belongs_to :elevator_control_station
     #belongs_to :manufacturer
 

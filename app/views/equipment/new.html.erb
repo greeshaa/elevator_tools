@@ -14,6 +14,8 @@
         <div class="form-group">
         <%= f.text_field :factory_sn, placeholder: "Серийный номер", autofocus: true, class: "form-control" %>
         </div>
+        <%= check_box_tag(:many_sn) %>
+        <%= label_tag(:many_sn, "Несколько серийных номеров через ';'") %>
 
         <div class="form-group">
         <%= f.text_area(:notes, rows: 6, placeholder: "Описание", class: "form-control") %>

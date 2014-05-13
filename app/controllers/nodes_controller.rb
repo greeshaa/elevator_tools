@@ -55,7 +55,21 @@ before_filter :signed_in_user
   end
 
   def index
-    @nodes = Node.search(params[:search])
+    if Node.search(params[:search]).nil?
+    else
+      streets = Street.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
+      if streets.empty?
+        @nodes = Node.search(params[:search])
+      else
+        @nodes = Node.search(params[:search])
+        streets.each do |s|
+          nodes = s.nodes
+          nodes.each do |n|
+            @nodes.push(n)
+          end
+        end
+      end   
+    end 
   end
 
   private

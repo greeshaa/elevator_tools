@@ -24,7 +24,11 @@
 <div>
   <div class="col-md-7 col-md-offset-1 list" >
     <table class="table table-striped table-bordered table-condensed">
+    <% if @lifts.empty? %>
+        <p class="lead">Лифты удовлетворяющие запросу не найдены.</p>
+    <% else %>
     <%= render @lifts %>
+    <% end %>
     </table>
   </div>
 </div>

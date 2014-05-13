@@ -15,15 +15,43 @@
         </tr>
         <% @lifts.each do |lift| %>
         <tr>
+          
+
           <td class="title_left">
-            <%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %> 
+            <% if lift.porch.nil? %>
+            <span class="label label-warning">Нет информации о расположении лифта</span>
+            <% else %>
+            <%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
+            <% end %>
           </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><%= lift.district.name %></td>
+          <td>
+            <% if lift.contract.nil? %>
+            <span class="label label-warning">Собственник неизвестен</span>
+            <% else %>
+              <% if lift.contract.partner.nil? %>
+              <span class="label label-warning">Собственник неизвестен</span>
+              <% else %>
+              <%= lift.contract.partner.name %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% if lift.contract.nil? %>
+            <span class="label label-warning">Договор неизвестен</span>
+            <% else %>
+            <%= lift.contract.number %>
+            <% end %>
+          </td>
+          <td>
+            <%= lift.tlr.name %>
+          </td>
+          <td>
+            <%= lift.expert.partner.name %>
+          </td>
+          <td>
+            <%= lift.service_payment %>
+          </td>
           <% if lift.inspections.last.nil? %>
           <td colspan="2">
               

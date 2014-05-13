@@ -35,6 +35,20 @@ class Node < ActiveRecord::Base
   def self.search(search)
     if search
       find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+      
+      #street = Street.find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+      #if street.empty?
+      #  find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+      #else
+      #  @f1 = 'name LIKE ?'
+      #  @f2 = '%#{search}%'
+      #  street.each do |s|
+       #   @f1 += " OR street_id = ?"
+       #   @f2 += (', ' + s.id.to_s)
+       # end
+        #find(:all, :conditions => [ @f1, @f2 ])
+      #end
+      
     end
   end
 end

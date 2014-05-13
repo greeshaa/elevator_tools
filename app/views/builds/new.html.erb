@@ -6,7 +6,7 @@
   <fieldset>
     <div class="form-group">
       <%= f.label :street_id, "Улица:" %>
-      <%= f.select :street_id, options_from_collection_for_select(@streets, :id, :name), {}, {class: "form-control input-sm"} %>
+      <%= f.select :street_id, options_from_collection_for_select(@streets.order(:name), :id, :name), {}, {class: "form-control input-sm"} %>
     </div>
     <div class="form-group">
       <%= f.label :name, "Номер здания:" %>
