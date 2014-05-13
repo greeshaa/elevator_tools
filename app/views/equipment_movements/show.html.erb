@@ -14,7 +14,7 @@
 			<td><%= @e_move.equipment.factory_sn %></td>
 			<td><%= @e_move.movement %></td>
 			<td><%= @e_move.reason %></td>
-			<td><%= @e_move.created_at %></td>
+			<td><%= @e_move.created_at.strftime("%d.%m.%Y") %></td>
 			<td><%= @e_move.user.runame %></td>
 		</tr>
 	</table>

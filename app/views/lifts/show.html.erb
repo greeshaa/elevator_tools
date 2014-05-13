@@ -76,7 +76,12 @@
               <% else %>
               Механик:&nbsp;<%= @lift.mechanic.name %><br/>
               <% end %>
-              Экспертная организация:&nbsp;<%= @lift.expert.partner.name %><br/>
+              Экспертная организация:&nbsp;
+              <% if @lift.expert.nil? %>
+              <span class="label label-warning">Нет информации</span><br/>
+              <% else %>
+              <%= @lift.expert.partner.name %><br/>
+              <% end %>
               ТО оплачивает&nbsp;<%= @lift.service_payment %><br/>
             </td>
             <td>
