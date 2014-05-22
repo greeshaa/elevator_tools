@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'protected_attributes'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

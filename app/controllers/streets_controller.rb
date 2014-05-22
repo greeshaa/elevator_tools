@@ -21,7 +21,7 @@ before_filter :signed_in_user
   def create
     @street = Street.new(params[:street])
     if @street.save
-    	okmessage = @street.street_kind.name + @street.name + " успешно добавлен(а)."
+    	okmessage = @street.street_kind.full_name + ' ' + @street.name + " успешно добавлен(а)."
       flash[:success] = okmessage
       redirect_to @street
     else

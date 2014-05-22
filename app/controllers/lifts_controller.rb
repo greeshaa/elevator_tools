@@ -21,7 +21,6 @@ before_filter :signed_in_user
   end
   def index
   	#@lifts = Lift.search(params[:search])
-
     if Lift.search(params[:search]).nil?
     else
       streets = Street.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
@@ -51,6 +50,10 @@ before_filter :signed_in_user
   end
 
   def list
+    @lifts = Lift.all
+  end
+
+  def fulliftsdata
     @lifts = Lift.all
   end
  

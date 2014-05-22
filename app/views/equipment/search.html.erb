@@ -1,6 +1,10 @@
 <% provide(:title, 'Результаты поиска оборудования' ) %>
 <div class="col-md-10 col-md-offset-1">
 <table class="table table-striped table-bordered table-condensed">
-  <%= render @equipment %>
+	<% if @equipment.empty? %>
+        <p class="lead">Оборудование удовлетворяющее запросу не найдено.</p>
+    <% else %>
+    <%= render @equipment %>
+    <% end %>
 </table>
 </div>

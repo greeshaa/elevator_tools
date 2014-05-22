@@ -1,0 +1,79 @@
+<% provide(:title, 'Лифты') %>
+<div >
+  <small>
+  <table id="lifts" class="table table-striped table-bordered table-condensed">
+   <thead>
+    <tr>
+      <td>Адрес</td>
+      <td>Подъезд</td>
+      <td>Производитель</td>
+      <td>СУЛ</td>
+      <td>Рег.№</td>
+      <td>Кол-во остановок</td>
+      <td>Назначение</td>
+      <td>Грузоподъемность</td>
+      <td>Первое испытание</td>
+      <td>ЗАО/ООО</td>
+      <td>Участок</td>
+      <td>Прораб</td>
+      <td>Механик</td>
+      <td>Владелец</td>
+      <td>№ договора</td>
+      <td>Оплата ТО</td>
+      <td>Эксперт</td>
+      <td>Последнее ТО</td>
+      <td>Следующее ТО</td>
+    </tr>
+   </thead>
+   <tbody>
+    <% @lifts.each do |l| %>
+    <tr>
+      <td><%= l.porch.build.street.name + ', ' + l.porch.build.name %></td>
+      <td><%= l.porch.name %></td>
+      <td><%= l.manufacturer %></td>
+      <td></td>
+      <td><%= l.regnum %></td>
+      <td><%= l.stopscount %></td>
+      <td><%= l.function %></td>
+      <td><%= l.capacity %></td>
+      <td><%= l.introduced_at %></td>
+      <% if l.tlr.nil? %>
+      <td></td>
+      <% else %>
+      <td><%= l.tlr.name %></td>
+      <% end %>
+      <% if l.district.nil? %>
+      <td></td>
+      <% else %>
+      <td><%= l.district.name %></td>
+      <% end %>
+      <td></td>
+      <% if l.mechanic.nil? %>
+      <td></td>
+      <% else %>
+      <td><%= l.mechanic.name %></td>
+      <% end %> 
+      <% if l.contract.nil? %>
+      <td></td>
+      <td></td>
+      <% elsif l.contract.partner.nil? %>
+      <td></td>
+      <td><%= l.contract.number %></td>
+      <% else %>
+      <td><%= l.contract.partner.name %></td>
+      <td><%= l.contract.number %></td>
+      <% end %> 
+      <td><%= l.service_payment %></td>
+      <% if l.expert.nil? %>
+      <td></td>
+      <% else %>
+      <td><%= l.expert.partner.name %></td>
+      <% end %> 
+      <td></td>
+      <td></td>
+    </tr>
+    <% end %>
+   </tbody>
+  </table>
+  </small>
+</div>

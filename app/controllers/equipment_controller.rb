@@ -3,8 +3,8 @@ class EquipmentController < ApplicationController
 before_filter :signed_in_user
 
 	def show
-			@equipment = Equipment.find(params[:id])
-			@e_move = @equipment.equipment_movements.new
+		@equipment = Equipment.find(params[:id])
+		@e_move = @equipment.equipment_movements.new
 	end
 
 	def new
@@ -44,12 +44,12 @@ before_filter :signed_in_user
 		end
 	end
 
-	def search
+	def index
 		@equipment = Equipment.search(params[:search])
-		render 'search'
+		#render 'search'
 	end
 
-	def index
+	def stats
 
 		@equip_all     	 = Equipment.count
 		@equip_store   	 = Equipment.count(:conditions => "porch_id = 1 AND broken = '0'")

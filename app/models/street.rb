@@ -12,7 +12,7 @@
 
 class Street < ActiveRecord::Base
   attr_accessible :name, :city_id, :street_kind_id
-  validates  :name, presence: true, uniqueness: {case_sensitive: false}, length: { minimum: 5 }
+  validates  :name, presence: true, uniqueness: {case_sensitive: false}, length: { minimum: 4 }
 
   belongs_to :city
   belongs_to :street_kind

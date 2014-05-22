@@ -33,13 +33,21 @@
             </td>
             <td>
               <% if @lift.manufacturer.nil? %>
-              <span class="label label-warning">Нет информации о производителе лифта</span>
+              <span class="label label-warning">Нет информации о производителе лифта</span><br/>
               <% else %>
               <%= @lift.manufacturer %><br/>
               <% end %>
+              <% if @lift.model.nil? %>
+              <span class="label label-warning">Нет информации о модели лифта</span><br/>
+              <% else %>
               <%= @lift.model %><br/>
+              <% end %>
+              <% if @lift.function.nil? %>
+              <span class="label label-warning">Нет информации о типе лифта</span><br/>
+              <% else %>
               <%= @lift.function %><br/>
-              <b><%= @lift.capacity.to_s %></b>&nbsp;кг,<br/>
+              <% end %>
+              Грузоподъемность:<b><%= @lift.capacity.to_s %></b>&nbsp;кг,<br/>
               <b><%= @lift.stopscount %></b>&nbsp;остановок<br/>
               Привод дверей&nbsp;<b><%= @lift.doors %></b><br/>
               Скорость движения кабины <b><%= @lift.speed %></b> м/с<br/>
@@ -59,6 +67,7 @@
               Лифтовой блок&nbsp;<br/>
               S/n блока&nbsp;<br/>
               Адрес на ЛШ&nbsp;<br/>
+              Принадлежит к<%= link_to ' УМ ' + @lift.node.name, @lift.node%><br/>
             </td>
             <td>
               <% if @lift.tlr.nil? %>
@@ -111,7 +120,7 @@
 <table>
     	<tr>
     		<td><%= link_to "Показать все лифты дома", '#', class: "btn btn-small" %></td>
-           <td><%= link_to "Показать все лифты узла", '#', class: "btn btn-small" %></td>
+           <td><%= link_to "Показать все лифты узла", lifts_path, class: "btn btn-small" %></td>
     		<td><%= link_to "Редактировать информацию о лифте", '#', class: "btn btn-small" %></td>
     	</tr>
 </table>

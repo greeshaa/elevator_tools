@@ -1,5 +1,5 @@
 <% provide(:title, 'Оборудование') %>
-<%= form_tag({:controller => "equipment", :action => "search"}, :method => "get", :class => "form-inline col-md-10 col-md-offset-1", role:"form") do %>
+<%= form_tag(equipment_index_path, method: "get", class: "form-inline col-md-10 col-md-offset-1", role:"form") do %>
 <legend>Оборудование</legend>
 <div class="input-group input-group-sm col-md-8">
 	<label class="sr-only" for="search">equipment</label>
@@ -15,6 +15,7 @@
  				<li class="divider"></li>
 				<li><%= link_to "Исправное", equipment_store_path %></li>
 				<li><%= link_to "Неисправное", equipment_broken_path %></li>
+				<li><%= link_to "Статистика", equipment_stats_path %></li>
 				<li class="divider"></li>
 				<li><%= link_to "Типы", equipment_lists_path %></li>
 				<li><%= link_to "Категории", equipment_types_path %></li>
@@ -23,36 +24,14 @@
 	</div>
 </div>
 <% end %>
-<div>
-  <div class="col-md-10 col-md-offset-1 list" >
-<table class="col-md-8 table-striped table-bordered table-condensed ">
-	<caption><b>Статистика использования оборудования</b></caption>
-	<tr>
-		<td></td>
-		<td class="title_top">Всего</td>
-		<td class="title_top">В работе</td>
-		<td class="title_top">Склад</td>
-		<td class="title_top">Неисправно</td>
-		<td class="title_top">Ремонт</td>
-	</tr>
-	<tr>
-		<td class="title_left">Общее количество оборудования</td>
-		<td><%= @equip_all %></td>
-		<td><%= @equip_work %></td>
-		<td><%= @equip_store %></td>
-		<td><%= @equip_broken %></td>
-		<td><%= @equip_service %></td>
-	</tr>
-	<% @equip_count.each do |ec| %>
-	<tr>
-		<td class="title_left"><%= link_to ec[:name], equipment_list_path(ec[:equipment]) %></td>
-		<td class="col-md-1"><%= ec[:all] %></td>
-		<td class="col-md-1"><%= ec[:work] %></td>
-		<td class="col-md-1"><%= ec[:store] %></td>
-		<td class="col-md-1"><%= ec[:broken] %></td>
-		<td class="col-md-1"><%= ec[:service] %></td>
-	</tr>
-	<% end %>
+<% unless @lifts.nil? %>
+<div class="col-md-10 col-md-offset-1">
+<table class="table table-striped table-bordered table-condensed">
+	<% if @equipment.empty? %>
+        <p class="lead">Оборудование удовлетворяющее запросу не найдено.</p>
+    <% else %>
+    <%= render @equipment %>
+    <% end %>
 </table>
-  </div>
 </div>
+<% end %>
