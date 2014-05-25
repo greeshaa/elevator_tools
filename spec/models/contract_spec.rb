@@ -9,10 +9,11 @@
 #  signed_at  :date
 #  lifetime   :date
 #  note       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #
 
+# -*- encoding : utf-8 -*-
 require 'spec_helper'
 
 describe Contract do

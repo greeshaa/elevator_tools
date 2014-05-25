@@ -45,8 +45,26 @@ before_filter :signed_in_user
 	end
 
 	def index
-		@equipment = Equipment.search(params[:search])
-		#render 'search'
+		#@equipment = Equipment.search(params[:search])
+		if params[:search].blank?
+		else
+			if Equipment.search(params[:search]).nil?
+    	else
+      	equipment_list = EquipmentList.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
+      	if equipment_list.empty?
+        	@equipment = Equipment.search(params[:search])
+      	else
+        	@equipment = Equipment.search(params[:search])
+        	equipment_list.each do |s|
+          	el = s.equipment
+          	el.each do |n|
+            	@equipment.push(n)
+          	end
+        	end
+      	end   
+    	end
+  	end
+
 	end
 
 	def stats

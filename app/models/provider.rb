@@ -9,10 +9,11 @@
 #  email      :string(255)
 #  contact    :string(255)
 #  note       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #
 
+# -*- encoding : utf-8 -*-
 class Provider < ActiveRecord::Base
   attr_accessible :contact, :email, :name, :note, :phone
   has_many :ip_addresses

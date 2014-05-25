@@ -55,7 +55,8 @@ before_filter :signed_in_user
   end
 
   def index
-    if Node.search(params[:search]).nil?
+    if (params[:search]).blank?
+
     else
       streets = Street.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
       if streets.empty?

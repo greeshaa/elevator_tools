@@ -13,6 +13,8 @@
         <ul class="dropdown-menu">
           <li><%= link_to "Добавить", add_lift_path %></li>
           <li><%= link_to "Все лифты", lifts_list_path %></li>
+          <li><%= link_to "Единый реестр", fulliftsdata_path %></li>
+          <li><%= link_to "Единый реестр (excel)", fulliftsdata_path(format: "xls") %></li>
           <li class="divider"></li>
           <li><%= link_to "Техн. освидетельствование", lifts_inspections_path %></li>
         </ul>

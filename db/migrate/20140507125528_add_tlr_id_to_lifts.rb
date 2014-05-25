@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddTlrIdToLifts < ActiveRecord::Migration
   def change
     add_column :lifts, :tlr_id, :integer

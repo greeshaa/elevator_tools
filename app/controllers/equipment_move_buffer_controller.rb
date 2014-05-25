@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class EquipmentMoveBufferController < ApplicationController
 	def show		
 		@equipment_move_buffer = current_equipment_buffer

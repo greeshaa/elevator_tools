@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateExperts < ActiveRecord::Migration
   def change
     create_table :experts do |t|

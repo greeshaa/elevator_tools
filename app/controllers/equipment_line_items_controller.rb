@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class EquipmentLineItemsController < ApplicationController
   before_action :set_equipment_line_item, only: [:show, :edit, :update, :destroy]
 

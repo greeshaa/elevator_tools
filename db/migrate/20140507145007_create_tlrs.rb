@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTlrs < ActiveRecord::Migration
   def change
     create_table :tlrs do |t|

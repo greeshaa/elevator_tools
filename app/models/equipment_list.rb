@@ -5,13 +5,14 @@
 #
 #  id                :integer          not null, primary key
 #  equipment_type_id :integer
-#  manufacturer      :string(255)
 #  name              :string(255)
+#  manufacturer      :string(255)
 #  description       :string(255)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # == Schema Information
 #

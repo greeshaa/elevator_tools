@@ -1,0 +1,16 @@
+<% provide(:title, 'Отметка о проведении ТО') %>
+<div class="col-md-10 col-md-offset-1">
+  <legend>Отметка о проведении ТО</legend>
+
+  <%= form_for(:inspection, html:{class: "col-md-4", role:"form", method: "get"} ) do |f| %>
+
+  <fieldset>
+    <div class="form-group">
+      <%= date_select :inspection, :inspection_at %>
+    </div>
+
+    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
+  </fieldset>
+  
+
+  <% end %>

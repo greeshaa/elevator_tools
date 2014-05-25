@@ -1,9 +1,12 @@
 <% provide(:title, 'Главная') %>
 <div class="row">
   <div class="col-md-6">
+    <h5>Информационные сообщения</h5>
+    <div class="well">
+    </div>
   </div>
-  <div class="col-md-5 offset-col-md-6">
-    <legend>Общая статистика по объектам</legend>
+  <div class="col-md-6 offset-col-md-6">
+    <h5>Общая статистика по объектам</h5>
     <table class="table table-striped table-bordered table-condensed">
       <tr>
         <% if current_user.foreman? %>
@@ -34,31 +37,33 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <legend>Недавно проведенные ТО:</legend>
+    <h5>Недавно проведенные ТО:</h5>
     <% if @inspection_last.nil? %>
     <p class="lead">В последнее время ТО не проводилось</p>
     <% else %>
     <div class="well">
       <% @inspection_last.each do |il| %>
-      <%= il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
+      <%= il.inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
       <% end %>     
     </div>
     <% end %>
   </div>
   <div class="col-md-6 offset-col-md-6">
-    <legend>Ближайщие запланированные ТО:</legend>
-    <% if @equipment_movements.nil? %>
+    <h5>Ближайшие запланированные ТО:</h5>
+    <% if @inspection_next.nil? %>
     <p class="lead">В ближайщее время ТО не запланировано</p>
     <% else %>
     <div class="well">
-     <%= render @equipment_movements %>
+      <% @inspection_next.each do |il| %>
+      <%= il.next_inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' + il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
+      <% end %>
     </div>
     <% end %>
   </div>
 </div>
 <div class="row">
   <div class="col-md-6">
-    <legend>Перемещения оборудования:</legend>
+    <h5>Перемещения оборудования:</h5>
     <% if @equipment_movements.nil? %>
       <p class="lead">Перемещений нет</p>
     <% else %>
@@ -68,7 +73,7 @@
     <% end %>
   </div>
   <div class="col-md-6 offset-col-md-6">
-    <legend>Изменения в УМ:</legend>
+    <h5>Изменения в УМ:</h5>
     <% if @nodes_last.nil? %>
     <p class="lead">Перемещений нет</p>
     <% else %>

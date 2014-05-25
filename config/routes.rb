@@ -9,7 +9,10 @@ ElevatorTools::Application.routes.draw do
   resources :streets
   resources :builds
   resources :porches
-  resources :lifts 
+  resources :lifts do
+  #resources :inspections
+  resources :inspections, shallow: true
+  end 
   resources :nodes do
       resources :ip_address, shallow: true
   end
@@ -33,7 +36,7 @@ ElevatorTools::Application.routes.draw do
   get '/test',   to: 'static_pages#test'
   get 'lifts_inspections',   to: 'lifts#inspections'
   get 'lifts_list',   to: 'lifts#list'
-  get 'lifts_fulliftsdata',   to: 'lifts#fulliftsdata'
+  get 'fulliftsdata',   to: 'lifts#fulliftsdata'
   get 'equipment_stats', to: 'equipment#stats'
   get 'equipment_store', to: 'equipment#store'
   get 'equipment_broken', to: 'equipment#broken'

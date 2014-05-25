@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddBrokenToEquipment < ActiveRecord::Migration
   def change
     add_column :equipment, :broken, :boolean, default: false

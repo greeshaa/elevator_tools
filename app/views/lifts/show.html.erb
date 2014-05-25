@@ -110,7 +110,7 @@
               Ввод: <b><%= @lift.introduced_at %></b>&nbsp;г.<br/>
               Срок службы:&nbsp;<b><%= @lift.standart_life %></b>&nbsp;лет<br/>
               Модернизация:&nbsp;<b><%= @lift.overhaul_at %></b>&nbsp;г.<br/>
-              Освидетельствование:&nbsp;<b><%= @lift.inspection_at %></b>&nbsp;г.<br/>
+              Освидетельствование:&nbsp;<b><%= @lift.inspections.last.inspection_at.strftime("%d.%m.%Y") %></b>&nbsp;г.<br/>
               Вывод: <b><%= @date_of_decommiss %></b>&nbsp;г.
             </td>
             
@@ -124,4 +124,17 @@
     		<td><%= link_to "Редактировать информацию о лифте", '#', class: "btn btn-small" %></td>
     	</tr>
 </table>
+<li><%= link_to "Отметка о ТО",     new_lift_inspection_path(@lift)  %></li>
+  <%= form_for(:inspection, html:{class: "col-md-4", role:"form", method: "get"} ) do |f| %>
+
+  <fieldset>
+    <div class="form-group">
+      <%= date_select :inspection, :inspection_at %>
+    </div>
+
+    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
+  </fieldset>
+  
+
+  <% end %>
 </div>

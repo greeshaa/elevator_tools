@@ -19,9 +19,20 @@ before_filter :signed_in_user
     @date_of_decommiss = @lift.introduced_at + 25
 
   end
+
+  def update
+    @lift   = Lift.find(params[:id])
+    if @lift.update_attributes(params[:lift]) 
+      flash[:success] = "Лифт с регистрационным номером: " + @lift.regnum + " обновлен"
+      redirect_to @lift
+    else
+      render 'edit'
+    end
+  end
+
   def index
   	#@lifts = Lift.search(params[:search])
-    if Lift.search(params[:search]).nil?
+    if (params[:search]).blank?
     else
       streets = Street.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
       if streets.empty?
@@ -55,6 +66,10 @@ before_filter :signed_in_user
 
   def fulliftsdata
     @lifts = Lift.all
+    respond_to do |format|
+      format.html
+      format.xls # { render text: @lifts.to_csv }
+    end
   end
  
 end

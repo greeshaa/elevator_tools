@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddColumnsToEquipmentMovements < ActiveRecord::Migration
   def change
     add_column :equipment_movements, :porch_id, :integer

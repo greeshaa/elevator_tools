@@ -5,16 +5,17 @@
 #
 #  id              :integer          not null, primary key
 #  manufacturer_id :integer
-#  model           :string(255)
+#  capacity        :integer
 #  function        :string(255)
 #  doors           :string(255)
-#  capacity        :integer
-#  speed           :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  model           :string(255)
 #  elevation       :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  speed           :integer
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 

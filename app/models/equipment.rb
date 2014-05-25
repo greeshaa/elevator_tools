@@ -4,17 +4,17 @@
 # Table name: equipment
 #
 #  id                :integer          not null, primary key
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  created_at        :datetime
+#  updated_at        :datetime
 #  equipment_list_id :integer
 #  factory_sn        :string(255)
 #  installed_at      :date
 #  notes             :string(255)
-#  destination_id    :integer
-#  node_id           :integer
-#  lift_id           :integer
+#  porch_id          :integer
+#  broken            :boolean          default(FALSE)
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 class Equipment < ActiveRecord::Base
   attr_accessible :equipment_list_id, :factory_sn, :notes, :destination_id, :installed_at, :porch_id

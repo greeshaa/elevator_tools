@@ -12,11 +12,12 @@
 #  remember_token  :string(255)
 #  runame          :string(255)
 #  admin           :boolean          default(FALSE)
-#  foreman         :boolean
-#  lask            :boolean
-#  management      :boolean
+#  foreman         :boolean          default(FALSE)
+#  management      :boolean          default(FALSE)
+#  lask            :boolean          default(FALSE)
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 

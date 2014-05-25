@@ -10,7 +10,6 @@
  *
  *= require bootstrap
  *= require_self
- *= require dataTables/jquery.dataTables
  *= require dataTables/jquery.dataTables.bootstrap3
  *= require_tree .
  */
@@ -28,11 +27,27 @@ body {
 }
 
  /* miscellaneous */
+ 
+.pdr {
+	padding-right: 25px;
+}
+
+.maincontainer{
+	margin: 25px;
+}
+
+.bigtables{
+	font-size: small;
+	text-align: center;
+	.address{
+		text-align: left;
+	}
+}
 
 
 .list{
 	margin-top: 25px;
-	}
+}
 
 .debug_dump {
   clear: both;

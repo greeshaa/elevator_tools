@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507145007) do
+ActiveRecord::Schema.define(version: 20140523082539) do
 
   create_table "builds", force: true do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "street_id"
     t.integer  "porch_count"
   end
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20140507145007) do
     t.date     "signed_at"
     t.date     "lifetime"
     t.string   "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "districts", force: true do |t|
@@ -45,13 +45,13 @@ ActiveRecord::Schema.define(version: 20140507145007) do
 
   create_table "elevator_control_stations", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "equipment", force: true do |t|
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "equipment_list_id"
     t.string   "factory_sn"
     t.date     "installed_at"
@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 20140507145007) do
     t.string   "name"
     t.string   "manufacturer"
     t.string   "description"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "equipment_move_buffers", force: true do |t|
@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 20140507145007) do
     t.integer  "equipment_id"
     t.string   "movement"
     t.string   "reason"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "node_id"
     t.integer  "porch_id"
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(version: 20140507145007) do
   create_table "equipment_types", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "experts", force: true do |t|
@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 20140507145007) do
   create_table "inspections", force: true do |t|
     t.integer  "lift_id"
     t.date     "inspection_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.date     "plained_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "next_inspection_at"
   end
 
   create_table "ip_addresses", force: true do |t|
@@ -129,14 +129,14 @@ ActiveRecord::Schema.define(version: 20140507145007) do
 
   create_table "lift_types", force: true do |t|
     t.integer  "manufacturer_id"
-    t.string   "model"
+    t.integer  "capacity"
     t.string   "function"
     t.string   "doors"
-    t.integer  "capacity"
-    t.integer  "speed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "model"
     t.integer  "elevation"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "speed"
   end
 
   create_table "lifts", force: true do |t|
@@ -161,10 +161,10 @@ ActiveRecord::Schema.define(version: 20140507145007) do
     t.string   "manufacturer"
     t.string   "model"
     t.string   "doors"
-    t.integer  "speed",                       limit: 3
-    t.integer  "elevation",                   limit: 3
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "speed"
+    t.integer  "elevation"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "tlr_id"
     t.integer  "district_id"
     t.string   "service_payment"
@@ -172,11 +172,11 @@ ActiveRecord::Schema.define(version: 20140507145007) do
   end
 
   create_table "manufacturers", force: true do |t|
-    t.string   "short_name"
-    t.string   "full_name"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "short_name"
+    t.string   "full_name"
   end
 
   create_table "mechanics", force: true do |t|
@@ -206,8 +206,8 @@ ActiveRecord::Schema.define(version: 20140507145007) do
   create_table "porches", force: true do |t|
     t.integer  "build_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "providers", force: true do |t|
@@ -216,8 +216,8 @@ ActiveRecord::Schema.define(version: 20140507145007) do
     t.string   "email"
     t.string   "contact"
     t.string   "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "street_kinds", force: true do |t|
@@ -229,8 +229,8 @@ ActiveRecord::Schema.define(version: 20140507145007) do
 
   create_table "streets", force: true do |t|
     t.string   "name"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "city_id"
     t.integer  "street_kind_id"
   end
@@ -250,18 +250,18 @@ ActiveRecord::Schema.define(version: 20140507145007) do
     t.string   "remember_token"
     t.string   "runame"
     t.boolean  "admin",           default: false
-    t.boolean  "foreman"
-    t.boolean  "lask"
-    t.boolean  "management"
+    t.boolean  "foreman",         default: false
+    t.boolean  "management",      default: false
+    t.boolean  "lask",            default: false
   end
 
-  add_index "users", ["name"], name: "index_users_on_name", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "users_groups", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
