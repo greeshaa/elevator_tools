@@ -16,7 +16,10 @@ before_filter :signed_in_user
     @city   = @street.city
     @node   = @build.node
     end
-    @date_of_decommiss = @lift.introduced_at + 25
+    if @lift.introduced_at.nil?
+    else
+      @date_of_decommiss = @lift.introduced_at + @lift.standart_life
+    end
 
   end
 
