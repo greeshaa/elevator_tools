@@ -5,7 +5,7 @@ gem 'unicorn'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
-gem 'sass-rails', '~> 4.0.2'
+gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -23,7 +23,7 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 group :development do
 	gem 'sqlite3'
 	gem 'annotate', '2.5.0'
-    gem 'magic_encoding'
+  gem 'magic_encoding'
 	gem 'capistrano'
  	gem 'rvm-capistrano'
 end
