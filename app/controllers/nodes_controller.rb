@@ -39,11 +39,15 @@ before_filter :signed_in_user
 
   def show
     @node = Node.find(params[:id])
-    @node_name = "УМ " + @node.name
+    if @node.id == 1
+      @node_name = @node.name
+    else
+      @node_name = "УМ " + @node.name
+    end
     @ipa  = @node.ip_addresses
 
     if @node.street.nil?
-      @address = "<h4>&nbsp;Группа лифтов, которые не выводятся в ЦД и не принадлежат какому-либо УМ</h4>"
+      @address = "Группа лифтов, которые не выводятся в ЦД и не принадлежат какому-либо УМ"
     else
       if @node.porch.nil?
         @address = "ул." + @node.street.name + ", д." + @node.build.name

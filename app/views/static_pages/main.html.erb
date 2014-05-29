@@ -1,87 +1,98 @@
 <% provide(:title, 'Главная') %>
-<div class="row">
+<p class="lead">Основная информационная панель</p>
+<hr>
+<!--- <div class="row">
   <div class="col-md-6">
-    <h5>Информационные сообщения</h5>
-    <div class="well">
-    </div>
-  </div>
-  <div class="col-md-6 offset-col-md-6">
-    <h5>Общая статистика по объектам</h5>
-    <table class="table table-striped table-bordered table-condensed">
-      <tr>
-        <% if current_user.foreman? %>
-        <td class="title_left">Количество УМ</td>
+    <div class="panel panel-default">
+      <div class="panel-heading">Информационные сообщения</div>
+      <div class="panel-body">
+        <% if @infomessages.empty? %>
+          <p class="">Новостей на сегодня нет</p>
         <% else %>
-        <td class="title_left"><%= link_to "Количество УМ", nodes_path %></td>
+          <%= render @infomessages %>
+        <% end %> 
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 offset-col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Задачи</div>
+      <div class="panel-body">
+        <% if @infomessages.empty? %>
+          <p class="">Задач на сегодня нет</p>
+        <% else %>
+          <%= render @infomessages %>
+        <% end %> 
+      </div>
+    </div>
+  </div>
+</div> ---->
+<div class="row">
+  <div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">Перемещения оборудования</div>
+    <div class="panel-body">
+        <% if @equipment_movements.empty? %>
+          <p class="text-info">Перемещений нет</p>
+        <% else %>
+          <%= render @equipment_movements %>
+        <% end %>    
+    </div>
+    </div>
+  </div>
+    <div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">Ближайшие запланированные ТО</div>
+    <div class="panel-body">
+      <% if @inspection_next.empty? %>
+        <p class="text-info">На ближайшее время ТО не запланировано<br><br></p>
+        
+      <% else %>
+        <% @inspection_next.each do |il| %>
+          <%= il.next_inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' + il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
         <% end %>
-        <td><%= Node.count %></td>
-      </tr>
-      <tr>
-        <td class="title_left"><%= link_to "Количество улиц", streets_path %> </td>
-        <td><%= Street.count %></td>
-      </tr>
-      <tr>
-        <td class="title_left">Количество домов</td>
-        <td><%= Build.count %></td>
-      </tr>
-      <tr>
-        <td class="title_left">Количество подъездов</td>
-        <td><%= Porch.count %></td>
-      </tr>
-      <tr>
-        <td class="title_left"><%= link_to "Количество обслуживаемых лифтов", lifts_path %></td>
-        <td><%= Lift.count %></td>
-      </tr>
-    </table>
+      <% end %> 
+    </div>
   </div>
+  </div>  
 </div>
 <div class="row">
   <div class="col-md-6">
-    <h5>Недавно проведенные ТО:</h5>
-    <% if @inspection_last.nil? %>
-    <p class="lead">В последнее время ТО не проводилось</p>
-    <% else %>
-    <div class="well">
-      <% @inspection_last.each do |il| %>
-      <%= il.inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
-      <% end %>     
-    </div>
-    <% end %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Изменения в УМ</div>
+      <div class="panel-body">
+        <% if @nodes_last.nil? %>
+          <p class="text-info">Изменений нет</p>
+        <% else %>
+        <p class="text-muted">
+          <% @nodes_last.each do |nl| %>
+            <strong><%= nl.created_at.strftime("%d.%m.%Y") %></strong>
+            Добавлен
+            <% if nl.name.length == 3 %>
+            <strong><%= link_to  'УМ ' + nl.name , nl %>&nbsp;</strong>
+            <% else %>
+            <strong>&nbsp;<%= link_to  'УМ ' + nl.name , nl %>&nbsp;&nbsp;</strong>
+            <% end %>
+            <%= nl.porch.build.street.street_kind.name + ' ' + nl.porch.build.street.name + ', ' + nl.porch.build.name %><br>
+
+          <% end %>
+        </p>
+        <% end %>    
+      </div>
+    </div>   
   </div>
   <div class="col-md-6 offset-col-md-6">
-    <h5>Ближайшие запланированные ТО:</h5>
-    <% if @inspection_next.nil? %>
-    <p class="lead">В ближайщее время ТО не запланировано</p>
-    <% else %>
-    <div class="well">
-      <% @inspection_next.each do |il| %>
-      <%= il.next_inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' + il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
-      <% end %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Недавно проведенные ТО</div>
+      <div class="panel-body">
+        <% if @inspection_last.empty? %>
+          <p class="text-info">В последнее время ТО не проводилось<br><br></p>
+        <% else %>
+          <% @inspection_last.each do |il| %>
+            <%= il.inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch. build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
+          <% end %> 
+        <% end %> 
+      </div>
     </div>
-    <% end %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6">
-    <h5>Перемещения оборудования:</h5>
-    <% if @equipment_movements.nil? %>
-      <p class="lead">Перемещений нет</p>
-    <% else %>
-    <div class="well">
-      <%= render @equipment_movements %>
-    </div>
-    <% end %>
-  </div>
-  <div class="col-md-6 offset-col-md-6">
-    <h5>Изменения в УМ:</h5>
-    <% if @nodes_last.nil? %>
-    <p class="lead">Перемещений нет</p>
-    <% else %>
-    <div class="well">
-    <% @nodes_last.each do |nl| %> 
-     <%= link_to nl.created_at.strftime("%d.%m.%Y") + ' Добавлен УМ' + nl.name, nl %></br>
-    <% end %>  
-    </div>
-    <% end %>
   </div>
 </div>

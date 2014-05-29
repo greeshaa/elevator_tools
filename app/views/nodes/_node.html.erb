@@ -1,8 +1,16 @@
 <tr>
-	<td><%= link_to "УМ " + node.name, node %>&nbsp;</td>
+	<td>
+		<div class="searchcell">
+			<%= link_to "УМ " + node.name, node %>
+		</div>
+	</td>
 	<% if node.street.nil? %>
-	<td>&nbsp;Группа лифтов, которые не выводятся в ЦД и не принадлежат какому-либо УМ </td>
+	<td>Не выводится в ЦД</td>
 	<% else %>
-	<td>&nbsp;<%= node.street.name + ', ' + node.build.name %></td>
+	<td>
+		<div class="searchcell">
+			<%= node.street.name + ', ' + node.build.name %>
+		</div>
+	</td>
 	<% end %>
 </tr>

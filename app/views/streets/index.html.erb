@@ -1,35 +1,44 @@
 <% provide(:title, 'Список улиц') %>
-<%= form_tag(streets_path, method:"get", class:"form-inline col-md-10 col-md-offset-1", role:"form") do %>
-  <legend>Улицы</legend>
-  <div class="input-group input-group-sm col-md-7">
-    <label class="sr-only" for="search">streets</label>
-    <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по названию улицы"}) %>
-    <div class="input-group-btn">
-      <%= submit_tag("Найти", class:"btn btn-default") %>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Списком
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><%= link_to "Все улицы",  streets_path  %></li>
-          <li><%= link_to "Все адреса", address_list_path %></li>
-        </ul>
+<legend>Адреса</legend>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <%= form_tag(streets_path, method:"get", role:"form") do %>
+      <div class="input-group input-group-sm">
+        <label class="sr-only" for="search">streets</label>
+        <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по названию улицы"}) %>
+        <div class="input-group-btn">
+          <%= submit_tag("Найти", class:"btn btn-default") %>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Списком
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Все улицы",  streets_path  %></li>
+              <li><%= link_to "Все адреса", address_list_path %></li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <%= link_to "Добавить улицу", add_street_path, class: "btn btn-default btn-sm" %>
+          </div>
+        </div>
       </div>
-      <div class="btn-group">
-        <%= link_to "Добавить улицу", add_street_path, class: "btn btn-default btn-sm" %>
-      </div>
-    </div>
+    <% end %>
   </div>
-<% end %>
-<div>
-  <div class="col-md-10 col-md-offset-1 list" >
-    <table class="col-md-7 table-bordered table-condensed table-striped">
-      <tr>
-        <th>Название улицы</th>
-        <th>Здания</th>
-        <th>Лифты</th>
-      </tr>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 list">
+    <table class="table table-condensed table-striped search search_result">
+      <caption>Перечень улиц</caption>
+      <thead>
+        <tr>
+          <td>Название улицы</td>
+          <td>Здания</td>
+          <td>Лифты</td>
+        </tr>
+      </thead>
+      <tbody>
       <%= render @streets %>
+      </tbody>
     </table>
   </div>
 </div>

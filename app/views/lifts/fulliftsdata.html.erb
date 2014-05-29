@@ -1,4 +1,5 @@
 <% provide(:title, 'Лифты') %>
+<legend>Единый реестр лифтов</legend>
 <div >
   <table id="lifts" class="table table-striped table-bordered table-condensed bigtables">
    <thead>
@@ -67,9 +68,14 @@
       <td></td>
       <% else %>
       <td><%= l.expert.partner.name %></td>
-      <% end %> 
+      <% end %>
+      <% if l.inspections.last.nil? %> 
       <td></td>
       <td></td>
+      <% else %>
+      <td><%= l.inspections.last.inspection_at.strftime("%d.%m.%Y") %></td>
+      <td><%= l.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></td>
+      <% end %>
     </tr>
     <% end %>
    </tbody>

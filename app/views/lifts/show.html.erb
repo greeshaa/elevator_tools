@@ -3,146 +3,161 @@
 <% else %>
 <% provide(:title, @street.name + ' ' + @build.name  + ' ' + @porch.name) %>
 <% end %>
-<div class="span10">
-<% if @node.nil? %>
-
+<% if @lift.porch.nil? %>
+  <p class="text-warning">Неизвестный адрес</p>
 <% else %>
- <h4>Лифт относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>, <%= @node.build.name %></h4>
+  <p class="lead"><%= @city.name + ", ул. " + @street.name + ", д. " + @build.name + " - " + @porch.name %></p>
 <% end %>
-<table class="table table-hover table-condensed table-bordered">
-<thead>
-        <td>Адрес</td>
-        <td>Лифт</td>
-        <td>Регистрационные данные</td>
-        <td>ДК "Объ"</td>
-        <td>Обслуживание</td>
-        <td>Контрагент</td>
-        <td>Сроки</td>
-</thead>
-<tbody>
-        <tr>
-            <td>
-              <% if @lift.porch.nil? %>
-              <span class="label label-warning">Неизвестный адрес</span>
-              <% else %>
-              <b><%= @city.name %></b><br/>
-              ул.&nbsp;<b><%= @street.name %></b>,
-              д.&nbsp;<b><%= @build.name %></b><br/>
-              <b><%= @porch.name %></b><br/>
-              <% end %>
-            </td>
-            <td>
-              <% if @lift.manufacturer.nil? %>
-              <span class="label label-warning">Нет информации о производителе лифта</span><br/>
-              <% else %>
-              <%= @lift.manufacturer %><br/>
-              <% end %>
-              <% if @lift.model.nil? %>
-              <span class="label label-warning">Нет информации о модели лифта</span><br/>
-              <% else %>
-              <%= @lift.model %><br/>
-              <% end %>
-              <% if @lift.function.nil? %>
-              <span class="label label-warning">Нет информации о типе лифта</span><br/>
-              <% else %>
-              <%= @lift.function %><br/>
-              <% end %>
-              Грузоподъемность:<b><%= @lift.capacity.to_s %></b>&nbsp;кг,<br/>
-              <b><%= @lift.stopscount %></b>&nbsp;остановок<br/>
-              Привод дверей&nbsp;<b><%= @lift.doors %></b><br/>
-              Скорость движения кабины <b><%= @lift.speed %></b> м/с<br/>
-              Высота подъема <b><%= @lift.elevation %></b> м.<br/>       
-            </td>
-            <td>
-              Рег. номер&nbsp;<%= @lift.regnum %><br/>
-              Зав. номер&nbsp;<%= @lift.sernum %><br/>
-              Номер паспорта&nbsp;<br/>
-            </td>
-            <td>
-              <% if @lift.elevator_control_station.nil? %>
-              <span class="label label-warning">Нет информации о СУЛ</span><br/>
-              <% else %>
-              СУЛ&nbsp;<b><%= @lift.elevator_control_station.name %></b><br/>
-              <% end %> 
-              Лифтовой блок&nbsp;<br/>
-              S/n блока&nbsp;<br/>
-              Адрес на ЛШ&nbsp;<br/>
-              Принадлежит к<%= link_to ' УМ ' + @lift.node.name, @lift.node%><br/>
-            </td>
-            <td>
-              <% if @lift.tlr.nil? %>
-              <span class="label label-warning">Нет информации о ЗАО/ООО</span><br/>
-              <% else %>
-              <%= @lift.tlr.name %>&nbsp;Томсклифтремонт<br/>
-              <% end %>
-              <% if @lift.district.nil? %>
-              <span class="label label-warning">Нет информации принадлежности к участку</span><br/>
-              <% else %>
-              <%= @lift.district.name %>&nbsp;участок<br/>
-              <% end %>
-              <% if @lift.mechanic.nil? %>
-              <span class="label label-warning">Нет информации о механике</span><br/>
-              <% else %>
-              Механик:&nbsp;<%= @lift.mechanic.name %><br/>
-              <% end %>
-              Экспертная организация:&nbsp;
-              <% if @lift.expert.nil? %>
-              <span class="label label-warning">Нет информации</span><br/>
-              <% else %>
-              <%= @lift.expert.partner.name %><br/>
-              <% end %>
-              ТО оплачивает&nbsp;<%= @lift.service_payment %><br/>
-            </td>
-            <td>
-              <% if @lift.contract.nil? %>
-              <span class="label label-warning">Нет информации о собственнике лифта</span><br/>
-              <% else %>
-                <% if @lift.contract.partner.nil? %>
-                <span class="label label-warning">Нет информации о собственнике лифта</span><br/>
-                договор №&nbsp;<%= @lift.contract.number %>&nbsp;от<br/>
-                <% else %>
-                <%= @lift.contract.partner.name %><br/>
-                договор №&nbsp;<%= @lift.contract.number %>&nbsp;от<br/>
-                <% end %> 
-              <% end %>               
-            </td>
-            <td>
-              Ввод: 
-              <% if @lift.introduced_at.nil? %>
-              <br/>
-              <% else %>
-              <b><%= @lift.introduced_at %></b>&nbsp;г.<br/>
-              <% end %> 
-              Срок службы:&nbsp;<b><%= @lift.standart_life %></b>&nbsp;лет<br/>
-              Модернизация:&nbsp;<b><%= @lift.overhaul_at %></b>&nbsp;г.<br/>
-              Освидетельствование:
-              <% if @lift.inspections.last.nil? %>
-              <br/>
-              <% else %>&nbsp;<b><%= @lift.inspections.last.inspection_at.strftime("%d.%m.%Y") %></b>&nbsp;г.<br/>
-              <% end %> 
-              Вывод: <b><%= @date_of_decommiss %></b>&nbsp;г.
-            </td>
-        </tr>
-</tbody>
-</table>
-<table>
-    	<tr>
-    		<td><%= link_to "Показать все лифты дома", '#', class: "btn btn-small" %></td>
-           <td><%= link_to "Показать все лифты узла", lifts_path, class: "btn btn-small" %></td>
-    		<td><%= link_to "Редактировать информацию о лифте", '#', class: "btn btn-small" %></td>
-    	</tr>
-</table>
-<li><%= link_to "Отметка о ТО",     new_lift_inspection_path(@lift)  %></li>
-  <%= form_for(:inspection, html:{class: "col-md-4", role:"form", method: "get"} ) do |f| %>
+<hr>
+<div class="col-md-10 col-md-offset-1">
+  <div class="row">
+    <div class="col-md-6">
 
-  <fieldset>
-    <div class="form-group">
-      <%= date_select :inspection, :inspection_at %>
     </div>
+    <div class="col-md-6">
+      <div class="btn-group btn-group-xs">
+        <%= link_to "Все лифты здания", '#', class: "btn btn-default" %>
+        <%= link_to "Все лифты узла", lifts_path, class: "btn btn-default" %>
+        <%= link_to "Редактировать", '#', class: "btn btn-default" %>
+        <%= link_to "Отметка о проведении ТО", '#', class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
 
-    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
-  </fieldset>
-  
-
-  <% end %>
+  <div class="row list">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Регистрационные данные</div>
+        <div class="panel-body">
+          Регистрационный номер:<strong><%= @lift.regnum %></strong><br>
+          Зававодской номер: <%= @lift.sernum %><br>
+          Номер паспорта: <br>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Владелец</div>
+        <div class="panel-body">
+          <% if @lift.contract.nil? %>
+            <span class="label label-warning">Нет информации о собственнике лифта</span><br>
+          <% else %>
+            <% if @lift.contract.partner.nil? %>
+              <span class="label label-warning">Нет информации о собственнике лифта</span><br>
+              Договор № <%= @lift.contract.number %>&nbsp;от<br>
+            <% else %>
+              <%= @lift.contract.partner.name %><br>
+              Договор № <%= @lift.contract.number %>&nbsp;от<br>
+            <% end %> 
+            Срок действия:
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Технические данные</div>
+        <div class="panel-body">
+          <% if @lift.manufacturer.nil? %>
+            <span class="label label-warning">Нет информации о производителе лифта</span>
+          <% else %>
+            <%= @lift.manufacturer %>
+          <% end %>
+          <% if @lift.model.nil? %>
+            <span class="label label-warning">Нет информации о модели лифта</span><br>
+          <% else %>
+            <%= @lift.model %><br>
+          <% end %>
+          <% if @lift.function.nil? %>
+            Назначение: <span class="label label-warning">Нет информации о типе лифта</span><br>
+          <% else %>
+            Назначение: <%= @lift.function %><br>
+          <% end %>
+          Грузоподъемность: <b><%= @lift.capacity.to_s %></b> кг,<br>
+          Количество остановок: <b><%= @lift.stopscount %></b><br>
+          Привод дверей: <b><%= @lift.doors %></b><br>
+          Скорость движения кабины: <b><%= @lift.speed %></b> м/с<br>
+          Высота подъема: <b><%= @lift.elevation %></b> м.<br>
+          <% if @lift.elevator_control_station.nil? %>
+            <span class="label label-warning">Нет информации о СУЛ</span><br>
+          <% else %>
+          СУЛ&nbsp;<b><%= @lift.elevator_control_station.name %></b><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Контрольные даты и сроки</div>
+        <div class="panel-body">
+          Ввод в эксплуатацию: 
+          <% if @lift.introduced_at.nil? %>
+          <br>
+          <% else %>
+          <b><%= @lift.introduced_at %></b>&nbsp;г.<br>
+          <% end %> 
+          Срок службы:&nbsp;<b><%= @lift.standart_life %></b>&nbsp;лет<br>
+          Вывод из эксплуатации: <b><%= @date_of_decommiss %></b>&nbsp;г.<br>
+          Модернизация:&nbsp;<b><%= @lift.overhaul_at %></b>&nbsp;г.<br>
+          Последнее освидетельствование:
+          <% if @lift.inspections.last.nil? %>
+          <br>
+          <% else %>&nbsp;<b><%= @lift.inspections.last.inspection_at.strftime("%d.%m.%Y") %></b>&nbsp;г.<br>
+          <% end %>
+          Следующее освидетельствование:
+          <% if @lift.inspections.last.nil? %>
+          <br>
+          <% else %>&nbsp;<b><%= @lift.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></b>&nbsp;г.<br>
+          <% end %>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Информация об обслуживании</div>
+        <div class="panel-body">
+          <% if @lift.tlr.nil? %>
+            <span class="label label-warning">Нет информации о ЗАО/ООО</span><br>
+          <% else %>
+            <%= @lift.tlr.name %>&nbsp;Томсклифтремонт<br>
+          <% end %>
+          <% if @lift.district.nil? %>
+            <span class="label label-warning">Нет информации принадлежности к участку</span><br>
+          <% else %>
+            <%= @lift.district.name %>&nbsp;участок<br>
+          <% end %>
+          <% if @lift.mechanic.nil? %>
+            <span class="label label-warning">Нет информации о механике</span><br>
+          <% else %>
+            Механик:&nbsp;<%= @lift.mechanic.name %><br>
+          <% end %>
+          Экспертная организация:&nbsp;
+          <% if @lift.expert.nil? %>
+            <span class="label label-warning">Нет информации</span><br>
+          <% else %>
+            <%= @lift.expert.partner.name %><br>
+          <% end %>
+          ТО оплачивает:&nbsp;<%= @lift.service_payment %><br>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Информация по ДК "Объ"</div>
+        <div class="panel-body">
+          Лифтовой блок&nbsp;<br>
+          S/n блока&nbsp;<br>
+          Адрес на ЛШ&nbsp;<br>
+          Принадлежит к<%= link_to ' УМ ' + @lift.node.name, @lift.node%><br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

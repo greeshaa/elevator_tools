@@ -1,30 +1,16 @@
 <% if @ipa.empty? %>
-<div class="row">
     <span class="label label-warning">Нет информации о ip -адресах</span>
-</div>
 <% else %>
-<% @ipa.each do |ipa| %>
-<div class="row">
-	<% if ipa.name == nil %>
-	<div class="col-sm-3 col-md-2 col-lg-1">
-		<span class="label label-warning">Не указан статус ip -адреса (основной/резервный)</span>
-	</div>
-	<% else %>
-	<div class="col-sm-3 col-md-2 col-lg-1">
-		<p class="text-muted text-right"><%= ipa.name %> ip:</p>
-	</div>
+	<% @ipa.each do |ipa| %>
+		<% if ipa.name == nil %>
+			<span class="label label-warning">Не указан статус ip -адреса (основной/резервный)</span>
+		<% else %>
+			<%= ipa.name %> ip:&nbsp;&nbsp;
+			<% if ipa.provider == nil %>
+					<%= ipa.ip %>&nbsp;&nbsp;<span class="label label-warning">Нет информации о провайдере</span>
+				<% else %>
+					<%= ipa.ip %>&nbsp;&nbsp;<%= ipa.provider.name %><br>
+				<% end %>
+		<% end %>
 	<% end %>
-	<% if ipa.provider == nil %>
-	<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-1">
-		<div class="row">
-		<div><%= ipa.ip %></div><div><span class="label label-warning">Нет информации о провайдере</span></div>
-		</div>
-	</div>
-	<% else %>	
-	<div class="col-sm-offset-3 col-md-offset-2 col-lg-offset-1">
-		<div><%= ipa.ip %></div><div><%= ipa.provider.name %></div>
-	</div>
-	<% end %>
-</div>
-<% end %>
 <% end %>

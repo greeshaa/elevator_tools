@@ -1,27 +1,41 @@
 <% provide(:title, 'Узловые модули') %>
-<%= form_tag(nodes_path, method:"get", class:"form-inline col-md-10 col-md-offset-1", role:"form") do %>
-	<legend>Узловые модули</legend>
-	<div class="input-group input-group-sm col-md-7">
-    <label class="sr-only" for="search">nodes</label>
-    <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по номеру УМ"}) %>
-    <div class="input-group-btn">
-    	<%= submit_tag("Найти", class:"btn btn-default") %>
-    	<div class="btn-group">
-        <%= link_to "Добавить УМ", add_node_path, class: "btn btn-default btn-sm" %>
-      </div>
-    </div>
-  </div>
-<% end %>
-<div>
-	<div class="col-md-10 col-md-offset-1 list" >
-		<table class="col-md-7 table-bordered table-condensed table-striped">
-			<% unless @nodes.nil? %>
-				<% if @nodes.empty? %>
-				<p class="lead">УМ удовлетворяющие запросу не найдены.</p>
-				<% else %>
-				<%= render @nodes %>
-				<% end %>
-			<% end %>
-		</table>
+<p class="lead">Информация о узловых модулях.</p>
+<hr>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+		<%= form_tag(nodes_path, method:"get", role:"form") do %>
+			<div class="input-group input-group-sm">
+		    <label class="sr-only" for="search">nodes</label>
+		    <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по адресу или номеру УМ"}) %>
+		    <div class="input-group-btn">
+		    	<%= submit_tag("Найти", class:"btn btn-default") %>
+		    	<div class="btn-group">
+		        <%= link_to "Добавить УМ", add_node_path, class: "btn btn-default btn-sm" %>
+		      </div>
+		    </div>
+		  </div>
+		<% end %>
 	</div>
 </div>
+<% unless @nodes.nil? %>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1 list" >
+		<% if @nodes.empty? %>
+			<p class="lead search_result">УМ удовлетворяющие запросу не найдены.</p>
+		<% else %>
+			<table class="table table-condensed table-striped search_result">
+				<caption>Результаты поиска</caption>
+        <thead>
+          <tr>
+            <td>Узловой модуль</td>
+            <td>Адрес</td>
+          </tr>
+        </thead>
+        <tbody>
+					<%= render @nodes %>
+				</tbody>
+			</table>
+		<% end %>			
+	</div>
+</div>
+<% end %>

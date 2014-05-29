@@ -1,0 +1,34 @@
+<% provide(:title, 'Статистика') %>
+<p class="lead">Статистика</p>
+<hr>
+<div class="row">
+	<div class="col-md-6 offset-col-md-6">
+	  <table class="table table-striped table-bordered table-condensed">
+	    <caption>Общая статистика по объектам</caption>
+	    <tr>
+	      <% if current_user.foreman? %>
+	      <td class="title_left">Количество УМ</td>
+	      <% else %>
+	      <td class="title_left"><%= link_to "Количество УМ", nodes_path %></td>
+	      <% end %>
+	      <td><%= Node.count %></td>
+	    </tr>
+	    <tr>
+	      <td class="title_left"><%= link_to "Количество улиц", streets_path %> </td>
+	      <td><%= Street.count %></td>
+	    </tr>
+	    <tr>
+	      <td class="title_left">Количество домов</td>
+	      <td><%= Build.count %></td>
+	    </tr>
+	    <tr>
+	      <td class="title_left">Количество подъездов</td>
+	      <td><%= Porch.count %></td>
+	    </tr>
+	    <tr>
+	      <td class="title_left"><%= link_to "Количество обслуживаемых лифтов", lifts_path %></td>
+	      <td><%= Lift.count %></td>
+	    </tr>
+	  </table>
+	</div>
+</div>

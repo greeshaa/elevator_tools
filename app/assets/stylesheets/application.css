@@ -27,26 +27,42 @@ body {
 }
 
  /* miscellaneous */
- 
+ /*
+ .navbar-static-top{
+ 	background-color: #274E7D;
+ }
+.navbar-default .navbar-brand{
+ 	 	color: #FFFFFF;
+}
+.whitehead{
+	color: #FFFFFF;
+}
+ */
 .pdr {
 	padding-right: 25px;
 }
 
-.maincontainer{
+.maincontainer {
 	margin: 25px;
 }
 
-.bigtables{
-	font-size: small;
-	text-align: center;
-	.address{
-		text-align: left;
-	}
-}
-
-
 .list{
 	margin-top: 25px;
+	/*margin-left: -15px;
+	margin-right: -15px;*/
+}
+
+.search_result{
+	width: 100%;
+	text-align: center;
+}
+.searchcell{
+	margin-left: 33%;
+	text-align: left;
+}
+.searchcell2{
+	margin-left: 12%;
+	text-align: left;
 }
 
 .debug_dump {

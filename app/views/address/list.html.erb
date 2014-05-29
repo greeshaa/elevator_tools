@@ -1,7 +1,9 @@
 <% provide(:title, 'Адреса') %>
-<%= form_tag({:controller => "address", :action => "index"}, :method => "get", :class => "form-inline col-md-10 col-md-offset-1", role:"form") do %>
- 		<legend>Адреса</legend>
-    <div class="input-group input-group-sm col-md-7">
+<legend>Адреса</legend>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <%= form_tag({:controller => "address", :action => "index"}, :method => "get", role:"form") do %>
+    <div class="input-group input-group-sm">
         <label class="sr-only" for="search">search</label>
         <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Партизанская, 8/1"}) %>
         <div class="input-group-btn">
@@ -26,23 +28,31 @@
           </div>
         </div>
     </div>
-<% end %>
-<div>
+    <% end %>
+  </div>
+</div>
+<div class="row">
   <div class="col-md-10 col-md-offset-1 list" >
-    <table class="col-md-7 table-bordered table-condensed table-striped">
       <% unless @address.nil? %>
+      <table class="table table-condensed table-striped search_result">
+        <caption>Перечень адресов</caption>
+        <thead>
+          <tr>
+            <td>Адрес</td>
+            <td>Количество лифтов</td>
+          </tr>
+        </thead>
+        <tbody>
         <% @address.each do |s, b| %>
         <% b.each do |build| %>
         <tr>
-          <td><%= link_to s.name + ', ' + build.name, build %></td>
-          <td><%= pluralize(build.lifts.count, "lift") %></td>
+          <td class="recordname"><%= link_to s.name + ', ' + build.name, build %></td>
+          <td><%= build.lifts.count%></td>
         </tr>
         <% end %>
         <% end %>
-
-        
-
+      </tbody>
+        </table>
       <% end %>
-    </table>
   </div>
 </div>

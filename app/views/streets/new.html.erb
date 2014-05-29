@@ -1,24 +1,30 @@
-<% provide(:title, 'Добавление улицы') %>
-<%= form_for(@street, html:{class:"form-inline col-md-10 col-md-offset-1", role:"form"} ) do |f| %>
+<% provide(:title, 'Адреса | Добавление улицы') %>
+<legend>Адреса</legend>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
     <legend>Добавление улицы</legend>
-
-      <div class="input-group input-group-sm col-md-7">
-    <div class="form-group">
-      <%= f.label :city_id, "Город:" %>
-      <%= f.select :city_id, options_from_collection_for_select(@city, :id, :name), {}, 
-      													{class: "form-control input-sm"} %>
-    </div>
-    <div class="form-group">
-      <%= f.label :street_kind_id, "Тип улицы:" %>
-      <%= f.select :street_kind_id, options_from_collection_for_select(@streetkind, :id, :name), {}, 
-      													{class: "form-control input-sm"} %>
-    </div>
-        <label class="sr-only" for="name">name</label>
-      	<%= f.text_field :name, class: "form-control", placeholder: "Название улицы" %>
-
-        <div class="input-group-btn">
-          <%= f.submit "Добавить", class: "btn btn-default" %>
-        </div>
+    <%= form_for(@street, html:{role:"form"} ) do |f| %>
+    <div><%= render 'shared/error_messages', object: f.object %></div>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :city_id, "Город:" %>
+        <%= f.select :city_id, options_from_collection_for_select(@city, :id, :name), {}, 
+        													{class: "form-control input-sm"} %>
       </div>
-    <div class="col-md-7" padding-top="25"><%= render 'shared/error_messages', object: f.object %></div>
-<% end %>
+      <div class="form-group">
+        <%= f.label :street_kind_id, "Тип улицы:" %>
+        <%= f.select :street_kind_id, options_from_collection_for_select(@streetkind, :id, :name), {}, 
+        													{class: "form-control input-sm"} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name, "Название улицы:" %>
+        <%= f.text_field :name, class: "form-control input-sm", placeholder: "Партизанская" %>
+      </div>
+      <div class="col-md-1 col-md-offset-9">
+        <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
+      </div>
+    </div>
+    </fieldset>
+    <% end %>
+  </div>
+</div>

@@ -1,17 +1,26 @@
 <% provide(:title, @streetkind + " " + @street.name) %>
+<legend>Адреса</legend>
+<div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <legend><%= @streetkind + " " + @street.name %></legend>
-      <div class="btn-group btn-group-sm col-md-7">
-        <%= link_to "Список всех улиц", streets_path, class: "btn btn-default" %>
-        <%= link_to "Редактировать улицу", edit_street_path, class: "btn btn-default" %>
-        <%= link_to "Добавить здание", add_build_path, class: "btn btn-default" %>
-      </div>
-    <div class="col-md-6">
-      <legend>Доступные адреса:</legend>
-      <div>
-        <ul class="list-group">
+    <p class="lead"><%= @streetkind + " " + @street.name %></p>
+    <div class="list">
+      <table class="table table-condensed table-striped search_result">
+        <caption>Доступные адреса:</caption>
+        <thead>
+          <tr>
+            <td>Адрес</td>
+            <td>Лифты</td>
+          </tr>
+        </thead>
+        <tbody>
           <%= render @builds %>
-        </ul>  
-      </div>
-    </div>    
+        </tbody>
+      </table> 
+    </div>
+    <div class="btn-group btn-group-xs">
+      <%= link_to "Список всех улиц", streets_path, class: "btn btn-default" %>
+      <%= link_to "Редактировать улицу", edit_street_path, class: "btn btn-default" %>
+      <%= link_to "Добавить здание", add_build_path, class: "btn btn-default" %>
+    </div>
   </div>
+</div>

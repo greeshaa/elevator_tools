@@ -31,6 +31,7 @@ ElevatorTools::Application.routes.draw do
   match '/signout', to: 'sessions#destroy',     via: :delete
 
   get '/main',   to: 'static_pages#main'
+  get '/statistics',   to: 'static_pages#statistics'
   get '/about',   to: 'static_pages#about'
   get '/handbook',   to: 'static_pages#handbook'
   get '/test',   to: 'static_pages#test'

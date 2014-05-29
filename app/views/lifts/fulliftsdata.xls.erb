@@ -69,9 +69,14 @@
 				<Cell><Data ss:Type="String"></Data></Cell>
 				<% else %>
 				<Cell><Data ss:Type="String"><%= l.expert.partner.name %></Data></Cell>
-				<% end %> 
+				<% end %>
+				<% if l.inspections.last.nil? %> 
 				<Cell><Data ss:Type="String"></Data></Cell>
 				<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+      	<Cell><Data ss:Type="String"><%= l.inspections.last.inspection_at.strftime("%d.%m.%Y") %></Data></Cell>
+      	<Cell><Data ss:Type="String"><%= l.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></Data></Cell>
+      	<% end %>
 			</Row>
 		<% end %>
 		</Table>

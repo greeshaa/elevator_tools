@@ -1,44 +1,52 @@
 <% provide(:title, @streetkind + ' ' + @street + ', ' + @build.name) %>
-<div class="col-md-10 col-md-offset-1">
-  <legend><%= @streetkind + ' ' + @street %>, <%= @build.name %></legend>
-  <% if @build.id == 1 %>
-    <%= render @porches %>
-  <% else %>
-
-
+<legend>Адреса</legend>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div>
+      <p class="lead"><%= @streetkind + ' ' + @street %>, <%= @build.name %></p>
+    </div>
+    <div>
       <% if @node.nil? %>
         <span class="label label-warning">Дом еще не привязан к какому-либо УМ</span>
       <% elsif @node.porch_id == nil %>
         <% if @node.id == 1 %>
-          <span class="label label-warning">Адрес не выводится в ЦД.</span>
+        <span class="label label-warning">Адрес не выводится в ЦД.</span>
         <% else %>
-          <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу 
-                              <%= @node.street.name %>, <%= @node.build.name %></p>
+        <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу 
+                            <%= @node.street.name %>, <%= @node.build.name %></p>
         <span class="label label-warning">Внимание! Необходимо проверить привязку УМ к подъезду.</span>
         <% end %>
       <% else %>
-      <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>, 
-                        <%= @node.build.name %> в <%= @node.porch.name %> <p>
+        <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>, 
+                      <%= @node.build.name %> в <%= @node.porch.name %> <p>
       <% end %>
-
-
-
-
-      <p>Подъездов в здании: <%= @build.porch_count.to_s %></p>
-      <legend>Обслуживаемые лифты</legend>
-      <% if @lifts.empty? %>
-      <p class="lead">Обслуживаемых лифтов нет.</p>
+    </div>
+    <div class="list">
+      <% if @build.id == 1 %>
+        <%= render @porches %>
       <% else %>
-        <ul>
-          <% @lifts.each do |lift| %>
-            <li><%= lift.porch.name + ' - ' %> <%= link_to 'Лифт ' + lift.function + ' - ' + lift.capacity.to_s + ' кг. - '  + lift.stopscount.to_s + ' остановок', lift %>
-            </li>
+          <% if @lifts.empty? %>
+          <p class="lead">Обслуживаемых лифтов нет.</p>
+          <% else %>
+            <table class="table table-condensed table-striped search_result">
+              <caption>Перечень обслуживаемых лифтов</caption>
+              <% @lifts.each do |lift| %>
+                <tr>
+                  <td>
+                    <%= lift.porch.name %>
+                  </td>
+                  <td>
+                    <%= link_to 'Лифт ' + lift.function + ' - ' + lift.capacity.to_s + ' кг. - '  +    lift.stopscount.to_s + ' остановок', lift %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
           <% end %>
-        </ul>
       <% end %>
-  <% end %>
-  <div class="btn-group btn-group-sm">
-        <%= link_to "Показать все здания улицы", '/streets/' + @streets, class: "btn btn-default" %>
-        <%= link_to "Редактировать здание", edit_build_path, class: "btn btn-default" %>
+    </div>
+    <div class="btn-group btn-group-xs">
+          <%= link_to "Показать все здания улицы", '/streets/' + @streets, class: "btn btn-default" %>
+          <%= link_to "Редактировать здание", edit_build_path, class: "btn btn-default" %>
+    </div>
   </div>
 </div>
