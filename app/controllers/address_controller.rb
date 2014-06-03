@@ -37,5 +37,6 @@ before_filter :signed_in_user
         street.each do |street|
           @address.store(street, Build.where('street_id = ?', street.id) )
         end
+    render 'index'
   end
 end

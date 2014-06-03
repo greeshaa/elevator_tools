@@ -1,0 +1,15 @@
+<% provide(:title, 'Список провайдеров') %>
+<p class="lead">Список провайдеров</p>
+<hr>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 list">
+    <% @providers.each do |p| %>
+      <%= link_to p.name, p %><br>
+    <% end %>
+  </div>
+</div>

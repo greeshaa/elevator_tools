@@ -22,6 +22,7 @@ ElevatorTools::Application.routes.draw do
   resources :equipment_line_items
   resources :equipment_move_buffer
   resources :equipment_movements
+  resources :providers
 
 
   root :to => 'static_pages#main'
@@ -41,6 +42,7 @@ ElevatorTools::Application.routes.draw do
   get 'equipment_stats', to: 'equipment#stats'
   get 'equipment_store', to: 'equipment#store'
   get 'equipment_broken', to: 'equipment#broken'
+  get '/nodes_all',  to: 'nodes#all'
   #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'
@@ -52,6 +54,7 @@ ElevatorTools::Application.routes.draw do
   get '/add_e_type', to: 'equipment_types#new'
   get '/add_e_list', to: 'equipment_lists#new'
   get '/add_equipment', to: 'equipment#new'
+  get '/new_provider', to: 'providers#new'
   #get 'edit_ip', to: 'nodes#edit_ip', :as => :edit_ip
   #get 'equipment/:id/move_equipment', to: 'equipment_movements#new', :as => :move_equipment
 

@@ -1,22 +1,28 @@
 <% provide(:title, 'Добавление здания') %>
-<div class="col-md-10 col-md-offset-1">
-  <legend>Добавление здания</legend>
-  <%= form_for(@build, html:{class: "col-md-4", role: "form"} ) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <fieldset>
-    <div class="form-group">
-      <%= f.label :street_id, "Улица:" %>
-      <%= f.select :street_id, options_from_collection_for_select(@streets.order(:name), :id, :name), {}, {class: "form-control input-sm"} %>
-    </div>
-    <div class="form-group">
-      <%= f.label :name, "Номер здания:" %>
-      <%= f.text_field :name, class: "form-control input-sm", placeholder: "Например: 8/1" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :porch_count, "Количество подъездов:" %>
-      <%= f.text_field :porch_count, class: "form-control input-sm", placeholder: "Например: 8" %>
-    </div>
-    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
-  </fieldset>
-  <% end %>
+<p class="lead">Новый адрес</p>
+<hr>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <legend>Добавление здания</legend>
+    <%= form_for(@build, html:{role: "form"} ) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :street_id, "Улица:" %>
+        <%= f.select :street_id, options_from_collection_for_select(@streets.order(:name), :id, :name), {}, {class: "form-control input-sm"} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name, "Номер здания:" %>
+        <%= f.text_field :name, class: "form-control input-sm", placeholder: "Например: 8/1" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :porch_count, "Количество подъездов:" %>
+        <%= f.text_field :porch_count, class: "form-control input-sm", placeholder: "Например: 8" %>
+      </div>
+      <div class="form-group pull-right">
+        <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
+      </div>
+    </fieldset>
+    <% end %>
+  </div>
 </div>

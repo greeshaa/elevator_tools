@@ -35,26 +35,114 @@
   </nav>
 <ul class="nav nav-tabs">
   <% if current_user.admin? or current_user.management? %> <!--- Вывод меню для администрации ---->
-  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>">
+  <li class="<%= 'active' if params[:controller] == 'static_pages' %>">
     <%= link_to "Главная", main_path %></li>
-  <li class="<%= 'active' if params[:controller] == 'address' %>"><%= link_to "Адреса", address_index_path %></li>
+  <li class="<%= 'active' if params[:controller] == 'address' or params[:controller] == 'streets' or params[:controller] == 'builds' %>"><%= link_to "Адреса", address_index_path %></li>
   <li class="<%= 'active' if params[:controller] == 'nodes' %>"><%= link_to "Узлы", nodes_path %></li>
   <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
-  <li class="<%= 'active' if params[:controller] == 'equipment' %>"><%= link_to "Оборудование", equipment_index_path %></li>
-  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'statistics') %>">
-    <%= link_to "Статистика", statistics_path %></li>
-  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook') %>">
-    <%= link_to "Справочник", handbook_path %></li>
-  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'about') %> pull-right pdr">
-      <%= link_to "?", about_path %></li>
+  <li class="<%= 'active' if params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == 'equipment_lists' %>"><%= link_to "Оборудование", equipment_index_path %></li>
+  <li class="disabled"><%= link_to "Договора", '#' %></li>
+  <li class="disabled"><%= link_to "Механики", '#' %></li>
+  
   <% else %> <!--- Вывод меню для всех остальных ---->
     <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>">
-      <%= link_to "Главная", main_path %></li>
+      <%= link_to "Основная", main_path %></li>
     <li class="<%= 'active' if params[:controller] == 'address' %>"><%= link_to "Адреса", address_index_path %></li>
     <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
     <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook') %>">
       <%= link_to "Справочник", handbook_path %></li>
   <% end %> 
 </ul>
+<!--- Меню контроллеров ---->
+<% if params[:controller] == 'static_pages'%>
+<ul class="nav nav-tabs-inverted pull-right pdr">
+  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>"><%= link_to "Основная", main_path %></li>
+  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'statistics') %>"><%= link_to "Статистика", statistics_path %></li>
+  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook') %>"><%= link_to "Справочник", handbook_path %></li>
+  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'about') %>">
+      <%= link_to "?", about_path %></li>
+</ul>
+<% end %>
+<% if (params[:controller] == 'address' or params[:controller] == 'streets' or params[:controller] == 'builds')%>
+<ul class="nav nav-tabs-inverted pull-right pdr">
+  <li class="<%= 'active' if (params[:controller] == 'streets'  and params[:action] == 'index') %>"><%= link_to "Все улицы",  streets_path  %></li>
+  <li class="<%= 'active' if (params[:controller] == 'address'  and params[:action] == 'list') %>"><%= link_to "Все адреса", address_list_path %></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      + <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu pull-right">
+      <li><%= link_to "Добавить улицу",  add_street_path %></li>
+      <li><%= link_to "Добавить адрес", add_build_path %></li>
+    </ul>
+  </li>
+</ul>
+<% end %>
+<% if (params[:controller] == 'nodes' or params[:controller] == 'providers')%>
+<ul class="nav nav-tabs-inverted pull-right pdr">
+  <li class="<%= 'active' if (params[:controller] == 'nodes'  and params[:action] == 'list') %>"><%= link_to "Все УМ", nodes_all_path %></li>
+  <li class="<%= 'active' if (params[:controller] == 'providers'  and params[:action] == 'index') %>"><%= link_to "Провайдеры", providers_path %></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      + <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu pull-right">
+      <li><%= link_to "Добавить УМ", add_node_path %></li>
+      <li><%= link_to "Добавить провайдера", new_provider_path %></li>
+    </ul>
+  </li>
+</ul>
+<% end %>
+<% if (params[:controller] == 'lifts' )%>
+<ul class="nav nav-tabs-inverted pull-right pdr">
+  <li class="<%= 'active' if (params[:controller] == 'lifts'  and params[:action] == 'list') %>"><%= link_to "Все лифты", lifts_list_path %></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      ПТО <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu pull-right">
+      <li><%= link_to "Текущий месяц", "#" %></li>
+      <li><%= link_to "Сформировать", lifts_inspections_path %></li>
+      <li><%= link_to "Выгрузить (excel)", lifts_inspections_path(format: "xls") %></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      Единый реестр <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu pull-right">
+      <li><%= link_to "Сформировать", fulliftsdata_path %></li>
+      <li><%= link_to "Выгрузить (excel)", fulliftsdata_path(format: "xls") %></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      + <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu pull-right">
+      <li><%= link_to "Добавить лифт", add_lift_path %></li>
+    </ul>
+  </li>
+</ul>
+<% end %>
+<% if (params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == 'equipment_lists')%>
+<ul class="nav nav-tabs-inverted pull-right pdr">
+  <li class="<%= 'active' if (params[:controller] == 'equipment'  and params[:action] == 'store') %>"><%= link_to "Исправное", equipment_store_path %></li>
+  <li class="<%= 'active' if (params[:controller] == 'equipment'  and params[:action] == 'broken') %>"><%= link_to "Неисправное", equipment_broken_path %></li>
+  <li class="<%= 'active' if (params[:controller] == 'equipment'  and params[:action] == 'stats') %>"><%= link_to "Статистика", equipment_stats_path %></li>
+  <li class="<%= 'active' if params[:controller] == 'equipment_types' %>"><%= link_to "Категории", equipment_types_path %></li>
+  <li class="<%= 'active' if params[:controller] == 'equipment_lists' %>"><%= link_to "Типы", equipment_lists_path %></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      + <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu pull-right">
+      <li><%= link_to "Добавить устройство", add_equipment_path %></li>
+      <li><%= link_to "Добавить новый тип", add_e_list_path %></li>
+      <li><%= link_to "Добавить новую категорию", add_e_type_path %></li>
+    </ul>
+  </li>
+</ul>
+<% end %>
 </header>
 <% end %>

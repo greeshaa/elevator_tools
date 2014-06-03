@@ -63,6 +63,11 @@ before_filter :signed_in_user
     @lifts = Lift.all
   end
 
+  def current_month
+    inspections = Inspection.where(next_inspection_at: Date.today.prev_month()..Date.today.next_month())  
+      
+  end
+
   def list
     @lifts = Lift.all
   end

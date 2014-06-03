@@ -1,18 +1,20 @@
-<% provide(:title, 'Освидетельствование лифтов') %>
+<% provide(:title, 'ПТО') %>
+<p class="lead">ПТО</p>
+<hr>
   <div class="row">
-   <div>
+   <div class="col-md-10 col-md-offset-1">
       <table id="lifts" class="table table-striped table-bordered table-condensed bigtables">
         <thead>
         <tr>
           <th>Лифт</th>
           <th>Район</th>
           <th>Собственник</th>
-          <th>№ договора</th>
+          <th>№ дог.</th>
           <th>ЗАО/ООО</th>
-          <th>Экспертная организация</th>
+          <th>Эксперт</th>
           <th>Оплата</th>
-          <th>Запланированная дата</th>
-          <th>Фактическая дата</th>
+          <th>Дата посл. ПТО</th>
+          <th>Дата след. ПТО</th>
         </tr>
         </thead>
         <tbody>
@@ -70,9 +72,9 @@
           <% if lift.inspections.last.next_inspection_at.nil? %>
           <td></td>
           <% else %>
-          <td><%= lift.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></td>
+          <td><%= lift.inspections.last.inspection_at.strftime("%d.%m.%Y") %></td>
           <% end %>
-          <td><%= lift.inspections.last.inspection_at.strftime("%d.%m.%Y") %></td>     
+          <td><%= lift.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></td>     
           <% end %>
         </tr>
         <% end %> 

@@ -4,13 +4,18 @@
 			<%= link_to "УМ " + node.name, node %>
 		</div>
 	</td>
-	<% if node.street.nil? %>
+	<% if node.id == 1 %>
 	<td>Не выводится в ЦД</td>
 	<% else %>
 	<td>
-		<div class="searchcell">
+		<div class="td_address">
 			<%= node.street.name + ', ' + node.build.name %>
 		</div>
 	</td>
 	<% end %>
+	<td>
+		<%= node.lifts.count %>
+	</td>
+	<td></td>
+	<td></td>
 </tr>

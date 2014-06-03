@@ -6,14 +6,11 @@
     <%= render "address/address_search" %>
   </div>
 </div>
-<% unless @address.nil? %>
 <div class="row">
   <div class="col-md-8 col-md-offset-2 list" >
-      <% if @address.empty? %>
-          <p class="lead search_result">Адреса удовлетворяющие запросу не найдены.</p>
-      <% else %>
+      <% unless @address.nil? %>
       <table class="table table-condensed table-striped search_result">
-        <caption>Результаты поиска</caption>
+        <caption>Перечень всех адресов</caption>
         <thead>
           <tr>
             <td>Адрес</td>
@@ -22,18 +19,15 @@
         </thead>
         <tbody>
         <% @address.each do |s, b| %>
-          <% b.each do |build| %>
-            <tr>
-              <td class="td_address" style="width:60%;">
-                  <%= link_to s.name + ', ' + build.name, build %>
-              </td>
-              <td style="width:40%;"><%= build.lifts.count %></td>
-            </tr>
-          <% end %>
+        <% b.each do |build| %>
+        <tr>
+          <td class="recordname"><%= link_to s.name + ', ' + build.name, build %></td>
+          <td><%= build.lifts.count%></td>
+        </tr>
         <% end %>
-        </tbody>  
-      </table>
+        <% end %>
+      </tbody>
+        </table>
       <% end %>
   </div>
 </div>
-<% end %>

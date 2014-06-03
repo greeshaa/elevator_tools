@@ -2,38 +2,17 @@
 <p class="lead">Информация по облуживаемым лифтам</p>
 <hr>
 <div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <%= form_tag(lifts_path, method:"get", role:"form") do %>
-    <div class="input-group input-group-sm">
-      <label class="sr-only" for="search">lifts</label>
-      <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по адресу, регистрационному номеру "} ) %>
-      <div class="input-group-btn">
-        <%= submit_tag("Найти", class:"btn btn-default") %>
-        <div class="btn-group">
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-            Лифт <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu pull-right">
-            <li><%= link_to "Добавить", add_lift_path %></li>
-            <li><%= link_to "Все лифты", lifts_list_path %></li>
-            <li><%= link_to "Единый реестр", fulliftsdata_path %></li>
-            <li><%= link_to "Единый реестр (excel)", fulliftsdata_path(format: "xls") %></li>
-            <li class="divider"></li>
-            <li><%= link_to "Техн. освидетельствование", lifts_inspections_path %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <% end %>
+  <div class="col-md-8 col-md-offset-2">
+    <%= render "lifts/lift_search" %>
   </div>
 </div>
 <% unless @lifts.nil? %>
 <div class="row">
-  <div class="col-md-10 col-md-offset-1 list" >
+  <div class="col-md-8 col-md-offset-2 list" >
     <% if @lifts.empty? %>
         <p class="lead search_result">Лифты удовлетворяющие запросу не найдены.</p>
     <% else %>
-      <table class="table table-condensed table-striped search_result">
+      <table class="table table-condensed table-bordered table-striped search_result">
         <caption>Результаты поиска</caption>
         <thead>
         </thead>

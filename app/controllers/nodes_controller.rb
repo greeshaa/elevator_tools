@@ -76,6 +76,10 @@ before_filter :signed_in_user
       end   
     end 
   end
+  def all
+    @nodes = Node.all
+    render 'index'
+  end
 
   private
   def node_params

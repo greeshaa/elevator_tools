@@ -1,11 +1,33 @@
 <tr>
-   <td>
-   	<div class="searchcell2">
-   		<% if lift.porch.nil? %>
+	<% if lift.porch.nil? %>
+  	<td>
    		<span class="label label-warning">Нет информации о расположении лифта</span>
-   		<% else %>
-   		<%= link_to 'Рег.номер: '  + lift.regnum+ ' - '  + lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
-   		<% end %>
-   	</div>
-   </td>
+   	</td>
+   	<td>
+   	</td>
+  <% else %>
+  	<% if lift.node.id == 1 %>
+  	<td>
+  		<div class="searchcell2">
+   		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift, class: "text-muted" %>
+   		</div>
+   	</td>
+   	<td>
+   	<%= link_to lift.node.name, lift.node, class: "text-muted" %>
+   	</td>
+   	<% else %>
+   	<td>
+  		<div class="searchcell2">
+   		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
+   		</div>
+   	</td>
+   	<td>
+   	<%= link_to 'УМ '  + lift.node.name, lift.node %>
+   	</td>
+   	<% end %>
+    <td>
+      <%= link_to 'Отметка о ПТО', '#' %>
+    </td>
+   	
+   <% end %>
 </tr>

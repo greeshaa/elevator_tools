@@ -4,8 +4,8 @@
 <% if @node.street.nil? %>
 
 <% else %>
-<div class="col-md-10 col-md-offset-1">
-    <div class="col-md-10">
+<div class="col-md-8 col-md-offset-2">
+    <div>
       <div class="btn-group btn-group-xs">
         <%= link_to "Все узлы", nodes_path, class: "btn btn-default" %>
         <div class="btn-group btn-group-xs">
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="col-md-10 list">
+    <div class="list">
       <div class="panel panel-default">
         <div class="panel-heading">Основные параметры узла</div>
         <div class="panel-body">
@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-10">
+    <div class="">
       <div class="panel panel-default">
         <div class="panel-heading">Сетевые параметры узла</div>
         <div class="panel-body">
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div class="col-md-10">
+    <div class="">
       <div class="panel panel-default">
         <div class="panel-heading">Конфигурация ММИ</div>
         <div class="panel-body">
@@ -105,7 +105,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-10">
+    <div class="">
       <div class="panel panel-default">
         <div class="panel-heading">Установленное оборудование</div>
         <div class="panel-body">
@@ -122,6 +122,8 @@
         </div>
       </div>
     </div>
-
+<% if @node.id == 2 %>
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d550.560208055016!2d84.97476247607624!3d56.49806196609943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sru!4v1401726618810" width="600" height="450" frameborder="0" style="border:0"></iframe>
+<% end %>
 </div>
 <% end %> 
