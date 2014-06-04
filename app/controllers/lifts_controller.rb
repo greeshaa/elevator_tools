@@ -79,5 +79,11 @@ before_filter :signed_in_user
       format.xls # { render text: @lifts.to_csv }
     end
   end
+
+  def lifts_of_nodes
+    @lift  = Lift.find(params[:id])
+    @lifts = @lift.node.lifts
+    render "index"
+  end
  
 end

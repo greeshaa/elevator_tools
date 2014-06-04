@@ -1,0 +1,9 @@
+<%= form_tag(equipment_index_path, method: "get", role:"form") do %>
+<div class="input-group input-group-sm">
+	<label class="sr-only" for="search">equipment</label>
+	<%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по серийному номеру или названию оборудования"} ) %>
+	<div class="input-group-btn">
+		<%= submit_tag("Найти", class:"btn btn-default") %>
+	</div>
+</div>
+<% end %>

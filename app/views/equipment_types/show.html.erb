@@ -1,12 +1,9 @@
 <% provide(:title, @e_type.name) %>
-<div class="span8">
+<p class="lead"><%=@e_type.name%></p>
+<hr>
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h3><%=@e_type.name%></h3>
-     <h5>Оборудование текущей категории:</h5>
-    </section>
-  </aside>
-</div>
-
+	<div class="col-md-8 col-md-offset-2">
+		<h5>Оборудование текущей категории:</h5>
+		<%= render @e_lists %>
+ 	</div>
 </div>

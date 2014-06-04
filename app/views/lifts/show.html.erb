@@ -17,9 +17,9 @@
     <div class="col-md-6">
       <div class="btn-group btn-group-xs">
         <%= link_to "Все лифты здания", '#', class: "btn btn-default" %>
-        <%= link_to "Все лифты узла", lifts_path, class: "btn btn-default" %>
+        <%= link_to "Все лифты узла", lifts_of_nodes_path + "?id=" + @lift.id.to_s, class: "btn btn-default" %>
         <%= link_to "Редактировать", '#', class: "btn btn-default" %>
-        <%= link_to "Отметка о ПТО", '#', class: "btn btn-default" %>
+        <%= link_to "Отметка о ПТО", new_inspection_path + '?lift_id=' +@lift.id.to_s, class: "btn btn-default" %>
       </div>
     </div>
   </div>

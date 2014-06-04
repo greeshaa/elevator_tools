@@ -4,7 +4,9 @@ before_filter :signed_in_user
 
   def show
     @e_list = EquipmentList.find(params[:id])
-    @equip_store = @e_list.equipment
+    @equip_store = @e_list.equipment.where("porch_id = 1 AND broken = '0'")
+    @equip_work = @e_list.equipment.where("porch_id > 1")
+    @equip_broken = @e_list.equipment.where("broken = '1'")
   end
 
   def new
@@ -41,6 +43,6 @@ before_filter :signed_in_user
   end
 
   def index
-    @e_lists = EquipmentList.all
+    @e_lists = EquipmentList.all.order(:manufacturer, :name)
   end
 end

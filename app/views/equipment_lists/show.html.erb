@@ -1,15 +1,35 @@
 <% provide(:title, @e_list.name) %>
+<p class="lead"><%=@e_list.manufacturer %> <%=@e_list.name  %></p>
+<hr>
 <div class="row">
-  <aside class="span9">
-    <section>
-      <h3><%=@e_list.manufacturer %> <%=@e_list.name  %></h3>
-      <h4>В наличии на складе:</h4>
+	<div class="col-md-8 col-md-offset-2">
+		<h4>В наличии на складе:</h4>
+		<table class="table table-striped table-bordered table-condensed">
+			<%= render @equip_store %>
+		</table>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<h4>В работе:</h4>
+		<% if @equip_work.empty? %>
 
-<table class="table table-striped table-bordered table-condensed">
-  <%= render @equip_store %>
-</table>
-    </section>
-  </aside>
-</div>
-<h4>Описание</h4>
+		<% else %>
+		<table class="table table-striped table-bordered table-condensed">
+			<%= render @equip_work %>
+		</table>
+		<% end %>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<h4>Неисправное:</h4>
+		<% if @equip_broken.empty? %>
+
+		<% else %>
+		<table class="table table-striped table-bordered table-condensed">
+			<%= render @equip_broken %>
+		</table>
+		<% end %>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<h4>Описание</h4>
       <p><%=@e_list.description %></p>
+	</div>
+</div>

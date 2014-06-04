@@ -45,7 +45,7 @@
       <% end %>
     </div>
     <div class="btn-group btn-group-xs">
-          <%= link_to "Показать все здания улицы", '/streets/' + @streets, class: "btn btn-default" %>
+          <%= link_to "Показать все здания улицы", street_path(@streets), class: "btn btn-default" %>
           <%= link_to "Редактировать здание", edit_build_path, class: "btn btn-default" %>
     </div>
   </div>

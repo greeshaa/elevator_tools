@@ -26,7 +26,7 @@
    	</td>
    	<% end %>
     <td>
-      <%= link_to 'Отметка о ПТО', '#' %>
+      <%= link_to 'Отметка о ПТО', new_inspection_path + '?lift_id=' + lift.id.to_s %>
     </td>
    	
    <% end %>

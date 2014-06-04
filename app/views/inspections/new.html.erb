@@ -1,15 +1,28 @@
 <% provide(:title, 'Отметка о проведении ТО') %>
-<div class="col-md-10 col-md-offset-1">
-  <legend>Отметка о проведении ТО</legend>
+<p class="lead">Отметка о проведении ТО</p>
+<hr>
+<div class="col-md-8 col-md-offset-2">
+  <legend>
+  	<% if @lift.porch.nil? %>
+			<% provide(:title, 'Неизвестный адрес') %>
+		<% else %>
+			<% provide(:title, @street.name + ' ' + @build.name  + ' ' + @porch.name) %>
+		<% end %>
+		<% if @porch.nil? %>
+ 		 <p class="text-warning">Неизвестный адрес</p>
+		<% else %>
+  		<p class="lead"><%= @city.name + ", ул. " + @street.name + ", д. " + @build.name + " - " + @porch.name %></p>
+		<% end %>
+	</legend>
 
-  <%= form_for(:inspection, html:{class: "col-md-4", role:"form", method: "get"} ) do |f| %>
+  <%= form_for @inspection do |f| %>
 
   <fieldset>
     <div class="form-group">
       <%= date_select :inspection, :inspection_at %>
     </div>
 
-    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
+    <%= f.submit "Добавить", class: "btn btn-default btn-sm pull-right" %>
   </fieldset>
   
 

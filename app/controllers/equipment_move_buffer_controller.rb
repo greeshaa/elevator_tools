@@ -12,10 +12,13 @@ class EquipmentMoveBufferController < ApplicationController
 		@equipment_move_buffer = current_equipment_buffer
 		@equipment_move_buffer.destroy
 		session[:cart_id] = nil
-		respond_to do |format|
-			format.html { redirect_to equipment_index_path, notice: 'Буфер успешно очищен!'}
-			format.json { head :ok}
-		end		
+
+		flash[:success] = "Буфер успешно очищен!"
+    redirect_to equipment_index_path
+		#respond_to do |format|
+			#format.html { redirect_to equipment_index_path, notice: 'Буфер успешно очищен!'}
+			#format.json { head :ok}
+		#end		
 	end
 
 end

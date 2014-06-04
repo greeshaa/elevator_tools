@@ -1,48 +1,40 @@
 <% provide(:title, @equipment.equipment_list.manufacturer + ' ' + @equipment.equipment_list.name ) %>
-<div class="col-md-10 col-md-offset-1">
-  <legend><%= @equipment.equipment_list.manufacturer + ' ' + @equipment.equipment_list.name%></legend>
-  <div class="btn-group btn-group-sm col-md-7">
-    <%= link_to "Показать все #{@equipment.equipment_list.manufacturer} #{@equipment.equipment_list.name}", equipment_list_path(@equipment.equipment_list.id), class: "btn btn-default" %>
-    <%= link_to "Изменить данные устройства", edit_equipment_path, class: "btn btn-default" %>
+<p class="lead"><%= @equipment.equipment_list.manufacturer + ' ' + @equipment.equipment_list.name%></p>
+<hr>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-striped">
+      <tr>
+       <td>Серийный номер</td>
+        <td><%= @equipment.factory_sn %></td>
+      </tr>
+      <tr>
+        <td>Дата поступления на склад</td>
+        <td><%= @equipment.installed_at.strftime("%d.%m.%Y") %></td>
+      </tr>
+      <tr>
+        <td>Расположение</td>
+       <td><%= @equipment.porch.name %></td>
+      </tr>
+      <tr>
+       <td>Адрес</td>
+       <td><%= "ул. " + @equipment.porch.build.street.name + ", д. " +   @equipment.porch.build.name %></td>
+      </tr>
+     <tr>
+        <td>Категория</td>
+        <td><%= @equipment.equipment_list.equipment_type.name %></td>
+      </tr>
+     <tr>
+        <td>Описание</td>
+        <td><%= @equipment.equipment_list.description %></td>
+      </tr>
+    </table>    
   </div>
-</div>
-<div>
-  <div class="col-md-10 col-md-offset-1 list" >
-  <table class="col-md-7 table-striped table-bordered table-condensed">
-    <tr>
-     <td>Серийный номер</td>
-      <td><%= @equipment.factory_sn %></td>
-    </tr>
-    <tr>
-      <td>Дата поступления на склад</td>
-      <td><%= @equipment.installed_at.strftime("%d.%m.%Y") %></td>
-    </tr>
-    <tr>
-      <td>Расположение</td>
-     <td><%= @equipment.porch.name %></td>
-    </tr>
-    <tr>
-     <td>Адрес</td>
-     <td><%= "ул. " + @equipment.porch.build.street.name + ", д. " + @equipment.porch.build.name %></td>
-    </tr>
-   <tr>
-      <td>Категория</td>
-      <td><%= @equipment.equipment_list.equipment_type.name %></td>
-    </tr>
-   <tr>
-      <td>Описание</td>
-      <td><%= @equipment.equipment_list.description %></td>
-    </tr>
-  </table>
+  <div class="col-md-8 col-md-offset-2 list" >
+    <div class="btn-group btn-group-xs">
+      <%= link_to "Показать все #{@equipment.equipment_list.manufacturer} #{@equipment.equipment_list.name}", equipment_list_path(@equipment.equipment_list.id), class: "btn btn-default" %>
+      <%= link_to "Изменить данные устройства", edit_equipment_path, class: "btn btn-default" %>
+      <%= button_to "Переместить устройство", equipment_line_items_path(equipment_id: @equipment), class: "btn btn-default" %>
+    </div>
   </div>
-</div>
-<div>
-<div class="col-md-10 col-md-offset-1 list">
-<legend>Перемещение оборудования</legend>
-  <div class="btn-group btn-group-sm col-md-7">
-    <%= link_to "Показать все устройства",  equipment_index_path, class: "btn btn-default" %>
-    <%= link_to "Редактировать устройство", edit_equipment_path, class: "btn btn-default" %>
-    <%= button_to "Переместить устройство", equipment_line_items_path(equipment_id: @equipment), class: "btn btn-default" %>
-  </div>
-</div>
 </div>

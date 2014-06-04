@@ -14,9 +14,19 @@
 class Inspection < ActiveRecord::Base
   attr_accessible :inspection_at, :next_inspection_at
 
+
+
   belongs_to :lift
 
-  before_save :inspection_shedule
+  #after_save :inspection_shedule
+
+  #before_save :inspection_check
+
+  #def inspection_check
+   # if self.inspection_at.blank?
+    #  self.destroy
+    #end
+  #end
 
   def inspection_shedule#(last_inspect_date)
   	#self.inspection_at = Date.today

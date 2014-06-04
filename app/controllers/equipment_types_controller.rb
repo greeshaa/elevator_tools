@@ -4,6 +4,7 @@ before_filter :signed_in_user
 
   def show
     @e_type = EquipmentType.find(params[:id])
+    @e_lists = @e_type.equipment_lists.order(:manufacturer, :name)
   end
 
   def new
@@ -36,7 +37,7 @@ before_filter :signed_in_user
   end
 
   def index
-    @e_types = EquipmentType.all
+    @e_types = EquipmentType.all.order(:name)
   end
 
 end

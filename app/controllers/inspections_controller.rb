@@ -1,14 +1,36 @@
 class InspectionsController < ApplicationController
 
 	def new
-		@lift = Lift.find(params[:lift_id])	
+		@lift = Lift.find(params[:lift_id])
+		@porch  = @lift.porch
+    if @porch.nil?
+      @build_name  = 'Номер здания неизвестен' 
+      @street_name = 'Улица неизвестна'
+      @city_name   = 'Населенный пункт неизвестен'
+    else
+  	@build  = @porch.build  
+  	@street = @build.street
+    @city   = @street.city
+    @node   = @build.node
+    end
+
+		@inspection = @lift.inspections.build
+		@@inspection = @inspection
 	end
 
 	def create
-		@lift = Lift.find(params[:lift_id])
-		inspection = Inspection.new(params[:inspection])
+		@inspection = @@inspection
+		@lift = @inspection.lift
+		@inspection.update_attributes(params[:inspection])
+			next_inspect_at =  @inspection.inspection_at.next_year()
+    	if next_inspect_at.cwday == 6
+    	 	@inspection.next_inspection_at = next_inspect_at.next_day(2)
+    	elsif next_inspect_at.cwday == 7
+    		 @inspection.next_inspection_at = next_inspect_at.next_day()
+    	else
+      	@inspection.next_inspection_at = next_inspect_at
+    	end
 		if @inspection.save
-			@lift.inspections << inspection
 			okmessage = "Отметка о ТО успешно добавлена."
       flash[:success] = okmessage
       redirect_to @lift
