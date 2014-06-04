@@ -45,7 +45,7 @@ class InspectionsController < ApplicationController
 	end
 
 	def overdue_inspections
-		@inspections = Inspection.where(created_at: (Date.today - Time.now.to_a[7])..Date.today).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
+		@inspections = Inspection.where(created_at: ((Date.today - Time.now.to_a[7]).prev_year()..Date.today - Time.now.to_a[7])).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
 		render 'index'		
 	end
 end
