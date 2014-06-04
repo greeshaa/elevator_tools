@@ -87,7 +87,7 @@ before_filter :signed_in_user
   end
 
   def overdue_lifts
-    @lifts = Lift.where('introduced_at <= (2014-25)').order(:introduced_at)
+    @lifts = Lift.where('introduced_at <= ?', Date.today.year - 25 ).order(:introduced_at)
     render "index"
   end
  

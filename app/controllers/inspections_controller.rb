@@ -41,7 +41,7 @@ class InspectionsController < ApplicationController
 	end
 
 	def index
-		@inspections = Inspection.all.order(created_at: :desc)
+		@inspections = Inspection.all.order(created_at: :desc, lift_id: :asc)
 	end
 
 	def overdue_inspections
