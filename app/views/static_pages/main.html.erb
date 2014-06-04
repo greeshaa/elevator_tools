@@ -30,7 +30,38 @@
 <div class="row">
   <div class="col-md-6">
   <div class="panel panel-default">
-    <div class="panel-heading">Перемещения оборудования</div>
+    <div class="panel-heading">Лифты с истекшим сроком эксплуатации (всего: <%= link_to @lift_overdue_count, overdue_lifts_path %>)</div>
+    <div class="panel-body">
+        <% if @lift_overdue.empty? %>
+          <p class="text-info">Лифты с истекшим сроком эксплуатации нет</p>
+        <% else %>
+        <% @lift_overdue.each do |lift| %>
+            <%= link_to lift.porch.build.street.name + ', ' + lift.porch.build.name + ' - ' + lift.porch.name, lift, class: "text-danger" %> &nbsp;&nbsp;&nbsp;&nbsp;год вывода: <%= (lift.introduced_at + 25) %><br>
+        <% end %>
+        <% end %>   
+    </div>
+    </div>
+  </div>
+    <div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">Просроченные ПТО (всего: <%= link_to @inspection_overdue_count, overdue_inspections_path %>)</div>
+    <div class="panel-body">
+      <% if @inspection_overdue.empty? %>
+        <p class="text-info">Просроченных ПТО нет<br><br></p>
+        
+      <% else %>
+        <% @inspection_overdue.each do |il| %>
+          <%= link_to il.lift.porch.build.street.street_kind.name + ' ' + il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name, il.lift, class: "text-danger" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Дата ПТО по плану: <%= il.next_inspection_at.strftime("%d.%m.%Y") + ' ' %></br>
+        <% end %>
+      <% end %> 
+    </div>
+  </div>
+  </div>  
+</div>
+<div class="row">
+  <div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= link_to 'Перемещения оборудования', equipment_movements_path %></div>
     <div class="panel-body">
         <% if @equipment_movements.empty? %>
           <p class="text-info">Перемещений нет</p>
@@ -42,10 +73,10 @@
   </div>
     <div class="col-md-6">
   <div class="panel panel-default">
-    <div class="panel-heading">Ближайшие запланированные ТО</div>
+    <div class="panel-heading">Ближайшие запланированные ПТО</div>
     <div class="panel-body">
       <% if @inspection_next.empty? %>
-        <p class="text-info">На ближайшее время ТО не запланировано<br><br></p>
+        <p class="text-info">На ближайшее время ПТО не запланировано<br><br></p>
         
       <% else %>
         <% @inspection_next.each do |il| %>
@@ -83,10 +114,10 @@
   </div>
   <div class="col-md-6 offset-col-md-6">
     <div class="panel panel-default">
-      <div class="panel-heading">Недавно проведенные ТО</div>
+      <div class="panel-heading">Недавно проведенные ПТО</div>
       <div class="panel-body">
         <% if @inspection_last.empty? %>
-          <p class="text-info">В последнее время ТО не проводилось<br><br></p>
+          <p class="text-info">В последнее время ПТО не проводилось<br><br></p>
         <% else %>
           <% @inspection_last.each do |il| %>
             <%= il.inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch. build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>

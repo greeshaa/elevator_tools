@@ -85,5 +85,10 @@ before_filter :signed_in_user
     @lifts = @lift.node.lifts
     render "index"
   end
+
+  def overdue_lifts
+    @lifts = Lift.where('introduced_at <= (2014-25)').order(:introduced_at)
+    render "index"
+  end
  
 end

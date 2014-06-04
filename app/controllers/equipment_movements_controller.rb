@@ -53,6 +53,6 @@ before_filter :signed_in_user
   end
 
   def index
-    @e_moves = EquipmentMovement.paginate(:page => params[:page]).order('created_at DESC')
+    @e_moves = EquipmentMovement.order('created_at DESC')
   end
 end

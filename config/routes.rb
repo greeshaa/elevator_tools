@@ -44,6 +44,8 @@ ElevatorTools::Application.routes.draw do
   get 'equipment_broken', to: 'equipment#broken'
   get '/nodes_all',  to: 'nodes#all'
   get 'lifts_of_nodes',  to: 'lifts#lifts_of_nodes'
+  get 'overdue_lifts',  to: 'lifts#overdue_lifts'
+  get 'overdue_inspections',  to: 'inspections#overdue_inspections'
   #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'

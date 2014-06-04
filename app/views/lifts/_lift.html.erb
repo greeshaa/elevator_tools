@@ -7,27 +7,35 @@
    	</td>
   <% else %>
   	<% if lift.node.id == 1 %>
-  	<td>
-  		<div class="searchcell2">
+  	<td class="td_address">
    		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift, class: "text-muted" %>
-   		</div>
    	</td>
    	<td>
    	<%= link_to lift.node.name, lift.node, class: "text-muted" %>
    	</td>
    	<% else %>
-   	<td>
-  		<div class="searchcell2">
+   	<td class="td_address">
    		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
-   		</div>
    	</td>
    	<td>
    	<%= link_to 'УМ '  + lift.node.name, lift.node %>
    	</td>
    	<% end %>
+    <% if lift.introduced_at.nil? %>
+      <td></td>
+    <% else %>
+      <% if lift.introduced_at <= (Date.today.year - 25) %>
+      <td class="text-danger">
+        <%= lift.introduced_at + 25 %>
+      </td>
+      <% else %>
+      <td>
+        <%= lift.introduced_at + 25 %>
+      </td>
+      <% end %>
+    <% end %>
     <td>
       <%= link_to 'Отметка о ПТО', new_inspection_path + '?lift_id=' + lift.id.to_s %>
     </td>
-   	
    <% end %>
 </tr>
