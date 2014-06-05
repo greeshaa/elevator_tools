@@ -1,3 +1,4 @@
+<% @lifts.each do |lift| %>
 <tr>
 	<% if lift.porch.nil? %>
   	<td>
@@ -6,26 +7,15 @@
    	<td>
    	</td>
   <% else %>
-  	<% if lift.node.id == 1 %>
   	<td>
-   		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift, class: "text-muted" %>
-   	</td>
-   	<td>
-   	<%= link_to lift.node.name, lift.node, class: "text-muted" %>
-   	</td>
-   	<% else %>
-   	<td>
    		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
    	</td>
-    <td>
-   	<%= link_to 'УМ '  + lift.node.name, lift.node %>
-   	</td>
-   	<% end %>
     <% if lift.district.nil? %>
     <td></td>
     <% else %>
     <td><%= lift.district.name %></td>
     <% end %>
+    <td></td>
     <% if lift.mechanic.nil? %>
     <td></td>
     <% else %>
@@ -44,8 +34,7 @@
       </td>
       <% end %>
     <% end %>
-    <td>
-      <%= link_to 'Отметка о ПТО', new_inspection_path + '?lift_id=' + lift.id.to_s %>
-    </td>
    <% end %>
 </tr>
+<% end %>
+

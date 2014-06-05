@@ -56,6 +56,7 @@ before_filter :signed_in_user
       end
     end
     @equipment = @node.porch.equipment
+    @lifts = @node.lifts
   end
 
   def index
