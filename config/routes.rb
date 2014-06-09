@@ -23,6 +23,7 @@ ElevatorTools::Application.routes.draw do
   resources :equipment_move_buffer
   resources :equipment_movements
   resources :providers
+  resources :mechanics
 
 
   root :to => 'static_pages#main'

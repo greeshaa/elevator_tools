@@ -1,24 +1,28 @@
 <% provide(:title, @streetkind + ' ' + @street + ', ' + @build.name) %>
-<legend>Адреса</legend>
 <div class="row">
-  <div class="col-md-10 col-md-offset-1">
+  <div class="col-md-6 col-md-offset-3 list">
+    <%= render "address/address_search" %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 list">
     <div>
       <p class="lead"><%= @streetkind + ' ' + @street %>, <%= @build.name %></p>
     </div>
     <div>
       <% if @node.nil? %>
-        <span class="label label-warning">Дом еще не привязан к какому-либо УМ</span>
+        <span class="label label-warning">Адрес еще не привязан к какому-либо УМ</span>
       <% elsif @node.porch_id == nil %>
         <% if @node.id == 1 %>
         <span class="label label-warning">Адрес не выводится в ЦД.</span>
         <% else %>
-        <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу 
+        <p>Адрес относится к УМ <%= link_to @node.name, @node %>, который расположен по адресу 
                             <%= @node.street.name %>, <%= @node.build.name %></p>
         <span class="label label-warning">Внимание! Необходимо проверить привязку УМ к подъезду.</span>
         <% end %>
       <% else %>
-        <p>Дом относится к <%= link_to @node.name, @node %>, который расположен по адресу <%= @node.street.name %>, 
-                      <%= @node.build.name %> в <%= @node.porch.name %> <p>
+        <p class="search_result">Адрес относится к УМ <%= link_to @node.name, @node %> (<%= @node.street.street_kind.name + '' + @node.street.name %>, 
+                      <%= @node.build.name %>&nbsp;&nbsp;<%= @node.porch.name %>) <p>
       <% end %>
     </div>
     <div class="list">
@@ -49,4 +53,28 @@
           <%= link_to "Редактировать здание", edit_build_path, class: "btn btn-default" %>
     </div>
   </div>
+  <% if @equipment.empty? %>
+  <div class="col-md-6 col-md-offset-3 list">
+    <p class="lead search_result">Нет установленного оборудования</p>
+  </div>
+  <% else %>
+  <div class="col-md-6 col-md-offset-3 list">
+    <div class="panel panel-default">
+      <div class="panel-heading">Установленное оборудование</div>
+        <div class="panel-body">
+          <table class="table table-striped table-condensed">
+            <thead>
+              <td>Оборудование</td>
+              <td>Подъезд</td>
+              <td>Серийный номер</td>
+              <td>Mac адрес</td>
+            </thead>
+            <tbody>
+              <%= render "builds/equipment" %>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+  <% end %>
 </div>

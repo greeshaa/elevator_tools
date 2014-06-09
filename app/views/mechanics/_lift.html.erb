@@ -1,0 +1,42 @@
+<% @lifts.each do |lift| %>
+<tr>
+	<% if lift.porch.nil? %>
+  	<td>
+   		<span class="label label-warning">Нет информации о расположении лифта</span>
+   	</td>
+   	<td>
+   	</td>
+  <% else %>
+  	<td>
+   		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
+   	</td>
+    <% if lift.district.nil? %>
+    <td></td>
+    <% else %>
+    <td><%= lift.district.name %></td>
+    <% end %>
+    <% if lift.tlr.nil? %>
+    <td></td>
+    <% else %>
+    <td><%= lift.tlr.name %></td>
+    <% end %>
+    <td><%= lift.function %></td>
+    <td><%= lift.capacity %></td>
+    <td><%= lift.stopscount %></td>
+    <% if lift.introduced_at.nil? %>
+      <td></td>
+    <% else %>
+      <% if lift.introduced_at <= (Date.today.year - 25) %>
+      <td class="text-danger">
+        <%= lift.introduced_at + 25 %>
+      </td>
+      <% else %>
+      <td>
+        <%= lift.introduced_at + 25 %>
+      </td>
+      <% end %>
+    <% end %>
+   <% end %>
+</tr>
+<% end %>
+

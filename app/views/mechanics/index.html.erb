@@ -1,0 +1,15 @@
+<% provide(:title, 'Механики') %>
+<p class="lead">Механики</p>
+<hr>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 list">
+    <% @mechanics.each do |m| %>
+      <%= link_to m.name, m %><br>
+    <% end %>
+  </div>
+</div>

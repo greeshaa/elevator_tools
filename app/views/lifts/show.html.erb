@@ -135,7 +135,7 @@
           <% if @lift.mechanic.nil? %>
             <span class="label label-warning">Нет информации о механике</span><br>
           <% else %>
-            Механик:&nbsp;<%= @lift.mechanic.name %><br>
+            Механик:&nbsp;<%= link_to @lift.mechanic.name, @lift.mechanic %><br>
           <% end %>
           Экспертная организация:&nbsp;
           <% if @lift.expert.nil? %>

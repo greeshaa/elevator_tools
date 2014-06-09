@@ -1,0 +1,8 @@
+<% @equipment.each do |equipment| %>
+<tr>
+      <td><%= equipment.equipment_list.manufacturer + ' ' + equipment.equipment_list.name %></td>
+      <td><%= link_to equipment.porch.name, equipment.porch %></td>
+      <td><%= link_to equipment.factory_sn, equipment %></td>
+      <td></td>
+</tr>
+<% end %>

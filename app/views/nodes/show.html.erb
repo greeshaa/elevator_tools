@@ -4,7 +4,7 @@
 <% if @node.street.nil? %>
 
 <% else %>
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-10 col-md-offset-1">
     <div>
       <div class="btn-group btn-group-xs">
         <%= link_to "Все узлы", nodes_all_path, class: "btn btn-default" %>
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="list">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Основные параметры узла</div>
         <div class="panel-body">
@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <div class="">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Сетевые параметры узла</div>
         <div class="panel-body">
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div class="">
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">Конфигурация ММИ</div>
         <div class="panel-body">
@@ -105,7 +105,7 @@
         </div>
       </div>
     </div>
-    <div class="">
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">Установленное оборудование</div>
         <div class="panel-body">
@@ -122,7 +122,7 @@
         </div>
       </div>
     </div>
-    <div class="">
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">Обслуживаемые лифты</div>
         <div class="panel-body">

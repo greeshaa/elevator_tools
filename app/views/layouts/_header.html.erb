@@ -36,13 +36,13 @@
 <ul class="nav nav-tabs">
   <% if current_user.admin? or current_user.management? %> <!--- Вывод меню для администрации ---->
   <li class="<%= 'active' if params[:controller] == 'static_pages' %>">
-    <%= link_to "Главная", main_path %></li>
+    <%= link_to "Основная", main_path %></li>
   <li class="<%= 'active' if params[:controller] == 'address' or params[:controller] == 'streets' or params[:controller] == 'builds' %>"><%= link_to "Адреса", address_index_path %></li>
   <li class="<%= 'active' if params[:controller] == 'nodes' %>"><%= link_to "Узлы", nodes_path %></li>
   <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
   <li class="<%= 'active' if params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == 'equipment_lists' %>"><%= link_to "Оборудование", equipment_index_path %></li>
+  <li class="<%= 'active' if params[:controller] == 'mechanics' %>"><%= link_to "Механики", mechanics_path %></li>
   <li class="disabled"><%= link_to "Договора", '#' %></li>
-  <li class="disabled"><%= link_to "Механики", '#' %></li>
   
   <% else %> <!--- Вывод меню для всех остальных ---->
     <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>">
@@ -56,7 +56,7 @@
 <!--- Меню контроллеров ---->
 <% if params[:controller] == 'static_pages'%>
 <ul class="nav nav-tabs-inverted pull-right pdr">
-  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>"><%= link_to "Основная", main_path %></li>
+  <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>"><%= link_to "Сводка", main_path %></li>
   <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'statistics') %>"><%= link_to "Статистика", statistics_path %></li>
   <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook') %>"><%= link_to "Справочник", handbook_path %></li>
   <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'about') %>">
