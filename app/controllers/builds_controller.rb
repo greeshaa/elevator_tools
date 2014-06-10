@@ -13,7 +13,11 @@ before_filter :signed_in_user
     @streetkind = @build.street.street_kind.full_name
     @porches    = @build.porches
     @streets    = @build.street.id.to_s
-    @node       = @lifts.first.node
+    if @lifts.empty?
+      @node     = Node.find_by_id('2')
+    else
+      @node     = @lifts.first.node
+    end
     @equipment  = []
     @porches.each do |porch|
       equipment = porch.equipment.order(:equipment_list_id)
