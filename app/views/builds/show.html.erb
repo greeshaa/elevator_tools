@@ -11,18 +11,14 @@
     </div>
     <div>
       <% if @node.nil? %>
-        <span class="label label-warning">Адрес еще не привязан к какому-либо УМ</span>
-      <% elsif @node.porch_id == nil %>
-        <% if @node.id == 1 %>
-        <span class="label label-warning">Адрес не выводится в ЦД.</span>
-        <% else %>
-        <p>Адрес относится к УМ <%= link_to @node.name, @node %>, который расположен по адресу 
-                            <%= @node.street.name %>, <%= @node.build.name %></p>
-        <span class="label label-warning">Внимание! Необходимо проверить привязку УМ к подъезду.</span>
-        <% end %>
+        <p class="lead text-warning search_result">Адрес еще не привязан к какому-либо УМ</p>
       <% else %>
-        <p class="search_result">Адрес относится к УМ <%= link_to @node.name, @node %> (<%= @node.street.street_kind.name + '' + @node.street.name %>, 
+        <% if @node.id == 1 %>
+          <p class="lead text-warning search_result">Адрес не выводится в ЦД.</p>
+        <% else %>
+          <p class="search_result">Адрес относится к УМ <%= link_to @node.name, @node %> (<%= @node.street.street_kind.name + '' + @node.street.name %>, 
                       <%= @node.build.name %>&nbsp;&nbsp;<%= @node.porch.name %>) <p>
+        <% end %>
       <% end %>
     </div>
     <div class="list">
