@@ -6,7 +6,7 @@ before_filter :signed_in_user
   	@equipment_movements      = EquipmentMovement.order(created_at: :desc).first(3)
   	@nodes_last 		 		      = Node.order(created_at: :desc).first(3)
   	inspection_last           = Inspection.where(created_at: (Date.today - 7.day)..Date.today + 1.day)
-    @inspection_last          = inspection_last.last(3).order(:created_at)
+    @inspection_last          = inspection_last.order(created_at: :desc).first(3)
     @inspection_last_count    = inspection_last.count
   	inspection_next           = Inspection.where(next_inspection_at: Date.today..(Date.today + 7.day))
     @inspection_next          = inspection_next.first(3)
