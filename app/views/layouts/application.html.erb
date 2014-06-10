@@ -9,7 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class='<%= controller.controller_name %>'>
-
+<% if Rails.env.development? %>
+<h1 align="center">Rails.env.development</h1>
+<% end %>
 <%= render 'layouts/header' %>
 <div class="maincontainer">
 <% flash.each do |key, value| %>

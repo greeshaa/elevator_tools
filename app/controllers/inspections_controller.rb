@@ -34,7 +34,7 @@ class InspectionsController < ApplicationController
       	@inspection.next_inspection_at = next_inspect_at
     	end
 		if @inspection.save
-			@@lastinspection.update_attributes(active: false)
+			@@lastinspection.update_attributes(active: false) if @@lastinspection != nil
 			okmessage = "Отметка о ТО успешно добавлена."
       flash[:success] = okmessage
       redirect_to @lift
