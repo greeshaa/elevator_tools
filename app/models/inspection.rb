@@ -12,13 +12,13 @@
 
 # -*- encoding : utf-8 -*-
 class Inspection < ActiveRecord::Base
-  attr_accessible :inspection_at, :next_inspection_at, :active
+  attr_accessible :inspection_at, :next_inspection_at, :active, :lift_id
 
 
 
   belongs_to :lift
 
-  #after_save :inspection_shedule
+  before_save :inspection_shedule
 
   #before_save :inspection_check
 
@@ -30,13 +30,16 @@ class Inspection < ActiveRecord::Base
 
   def inspection_shedule#(last_inspect_date)
   	#self.inspection_at = Date.today
-    next_inspect_at = self.inspection_at.next_year()
-    if next_inspect_at.cwday == 6
-    	self.next_inspection_at = next_inspect_at.next_day(2)
-    elsif next_inspect_at.cwday == 7
-    	self.next_inspection_at = next_inspect_at.next_day()
+    if self.inspection_at.nil?
     else
-     self.next_inspection_at = next_inspect_at
+      next_inspect_at = self.inspection_at.next_year()
+      if next_inspect_at.cwday == 6
+      	self.next_inspection_at = next_inspect_at.next_day(2)
+      elsif next_inspect_at.cwday == 7
+      	self.next_inspection_at = next_inspect_at.next_day()
+      else
+       self.next_inspection_at = next_inspect_at
+      end
     end
   end
 end

@@ -48,8 +48,18 @@ class InspectionsController < ApplicationController
 		@inspections = Inspection.all.order(created_at: :desc, lift_id: :asc)
 	end
 
-	def overdue_inspections
+	def overdue
 		@inspections = Inspection.where(active: true).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
 		render 'index'		
+	end
+
+	def next
+		@inspections = Inspection.where(next_inspection_at: Date.today..(Date.today + 7.day)).order(:next_inspection_at)
+		render 'index'
+	end
+
+	def last
+		@inspections = Inspection.where(created_at: (Date.today - 7.day)..Date.today + 1.day).order(:created_at)
+		render 'index'
 	end
 end

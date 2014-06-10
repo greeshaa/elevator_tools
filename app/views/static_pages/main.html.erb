@@ -73,7 +73,7 @@
   </div>
     <div class="col-md-6">
   <div class="panel panel-default">
-    <div class="panel-heading">Ближайшие запланированные ПТО</div>
+    <div class="panel-heading">Ближайшие запланированные ПТО (всего: <%= link_to @inspection_next_count, next_inspections_path %>)</div>
     <div class="panel-body">
       <% if @inspection_next.empty? %>
         <p class="text-info">На ближайшее время ПТО не запланировано<br><br></p>
@@ -114,10 +114,10 @@
   </div>
   <div class="col-md-6 offset-col-md-6">
     <div class="panel panel-default">
-      <div class="panel-heading">Недавно проведенные ПТО</div>
+      <div class="panel-heading">Последние отметки о ПТО (всего: <%= link_to @inspection_last_count, last_inspections_path %>)</div>
       <div class="panel-body">
         <% if @inspection_last.empty? %>
-          <p class="text-info">В последнее время ПТО не проводилось<br><br></p>
+          <p class="text-info">Нет информации об отметках ПТО за прошедшую неделю<br><br></p>
         <% else %>
           <% @inspection_last.each do |il| %>
             <%= il.inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch. build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
