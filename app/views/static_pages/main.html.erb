@@ -120,7 +120,7 @@
           <p class="text-info">Нет информации об отметках ПТО за прошедшую неделю<br><br></p>
         <% else %>
           <% @inspection_last.each do |il| %>
-            <%= il.inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch. build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
+            <%= il.created_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch. build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name + ' дата ПТО: ' + il.inspection_at.strftime("%d.%m.%Y") %></br>
           <% end %> 
         <% end %> 
       </div>
