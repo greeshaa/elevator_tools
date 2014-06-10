@@ -12,7 +12,7 @@
 
 # -*- encoding : utf-8 -*-
 class Inspection < ActiveRecord::Base
-  attr_accessible :inspection_at, :next_inspection_at
+  attr_accessible :inspection_at, :next_inspection_at, :active
 
 
 

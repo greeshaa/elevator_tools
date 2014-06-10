@@ -14,6 +14,8 @@ class InspectionsController < ApplicationController
     @node   = @build.node
     end
 
+    @@lastinspection = @lift.inspections.last
+
 		@inspection = @lift.inspections.build
 		@@inspection = @inspection
 	end
@@ -21,6 +23,7 @@ class InspectionsController < ApplicationController
 	def create
 		@inspection = @@inspection
 		@lift = @inspection.lift
+
 		@inspection.update_attributes(params[:inspection])
 			next_inspect_at =  @inspection.inspection_at.next_year()
     	if next_inspect_at.cwday == 6
@@ -31,6 +34,7 @@ class InspectionsController < ApplicationController
       	@inspection.next_inspection_at = next_inspect_at
     	end
 		if @inspection.save
+			@@lastinspection.update_attributes(active: false)
 			okmessage = "Отметка о ТО успешно добавлена."
       flash[:success] = okmessage
       redirect_to @lift
@@ -45,7 +49,7 @@ class InspectionsController < ApplicationController
 	end
 
 	def overdue_inspections
-		@inspections = Inspection.where(created_at: ((Date.today - Time.now.to_a[7]).prev_year()..Date.today - Time.now.to_a[7])).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
+		@inspections = Inspection.where(active: true).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
 		render 'index'		
 	end
 end

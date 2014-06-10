@@ -50,6 +50,7 @@ ElevatorTools::Application.routes.draw do
   #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'
+  get '/district', to: 'address#district'
   get '/add_street',  to: 'streets#new'
   get '/list_street',  to: 'streets#list'
   get '/add_build',  to: 'builds#new'

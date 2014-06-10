@@ -67,6 +67,7 @@
 <ul class="nav nav-tabs-inverted pull-right pdr">
   <li class="<%= 'active' if (params[:controller] == 'streets'  and params[:action] == 'index') %>"><%= link_to "Все улицы",  streets_path  %></li>
   <li class="<%= 'active' if (params[:controller] == 'address'  and params[:action] == 'list') %>"><%= link_to "Все адреса", address_list_path %></li>
+  <li class="<%= 'active' if (params[:controller] == 'address'  and params[:action] == 'district') %>"><%= link_to "Районы", district_path %></li>
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
       + <span class="caret"></span>

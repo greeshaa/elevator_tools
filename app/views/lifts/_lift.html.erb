@@ -29,7 +29,7 @@
     <% if lift.mechanic.nil? %>
     <td></td>
     <% else %>
-    <td><%= lift.mechanic.name %></td>
+    <td><%= link_to lift.mechanic.name, lift.mechanic %></td>
     <% end %>
     <% if lift.introduced_at.nil? %>
       <td></td>

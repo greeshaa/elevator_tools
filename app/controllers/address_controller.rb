@@ -39,4 +39,8 @@ before_filter :signed_in_user
         end
     render 'index'
   end
+
+  def district
+    @districts = District.all.order(:name)    
+  end
 end
