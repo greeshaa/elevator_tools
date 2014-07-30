@@ -1,0 +1,46 @@
+<% @count =+1 %>
+<% @tsm.each do |tsm| %>
+<tr>
+  <td>
+    <%= @count %>
+    <% @count = @count + 1%>
+  </td>
+  <% if tsm.lift.porch.nil? %>
+    <td>
+      <span class="label label-warning">Нет информации о расположении лифта</span>
+    </td>
+    <td>
+    </td>
+  <% else %>
+    <td>
+      <%= link_to tsm.lift.porch.build.street.name + ', '  + tsm.lift.porch.build.name + ' - '  + tsm.lift.porch.name, tsm.lift %>
+    </td>
+    <% if tsm.lift.district.nil? %>
+    <td></td>
+    <% else %>
+    <td><%= tsm.lift.district.name %></td>
+    <% end %>
+    <% if tsm.lift.tlr.nil? %>
+    <td></td>
+    <% else %>
+    <td><%= tsm.lift.tlr.name %></td>
+    <% end %>
+    <td><%= tsm.lift.function %></td>
+    <td><%= tsm.lift.capacity %></td>
+    <td><%= tsm.lift.stopscount %></td>
+    <% if tsm.lift.introduced_at.nil? %>
+      <td></td>
+    <% else %>
+      <% if tsm.lift.introduced_at <= (Date.today.year - 25) %>
+      <td class="text-danger">
+        <%= tsm.lift.introduced_at + 25 %>
+      </td>
+      <% else %>
+      <td>
+        <%= tsm.lift.introduced_at + 25 %>
+      </td>
+      <% end %>
+    <% end %>
+   <% end %>
+</tr>
+<% end %>

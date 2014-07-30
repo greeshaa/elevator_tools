@@ -16,9 +16,18 @@ before_filter :signed_in_user
     @city   = @street.city
     @node   = @build.node
     end
+
     if @lift.introduced_at.nil?
     else
       @date_of_decommiss = @lift.introduced_at + @lift.standart_life
+    end
+
+    if @lift.temp_serv_meches.empty?
+    else
+    @temp_serv_mech = @lift.temp_serv_meches.last.mechanic  
+    @temp_serv_mech_name = @temp_serv_mech.name
+    @temp_serv_time = ("(c " + @lift.temp_serv_meches.last.start_at.strftime("%d.%m.%Y") + 
+                      " по " + @lift.temp_serv_meches.last.end_at.strftime("%d.%m.%Y") + ")")
     end
 
   end
@@ -89,6 +98,18 @@ before_filter :signed_in_user
   def overdue_lifts
     @lifts = Lift.where('introduced_at <= ?', Date.today.year - 25 ).order(:introduced_at)
     render "index"
+  end
+
+  def move
+    @mechanic = Mechanic.find(params[:mechanic_id])
+    if params[:temporary] == "1"
+      Lift.where(:id => params[:lift_ids]).each do |lift|
+        TempServMech.create(lift_id: lift.id, mechanic_id: params[:mechanic_id], start_at: params[:start_at], end_at: params[:end_at])
+      end
+    else
+      Lift.update_all(["mechanic_id=?", params[:mechanic_id]], :id => params[:lift_ids])
+    end
+    redirect_to @mechanic
   end
  
 end

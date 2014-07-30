@@ -39,6 +39,7 @@ before_filter :signed_in_user
 
   def show
     @node = Node.find(params[:id])
+    @klsh = @node.porch.equipment.where("equipment_list_id = ?", 13)
     if @node.id == 1
       @node_name = @node.name
     else

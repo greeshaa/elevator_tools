@@ -18,8 +18,8 @@
   <%= form_for @inspection do |f| %>
 
   <fieldset>
-    <div class="form-group">
-      <%= date_select :inspection, :inspection_at %>
+    <div class="input-daterange input-group" >
+      <%= text_field_tag :inspection_at, nil, class: "input-sm form-control" %>
     </div>
 
     <%= f.submit "Добавить", class: "btn btn-default btn-sm pull-right" %>

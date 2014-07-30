@@ -31,16 +31,16 @@
       </div>
       <div class="form-group">
         <%= f.label :street_id, "Улица:" %>
-        <%= f.collection_select :street_id, Street.order(:name), :id, :name, {}, {class: "form-control input-sm"} %>
+        <%= f.collection_select :street_id, Street.order(:name), :id, :name, {prompt:'Укажите улицу'}, {class: "form-control input-sm"} %>
       </div>
       <div class="form-group">
         <%= f.label :build_id, "Здание:" %>
-        <%= f.grouped_collection_select(:build_id, Street.order(:name), :builds, :name, :id, :name, {}, html_options = {prompt: 
+        <%= f.grouped_collection_select(:build_id, Street.order(:name), :builds, :name, :id, :name, {prompt:'Укажите здание'}, html_options = {prompt: 
           'Выберите здание...', class: "form-control input-sm"}) %>
       </div>
       <div class="form-group">
         <%= f.label :porch_id, "Подъезд:" %>
-        <%= f.grouped_collection_select(:porch_id, Build.order(:name), :porches, :name, :id, :name, {}, html_options = {prompt: 
+        <%= f.grouped_collection_select(:porch_id, Build.order(:name), :porches, :name, :id, :name, {prompt:'Укажите подъезд'}, html_options = {prompt: 
           'Выберите подъезд...', class: "form-control input-sm"}) %>
       </div>
       <%= f.submit "Переместить", class: "pull-right btn btn-default btn-xs" %>   

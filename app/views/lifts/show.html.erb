@@ -135,7 +135,11 @@
           <% if @lift.mechanic.nil? %>
             <span class="label label-warning">Нет информации о механике</span><br>
           <% else %>
-            Механик:&nbsp;<%= link_to @lift.mechanic.name, @lift.mechanic %><br>
+            Линейный механик:&nbsp;<%= link_to @lift.mechanic.name, @lift.mechanic %><br>
+          <% end %>
+          <% if @lift.temp_serv_meches.empty? %>
+          <% else %>
+            Замещающий механик:&nbsp; <%= link_to @temp_serv_mech_name, @temp_serv_mech %> <%= @temp_serv_time  %><br>
           <% end %>
           Экспертная организация:&nbsp;
           <% if @lift.expert.nil? %>

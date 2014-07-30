@@ -1,0 +1,30 @@
+<% @liftsooo.each do |lift| %>
+<tr>
+  <% if lift.porch.nil? %>
+    <td>
+      <span class="label label-warning">Нет информации о расположении лифта</span>
+    </td>
+    <td>
+    </td>
+  <% else %>
+    <td>
+      <%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
+    </td>
+    <td><%= lift.function %></td>
+    <td><%= lift.capacity %></td>
+    <td><%= lift.stopscount %></td>
+    <% if lift.price.nil? %>
+      <td></td>
+    <% else %>
+      <td>
+        <%= lift.price.cost %><i class="fa fa-rub"></i>
+      </td>
+    <% end %>
+   <% end %>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+</tr>
+<% end %>

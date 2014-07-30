@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610055539) do
+ActiveRecord::Schema.define(version: 20140724041510) do
 
   create_table "builds", force: true do |t|
     t.string   "name"
@@ -108,6 +108,13 @@ ActiveRecord::Schema.define(version: 20140610055539) do
     t.datetime "updated_at"
   end
 
+  create_table "foremen", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "inspections", force: true do |t|
     t.integer  "lift_id"
     t.date     "inspection_at"
@@ -170,6 +177,7 @@ ActiveRecord::Schema.define(version: 20140610055539) do
     t.integer  "district_id"
     t.string   "service_payment"
     t.integer  "expert_id"
+    t.integer  "price_id"
   end
 
   create_table "manufacturers", force: true do |t|
@@ -184,6 +192,7 @@ ActiveRecord::Schema.define(version: 20140610055539) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "foreman_id"
   end
 
   create_table "nodes", force: true do |t|
@@ -211,6 +220,14 @@ ActiveRecord::Schema.define(version: 20140610055539) do
     t.datetime "updated_at"
   end
 
+  create_table "prices", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.decimal  "cost",        precision: 5, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "providers", force: true do |t|
     t.string   "name"
     t.string   "phone"
@@ -234,6 +251,15 @@ ActiveRecord::Schema.define(version: 20140610055539) do
     t.datetime "updated_at"
     t.integer  "city_id"
     t.integer  "street_kind_id"
+  end
+
+  create_table "temp_serv_meches", force: true do |t|
+    t.integer  "lift_id"
+    t.integer  "mechanic_id"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tlrs", force: true do |t|

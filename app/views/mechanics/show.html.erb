@@ -1,38 +1,112 @@
 <% provide(:title, 'Механики') %>
-<p class="lead"><%= @mechanic.name %></p>
+<div class="row">
+  <div class="col-md-4 col-md-offset-1">
+    <p class="lead"><%= @mechanic.name %></p>
+    <% if @mechanic.foreman.nil? %>
+    <% else %>
+    <p>Прораб: <%= @mechanic.foreman.user.runame %></p>
+    <% end %>
+    <%= link_to "Изменить данные", edit_mechanic_path %>
+  </div>
+  <div class="col-md-2">
+    <table class="table table-striped table-condensed search_result">
+      <tr>
+        <td colspan=2></td>
+        <td>Собственные</td>
+        <td>Временные</td>
+      </tr>
+      <tr>
+        <td>Всего:</td>
+        <td><%= @allliftsum %></td>
+        <td><%= @lcount %></td>
+        <td><%= @templiftcount %></td>
+      </tr>
+      <tr>
+        <td>ООО</td>
+        <td><%= @oliftsum %></td>
+        <td><%= @olcount %> </td>
+        <td><%= @otempliftcount %></td>
+      </tr>
+      <tr>
+        <td>ЗАО</td>
+        <td><%= @zliftsum %></td>
+        <td><%= @zlcount %></td>
+        <td><%= @ztempliftcount %></td>
+      </tr>
+    </table>
+  </div>
+</div>
 <hr>
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-  	<div class="panel panel-default">
-        <div class="panel-heading">Сводка</div>
-        <div class="panel-body">
-          Всего лифтов: <%= @lcount %><br>
-          Лифтов ЗАО: <%= @zlcount %><br>
-          Лифтов ООО: <%= @olcount %><br>
-        </div>
-      </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-  	<div class="panel panel-default">
-        <div class="panel-heading">Список закрепленных лифтов</div>
+    <%= form_tag move_lifts_path, :method => :put, html: {class:"form-horizontal"} do %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Список закрепленных лифтов.</div>
         <div class="panel-body">
           <table class="table table-striped table-condensed">
             <thead>
-              <td>Адрес</td>
-              <td>Район</td>
-              <td>ТЛР</td>
-              <td>Тип</td>
-              <td>Груз-сть</td>
-              <td>Остановок</td>
-              <td>Дата вывода</td>
+              <tr>
+                <td></td>
+                <td>Адрес</td>
+                <td>Район</td>
+                <td>ТЛР</td>
+                <td>Тип</td>
+                <td>Груз-сть</td>
+                <td>Остановок</td>
+                <td>Дата вывода</td>
+              </tr>
             </thead>
+            <fieldset>
             <tbody>
               <%= render "mechanics/lift" %>
             </tbody>
           </table>
+          <% if @tsm.empty? %>
+          <% else %>
+          <table class="table table-striped table-condensed">
+            <caption>Временно обслуживаемые</caption>
+            <thead>
+              <tr>
+                <td></td>
+                <td>Адрес</td>
+                <td>Район</td>
+                <td>ТЛР</td>
+                <td>Тип</td>
+                <td>Груз-сть</td>
+                <td>Остановок</td>
+                <td>Дата вывода</td>
+              </tr>
+            </thead>
+              <%= render "mechanics/templift" %>
+            <tbody>
+            </tbody>
+          </table>
+          <% end %>
+          <div class="">
+            <div class="form-group">
+              <%= label_tag :mechanic_id, "Закрепить за", class:"col-md-2 control-label" %>
+              <div class="col-md-4">
+                <%= select_tag(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {class: "form-control  input-sm"} ) %>
+                <div class="checkbox">
+                  <label>
+                    <%= check_box_tag 'temporary' %> Временно
+                  </label>
+                </div>
+              </div>
+              <div class="input-daterange form-group input-group col-md-4" id="datepicker">
+                <span class="input-group-addon">&ensp;&ensp;с</span>
+                  <%= text_field_tag :start_at, nil, class: "input-sm form-control" %>
+                <span class="input-group-addon">по</span>
+                  <%= text_field_tag :end_at, nil, class: "input-sm form-control" %>
+              </div>
+              <div class="form-group col-md-2">
+                <%= submit_tag "Сохранить", method: :put, data: { confirm: "Выбранные лифты будут закреплены. Вы уверены?" }, class:   "btn btn-primary btn-sm" %>
+              </div>
+            </div>
+          </div>
+          </fieldset>
         </div>
       </div>
+    <% end %>
   </div>
 </div>

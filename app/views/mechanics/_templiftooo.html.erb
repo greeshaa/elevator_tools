@@ -1,8 +1,5 @@
-<% @lifts.each do |lift| %>
+<% @templiftsooo.each do |lift| %>
 <tr>
-  <td>
-    <%= check_box_tag 'lift_ids[]', lift.id %>
-  </td>
   <% if lift.porch.nil? %>
     <td>
       <span class="label label-warning">Нет информации о расположении лифта</span>
@@ -13,16 +10,6 @@
     <td>
       <%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
     </td>
-    <% if lift.district.nil? %>
-    <td></td>
-    <% else %>
-    <td><%= lift.district.name %></td>
-    <% end %>
-    <% if lift.tlr.nil? %>
-    <td></td>
-    <% else %>
-    <td><%= lift.tlr.name %></td>
-    <% end %>
     <td><%= lift.function %></td>
     <td><%= lift.capacity %></td>
     <td><%= lift.stopscount %></td>
@@ -40,5 +27,10 @@
       <% end %>
     <% end %>
    <% end %>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
 </tr>
 <% end %>

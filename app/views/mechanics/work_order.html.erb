@@ -1,0 +1,161 @@
+<% provide(:title, 'Расчет ЗП') %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-1">
+    <p class="lead">Расчет ЗП <%= @mechanic.name %></p>
+    <% if @mechanic.foreman.nil? %>
+    <% else %>
+    <p>Прораб: <%= @mechanic.foreman.user.runame %></p>
+    <% end %>
+  </div>
+  <div class="col-md-2">
+    <table class="table table-striped table-condensed search_result">
+      <tr>
+        <td colspan=2></td>
+        <td>Собственные</td>
+        <td>Временные</td>
+      </tr>
+      <tr>
+        <td>Всего:</td>
+        <td><%= @allliftsum %></td>
+        <td><%= @lcount %></td>
+        <td><%= @templiftcount %></td>
+      </tr>
+      <tr>
+        <td>ООО</td>
+        <td><%= @oliftsum %></td>
+        <td><%= @olcount %> </td>
+        <td><%= @otempliftcount %></td>
+      </tr>
+      <tr>
+        <td>ЗАО</td>
+        <td><%= @zliftsum %></td>
+        <td><%= @zlcount %></td>
+        <td><%= @ztempliftcount %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">Список собственных лифтов</div>
+        <div class="panel-body">
+          <div class="panel panel-default">
+            <div class="panel-heading">ЗАО</div>
+              <div class="panel-body">
+                <table class="table table-striped table-condensed">
+                  <thead>
+                    <tr>
+                      <td>Адрес</td>
+                      <td>Тип</td>
+                      <td>ГП</td>
+                      <td>Ост.</td>
+                      <td>Цена</td>
+                      <td>Отработано</td>
+                      <td>Начислено</td>
+                      <td>Простои</td>
+                      <td>Удержано</td>
+                      <td>Итог</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%= render "mechanics/liftzao" %>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+          <% if @liftsooo.empty? %>
+          <% else %>
+          <div class="panel panel-default">
+            <div class="panel-heading">ООО</div>
+              <div class="panel-body">
+                <table class="table table-striped table-condensed">
+                  <thead>
+                    <tr>
+                      <td>Адрес</td>
+                      <td>Тип</td>
+                      <td>ГП</td>
+                      <td>Ост.</td>
+                      <td>Цена</td>
+                      <td>Отработано</td>
+                      <td>Начислено</td>
+                      <td>Простои</td>
+                      <td>Удержано</td>
+                      <td>Итог</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%= render "mechanics/liftooo" %>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>
+<% if @tsm.empty? %>
+<% else %>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">Список временно обслуживаемых лифтов</div>
+        <div class="panel-body">
+          <div class="panel panel-default">
+            <div class="panel-heading">ЗАО</div>
+              <div class="panel-body">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                      <tr>
+                        <td>Адрес</td>
+                        <td>Тип</td>
+                        <td>ГП</td>
+                        <td>Ост.</td>
+                        <td>Цена</td>
+                        <td>Отработано</td>
+                        <td>Начислено</td>
+                        <td>Простои</td>
+                        <td>Удержано</td>
+                        <td>Итог</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%= render "mechanics/templiftzao" %>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+          <% if @templiftsooo.empty? %>
+          <% else %>
+          <div class="panel panel-default">
+            <div class="panel-heading">ООО</div>
+              <div class="panel-body">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                      <tr>
+                        <td>Адрес</td>
+                        <td>Тип</td>
+                        <td>ГП</td>
+                        <td>Ост.</td>
+                        <td>Цена</td>
+                        <td>Отработано</td>
+                        <td>Начислено</td>
+                        <td>Простои</td>
+                        <td>Удержано</td>
+                        <td>Итог</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%= render "mechanics/templiftooo" %>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+  </div>
+</div>
+<% end %>

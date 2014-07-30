@@ -8,23 +8,22 @@ class InspectionsController < ApplicationController
       @street_name = 'Улица неизвестна'
       @city_name   = 'Населенный пункт неизвестен'
     else
-  	@build  = @porch.build  
-  	@street = @build.street
-    @city   = @street.city
-    @node   = @build.node
+  		@build  = @porch.build  
+  		@street = @build.street
+    	@city   = @street.city
+    	@node   = @build.node
     end
-
     @@lastinspection = @lift.inspections.last
-
-		@inspection = @lift.inspections.build
-		@@inspection = @inspection
+		@inspection = @@inspection = @lift.inspections.build
+		
 	end
 
 	def create
+		
 		@inspection = @@inspection
 		@lift = @inspection.lift
 
-		@inspection.update_attributes(params[:inspection])
+		@inspection.update_attributes(inspection_at: params[:inspection_at])
 			next_inspect_at =  @inspection.inspection_at.next_year()
     	if next_inspect_at.cwday == 6
     	 	@inspection.next_inspection_at = next_inspect_at.next_day(2)

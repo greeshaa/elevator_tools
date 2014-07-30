@@ -5,32 +5,29 @@
 
 <% else %>
 <div class="col-md-10 col-md-offset-1">
-    <div>
-      <div class="btn-group btn-group-xs">
-        <%= link_to "Все узлы", nodes_all_path, class: "btn btn-default" %>
-        <div class="btn-group btn-group-xs">
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Изменить
-          <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Узел",         edit_node_path %></li>
-            <% if @ipa.empty? %>
-            <li><%= link_to "Добавить ip-адрес",     new_node_ip_address_path(@node)  %></li>
-            <% else %>
-            <% @ipa.each do |ipa| %>
-            <li><%= link_to ipa.name + " ip-адрес",     edit_ip_address_path(ipa)  %></li>
-            <% end %>
-            <li><%= link_to "Добавить ip-адрес",     new_node_ip_address_path(@node)  %></li>
-            <% end %>
-            <li><%= link_to "Оборудование", '#' %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+
 
     <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Основные параметры узла</div>
+        <div class="panel-heading">Основные параметры узла
+          <div class="btn-group btn-group-xs pull-right">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle " data-toggle="dropdown">Изменить
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Узел",         edit_node_path %></li>
+              <% if @ipa.empty? %>
+              <li><%= link_to "Добавить ip-адрес",     new_node_ip_address_path(@node)  %></li>
+              <% else %>
+              <% @ipa.each do |ipa| %>
+              <li><%= link_to ipa.name + " ip-адрес",     edit_ip_address_path(ipa)  %></li>
+              <% end %>
+              <li><%= link_to "Добавить ip-адрес",     new_node_ip_address_path(@node)  %></li>
+              <% end %>
+              <li><%= link_to "Оборудование", '#' %></li>
+            </ul>
+          </div>
+        </div>
         <div class="panel-body">
           Расположение оборудования: <%= @node.description %><br>
           Количество обслуживаемых лифтов: <%= @node.lifts.count %> <br>
@@ -56,7 +53,7 @@
       </div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Конфигурация ММИ</div>
         <div class="panel-body">
@@ -64,48 +61,27 @@
             <thead>
               <td class="col-sm-2">№ слота</td>
               <td>Устройство</td>
-              <td>Описание ЛШ</td>
+              <td>Свободно адресов на ЛШ</td>
             </thead>
+            <% n = 1 %>
+            <% @klsh.each do |klsh| %>
             <tr>
-              <td>1</td>
-              <td></td>
+              <td><%= 7 - n %></td>
+              <td><%= klsh.equipment_list.name %></td>
               <td></td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td></td>
-              <td></td>
-             </tr>
-            <tr>
-              <td>5</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td></td>
-              <td></td>
-            </tr>
+            <% n =+1 %>
+            <% end %>
             <tr>
               <td>7</td>
-              <td></td>
+              <td>КСЛ-Eth</td>
               <td></td>
             </tr>  
           </table>
         </div>
       </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Установленное оборудование</div>
         <div class="panel-body">

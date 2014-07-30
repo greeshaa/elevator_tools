@@ -19,6 +19,8 @@ before_filter :signed_in_user
   end
 
   def create
+    @city = City.all
+    @streetkind = StreetKind.all
     @street = Street.new(params[:street])
     if @street.save
     	okmessage = @street.street_kind.full_name + ' ' + @street.name + " успешно добавлен(а)."
