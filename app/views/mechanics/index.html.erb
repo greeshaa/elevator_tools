@@ -6,10 +6,16 @@
     <table class="table table-striped table-condensed">
       <thead>
         <tr>
-          <th>Механик</th>
-          <th>Количество лифтов</th>
-          <th></th>
-          <th></th>
+          <th rowspan="2">Механик</th>
+          <th colspan="4">Количество лифтов</th>
+          <th rowspan="2">Прораб</th>
+          <th colspan="2" rowspan="2"></th>
+        </tr>
+        <tr>
+          <th>Всего</th>
+          <th>ЗАО</th>
+          <th>ООО</th>
+          <th>Временно</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +23,14 @@
         <tr>
           <td><%= link_to m.name, m %></td>
           <td><%= m.lifts.count %></td>
+          <td><%= m.lifts.where('tlr_id = ?', 1).count %></td>
+          <td><%= m.lifts.where('tlr_id = ?', 2).count %></td>
+          <td><%= m.temp_serv_meches.where("start_at <? AND end_at >?", Time.now, Time.now).count %></td>
+          <% if m.foreman.nil? %>
+            <td></td>
+          <% else %>
+            <td><%= m.foreman.user.runame %></td>
+          <% end %>
           <td><%= link_to "Изменить", edit_mechanic_path(m), class:"text-muted" %></td>
           <% if current_user.admin? %>
             <td><%= link_to "Удалить", m, method: :delete, data: { confirm: "Вы уверены?" }, class:"text-muted" %></td>
