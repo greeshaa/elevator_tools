@@ -10,7 +10,7 @@
 #
 
 class Mechanic < ActiveRecord::Base
-  attr_accessible :name, :foremen_id
+  attr_accessible :name, :foreman_id
   validates :name, presence: true, length: { minimum: 7, maximum: 24 }, uniqueness: true
   validates :foremen_id, presence: true
   #before_save { name.capitalize! }
