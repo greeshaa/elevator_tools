@@ -29,8 +29,9 @@
           </div>
         </div>
         <div class="panel-body">
-          Расположение оборудования: <%= @node.description %><br>
-          Количество обслуживаемых лифтов: <%= @node.lifts.count %> <br>
+          Расположение: <%= @node.description %><br>
+          Обслуживает <%= @node.lifts.count %> лифтов <br>
+          Свободно <%= 64 - @node.lifts.count %> адресов <br>
         </div>
       </div>
     </div>

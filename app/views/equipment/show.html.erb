@@ -13,12 +13,8 @@
         <td><%= @equipment.installed_at.strftime("%d.%m.%Y") %></td>
       </tr>
       <tr>
-        <td>Расположение</td>
-       <td><%= @equipment.porch.name %></td>
-      </tr>
-      <tr>
        <td>Адрес</td>
-       <td><%= "ул. " + @equipment.porch.build.street.name + ", д. " +   @equipment.porch.build.name %></td>
+       <td><%= "ул. " + @equipment.porch.build.street.name + ", д. " +   @equipment.porch.build.name %> ( <%= @equipment.porch.name %> ) </td>
       </tr>
      <tr>
         <td>Категория</td>
@@ -34,7 +30,7 @@
     <div class="btn-group btn-group-xs">
       <%= link_to "Показать все #{@equipment.equipment_list.manufacturer} #{@equipment.equipment_list.name}", equipment_list_path(@equipment.equipment_list.id), class: "btn btn-default" %>
       <%= link_to "Изменить данные устройства", edit_equipment_path, class: "btn btn-default" %>
-      <%= button_to "Переместить устройство", equipment_line_items_path(equipment_id: @equipment), class: "btn btn-default" %>
+      <%= button_to "Переместить устройство", equipment_line_items_path(equipment_id: @equipment), class: "btn btn-default btn-xs" %>
     </div>
   </div>
 </div>
