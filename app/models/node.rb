@@ -32,6 +32,10 @@ class Node < ActiveRecord::Base
   accepts_nested_attributes_for :ip_addresses
   accepts_nested_attributes_for :equipment
 
+  def self.order_by_name
+    order('name DESC').sort
+  end
+
   def self.search(search)
     if search
       find(:all, :conditions => ['name LIKE ?', "%#{search}%"])

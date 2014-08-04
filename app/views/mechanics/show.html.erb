@@ -6,7 +6,9 @@
     <% else %>
     <p>Прораб: <%= @mechanic.foreman.user.runame %></p>
     <% end %>
-    <%= link_to "Изменить данные", edit_mechanic_path %>
+    <%= link_to "Изменить данные", edit_mechanic_path %><br>
+    <%= link_to "Перезакрепить лифты", lift_move_path %><br>
+    <%= link_to "Расчет ЗП", work_order_path %><br>
   </div>
   <div class="col-md-2">
     <table class="table table-striped table-condensed search_result">
@@ -46,7 +48,6 @@
           <table class="table table-striped table-condensed">
             <thead>
               <tr>
-                <td></td>
                 <td>Адрес</td>
                 <td>Район</td>
                 <td>ТЛР</td>
@@ -67,7 +68,6 @@
             <caption>Временно обслуживаемые</caption>
             <thead>
               <tr>
-                <td></td>
                 <td>Адрес</td>
                 <td>Район</td>
                 <td>ТЛР</td>
@@ -82,28 +82,6 @@
             </tbody>
           </table>
           <% end %>
-          <div class="">
-            <div class="form-group">
-              <%= label_tag :mechanic_id, "Закрепить за", class:"col-md-2 control-label" %>
-              <div class="col-md-4">
-                <%= select_tag(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {class: "form-control  input-sm"} ) %>
-                <div class="checkbox">
-                  <label>
-                    <%= check_box_tag 'temporary' %> Временно
-                  </label>
-                </div>
-              </div>
-              <div class="input-daterange form-group input-group col-md-4" id="datepicker">
-                <span class="input-group-addon">&ensp;&ensp;с</span>
-                  <%= text_field_tag :start_at, nil, class: "input-sm form-control" %>
-                <span class="input-group-addon">по</span>
-                  <%= text_field_tag :end_at, nil, class: "input-sm form-control" %>
-              </div>
-              <div class="form-group col-md-2">
-                <%= submit_tag "Сохранить", method: :put, data: { confirm: "Выбранные лифты будут закреплены. Вы уверены?" }, class:   "btn btn-primary btn-sm" %>
-              </div>
-            </div>
-          </div>
           </fieldset>
         </div>
       </div>

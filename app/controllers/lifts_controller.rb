@@ -101,15 +101,26 @@ before_filter :signed_in_user
   end
 
   def move
-    @mechanic = Mechanic.find(params[:mechanic_id])
-    if params[:temporary] == "1"
-      Lift.where(:id => params[:lift_ids]).each do |lift|
-        TempServMech.create(lift_id: lift.id, mechanic_id: params[:mechanic_id], start_at: params[:start_at], end_at: params[:end_at])
+    mech = params[:mechanic_id]
+    node = params[:node_id]
+    if mech.nil?
+      if node.nil?
+      else
+        @node = Node.find(params[:node_id])
+        Lift.update_all(["node_id=?", params[:node_id]], :id => params[:lift_ids])
+        redirect_to @node
       end
     else
-      Lift.update_all(["mechanic_id=?", params[:mechanic_id]], :id => params[:lift_ids])
+      @mechanic = Mechanic.find(params[:mechanic_id])
+      if params[:temporary] == "1"
+        Lift.where(:id => params[:lift_ids]).each do |lift|
+          TempServMech.create(lift_id: lift.id, mechanic_id: params[:mechanic_id], start_at: params[:start_at], end_at: params[:end_at])
+        end
+      else
+        Lift.update_all(["mechanic_id=?", params[:mechanic_id]], :id => params[:lift_ids])
+      end
+      redirect_to @mechanic
     end
-    redirect_to @mechanic
   end
  
 end

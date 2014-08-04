@@ -1,13 +1,50 @@
 class MechanicsController < ApplicationController
 
 	def index
-		@mechanics = Mechanic.all.order(:name)
+		if current_user.foreman?
+			foreman = Foreman.where('user_id = ?', current_user.id).first
+			@mechanics = Mechanic.all.where('foreman_id = ?', foreman.id).order(:name)
+		else
+			@mechanics = Mechanic.all.order(:name)
+		end
 	end
 
 	def show
 		@mechanic = Mechanic.find(params[:id])
 		#@boss = @mechanic.
-		@mechanics = Mechanic.all
+		if current_user.foreman?
+			foreman = Foreman.where('user_id = ?', current_user.id).first
+			@mechanics = Mechanic.all.where('foreman_id = ?', foreman.id).order(:name)
+		else
+			@mechanics = Mechanic.all.order(:name)
+		end
+		@lifts    = @mechanic.lifts.order(:tlr_id, :porch_id)
+		@lcount 	= @lifts.count
+		@zlcount 	= @lifts.where('tlr_id = ?', 1).count
+		@olcount 	= @lifts.where('tlr_id = ?', 2).count
+		@tsm = @mechanic.temp_serv_meches.where("start_at <? AND end_at >?", Time.now, Time.now)
+		@templift = []
+		@tsm.each do |tsm|
+			@templift.push(tsm.lift)
+		end
+		@templiftcount 	= @templift.count
+		@ztempliftcount = @templift.find_all{|i| i.tlr_id == 1}.count
+		@otempliftcount = @templift.find_all{|i| i.tlr_id == 2}.count
+		@allliftsum = @lcount + @templiftcount
+		@zliftsum = @zlcount + @ztempliftcount
+		@oliftsum = @olcount + @otempliftcount
+		
+	end
+
+		def lift_move
+		@mechanic = Mechanic.find(params[:id])
+		#@boss = @mechanic.
+		if current_user.foreman?
+			foreman = Foreman.where('user_id = ?', current_user.id).first
+			@mechanics = Mechanic.all.where('foreman_id = ?', foreman.id).order(:name)
+		else
+			@mechanics = Mechanic.all.order(:name)
+		end
 		@lifts    = @mechanic.lifts.order(:tlr_id, :porch_id)
 		@lcount 	= @lifts.count
 		@zlcount 	= @lifts.where('tlr_id = ?', 1).count
@@ -29,7 +66,7 @@ class MechanicsController < ApplicationController
 	def work_order
 		@mechanic = Mechanic.find(params[:id])
 		#@boss = @mechanic.
-		@mechanics = Mechanic.all
+		@mechanics = Mechanic.all.order(:name)
 		@lifts    = @mechanic.lifts.order(:tlr_id, :porch_id)
 		@liftszao = @lifts.where('tlr_id = ?', 1)
 		@liftsooo = @lifts.where('tlr_id = ?', 2)

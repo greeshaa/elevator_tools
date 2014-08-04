@@ -1,0 +1,45 @@
+<% provide(:title, @node_name) %>
+<p class="lead"><%=@node_name %>&nbsp;&nbsp;-&nbsp;&nbsp;<%= @address %></p>
+<hr>
+<% if @node.street.nil? %>
+
+<% else %>
+<div class="col-md-10 col-md-offset-1">
+<%= form_tag move_lifts_path, :method => :put, html: {class:"form-horizontal"} do %>
+<fieldset>
+  <div class="form-group">
+    <%= label_tag :node_id, "Закрепить за УМ", class:"col-md-2 control-label" %>
+    <div class="col-md-4">
+      <%= select_tag(:node_id, options_for_select(@nodes.order_by_name.collect {|n| [n.name, n.id] }), {class: "form-control  input-sm"} ) %>
+    </div>
+    <div class="form-group">
+      <div class="col-md-3 col-md-offset-5 list">
+      <%= link_to " Отменить ", node_path, class: "btn btn-default btn-sm" %>
+      <%= submit_tag "Изменить", method: :put, data: { confirm: "Выбранные лифты будут закреплены. Вы уверены?" }, class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 list">
+    <div class="panel panel-default">
+      <div class="panel-heading">Обслуживаемые лифты</div>
+      <div class="panel-body">
+        <table class="table table-striped table-condensed">
+          <thead>
+            <td></td>
+            <td>Адрес</td>
+            <td>Район</td>
+            <td>Прораб</td>
+            <td>Механик</td>
+            <td>Дата вывода</td>
+          </thead>
+          <tbody>
+            <%= render "nodes/lift" %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<% end %>
+</div>
+<% end %> 

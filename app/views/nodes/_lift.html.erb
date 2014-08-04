@@ -1,5 +1,11 @@
 <% @lifts.each do |lift| %>
 <tr>
+  <% if (params[:controller] == 'nodes' and params[:action] == 'lift_move') %>
+  <td>
+    <%= check_box_tag 'lift_ids[]', lift.id %>
+  </td>
+  <% else %>
+  <% end %>
 	<% if lift.porch.nil? %>
   	<td>
    		<span class="label label-warning">Нет информации о расположении лифта</span>

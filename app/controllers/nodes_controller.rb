@@ -83,6 +83,27 @@ before_filter :signed_in_user
     render 'index'
   end
 
+  def lift_move
+    @node = Node.find(params[:id])
+    @nodes = Node.all.order(:name)
+    if @node.id == 1
+      @node_name = @node.name
+    else
+      @node_name = "УМ " + @node.name
+    end
+    if @node.street.nil?
+      @address = "Группа лифтов, которые не выводятся в ЦД и не принадлежат какому-либо УМ"
+    else
+      if @node.porch.nil?
+        @address = "ул." + @node.street.name + ", д." + @node.build.name
+      else
+        @address = "ул." + @node.street.name + ", д." + @node.build.name + ", " + @node.porch.name
+      end
+    end
+ 
+    @lifts    = @node.lifts.order(:tlr_id, :porch_id)    
+  end
+
   private
   def node_params
     params.require(:node).permit(:name, :description, :street_id, :build_id, :porch_id, :dataport, :soundport, 

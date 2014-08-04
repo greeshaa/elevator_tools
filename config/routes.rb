@@ -29,6 +29,7 @@ ElevatorTools::Application.routes.draw do
     resources :lifts
   end
   resources :foremen
+  resources :prices
 
 
   root :to => 'static_pages#main'
@@ -54,7 +55,9 @@ ElevatorTools::Application.routes.draw do
   get 'overdue_inspections',  to: 'inspections#overdue'
   get 'next_inspections',  to: 'inspections#next'
   get 'last_inspections',  to: 'inspections#last'
-  get 'mechanics/:id/work_order', to: 'mechanics#work_order'
+  get 'mechanics/:id/work_order', to: 'mechanics#work_order', :as => :work_order
+  get 'mechanics/:id/lift_move', to: 'mechanics#lift_move', :as => :mechanics_lift_move
+  get 'nodes/:id/lift_move', to: 'nodes#lift_move', :as => :nodes_lifts_move
   #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'

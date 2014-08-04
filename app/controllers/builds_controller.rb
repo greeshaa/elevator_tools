@@ -50,6 +50,8 @@ before_filter :signed_in_user
   end
   
   def create
+    @streets = Street.all
+    @nodes = Node.all
     @build = Build.new(params[:build])
     if @build.save
       addporches(@build)
