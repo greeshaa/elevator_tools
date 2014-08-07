@@ -58,11 +58,13 @@ before_filter :signed_in_user
     @equipment     = @node.porch.equipment
     @lifts         = @node.lifts
     @klsh          = @equipment.where("equipment_list_id=? or equipment_list_id=?", 10, 18)
-    if  @klsh == 0
+    @klsh_count    = @klsh.count
+    if  @klsh_count == 0
       @klsh        = @equipment.where("equipment_list_id=? or equipment_list_id=?", 12, 13)
+      @klsh_count  = @klsh.count
       @monoblk     = 1
     end
-    @klsh_count    = @klsh.count 
+     
     @lifts_count   = @lifts.count
     @address_stack = @klsh_count * 31
     @free_address  = @address_stack - @lifts.count
