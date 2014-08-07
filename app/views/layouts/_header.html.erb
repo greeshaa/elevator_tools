@@ -89,10 +89,10 @@
       </li>
     </ul>
   <% end %>
-  <% if (params[:controller] == 'nodes' or params[:controller] == 'providers')%>
+  <% if (params[:controller] == 'nodes' or params[:controller] == 'providers' or params[:controller] == 'connections')%>
     <ul class="breadcrumb pull-right pdr">
       <li class="<%= 'active' if (params[:controller] == 'nodes'  and params[:action] == 'list') %>"><%= link_to "УМ",    nodes_all_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'providers'  and params[:action] == 'index') %>"><%= link_to "Подключения",    providers_path %></li>
+      <li class="<%= 'active' if (params[:controller] == 'providers'  and params[:action] == 'index') %>"><%= link_to "Подключения",    connections_path %></li>
       <li class="<%= 'active' if (params[:controller] == 'providers'  and params[:action] == 'index') %>"><%= link_to "Провайдеры",    providers_path %></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -100,6 +100,7 @@
         </a>
         <ul class="dropdown-menu pull-right">
           <li><%= link_to "Добавить УМ", add_node_path %></li>
+          <li><%= link_to "Добавить подключение", new_connection_path %></li>
           <li><%= link_to "Добавить провайдера", new_provider_path %></li>
         </ul>
       </li>

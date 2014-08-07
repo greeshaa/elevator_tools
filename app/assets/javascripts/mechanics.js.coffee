@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
  jQuery ->
-    $('.input-daterange').datepicker({
+    $('#datepicker').datepicker({
     		format: 'yyyy-mm-dd',
     		todayBtn: "linked",
     		todayHighlight: true,

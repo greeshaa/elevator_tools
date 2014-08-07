@@ -1,72 +1,57 @@
 <% provide(:title, 'Добавление узлового модуля') %>
-<p class="lead">Новый УМ</p>
-<hr>
 <div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <legend>Добавление узлового модуля</legend>
-    <%= form_for(@node, html:{role:"form"} ) do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-    <fieldset>
-      <div class="form-group">
-        <%= f.label :name, "Номер узлового модуля:" %>
-        <%= f.text_field :name, class: "form-control input-sm", placeholder:"УМ 254" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :description, "Расположение оборудования:" %>
-        <%= f.text_field :description, class: "form-control input-sm", placeholder:"МП 1 подъезд (ключ на проходной)" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :street_id, "Улица:" %>
-        <%= f.collection_select :street_id, Street.order(:name), :id, :name, {}, {class: "form-control input-sm"} %>
-      </div>
-      <div class="form-group">
-        <%= f.label :build_id, "Здание:" %>
-        <%= f.grouped_collection_select(:build_id, Street.order(:name), :builds, :name, :id, :name, {}, html_options = {prompt: 
-          'Выберите здание...', class: "form-control input-sm"}) %>
-      </div>
-      <div class="form-group">
-        <%= f.label :porch_id, "Подъезд:" %>
-        <%= f.grouped_collection_select(:porch_id, Build.order(:name), :porches, :name, :id, :name, {}, html_options = {prompt: 
-          'Выберите подъезд...', class: "form-control input-sm"}) %>
-      </div>
-      <div class="form-group">
-        <%= f.label :dataport, "Порт данных:" %>
-        <%= f.text_field :dataport, class: "form-control input-sm", placeholder:"44000" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :soundport, "Порт звука:" %>
-        <%= f.text_field :soundport, class: "form-control input-sm", placeholder:"44001" %>
-      </div>
-      <%= f.fields_for :ip_addresses do |ipa| %>
-    <%= render 'shared/error_messages', object: ipa.object %>
-    <fieldset>
-      <div class="form-group">
-        <%= ipa.label :provider_id, "Провайдер:" %>
-        <%= ipa.select :provider_id, 
-            options_from_collection_for_select(@providers, :id, :name), {}, {class: "form-control input-sm"} %>
-      </div>
-      <div class="form-group">
-        <%= ipa.label :name, "Тип адреса:" %>
-        <%= ipa.text_field :name, class: "form-control input-sm", placeholder:"Основной" %>
-      </div>
-      <div class="form-group">
-        <%= ipa.label :ip, "ip-адрес:" %>
-        <%= ipa.text_field :ip, class: "form-control input-sm", placeholder:"192.168.0.1" %>
-      </div>
-      <div class="form-group">
-        <%= ipa.label :mask, "Маска подсети:" %>
-        <%= ipa.text_field :mask, class: "form-control input-sm", placeholder:"255.255.255.0" %>
-      </div>
-      <div class="form-group">
-        <%= ipa.label :gate, "Основной шлюз:" %>
-        <%= ipa.text_field :gate, class: "form-control input-sm", placeholder:"192.168.0.254" %>
-      </div>
-    </fieldset>
-    <% end %>
-      <div class="form-group pull-right">
-        <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
-      </div>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="well bs-component">
+      <%= form_for @node, html:{class:"form-horizontal", role:"form"} do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <fieldset>
+        <legend>Добавление узлового модуля</legend>
+        <div class="form-group">
+          <%= f.label :name, "Номер УМ:", class:"col-md-3 control-label" %>
+          <div class="col-md-9">
+          <%= f.text_field :name, class: "form-control input-sm", placeholder:"УМ 254" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :description, "Расположение:", class:"col-md-3 control-label" %>
+          <div class="col-md-9">
+          <%= f.text_field :description, class: "form-control input-sm", placeholder:"МП 1 подъезд (ключ на проходной)" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :street_id, "Улица:", class:"col-md-3 control-label" %>
+          <div class="col-md-9">
+          <%= f.collection_select(:street_id, Street.order(:name), :id, :name, 
+              {}, html_options = {prompt: 'Выберите улицу', class: "form-control input-sm"}) %>
+              </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :build_id, "Здание:", class:"col-md-3 control-label" %>
+          <div class="col-md-9">
+          <%= f.grouped_collection_select(:build_id, Street.order(:name), :builds, :name, :id, :name, 
+              {}, html_options = {prompt: 'Выберите здание', class: "form-control input-sm"}) %>
+              </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :dataport, "Порт данных:", class:"col-md-3 control-label" %>
+          <div class="col-md-9">
+          <%= f.text_field :dataport, class: "form-control input-sm", placeholder:"44000" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :soundport, "Порт звука:", class:"col-md-3 control-label" %>
+          <div class="col-md-9">
+          <%= f.text_field :soundport, class: "form-control input-sm", placeholder:"44001" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <%= link_to " Отменить ", nodes_path, class: "btn btn-default btn-sm" %>
+            <%= f.submit "Сохранить", class: "btn btn-primary btn-sm" %>
+          </div>
+        </div>
       </fieldset>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -39,13 +39,12 @@ before_filter :signed_in_user
 
   def show
     @node = Node.find(params[:id])
-    @klsh = @node.porch.equipment.where("equipment_list_id = ?", 13)
     if @node.id == 1
       @node_name = @node.name
     else
       @node_name = "УМ " + @node.name
     end
-    @ipa  = @node.ip_addresses
+    @connections  = @node.porch.connections
 
     if @node.street.nil?
       @address = "Группа лифтов, которые не выводятся в ЦД и не принадлежат какому-либо УМ"
@@ -56,8 +55,17 @@ before_filter :signed_in_user
         @address = "ул." + @node.street.name + ", д." + @node.build.name + ", " + @node.porch.name
       end
     end
-    @equipment = @node.porch.equipment
-    @lifts = @node.lifts
+    @equipment     = @node.porch.equipment
+    @lifts         = @node.lifts
+    @klsh          = @equipment.where("equipment_list_id=? or equipment_list_id=?", 10, 18)
+    if  @klsh == 0
+      @klsh        = @equipment.where("equipment_list_id=? or equipment_list_id=?", 12, 13)
+      @monoblk     = 1
+    end
+    @klsh_count    = @klsh.count 
+    @lifts_count   = @lifts.count
+    @address_stack = @klsh_count * 31
+    @free_address  = @address_stack - @lifts.count
   end
 
   def index
@@ -78,8 +86,10 @@ before_filter :signed_in_user
       end   
     end 
   end
+
   def all
-    @nodes = Node.all
+    @nodes  = Node.all
+    @nodes.each
     render 'index'
   end
 

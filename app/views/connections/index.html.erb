@@ -1,0 +1,22 @@
+<% provide(:title, 'Список точек подключения') %>
+<p class="lead">Список точек подключения</p>
+<hr>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 list">
+  	<table class="table table-striped">
+    	<% @connections.each do |c| %>
+    	<% if c.title == 'Резервный канал связи' %>
+    	<tr class="warning">
+    	  <td><%= link_to c.porch.build.street.name+' '+c.porch.build.name+' '+c.porch.name, c.porch, class:"text-muted" %> </td>
+				<td><%= link_to c.title, c, class:"text-muted" %></td>
+			</tr>
+    	<% else %>
+    	<tr>
+    	  <td><%= link_to c.porch.build.street.name+' '+c.porch.build.name+' '+c.porch.name, c.porch, class:"text-muted" %> </td>
+				<td><%= link_to c.title, c, class:"text-muted" %></td>
+    	</tr>
+    	<% end %>
+    	<% end %>
+    </table>
+  </div>
+</div>

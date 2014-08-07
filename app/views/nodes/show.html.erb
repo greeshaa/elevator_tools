@@ -15,23 +15,14 @@
             <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to "Узел",         edit_node_path %></li>
-              <% if @ipa.empty? %>
-              <li><%= link_to "Добавить ip-адрес",     new_node_ip_address_path(@node)  %></li>
-              <% else %>
-              <% @ipa.each do |ipa| %>
-              <li><%= link_to ipa.name + " ip-адрес",     edit_ip_address_path(ipa)  %></li>
-              <% end %>
-              <li><%= link_to "Добавить ip-адрес",     new_node_ip_address_path(@node)  %></li>
-              <% end %>
-              <li><%= link_to "Оборудование", '#' %></li>
+              <li><%= link_to "Узел", edit_node_path %></li>
             </ul>
           </div>
         </div>
         <div class="panel-body">
-          Расположение: <%= @node.description %><br>
-          Обслуживает <%= @node.lifts.count %> лифтов <br>
-          Свободно <%= 64 - @node.lifts.count %> адресов <br>
+          Расположение <%= @node.description %><br>
+          Обслуживает <%= @lifts_count %> лифтов <br>
+          Свободно <%= @free_address %> адресов <br>
         </div>
       </div>
     </div>
@@ -39,7 +30,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Сетевые параметры узла</div>
         <div class="panel-body">
-          <%= render "nodes/ipa" %>
+          <%= render "nodes/connections" %>
           <% if @node.dataport == nil %>
           <span class="label label-warning">Порт данных не указан</span><br>
           <% else %>
@@ -64,18 +55,22 @@
               <td>Устройство</td>
               <td>Свободно адресов на ЛШ</td>
             </thead>
-            <% n = 1 %>
+            <% n = @klsh_count %>
             <% @klsh.each do |klsh| %>
             <tr>
               <td><%= 7 - n %></td>
-              <td><%= klsh.equipment_list.name %></td>
-              <td></td>
+              <td><%= klsh.equipment_list.name %><% @ksl = klsh.equipment_list.name %></td>
+              <td><%= @free_address %></td>
             </tr>
-            <% n =+1 %>
+            <% n -= 1 %>
             <% end %>
             <tr>
               <td>7</td>
+              <% if @monoblk == 1 %>
               <td>КСЛ-Eth</td>
+              <% else %>
+              <td><%= @ksl %></td>
+              <% end %>
               <td></td>
             </tr>  
           </table>

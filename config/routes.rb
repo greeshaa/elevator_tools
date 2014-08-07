@@ -15,9 +15,7 @@ ElevatorTools::Application.routes.draw do
   resources :inspections
   #resources :inspections, shallow: true
   #end 
-  resources :nodes do
-      resources :ip_address, shallow: true
-  end
+  resources :nodes 
   resources :equipment_types
   resources :equipment_lists
   resources :equipment
@@ -30,6 +28,9 @@ ElevatorTools::Application.routes.draw do
   end
   resources :foremen
   resources :prices
+  resources :connections do
+      resources :ip_address, shallow: true
+  end
 
 
   root :to => 'static_pages#main'

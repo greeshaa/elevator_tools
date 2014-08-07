@@ -1,0 +1,8 @@
+<% if @connections.empty? %>
+    <span class="label label-warning">Нет информации о подключениях</span>
+<% else %>
+	<% @connections.each do |connection| %>
+		<%= connection.title %>&nbsp;&nbsp;
+		<%= connection.ip_address.ip %>&nbsp;&nbsp;<%= connection.provider.name %><br>
+	<% end %>
+<% end %>

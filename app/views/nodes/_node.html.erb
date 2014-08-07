@@ -1,21 +1,41 @@
+
 <tr>
+	<% if node.id == 1 %>
 	<td>
 		<div class="searchcell">
-			<%= link_to "УМ " + node.name, node %>
+			<%= link_to node.name, node %>
 		</div>
 	</td>
-	<% if node.id == 1 %>
-	<td>Не выводится в ЦД</td>
-	<% else %>
-	<td>
-		<div class="td_address">
-			<%= node.street.name + ', ' + node.build.name %>
-		</div>
-	</td>
-	<% end %>
+	<td class="td_address">Лифты не подключенные к ДК "Объ"</td>
 	<td>
 		<%= node.lifts.count %>
 	</td>
 	<td></td>
 	<td></td>
+	<% else %>
+	<td>
+		<div class="searchcell">
+			<%= link_to "УМ " + node.name, node %>
+		</div>
+	</td>
+	<td>
+		<div class="td_address">
+			<%= node.street.name + ', ' + node.build.name %>
+		</div>
+	</td>
+	<td>
+		<%= node.lifts.count %>
+	</td>
+	<%
+		@equipment     = node.porch.equipment
+    @lifts         = node.lifts
+    @klsh_count    = @equipment.where("equipment_list_id=? or equipment_list_id=?", 10, 18).count 
+    @klsh_count    = @equipment.where("equipment_list_id=? or equipment_list_id=?", 12, 13).count if  @klsh_count == 0
+    @lifts_count   = @lifts.count
+    @address_stack = @klsh_count * 31
+    @free_address  = @address_stack - @lifts.count
+	%>
+	<td class="<%= 'danger' if @free_address < 3 %>" ><%= @free_address %></td>
+	<td ><%= @klsh_count %></td>
+	<% end %>
 </tr>

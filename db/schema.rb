@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724041510) do
+ActiveRecord::Schema.define(version: 20140805072212) do
 
   create_table "builds", force: true do |t|
     t.string   "name"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20140724041510) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "connections", force: true do |t|
+    t.string   "title"
+    t.integer  "porch_id"
+    t.integer  "provider_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -133,6 +141,7 @@ ActiveRecord::Schema.define(version: 20140724041510) do
     t.integer  "provider_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "connection_id"
   end
 
   create_table "lift_types", force: true do |t|
@@ -171,8 +180,8 @@ ActiveRecord::Schema.define(version: 20140724041510) do
     t.string   "doors"
     t.integer  "speed"
     t.integer  "elevation"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "tlr_id"
     t.integer  "district_id"
     t.string   "service_payment"
@@ -182,16 +191,16 @@ ActiveRecord::Schema.define(version: 20140724041510) do
 
   create_table "manufacturers", force: true do |t|
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "short_name"
     t.string   "full_name"
   end
 
   create_table "mechanics", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "foreman_id"
   end
 
@@ -203,14 +212,14 @@ ActiveRecord::Schema.define(version: 20140724041510) do
     t.integer  "porch_id"
     t.integer  "dataport"
     t.integer  "soundport"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "partners", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "porches", force: true do |t|
@@ -223,7 +232,7 @@ ActiveRecord::Schema.define(version: 20140724041510) do
   create_table "prices", force: true do |t|
     t.string   "title"
     t.string   "description"
-    t.decimal  "cost",        precision: 5, scale: 2
+    t.decimal  "cost",        precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

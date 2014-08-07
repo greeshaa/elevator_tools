@@ -24,13 +24,15 @@ class Node < ActiveRecord::Base
 
   has_many :equipment
   has_many :ip_addresses
+  has_many :connections
   has_many :lifts
   has_many :porches, :through => :lifts
   has_many :builds, :through => :porches
   has_many :streets, :through => :builds
   
-  accepts_nested_attributes_for :ip_addresses
+  
   accepts_nested_attributes_for :equipment
+  accepts_nested_attributes_for :ip_addresses
 
   def self.order_by_name
     order('name DESC').sort

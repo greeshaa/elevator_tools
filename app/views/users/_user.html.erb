@@ -1,7 +1,10 @@
-<li>
-      <%= link_to user.runame, user %>
-        <% if current_user.admin? && !current_user?(user) %>
-           |  <%= link_to "Удалить", user, method: :delete,
-                                  data: { confirm: "Вы уверены?" } %>
-        <% end %>
-</li>
+<tr>
+	<td><%= link_to user.runame, user %></td>
+	<td><%= user.name %></td>
+	<td><%= user.email %></td>
+	<% if current_user.admin? && !current_user?(user) %>
+	<td><%= link_to "Удалить", user, method: :delete, data: { confirm: "Вы уверены?" } %></td>
+	<% else %>
+	<td></td>
+  <% end %>
+</tr>

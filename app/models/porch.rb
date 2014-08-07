@@ -18,6 +18,7 @@ class Porch < ActiveRecord::Base
   belongs_to :street
 
   has_one  :node
+  has_many :connections
   has_many :lifts
   has_many :equipment
   has_many :equipment_movements

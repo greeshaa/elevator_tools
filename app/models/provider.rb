@@ -17,4 +17,8 @@
 class Provider < ActiveRecord::Base
   attr_accessible :contact, :email, :name, :note, :phone
   has_many :ip_addresses
+  has_many :connections
+  def self.order_by_name
+    order('name ASC')
+  end
 end
