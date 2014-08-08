@@ -32,8 +32,8 @@ before_filter :signed_in_user
   end
 
   def edit
-     @street = Street.find(params[:id])
-     @city = City.all
+    @street = Street.find(params[:id])
+    @city = City.all
     @streetkind = StreetKind.all
   end
 

@@ -1,11 +1,11 @@
-<% provide(:title, 'Новый лифт') %>
+<% provide(:title, 'Изменение данных лифта') %>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <div class="well bs-component">
       <%= form_for(@lift, html:{class:"form-horizontal", role:"form"}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <fieldset>
-        <legend>Новый лифт</legend>
+        <legend>Изменение данных лифта</legend>
         <div class="form-group">
           <%= f.label :regnum, "Рег. номер", class:"col-md-4 control-label" %>
           <div class="col-md-6">

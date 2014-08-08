@@ -18,7 +18,7 @@
       <div class="btn-group btn-group-xs">
         <%= link_to "Все лифты здания", build_path(@build), class: "btn btn-default" %>
         <%= link_to "Все лифты узла", lifts_of_nodes_path + "?id=" + @lift.id.to_s, class: "btn btn-default" %>
-        <%= link_to "Редактировать", '#', class: "btn btn-default" %>
+        <%= link_to "Редактировать", edit_lift_path, class: "btn btn-default" %>
         <%= link_to "Отметка о ПТО", new_inspection_path + '?lift_id=' +@lift.id.to_s, class: "btn btn-default" %>
       </div>
     </div>
@@ -30,7 +30,7 @@
         <div class="panel-heading">Регистрационные данные</div>
         <div class="panel-body">
           Регистрационный номер:<strong><%= @lift.regnum %></strong><br>
-          Зававодской номер: <%= @lift.sernum %><br>
+          Заводской номер: <%= @lift.sernum %><br>
           Номер паспорта: <br>
         </div>
       </div>
@@ -75,7 +75,7 @@
           <% else %>
             Назначение: <%= @lift.function %><br>
           <% end %>
-          Грузоподъемность: <b><%= @lift.capacity.to_s %></b> кг,<br>
+          Грузоподъемность: <b><%= @lift.capacity.to_s %></b> кг<br>
           Количество остановок: <b><%= @lift.stopscount %></b><br>
           Привод дверей: <b><%= @lift.doors %></b><br>
           Скорость движения кабины: <b><%= @lift.speed %></b> м/с<br>

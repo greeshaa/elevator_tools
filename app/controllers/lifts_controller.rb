@@ -1,6 +1,63 @@
 # -*- encoding : utf-8 -*-
 class LiftsController < ApplicationController
 before_filter :signed_in_user
+  
+  def new
+    @districts = District.all
+    @streets = Street.all
+    @builds = Build.all
+    @porch = Porch.all
+    @nodes = Node.all
+    @mechanics = Mechanic.all
+    @tlr = Tlr.all
+    @lift = Lift.new 
+  end
+
+  def create
+    lift_data = params[:lift]
+    lift_data.delete("street")
+    lift_data.delete("build")
+    @lift = Lift.new(lift_data)
+    if @lift.save
+      okmessage = "Лифт добавлен в базу данных."
+      flash[:success] = okmessage
+      redirect_to @lift
+    else
+      @districts = District.all
+      @streets = Street.all
+      @builds = Build.all
+      @porch = Porch.all
+      @nodes = Node.all
+      @mechanics = Mechanic.all
+      @tlr = Tlr.all
+      render 'new'
+    end
+    
+  end
+
+  def edit
+    @lift   = Lift.find(params[:id])
+    @districts = District.all
+    @streets = Street.all
+    @builds = Build.all
+    @porch = Porch.all
+    @nodes = Node.all
+    @mechanics = Mechanic.all
+    @tlr = Tlr.all
+  end
+
+  def update
+    @lift   = Lift.find(params[:id])
+    lift_data = params[:lift]
+    lift_data.delete("street")
+    lift_data.delete("build")
+    if @lift.update_attributes(lift_data) 
+      flash[:success] = "Лифт с регистрационным номером: " + @lift.regnum + " обновлен"
+      redirect_to @lift
+    else
+      render 'edit'
+    end
+  end
 
   def show
   	@lift   = Lift.find(params[:id])
@@ -32,16 +89,6 @@ before_filter :signed_in_user
 
   end
 
-  def update
-    @lift   = Lift.find(params[:id])
-    if @lift.update_attributes(params[:lift]) 
-      flash[:success] = "Лифт с регистрационным номером: " + @lift.regnum + " обновлен"
-      redirect_to @lift
-    else
-      render 'edit'
-    end
-  end
-
   def index
   	#@lifts = Lift.search(params[:search])
     if (params[:search]).blank?
@@ -59,13 +106,6 @@ before_filter :signed_in_user
         end
       end   
     end 
-  end
-
-  def new
-    @streets = Street.all
-    @builds = Build.all
-    @porch = Porch.all
-    @lift = Lift.new 
   end
 
   def inspections

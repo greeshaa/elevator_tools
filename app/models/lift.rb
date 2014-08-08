@@ -37,8 +37,8 @@
 
 # -*- encoding : utf-8 -*-
 class Lift < ActiveRecord::Base
-    attr_accessible :node_id, :porch_id, :position, :lift_type_id, :elevator_control_station_id, :regnum, :sernum, 
-    				:contract_id, :mechanic_id, :inspection_at, :stopscount, :introduced_at, :overhaul_at, :standart_life
+    attr_accessible :node_id, :porch_id, :district_id, :tlr_id, :position, :lift_type_id, :elevator_control_station_id, :regnum, :sernum, 
+    				:contract_id, :mechanic_id, :inspection_at, :stopscount, :introduced_at, :overhaul_at, :standart_life, :function, :capacity
   
     belongs_to :porch
     belongs_to :build
@@ -59,6 +59,8 @@ class Lift < ActiveRecord::Base
     has_many :temp_serv_meches
     
     accepts_nested_attributes_for :inspections
+
+    validates  :node_id, :porch_id, presence: true
 
     def self.search(search)
       if search
