@@ -2,15 +2,16 @@
 #
 # Table name: ip_addresses
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  ip          :string(255)
-#  mask        :string(255)
-#  gate        :string(255)
-#  node_id     :integer
-#  provider_id :integer
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id            :integer          not null, primary key
+#  name          :string(255)
+#  ip            :string(255)
+#  mask          :string(255)
+#  gate          :string(255)
+#  node_id       :integer
+#  provider_id   :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  connection_id :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

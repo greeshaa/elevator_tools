@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTempServMeches < ActiveRecord::Migration
   def change
     create_table :temp_serv_meches do |t|

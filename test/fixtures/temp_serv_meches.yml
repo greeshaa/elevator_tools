@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: temp_serv_meches
+#
+#  id          :integer          not null, primary key
+#  lift_id     :integer
+#  mechanic_id :integer
+#  start_at    :date
+#  end_at      :date
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

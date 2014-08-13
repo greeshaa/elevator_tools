@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateConnections < ActiveRecord::Migration
   def change
     create_table :connections do |t|

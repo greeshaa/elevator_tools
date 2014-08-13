@@ -2,17 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-	$('#lifts').dataTable()
-
-jQuery ->
-   $('#datepicker').datepicker({
-   		format: 'yyyy-mm-dd',
-   		todayBtn: "linked",
-   		todayHighlight: true,
-   		autoclose: true,
-   		language: "ru"
-   	})
-   	
+	$('#datatables').dataTable();   	
 jQuery ->
 	builds = $('#lift_build').html()
 	$('#lift_street').change ->

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: connections
+#
+#  id          :integer          not null, primary key
+#  title       :string(255)
+#  porch_id    :integer
+#  provider_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+# -*- encoding : utf-8 -*-
 class Connection < ActiveRecord::Base
 	attr_accessible :title, :porch_id, :provider_id, :ip_address_attributes
   belongs_to :porch

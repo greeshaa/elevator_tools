@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateForemen < ActiveRecord::Migration
   def change
     create_table :foremen do |t|

@@ -8,8 +8,10 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  next_inspection_at :date
+#  active             :boolean          default(TRUE)
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 require 'spec_helper'

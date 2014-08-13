@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: prices
+#
+#  id          :integer          not null, primary key
+#  title       :string(255)
+#  description :string(255)
+#  cost        :decimal(8, 2)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

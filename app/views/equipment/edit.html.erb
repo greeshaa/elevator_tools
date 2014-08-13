@@ -1,20 +1,39 @@
 <% provide(:title, 'Редактирование устройства') %>
-<h1>Редактирование устройства</h1>
 <div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@equipment) do |f| %>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="well bs-component">
+      <%= form_for(@equipment, html:{class:"form-horizontal", role:"form"}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :equipment_list_id, "Устройство:" %>
-      <%= f.select :equipment_list_id,  options_from_collection_for_select(@e_lists, :id, :name) %>
-
-      <%= f.label :factory_sn, "Серийный номер:" %>
-      <%= f.text_field :factory_sn %>
-
-      <%= f.label :notes, "Описание:" %>
-      <%= f.text_area(:notes, rows: 6)  %>
-
-      <%= f.submit "Изменить", class: "btn btn-mini" %>
-    <% end %>
+      <fieldset>
+        <legend>Редактирование устройства</legend>
+        <div class="form-group">
+          <%= f.label :equipment_list_id, "Устройство", class:"col-md-4 control-label" %>
+          <div class="col-md-6">
+            <%= f.select :equipment_list_id,  options_from_collection_for_select(@e_lists, :id, :name), {prompt:'....'}, {class: "form-control input-sm"} %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :factory_sn, "Серийный номер", class:"col-md-4 control-label" %>
+          <div class="col-md-6">
+            <%= f.text_field :factory_sn, placeholder: "AB0123456", autofocus: true, class: "form-control input-sm" %>
+            <%= check_box_tag(:many_sn) %>
+            <%= label_tag(:many_sn, "Несколько номеров через ';'") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :notes, "Описание", class:"col-md-4 control-label" %>
+          <div class="col-md-6">
+            <%= f.text_area(:notes, rows: 6, placeholder: "Описание", class: "form-control") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-6 col-md-offset-4">
+            <%= link_to " Отменить ", equipment_index_path, class: "btn btn-default btn-sm" %>
+            <%= f.submit "Сохранить", class: "btn btn-primary btn-sm" %>
+          </div>
+        </div>  
+      </fieldset>
+      <% end %>
+    </div>  
   </div>
 </div>

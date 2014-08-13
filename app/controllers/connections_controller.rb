@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ConnectionsController < ApplicationController
 	def index
 		@connections = Connection.all

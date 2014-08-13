@@ -8,14 +8,14 @@ jQuery ->
 		options = $(builds).filter("optgroup[label='#{street}']").html()
 		if options
 			$('#equipment_movement_build_id').html(options)
+			porches = $('#equipment_movement_porch_id').html()
+			$('#equipment_movement_build_id').change ->
+				build  = $('#equipment_movement_build_id :selected').text()
+				options = $(porches).filter("optgroup[label='#{build}']").html()
+				if options
+					$('#equipment_movement_porch_id').html(options)
+				else
+					$('#equipment_movement_porch_id').empty()
 		else
 			$('#equipment_movement_build_id').empty()
 
-	porches = $('#equipment_movement_porch_id').html()
-	$('#equipment_movement_build_id').change ->
-		build  = $('#equipment_movement_build_id :selected').text()
-		options = $(porches).filter("optgroup[label='#{build}']").html()
-		if options
-			$('#equipment_movement_porch_id').html(options)
-		else
-			$('#equipment_movement_porch_id').empty()

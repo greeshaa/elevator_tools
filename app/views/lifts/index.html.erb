@@ -1,5 +1,5 @@
 <% provide(:title, 'Лифты') %>
-<p class="lead">Информация по облуживаемым лифтам</p>
+<p class="lead"><%= @title %></p>
 <hr>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -12,13 +12,19 @@
     <% if @lifts.empty? %>
         <p class="lead search_result">Лифты удовлетворяющие запросу не найдены.</p>
     <% else %>
-      <table class="table table-condensed table-bordered table-striped">
-        <caption>Результаты поиска</caption>
+      <table id="datatables" class="table table-condensed table-striped">
         <thead>
+          <th>Адрес</th>
+          <th>Рег.номер</th>
+          <th>УМ</th>
+          <th>Район</th>
+          <th>Механик</th>
+          <th>Вывод</th>
+          <th></th>
         </thead>
         <tbody>
-        <%= render @lifts %>
-      </tbody>
+          <%= render @lifts %>
+        </tbody>
       </table>
     <% end %>  
   </div>

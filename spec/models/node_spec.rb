@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: nodes
@@ -6,15 +5,16 @@
 #  id          :integer          not null, primary key
 #  name        :string(255)
 #  description :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
 #  street_id   :integer
 #  build_id    :integer
 #  porch_id    :integer
 #  dataport    :integer
 #  soundport   :integer
+#  created_at  :datetime
+#  updated_at  :datetime
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-

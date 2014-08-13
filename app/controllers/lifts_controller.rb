@@ -92,6 +92,7 @@ before_filter :signed_in_user
   def index
   	#@lifts = Lift.search(params[:search])
     if (params[:search]).blank?
+      @title = 'Информация по облуживаемым лифтам'
     else
       streets = Street.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
       if streets.empty?
@@ -104,7 +105,8 @@ before_filter :signed_in_user
             @lifts.push(n)
           end
         end
-      end   
+      end
+      @title = 'Результаты поиска по запросу "' + params[:search] + '"'   
     end 
   end
 
@@ -119,6 +121,8 @@ before_filter :signed_in_user
 
   def list
     @lifts = Lift.all
+    @title = 'Все зарегистрированные в системе лифты'
+    render "index"
   end
 
   def fulliftsdata
@@ -132,11 +136,24 @@ before_filter :signed_in_user
   def lifts_of_nodes
     @lift  = Lift.find(params[:id])
     @lifts = @lift.node.lifts
+    @title = 'Лифты облуживаемые УМ ' + @lift.node.name
+    render "index"
+  end
+
+  def lifts_of_contract
+    @contract  = Contract.find(params[:id])
+    @lifts = @contract.lifts
+    if @contract.partner.nil?
+      @title = 'Лифты облуживаемые в рамках договора № ' + @contract.number
+    else
+      @title = 'Лифты облуживаемые в рамках договора № ' + @contract.number + ' с ' + @contract.partner.name
+    end 
     render "index"
   end
 
   def overdue_lifts
     @lifts = Lift.where('introduced_at <= ?', Date.today.year - 25 ).order(:introduced_at)
+    @title = 'Лифты с истекшим сроком эксплуатации'
     render "index"
   end
 

@@ -13,8 +13,6 @@ ElevatorTools::Application.routes.draw do
     collection { put :move }
   end
   resources :inspections
-  #resources :inspections, shallow: true
-  #end 
   resources :nodes 
   resources :equipment_types
   resources :equipment_lists
@@ -27,6 +25,7 @@ ElevatorTools::Application.routes.draw do
     resources :lifts
   end
   resources :foremen
+  resources :contracts
   resources :prices
   resources :connections do
       resources :ip_address, shallow: true
@@ -52,6 +51,7 @@ ElevatorTools::Application.routes.draw do
   get 'equipment_broken', to: 'equipment#broken'
   get '/nodes_all',  to: 'nodes#all'
   get 'lifts_of_nodes',  to: 'lifts#lifts_of_nodes'
+  get 'lifts_of_contract',  to: 'lifts#lifts_of_contract'
   get 'overdue_lifts',  to: 'lifts#overdue_lifts'
   get 'overdue_inspections',  to: 'inspections#overdue'
   get 'next_inspections',  to: 'inspections#next'

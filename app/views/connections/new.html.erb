@@ -33,6 +33,14 @@
 					</div>
 				</div>
 
+        <div class="form-group" id="street">
+          <%= f.label :porch_id, "стррит", class:"col-md-2 control-label" %>
+          <div class="col-md-10">
+            <%= f.select(:porch_id, options_for_select(@nodes.order_by_name.collect {|n| [n.name, n.porch_id] }), {}, 
+            {class: " form-control input-sm"} ) %>
+          </div>
+        </div>
+
 
 
 

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: lifts
@@ -27,14 +26,16 @@
 #  doors                       :string(255)
 #  speed                       :integer
 #  elevation                   :integer
-#  created_at                  :datetime         not null
-#  updated_at                  :datetime         not null
+#  created_at                  :datetime
+#  updated_at                  :datetime
 #  tlr_id                      :integer
 #  district_id                 :integer
 #  service_payment             :string(255)
 #  expert_id                   :integer
+#  price_id                    :integer
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-

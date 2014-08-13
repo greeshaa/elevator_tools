@@ -8,8 +8,10 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  next_inspection_at :date
+#  active             :boolean          default(TRUE)
 #
 
+# -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 class Inspection < ActiveRecord::Base
   attr_accessible :inspection_at, :next_inspection_at, :active, :lift_id
