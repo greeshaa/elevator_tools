@@ -1,11 +1,11 @@
-<% provide(:title, 'Редактирование договора') %>
+<% provide(:title, 'Новый договор') %>
 <div class="row">
   <div class="span6 offset3">  <div class="col-md-6 col-md-offset-3">
     <div class="well bs-component">
-      <%= form_for(@contract, html:{class:"form-horizontal", role:"form"} ) do |f| %>
+      <%= form_for(@contract, html: { method: :post, class:"form-horizontal" } ) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <fieldset>
-        <legend>Редактирование договора</legend>
+        <legend>Новый договор</legend>
         <div class="form-group">
           <%= f.label :number, "Номер:", class:"col-md-4 control-label"  %>
           <div class="col-md-6">
@@ -22,7 +22,7 @@
           <%= f.label :signed_at, "Дата подписания:", class:"col-md-4 control-label" %>
           <div class="col-md-6">
             <div class="input-daterange input-group"  id="datepicker">
-              <%= f.text_field :signed_at, class: "input-sm form-control" %>
+              <%= text_field_tag :signed_at, nil, class: "input-sm form-control" %>
             </div>
           </div>
         </div>

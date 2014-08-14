@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to "elevatorTools", main_path, class: "navbar-brand" %>
-    </div>  
+    </div>
     <div class="collapse navbar-collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav pull-right pdr">
           <li class="dropdown">
@@ -43,7 +43,7 @@
     <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
     <li class="<%= 'active' if params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == 'equipment_lists' %>"><%= link_to "Оборудование", equipment_index_path %></li>
     <li class="<%= 'active' if params[:controller] == 'mechanics' %>"><%= link_to "Механики", mechanics_path %></li>
-    <li class="<%= 'active' if params[:controller] == 'conracts' %>"><%= link_to "Договора", contracts_path %></li> 
+    <li class="<%= 'active' if params[:controller] == 'conracts' %>"><%= link_to "Договора", contracts_path %></li>
     <% else %> <!--- все остальные ---->
       <% if current_user.foreman?  %>
       <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>">
@@ -60,7 +60,7 @@
       <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
       <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook') %>">
         <%= link_to "Справочник", handbook_path %></li>
-      <% end %> 
+      <% end %>
     <% end %>
     <div class="col-md-4 pull-right pdr">
       <%= form_tag({:controller => "address", :action => "index"}, :method => "get", role:"form") do %>
@@ -70,7 +70,7 @@
         <div class="input-group-btn">
           <button class='btn btn-default' style='width:40px;' type="submit">
             <i class="fa fa-search"></i>
-          </button>      
+          </button>
          </div>
       </div>
       <% end %>
@@ -179,6 +179,19 @@
         </a>
         <ul class="dropdown-menu pull-right">
           <li><%= link_to "Добавить механика", new_mechanic_path %></li>
+        </ul>
+      </li>
+    </ul>
+  <% end %>
+  <% if (params[:controller] == 'contracts')%>
+    <ul class="breadcrumb pull-right pdr">
+      <li></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          + <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu pull-right">
+          <li><%= link_to "Новый договор", new_contract_path %></li>
         </ul>
       </li>
     </ul>

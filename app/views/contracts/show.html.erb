@@ -4,7 +4,11 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
   	<div class="panel panel-default">
-    	<div class="panel-heading">Данные договора</div>
+    	<div class="panel-heading">Данные договора
+        <div class="btn-group btn-group-xs pull-right">
+          <%= link_to "Изменить", edit_contract_path, class:"btn btn-default btn-xs" %>
+        </div>
+      </div>
     		<div class="panel-body">
     			<table class="table table-condensed table-striped">
     				<tr>
@@ -13,7 +17,7 @@
     				</tr>
     				<tr>
     					<td>Дата подписания</td>
-    					<td><%= @contract.signed_at %></td>
+    					<td><%= @contract.signed_at.strftime("%d.%m.%Y") %></td>
     				</tr>
     				<tr>
     					<td>Срок действия</td>
