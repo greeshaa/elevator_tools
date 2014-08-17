@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kind: MyString
+  produced_at: 2014-08-17
+  description: MyString
+  new_lifetime: 1
+  lift_id: 1
+  active: false
+
+two:
+  kind: MyString
+  produced_at: 2014-08-17
+  description: MyString
+  new_lifetime: 1
+  lift_id: 1
+  active: false

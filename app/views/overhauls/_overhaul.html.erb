@@ -1,0 +1,22 @@
+<tr>
+	<td><%= link_to overhaul.id, overhaul %></td>
+	<% if overhaul.lift.porch.nil? %>
+  	<td>
+   		<span class="label label-warning">Нет информации о расположении лифта</span>
+   	</td>
+   	<td>
+   	</td>
+  <% else %>
+  	<td>
+   		<%= link_to overhaul.lift.porch.build.street.name + ', '  + overhaul.lift.porch.build.name + ' - '  + overhaul.lift.porch.name, overhaul.lift %>
+   	</td>
+    <td class="td_center"><%= overhaul.produced_at.strftime("%d.%m.%Y") %></td>
+   	<td><%= overhaul.kind %></td>
+   	<td class="td_center"><%= overhaul.new_lifetime %></td>
+    <% if overhaul.lift.mechanic.nil? %>
+    <td></td>
+    <% else %>
+    <td><%= link_to overhaul.lift.mechanic.name, overhaul.lift.mechanic %></td>
+    <% end %>
+  <% end %>
+</tr>

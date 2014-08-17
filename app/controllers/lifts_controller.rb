@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class LiftsController < ApplicationController
 before_filter :signed_in_user
-  
+
   def new
     @districts = District.all
     @streets = Street.all
@@ -10,7 +10,7 @@ before_filter :signed_in_user
     @nodes = Node.all
     @mechanics = Mechanic.all
     @tlr = Tlr.all
-    @lift = Lift.new 
+    @lift = Lift.new
   end
 
   def create
@@ -32,7 +32,7 @@ before_filter :signed_in_user
       @tlr = Tlr.all
       render 'new'
     end
-    
+
   end
 
   def edit
@@ -51,7 +51,7 @@ before_filter :signed_in_user
     lift_data = params[:lift]
     lift_data.delete("street")
     lift_data.delete("build")
-    if @lift.update_attributes(lift_data) 
+    if @lift.update_attributes(lift_data)
       flash[:success] = "Лифт с регистрационным номером: " + @lift.regnum + " обновлен"
       redirect_to @lift
     else
@@ -63,12 +63,12 @@ before_filter :signed_in_user
   	@lift   = Lift.find(params[:id])
   	@porch  = @lift.porch
     if @porch.nil?
-      @build_name  = 'Номер здания неизвестен' 
+      @build_name  = 'Номер здания неизвестен'
       @street_name = 'Улица неизвестна'
       @city_name   = 'Населенный пункт неизвестен'
 
     else
-  	@build  = @porch.build  
+  	@build  = @porch.build
   	@street = @build.street
     @city   = @street.city
     @node   = @build.node
@@ -76,14 +76,19 @@ before_filter :signed_in_user
 
     if @lift.introduced_at.nil?
     else
-      @date_of_decommiss = @lift.introduced_at + @lift.standart_life
+      if @lift.overhauls.empty?
+        @date_of_decommiss = @lift.introduced_at + @lift.standart_life
+      else
+        @date_of_decommiss = @lift.overhauls.last.produced_at + @lift.overhauls.last.new_lifetime*365
+      end
+
     end
 
     if @lift.temp_serv_meches.empty?
     else
-    @temp_serv_mech = @lift.temp_serv_meches.last.mechanic  
+    @temp_serv_mech = @lift.temp_serv_meches.last.mechanic
     @temp_serv_mech_name = @temp_serv_mech.name
-    @temp_serv_time = ("(c " + @lift.temp_serv_meches.last.start_at.strftime("%d.%m.%Y") + 
+    @temp_serv_time = ("(c " + @lift.temp_serv_meches.last.start_at.strftime("%d.%m.%Y") +
                       " по " + @lift.temp_serv_meches.last.end_at.strftime("%d.%m.%Y") + ")")
     end
 
@@ -106,8 +111,9 @@ before_filter :signed_in_user
           end
         end
       end
-      @title = 'Результаты поиска по запросу "' + params[:search] + '"'   
-    end 
+      @title = 'Результаты поиска по запросу "' + params[:search] + '"'
+      @link_name = 'ПТО'
+    end
   end
 
   def inspections
@@ -115,8 +121,8 @@ before_filter :signed_in_user
   end
 
   def current_month
-    inspections = Inspection.where(next_inspection_at: Date.today.prev_month()..Date.today.next_month())  
-      
+    inspections = Inspection.where(next_inspection_at: Date.today.prev_month()..Date.today.next_month())
+
   end
 
   def list
@@ -147,13 +153,24 @@ before_filter :signed_in_user
       @title = 'Лифты облуживаемые в рамках договора № ' + @contract.number
     else
       @title = 'Лифты облуживаемые в рамках договора № ' + @contract.number + ' с ' + @contract.partner.name
-    end 
+    end
     render "index"
   end
 
   def overdue_lifts
-    @lifts = Lift.where('introduced_at <= ?', Date.today.year - 25 ).order(:introduced_at)
+    lifts = Lift.where('introduced_at <= ?', Date.today.year - 25 ).order(:introduced_at)
+    @lifts = []
+    lifts.each do |l|
+      if l.overhauls.empty?
+        @lifts.push(l)
+      else
+        if l.overhauls.last.produced_at < (Date.today.year - l.overhauls.last.new_lifetime)
+          @lifts.push(l)
+        end
+      end
+    end
     @title = 'Лифты с истекшим сроком эксплуатации'
+    @link_name = 'Ремонт'
     render "index"
   end
 
@@ -179,5 +196,5 @@ before_filter :signed_in_user
       redirect_to @mechanic
     end
   end
- 
+
 end

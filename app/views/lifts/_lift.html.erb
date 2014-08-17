@@ -41,17 +41,28 @@
       <td></td>
     <% else %>
       <% if lift.introduced_at <= (Date.today.year - 25) %>
-      <td class="text-danger">
-        <%= lift.introduced_at + 25 %>
-      </td>
+        <% if lift.overhauls.empty? %>
+        <td class="td_center text-danger">
+          <%= lift.introduced_at + 25 %>
+        </td>
+        <% else %>
+          <td class="td_center">
+            <%= (lift.overhauls.last.produced_at + lift.overhauls.last.new_lifetime*365).strftime("%Y") %>
+          </td>
+        <% end %>
       <% else %>
-      <td>
+      <td class="td_center">
         <%= lift.introduced_at + 25 %>
       </td>
       <% end %>
     <% end %>
-    <td>
-      <%= link_to 'Отметка ПТО', new_inspection_path + '?lift_id=' + lift.id.to_s %>
+    <td class="td_center">
+    <% if params[:action] == 'overdue_lifts' %>
+      <%= link_to '<i class="fa fa-calendar"></i>'.html_safe, new_overhaul_path + '?lift_id=' + lift.id.to_s %>
+      <% @back_path = params[:action] %>
+    <% else %>
+      <%= link_to '<i class="fa fa-calendar"></i>'.html_safe, new_inspection_path + '?lift_id=' + lift.id.to_s %>
+    <% end %>
     </td>
    <% end %>
 </tr>

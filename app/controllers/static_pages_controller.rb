@@ -15,7 +15,17 @@ before_filter :signed_in_user
     inspection_overdue        = Inspection.where(active: true).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
     @inspection_overdue       = inspection_overdue.first(3)
     @inspection_overdue_count = inspection_overdue.count
-    lift_overdue              = Lift.where('introduced_at <= ?', Date.today.year - 25 )
+    lifts              = Lift.where('introduced_at <= ?', Date.today.year - 25 )
+    lift_overdue = []
+    lifts.each do |l|
+      if l.overhauls.empty?
+        lift_overdue.push(l)
+      else
+        if l.overhauls.last.produced_at < (Date.today.year - l.overhauls.last.new_lifetime)
+          lift_overdue.push(l)
+        end
+      end
+    end
     @lift_overdue             = lift_overdue.first(3)
     @lift_overdue_count       = lift_overdue.count
   end

@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 ElevatorTools::Application.routes.draw do
 
-  
-
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
   resources :address
@@ -13,7 +11,8 @@ ElevatorTools::Application.routes.draw do
     collection { put :move }
   end
   resources :inspections
-  resources :nodes 
+  resources :overhauls
+  resources :nodes
   resources :equipment_types
   resources :equipment_lists
   resources :equipment

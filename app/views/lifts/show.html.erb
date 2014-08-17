@@ -48,7 +48,7 @@
             <% else %>
               <%= @lift.contract.partner.name %><br>
               Договор № <%= @lift.contract.number %>&nbsp;от<br>
-            <% end %> 
+            <% end %>
             Срок действия:
           <% end %>
         </div>
@@ -92,15 +92,16 @@
       <div class="panel panel-default">
         <div class="panel-heading">Контрольные даты и сроки</div>
         <div class="panel-body">
-          Ввод в эксплуатацию: 
+          Ввод в эксплуатацию:
           <% if @lift.introduced_at.nil? %>
           <br>
           <% else %>
           <b><%= @lift.introduced_at %></b>&nbsp;г.<br>
-          <% end %> 
+          <% end %>
           Срок службы:&nbsp;<b><%= @lift.standart_life %></b>&nbsp;лет<br>
-          Вывод из эксплуатации: <b><%= @date_of_decommiss %></b>&nbsp;г.<br>
-          Модернизация:&nbsp;<b><%= @lift.overhaul_at %></b>&nbsp;г.<br>
+          Модернизация:&nbsp;<b><%= @lift.overhauls.last.produced_at.strftime("%d.%m.%Y") %></b>
+          (<%= link_to @lift.overhauls.last.kind, @lift.overhauls.last %>)<br>
+          Вывод из эксплуатации: <b><%= @date_of_decommiss.strftime("%Y") %></b>&nbsp;г.<br>
           Последнее освидетельствование:
           <% if @lift.inspections.last.nil? %>
           <br>

@@ -2,8 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-	$('#datatables').dataTable();   	
-jQuery ->
+	$('#datatables').dataTable();
+
 	builds = $('#lift_build').html()
 	$('#lift_street').change ->
 		street  = $('#lift_street :selected').text()

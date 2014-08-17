@@ -10,7 +10,7 @@
       <%= link_to "elevatorTools", main_path, class: "navbar-brand" %>
     </div>
     <div class="collapse navbar-collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav pull-right pdr">
+        <ul class="nav navbar-nav pull-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i> <%= @current_user.runame %> <b class="caret"></b></a>
             <ul class="dropdown-menu pull-right">
@@ -122,6 +122,7 @@
   <% if (params[:controller] == 'lifts' )%>
     <ul class="breadcrumb pull-right pdr">
       <li class="<%= 'active' if (params[:controller] == 'lifts'  and params[:action] == 'list') %>"><%= link_to "Все лифты",     lifts_list_path %></li>
+      <li><%= link_to "Ремонты", overhauls_path %></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           ПТО <span class="caret"></span>

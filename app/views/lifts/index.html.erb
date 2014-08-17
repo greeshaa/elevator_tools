@@ -1,4 +1,4 @@
-<% provide(:title, 'Лифты') %>
+<% provide(:title, @title) %>
 <p class="lead"><%= @title %></p>
 <hr>
 <div class="row">
@@ -14,19 +14,19 @@
     <% else %>
       <table id="datatables" class="table table-condensed table-striped">
         <thead>
-          <th>Адрес</th>
-          <th>Рег.номер</th>
-          <th>УМ</th>
-          <th>Район</th>
-          <th>Механик</th>
-          <th>Вывод</th>
-          <th></th>
+          <th  class="td_center">Адрес</th>
+          <th  class="td_center">Рег.номер</th>
+          <th  class="td_center">УМ</th>
+          <th  class="td_center">Район</th>
+          <th  class="td_center">Механик</th>
+          <th  class="td_center">Вывод</th>
+          <th  class="td_center"><%= @link_name %></th>
         </thead>
         <tbody>
           <%= render @lifts %>
         </tbody>
       </table>
-    <% end %>  
+    <% end %>
   </div>
 </div>
 <% end %>

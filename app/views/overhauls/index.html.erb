@@ -1,0 +1,20 @@
+<% provide(:title, @title) %>
+<p class="lead"><%= @title %></p>
+<hr>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <table id="datatables" class="table table-condensed table-striped">
+        <thead>
+        <th class="td_center">#</th>
+        <th class="td_center">Адрес</th>
+        <th class="td_center">Дата ремонта</th>
+        <th class="td_center">Вид работ</th>
+        <th class="td_center">Срок продления</th>
+        <th class="td_center">Механик</th>
+        </thead>
+        <tbody>
+          <%= render @overhauls %>
+        </tbody>
+    </table>
+  </div>
+</div>

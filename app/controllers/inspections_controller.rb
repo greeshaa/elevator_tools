@@ -5,22 +5,22 @@ class InspectionsController < ApplicationController
 		@lift = Lift.find(params[:lift_id])
 		@porch  = @lift.porch
     if @porch.nil?
-      @build_name  = 'Номер здания неизвестен' 
+      @build_name  = 'Номер здания неизвестен'
       @street_name = 'Улица неизвестна'
       @city_name   = 'Населенный пункт неизвестен'
     else
-  		@build  = @porch.build  
+  		@build  = @porch.build
   		@street = @build.street
     	@city   = @street.city
     	@node   = @build.node
     end
     @@lastinspection = @lift.inspections.last
 		@inspection = @@inspection = @lift.inspections.build
-		
+
 	end
 
 	def create
-		
+
 		@inspection = @@inspection
 		@lift = @inspection.lift
 
@@ -50,16 +50,19 @@ class InspectionsController < ApplicationController
 
 	def overdue
 		@inspections = Inspection.where(active: true).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
-		render 'index'		
+		@title = 'Лифты с просроченным ПТО'
+		render 'index'
 	end
 
 	def next
 		@inspections = Inspection.where(next_inspection_at: Date.today..(Date.today + 7.day)).order(:next_inspection_at)
+		@title = 'Лифты с ПТО запланированным на следующую неделю'
 		render 'index'
 	end
 
 	def last
 		@inspections = Inspection.where(created_at: (Date.today - 7.day)..Date.today + 1.day).order(:created_at)
+		@title = 'Лифты с ПТО на прошедшей неделе'
 		render 'index'
 	end
 end

@@ -3,4 +3,5 @@
 	<td><%= inspection.lift.porch.build.street.street_kind.name + ' ' + inspection.lift.porch.build.street.name + ' - ' + inspection.lift.porch.build.name + ', ' + inspection.lift.porch.name %></td>
 	<td class="td_center"><%= inspection.inspection_at.strftime("%d.%m.%Y") %></td>
 	<td class="td_center"><%= inspection.next_inspection_at.strftime("%d.%m.%Y") %></td>
+	<td class="td_center"><%= link_to '<i class="fa fa-calendar"></i>'.html_safe, new_inspection_path + '?lift_id=' + inspection.lift.id.to_s %></td>
 </tr>
