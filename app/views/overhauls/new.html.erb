@@ -1,4 +1,6 @@
 <% provide(:title, @title) %>
+<p class="lead"><%= @title %></p>
+<hr>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <div class="well bs-component">
@@ -6,11 +8,6 @@
       <%= render 'shared/error_messages', object: f.object %>
       <fieldset>
         <legend>
-          <% if @lift.porch.nil? %>
-            <% provide(:title, 'Неизвестный адрес') %>
-          <% else %>
-            <% provide(:title, @street.name + ' ' + @build.name  + ' ' + @porch.name) %>
-          <% end %>
           <% if @porch.nil? %>
            <p class="text-warning">Неизвестный адрес</p>
           <% else %>
