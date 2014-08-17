@@ -79,7 +79,7 @@ before_filter :signed_in_user
       if @lift.overhauls.empty?
         @date_of_decommiss = @lift.introduced_at + @lift.standart_life
       else
-        @date_of_decommiss = @lift.overhauls.last.produced_at + @lift.overhauls.last.new_lifetime*365
+        @date_of_decommiss = (@lift.overhauls.last.produced_at + @lift.overhauls.last.new_lifetime*365).strftime("%Y")
       end
 
     end

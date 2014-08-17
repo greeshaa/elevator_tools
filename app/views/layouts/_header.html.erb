@@ -66,7 +66,7 @@
       <%= form_tag({:controller => "address", :action => "index"}, :method => "get", role:"form") do %>
       <div class="input-group input-group-sm">
         <label class="sr-only" for="search">search</label>
-        <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Партизанская, 8/1"}) %>
+        <%= search_field_tag(:search, params[:search], {class:"form-control"}) %>
         <div class="input-group-btn">
           <button class='btn btn-default' style='width:40px;' type="submit">
             <i class="fa fa-search"></i>
