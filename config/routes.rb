@@ -9,6 +9,7 @@ ElevatorTools::Application.routes.draw do
   resources :porches
   resources :lifts do
     collection { put :move }
+    #collection { patch :select_price_save}
   end
   resources :inspections
   resources :overhauls
@@ -58,6 +59,8 @@ ElevatorTools::Application.routes.draw do
   get 'mechanics/:id/work_order', to: 'mechanics#work_order', :as => :work_order
   get 'mechanics/:id/lift_move', to: 'mechanics#lift_move', :as => :mechanics_lift_move
   get 'nodes/:id/lift_move', to: 'nodes#lift_move', :as => :nodes_lifts_move
+  get 'lifts/:id/select_price', to: 'lifts#select_price', :as => :select_price
+  patch 'lifts/:id/select_price_save', to: 'lifts#select_price_save', :as => :select_price_save
   #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'

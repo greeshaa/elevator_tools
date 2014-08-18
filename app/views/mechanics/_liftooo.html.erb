@@ -14,10 +14,10 @@
     <td><%= lift.capacity %></td>
     <td><%= lift.stopscount %></td>
     <% if lift.price.nil? %>
-      <td></td>
+      <td><%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, select_price_path(lift) if current_user.admin? || current_user.management? %></td>
     <% else %>
       <td>
-        <%= lift.price.cost %><i class="fa fa-rub"></i>
+        <%= number_to_currency(lift.price.cost, locale: :ru) %> <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, select_price_path(lift) if current_user.admin? || current_user.management? %>
       </td>
     <% end %>
    <% end %>

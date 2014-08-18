@@ -197,4 +197,75 @@ before_filter :signed_in_user
     end
   end
 
+  def select_price
+    session[:return_to] ||= request.referer
+    prices = Price.all
+    prices.each do |p|
+      case p.floor
+      when 2
+        @prices2fl = [] if @prices2fl.nil?
+        @prices2fl.push(p)
+      when 3
+        @prices3fl = [] if @prices3fl.nil?
+        @prices3fl.push(p)
+      when 4
+        @prices4fl = [] if @prices4fl.nil?
+        @prices4fl.push(p)
+      when 5
+        @prices5fl = [] if @prices5fl.nil?
+        @prices5fl.push(p)
+      when 6
+        @prices6fl = [] if @prices6fl.nil?
+        @prices6fl.push(p)
+      when 7
+        @prices7fl = [] if @prices7fl.nil?
+        @prices7fl.push(p)
+      when 8
+        @prices8fl = [] if @prices8fl.nil?
+        @prices8fl.push(p)
+      when 9
+        @prices9fl = [] if @prices9fl.nil?
+        @prices9fl.push(p)
+      when 10
+        @prices10fl = [] if @prices10fl.nil?
+        @prices10fl.push(p)
+      when 11
+        @prices11fl = [] if @prices11fl.nil?
+        @prices11fl.push(p)
+      when 12
+        @prices12fl = [] if @prices12fl.nil?
+        @prices12fl.push(p)
+      when 13
+        @prices13fl = [] if @prices13fl.nil?
+        @prices13fl.push(p)
+      when 14
+        @prices14fl = [] if @prices14fl.nil?
+        @prices14fl.push(p)
+      when 15
+        @prices15fl = [] if @prices15fl.nil?
+        @prices15fl.push(p)
+      when 16
+        @prices16fl = [] if @prices16fl.nil?
+        @prices16fl.push(p)
+      when 17
+        @prices17fl = [] if @prices17fl.nil?
+        @prices17fl.push(p)
+      else
+
+      end
+    end
+    @lift   = Lift.find(params[:id])
+  end
+
+  def select_price_save
+    @lift   = Lift.find(params[:id])
+    @lift.price_id = params[:price_id]
+    if @lift.save
+      flash[:success] = "Лифт с регистрационным номером: " + @lift.regnum + " обновлен"
+      redirect_to session.delete(:return_to)
+    else
+      render 'select_price_save'
+    end
+  end
+
 end

@@ -15,70 +15,70 @@
         <div class="form-group">
           <%= f.label :function, "Назначение", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-            <%= f.select(:function, options_for_select([['Пассажирский', 'Пассажирский'], ['Больничный', 'Больничный'], ['М.грузовой', 'М.грузовой'], ['Грузовой', 'Грузовой'], ['Эскалатор', 'Эскалатор']]), {}, 
+            <%= f.select(:function, options_for_select([['Пассажирский', 'Пассажирский'], ['Больничный', 'Больничный'], ['М.грузовой', 'М.грузовой'], ['Грузовой', 'Грузовой'], ['Эскалатор', 'Эскалатор']]), {},
             {class: " form-control input-sm"} ) %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :capacity, "Грузоподъемность", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-            <%= f.select(:capacity, options_for_select([['100 кг', 100], ['320 кг', 320], ['400 кг', 400], ['630 кг', 630], ['1000 кг', 1000], ['2000 кг', 2000]]), {}, 
+            <%= f.select(:capacity, options_for_select([['100 кг', 100], ['320 кг', 320], ['400 кг', 400], ['630 кг', 630], ['1000 кг', 1000], ['2000 кг', 2000]]), {},
             {class: " form-control input-sm"} ) %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :stopscount, "Количество остановок", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-            <%= f.select(:stopscount, options_for_select( 2.upto(17).collect {|i| [i, i] }), {}, 
+            <%= f.select(:stopscount, options_for_select( 2.upto(17).collect {|i| [i, i] }), {},
             {class: " form-control input-sm"} ) %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :district_id, "Район", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-            <%= f.select(:district_id, options_for_select(@districts.collect {|d| [d.name, d.id] }), {}, 
+            <%= f.select(:district_id, options_for_select(@districts.collect {|d| [d.name, d.id] }), {},
             {class: " form-control input-sm"} ) %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :street, "Улица", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-          <%= f.collection_select(:street, Street.order(:name), :id, :name, 
+          <%= f.collection_select(:street, Street.order(:name), :id, :name,
               {}, html_options = {prompt: 'Выберите улицу', class:"form-control input-sm"}) %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :build, "Здание", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-          <%= f.grouped_collection_select(:build, Street.order(:name), :builds, :name, :id, :name, 
+          <%= f.grouped_collection_select(:build, Street.order(:name), :builds, :name, :id, :name,
                         {}, html_options = {prompt: 'Выберите здание', class:"form-control input-sm"}) %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :porch_id, "Подъезд", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-          <%= f.grouped_collection_select(:porch_id, Build.order(:name), :porches, :name, :id, :name, 
+          <%= f.grouped_collection_select(:porch_id, Build.order(:name), :porches, :name, :id, :name,
                         {}, html_options = {prompt: 'Выберите подъезд...', class:"form-control input-sm"}) %>
           </div>
         </div>
         <div class="form-group" id="node">
           <%= f.label :node_id, "УМ", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-            <%= f.select(:node_id, options_for_select(@nodes.order_by_name.collect {|n| [n.name, n.id] }), {}, 
+            <%= f.select(:node_id, options_for_select(@nodes.order_by_name.collect {|n| [n.name, n.id] }), {},
             {class: " form-control input-sm"} ) %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :mechanic_id, "Механик", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-            <%= f.select(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {}, 
+            <%= f.select(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {},
             {class: " form-control input-sm"} ) %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :tlr_id, "ТЛР", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-            <%= f.select(:tlr_id, options_for_select(@tlr.collect {|t| [t.name, t.id] }), {}, 
+            <%= f.select(:tlr_id, options_for_select(@tlr.collect {|t| [t.name, t.id] }), {},
             {class: " form-control input-sm"} ) %>
           </div>
         </div>
@@ -87,7 +87,8 @@
             <%= link_to " Отменить ", lifts_path, class: "btn btn-default btn-sm" %>
             <%= f.submit "Сохранить", class: "btn btn-primary btn-sm" %>
           </div>
-        </div>      
+        </div>
+      </fieldset>
       <% end %>
     </div>
   </div>

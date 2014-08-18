@@ -1,0 +1,9 @@
+<td class="td_center">
+<% if (params[:controller] == 'lifts' || params[:action] == 'select_price') %>
+<%= radio_button_tag :price_id, price.id %>
+<%= number_to_currency(price.cost, locale: :ru) %>
+<% else %>
+<%= number_to_currency(price.cost, locale: :ru) %>
+<%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, edit_price_path(price) if current_user.admin? || current_user.management? %>
+<% end %>
+</td>
