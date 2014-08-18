@@ -62,6 +62,7 @@
         <%= link_to "Справочник", handbook_path %></li>
       <% end %>
     <% end %>
+    <% if current_user.admin? %>
     <div class="col-md-4 pull-right pdr">
       <%= form_tag({:controller => "address", :action => "index"}, :method => "get", role:"form") do %>
       <div class="input-group input-group-sm">
@@ -75,6 +76,7 @@
       </div>
       <% end %>
     </div>
+    <% end %>
   </ul>
 <!--- Меню контроллеров ---->
   <% if params[:controller] == 'static_pages'%>
