@@ -31,9 +31,20 @@
             </tr>
           <% end %>
         <% end %>
-        </tbody>  
+
+        </tbody>
       </table>
       <% end %>
   </div>
 </div>
+<% end %>
+<% unless @equip.nil? %>
+<% @equip.each do |e| %>
+  <tr>
+    <td class="td_address" style="width:60%;">
+        <%= link_to e.equipment_list.manufacturer + ' ' + e.equipment_list.name + ' s/n: ' + e.factory_sn, e %><br>
+    </td>
+    <td style="width:40%;"></td>
+  </tr>
+<% end %>
 <% end %>

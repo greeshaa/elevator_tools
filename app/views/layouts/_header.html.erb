@@ -51,15 +51,12 @@
       <li class="<%= 'active' if params[:controller] == 'address' %>"><%= link_to "Адреса", address_index_path %></li>
       <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
       <li class="<%= 'active' if params[:controller] == 'mechanics' %>"><%= link_to "Механики", mechanics_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook') %>">
-        <%= link_to "Справочник", handbook_path %></li>
       <% else %>
       <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>">
         <%= link_to "Основная", main_path %></li>
       <li class="<%= 'active' if params[:controller] == 'address' %>"><%= link_to "Адреса", address_index_path %></li>
       <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook') %>">
-        <%= link_to "Справочник", handbook_path %></li>
+      <li class="<%= 'active' if params[:controller] == 'conracts' %>"><%= link_to "Договора", contracts_path %></li>
       <% end %>
     <% end %>
     <% if current_user.admin? %>

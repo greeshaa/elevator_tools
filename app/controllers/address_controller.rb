@@ -8,7 +8,7 @@ before_filter :signed_in_user
       #@addr1 = "%#{address[0]}%"
       #@addr2 = "%#{address[1]}%"
       @address = Hash.new
-    	if address[0] != nil && address[1] != nil 
+    	if address[0] != nil && address[1] != nil
      		street = Street.where('LOWER(name) LIKE ?', "%#{address[0]}%")
      		if street.nil?
      			okmessage = "Улица ненайдена."
@@ -29,7 +29,7 @@ before_filter :signed_in_user
 	end
 
   def new
-    
+
   end
   def list
     @address = Hash.new
@@ -41,6 +41,6 @@ before_filter :signed_in_user
   end
 
   def district
-    @districts = District.all.order(:name)    
+    @districts = District.all.order(:name)
   end
 end

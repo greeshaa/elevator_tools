@@ -17,7 +17,7 @@
       <td><%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, select_price_path(lift) if current_user.admin? || current_user.management? %></td>
     <% else %>
       <td>
-        <%= number_to_currency(lift.price.cost, locale: :ru) %> <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, select_price_path(lift) if current_user.admin? || current_user.management? %>
+        <%= number_to_currency(lift.price.cost, locale: :ru) %> <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, select_price_path(lift) if current_user.admin? || current_user.management? || current_user.foreman? %>
       </td>
     <% end %>
    <% end %>
