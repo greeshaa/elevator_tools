@@ -6,43 +6,40 @@
    	<td>
    	</td>
   <% else %>
-  	<% if lift.node.id == 1 %>
-  	<td>
-   		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift, class: "text-muted" %>
-   	</td>
-    <td>
-      <%= lift.regnum %>
-    </td>
-   	<td>
-   	<%= link_to lift.node.name, lift.node, class: "text-muted" %>
-   	</td>
-   	<% else %>
-   	<td>
+  	<td class="<%= 'text-muted' if lift.node.id == 1 %>">
    		<%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
    	</td>
-    <td>
+    <td class="td_center">
       <%= lift.regnum %>
     </td>
-    <td>
-   	<%= link_to 'УМ '  + lift.node.name, lift.node %>
-   	</td>
-   	<% end %>
-    <% if lift.district.nil? %>
-    <td></td>
-    <% else %>
-    <td><%= lift.district.name %></td>
-    <% end %>
+    <td class="td_center">
+      <%= lift.capacity %>
+    </td>
+    <td class="td_center">
+      <%= lift.stopscount %>
+    </td>
     <% if lift.mechanic.nil? %>
     <td></td>
     <% else %>
     <td><%= link_to lift.mechanic.name, lift.mechanic %></td>
     <% end %>
+    <td>
+    <% if lift.contract.nil? %>
+      <span class="label label-warning">Нет информации</span>
+    <% else %>
+      <% if lift.contract.partner.nil? %>
+        <span class="label label-warning">Нет информации</span>
+      <% else %>
+        <%= lift.contract.partner.name %><br>
+      <% end %>
+    <% end %>
+    </td>
     <% if lift.introduced_at.nil? %>
       <td></td>
     <% else %>
       <% if lift.introduced_at <= (Date.today.year - 25) %>
         <% if lift.overhauls.empty? %>
-        <td class="td_center text-danger">
+        <td class="td_center danger">
           <%= lift.introduced_at + 25 %>
         </td>
         <% else %>
@@ -55,6 +52,13 @@
         <%= lift.introduced_at + 25 %>
       </td>
       <% end %>
+    <% end %>
+    <% if lift.inspections.last != nil %>
+    <td class="td_center <%= 'danger' if lift.inspections.last.next_inspection_at < Date.today %> <%= 'warning' if lift.inspections.last.next_inspection_at == Date.today %>" >
+      <%= lift.inspections.last.next_inspection_at.strftime("%d.%m.%Y")  if lift.inspections.last != nil %>
+    </td>
+    <% else %>
+    <td><span class="label label-warning">Нет информации</span></td>
     <% end %>
     <td class="td_center">
     <% if params[:action] == 'overdue_lifts' %>
