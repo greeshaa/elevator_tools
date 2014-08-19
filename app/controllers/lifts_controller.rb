@@ -171,7 +171,10 @@ before_filter :signed_in_user
     end
     @title = 'Лифты с истекшим сроком эксплуатации'
     @link_name = 'Ремонт'
-    render "index"
+    respond_to do |format|
+      format.html render "index"
+      format.xls  render "index"
+    end
   end
 
   def move

@@ -1,13 +1,13 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   before_filter :signed_in_user #, only: [:edit, :update, :show ]
-  before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user,     only: :destroy #, :edit, :update]
+  before_filter :correct_user, only: [:edit, :update]
+  before_filter :admin_user,   only: :destroy #, :edit, :update]
 
   def show
     @user = User.find(params[:id])
   end
-  
+
   def new
     @user = User.new
   end
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to user_url, notice: "Вы не можете редактировать этого пользователя." unless current_user?(@user)
+      redirect_to user_url, notice: "Вы не можете редактировать этого пользователя." unless current_user?(@user) || current_user.admin?
     end
 
     def admin_user

@@ -48,6 +48,7 @@ class Lift < ActiveRecord::Base
     belongs_to :node
     belongs_to :mechanic
     belongs_to :contract
+    belongs_to :partner
     belongs_to :expert
     belongs_to :tlr
     belongs_to :elevator_control_station

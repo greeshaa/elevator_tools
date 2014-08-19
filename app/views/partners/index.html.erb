@@ -1,0 +1,33 @@
+<% provide(:title, 'Контрагенты') %>
+<p class="lead">Контрагенты</p>
+<hr>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render "address/address_search" %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 list">
+  	<table id="datatables" class="table table-condensed table-striped">
+  		<thead>
+  			<tr>
+  				<th class="td_center">Контрагент</th>
+  				<th class="td_center">Кол-во договоров</th>
+  				<th class="td_center">Кол-во лифтов</th>
+  				<th></th>
+  			</tr>
+  		</thead>
+  		<tbody>
+    		<% @partners.each do |p| %>
+    		<tr>
+    			<td><%= link_to p.name, p %></td>
+    			<td class="td_center"><%= p.contracts.count %></td>
+          <td class="td_center"><%= p.lifts.count %></td>
+    			<td class="td_center"><%= link_to "Изменить", edit_partner_path(p), class:"text-muted" %></td>
+    			<td class="td_center"><%= link_to "Удалить", p, method: :delete, data: { confirm: "Вы уверены?" }, class:"text-muted" if current_user.admin? %></td>
+    		</tr>
+    		<% end %>
+  		</tbody>
+  	</table>
+  </div>
+</div>

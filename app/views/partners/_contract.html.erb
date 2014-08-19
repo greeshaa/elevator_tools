@@ -1,0 +1,10 @@
+<% @contracts.each do |c| %>
+  <tr>
+    <td><%= link_to c.number, c %></td>
+    <td><%= c.signed_at %></td>
+    <td><%= c.lifetime %></td>
+    <td><%= link_to c.lifts.count, lifts_of_contract_path + "?id=" + c.id.to_s %></td>
+    <td><%= link_to "Изменить", edit_contract_path(c), class:"text-muted" %></td>
+    <td><%= link_to "Удалить", c, method: :delete, data: { confirm: "Вы уверены?" }, class:"text-muted" if current_user.admin? %></td>
+  </tr>
+<% end %>

@@ -26,6 +26,7 @@ ElevatorTools::Application.routes.draw do
   end
   resources :foremen
   resources :contracts
+  resources :partners
   resources :prices
   resources :connections do
       resources :ip_address, shallow: true

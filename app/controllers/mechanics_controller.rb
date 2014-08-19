@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class MechanicsController < ApplicationController
-
+before_filter :signed_in_user
 	def index
 		if current_user.foreman?
 			foreman = Foreman.where('user_id = ?', current_user.id).first
@@ -34,7 +34,7 @@ class MechanicsController < ApplicationController
 		@allliftsum = @lcount + @templiftcount
 		@zliftsum = @zlcount + @ztempliftcount
 		@oliftsum = @olcount + @otempliftcount
-		
+
 	end
 
 		def lift_move
@@ -61,7 +61,7 @@ class MechanicsController < ApplicationController
 		@allliftsum = @lcount + @templiftcount
 		@zliftsum = @zlcount + @ztempliftcount
 		@oliftsum = @olcount + @otempliftcount
-		
+
 	end
 
 	def work_order
@@ -89,7 +89,7 @@ class MechanicsController < ApplicationController
 		@allliftsum = @lcount + @templiftcount
 		@zliftsum = @zlcount + @ztempliftcount
 		@oliftsum = @olcount + @otempliftcount
-		
+
 	end
 
 	def new

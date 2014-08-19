@@ -1,11 +1,12 @@
 # -*- encoding : utf-8 -*-
 class ConnectionsController < ApplicationController
+    before_filter :signed_in_user
 	def index
 		@connections = Connection.all
 	end
 
 	def show
-		@connection = Connection.find(params[:id])		
+		@connection = Connection.find(params[:id])
 	end
 
 	def new
@@ -29,7 +30,7 @@ class ConnectionsController < ApplicationController
     else
       render 'new'
     end
-		
+
 	end
 
 end

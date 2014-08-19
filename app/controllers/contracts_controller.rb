@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ContractsController < ApplicationController
-
+before_filter :signed_in_user
 	def index
 		@contracts = Contract.all
 	end

@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class OverhaulsController < ApplicationController
+	before_filter :signed_in_user
 	def index
 		@overhauls = Overhaul.all
 		@title = 'Проведенные ремонты'

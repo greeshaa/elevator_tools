@@ -1,0 +1,54 @@
+<% provide(:title, 'Данные контрагента') %>
+<p class="lead">Данные контрагента</p>
+<hr>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+  	<div class="panel panel-default">
+    	<div class="panel-heading">Данные контрагента
+        <div class="btn-group btn-group-xs pull-right">
+          <%= link_to "Изменить", edit_partner_path, class:"btn btn-default btn-xs" %>
+        </div>
+      </div>
+    		<div class="panel-body">
+    			<table class="table table-condensed table-striped">
+    				<tr>
+    					<td>Название</td>
+    					<td><%= @partnername %></td>
+    				</tr>
+    				<tr>
+    					<td>Адрес</td>
+    					<td><%=  %></td>
+    				</tr>
+    				<tr>
+    					<td>ИНН</td>
+    					<td><%=  %></td>
+    				</tr>
+    				<tr>
+    					<td>КПП</td>
+    					<td><%=  %></td>
+    				</tr>
+    			</table>
+    	</div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Договора</div>
+      <div class="panel-body">
+        <table class="table table-striped table-condensed">
+          <thead>
+            <tr>
+              <th>Номер</th>
+              <th>Дата подписания</th>
+              <th>Срок действия</th>
+              <th>Количество лифтов</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render 'partners/contract' %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

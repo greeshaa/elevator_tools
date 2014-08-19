@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+	xmlns:o="urn:schemas-microsoft-com:office:office"
+	xmlns:x="urn:schemas-microsoft-com:office:excel"
+	xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+	xmlns:html="http://www.w3.org/TR/REC-html40">
+	<Worksheet ss:Name="Единый реестр">
+		<Table>
+			<Row>
+				<Cell><Data ss:Type="String">Адрес</Data></Cell>
+				<Cell><Data ss:Type="String">Подъезд</Data></Cell>
+				<Cell><Data ss:Type="String">Производитель</Data></Cell>
+				<Cell><Data ss:Type="String">СУЛ</Data></Cell>
+				<Cell><Data ss:Type="String">Рег.№</Data></Cell>
+				<Cell><Data ss:Type="String">Кол-во остановок</Data></Cell>
+				<Cell><Data ss:Type="String">Назначение</Data></Cell>
+				<Cell><Data ss:Type="String">Грузоподъемность</Data></Cell>
+				<Cell><Data ss:Type="String">Первое испытание</Data></Cell>
+				<Cell><Data ss:Type="String">ЗАО/ООО</Data></Cell>
+				<Cell><Data ss:Type="String">Участок</Data></Cell>
+				<Cell><Data ss:Type="String">Прораб</Data></Cell>
+				<Cell><Data ss:Type="String">Механик</Data></Cell>
+				<Cell><Data ss:Type="String">Владелец</Data></Cell>
+				<Cell><Data ss:Type="String">№ договора</Data></Cell>
+				<Cell><Data ss:Type="String">Оплата ТО</Data></Cell>
+				<Cell><Data ss:Type="String">Эксперт</Data></Cell>
+				<Cell><Data ss:Type="String">Последнее ТО</Data></Cell>
+				<Cell><Data ss:Type="String">Следующее ТО</Data></Cell>
+			</Row>
+		<% @lifts.each do |l| %>
+			<Row>
+				<Cell><Data ss:Type="String"><%= l.porch.build.street.name + ', ' + l.porch.build.name %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= l.porch.name %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= l.manufacturer %></Data></Cell>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<Cell><Data ss:Type="String"><%= l.regnum %></Data></Cell>
+				<Cell><Data ss:Type="Number"><%= l.stopscount %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= l.function %></Data></Cell>
+				<Cell><Data ss:Type="Number"><%= l.capacity %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= l.introduced_at %></Data></Cell>
+				<% if l.tlr.nil? %>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+				<Cell><Data ss:Type="String"><%= l.tlr.name %></Data></Cell>
+				<% end %>
+				<% if l.district.nil? %>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+				<Cell><Data ss:Type="String"><%= l.district.name %></Data></Cell>
+				<% end %>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<% if l.mechanic.nil? %>
+				<Cell><Data ss:Type="String">Механик</Data></Cell>
+				<% else %>
+				<Cell><Data ss:Type="String"><%= l.mechanic.name %></Data></Cell>
+				<% end %>
+				<% if l.contract.nil? %>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<% elsif l.contract.partner.nil? %>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<Cell><Data ss:Type="String"><%= l.contract.number %></Data></Cell>
+				<% else %>
+				<Cell><Data ss:Type="String"><%= l.contract.partner.name %></Data></Cell>
+				<Cell><Data ss:Type="String"><%= l.contract.number %></Data></Cell>
+				<% end %>
+				<Cell><Data ss:Type="String"><%= l.service_payment %></Data></Cell>
+				<% if l.expert.nil? %>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+				<Cell><Data ss:Type="String"><%= l.expert.partner.name %></Data></Cell>
+				<% end %>
+				<% if l.inspections.last.nil? %>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+      	<Cell><Data ss:Type="String"><%= l.inspections.last.inspection_at.strftime("%d.%m.%Y") %></Data></Cell>
+      	<Cell><Data ss:Type="String"><%= l.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></Data></Cell>
+      	<% end %>
+			</Row>
+		<% end %>
+		</Table>
+	</Worksheet>
+</Workbook>

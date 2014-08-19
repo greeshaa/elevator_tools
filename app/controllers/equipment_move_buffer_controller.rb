@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class EquipmentMoveBufferController < ApplicationController
-	def show		
+	before_filter :signed_in_user
+	def show
 		@equipment_move_buffer = current_equipment_buffer
 		#@equipment_move_buffer = equipment_move_buffer.equipment_line_items
 		@equipment_movements = EquipmentMovement.new
@@ -18,7 +19,7 @@ class EquipmentMoveBufferController < ApplicationController
 		#respond_to do |format|
 			#format.html { redirect_to equipment_index_path, notice: 'Буфер успешно очищен!'}
 			#format.json { head :ok}
-		#end		
+		#end
 	end
 
 end

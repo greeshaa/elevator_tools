@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class InspectionsController < ApplicationController
-
+before_filter :signed_in_user
 	def new
 		@lift = Lift.find(params[:lift_id])
 		@porch  = @lift.porch

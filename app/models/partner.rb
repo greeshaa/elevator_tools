@@ -12,4 +12,5 @@
 class Partner < ActiveRecord::Base
   attr_accessible :name
   has_many :contracts
+  has_many :lifts, :through => :contracts
 end
