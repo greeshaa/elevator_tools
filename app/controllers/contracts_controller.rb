@@ -42,4 +42,10 @@ before_filter :signed_in_user
 
 	end
 
+	def lift_move
+		@contract  = Contract.find(params[:id])
+		@contracts = Contract.all.order(:number)
+		@lifts     = @contract.lifts
+	end
+
 end

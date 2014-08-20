@@ -60,6 +60,7 @@ ElevatorTools::Application.routes.draw do
   get 'mechanics/:id/work_order', to: 'mechanics#work_order', :as => :work_order
   get 'mechanics/:id/lift_move', to: 'mechanics#lift_move', :as => :mechanics_lift_move
   get 'nodes/:id/lift_move', to: 'nodes#lift_move', :as => :nodes_lifts_move
+  get 'contracts/:id/lift_move', to: 'contracts#lift_move', :as => :contracts_lifts_move
   get 'lifts/:id/select_price', to: 'lifts#select_price', :as => :select_price
   patch 'lifts/:id/select_price_save', to: 'lifts#select_price_save', :as => :select_price_save
   get 'lifts/:id/select_price_cancel', to: 'lifts#select_price_cancel', :as => :select_price_cancel

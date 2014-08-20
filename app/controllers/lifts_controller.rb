@@ -180,8 +180,16 @@ before_filter :signed_in_user
   def move
     mech = params[:mechanic_id]
     node = params[:node_id]
+    contract = params[:contract_id]
     if mech.nil?
       if node.nil?
+        if contract.nil?
+
+        else
+          @contract = Contract.find(params[:contract_id])
+          Lift.update_all(["contract_id=?", params[:contract_id]], :id => params[:lift_ids])
+          redirect_to @contract
+        end
       else
         @node = Node.find(params[:node_id])
         Lift.update_all(["node_id=?", params[:node_id]], :id => params[:lift_ids])

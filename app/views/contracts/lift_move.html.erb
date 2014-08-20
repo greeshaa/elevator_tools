@@ -1,0 +1,43 @@
+<% provide(:title, 'Договор №' + @contract.number) %>
+<p class="lead"><%= 'Договор №' + @contract.number %></p>
+<hr>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_tag move_lifts_path, :method => :put, html: {class:"form-horizontal"} do %>
+    <fieldset>
+      <div class="form-group">
+        <%= label_tag :contract_id, "Закрепить за ", class:"col-md-2 control-label" %>
+        <div class="col-md-4">
+          <%= select_tag(:contract_id, options_for_select(@contracts.collect {|n| [n.number, n.id] }), {class: "form-control  input-sm"} )    %>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3 col-md-offset-5 list">
+          <%= link_to " Отменить ", contract_path, class: "btn btn-default btn-sm" %>
+          <%= submit_tag "Изменить", method: :put, data: { confirm: "Выбранные лифты будут закреплены. Вы уверены?" }, class: "btn btn-primary    btn-sm" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 list">
+        <div class="panel panel-default">
+          <div class="panel-heading">Обслуживаемые лифты</div>
+          <div class="panel-body">
+            <table id="lifts" class="table table-striped table-condensed">
+              <thead>
+                <td>Адрес</td>
+                <td>Рег.номер</td>
+                <td>УМ</td>
+                <td>Район</td>
+                <td>Механик</td>
+                <td>Дата вывода</td>
+              </thead>
+              <tbody>
+                <%= render "contracts/lift" %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <% end %>
+  </div>
+</div>
