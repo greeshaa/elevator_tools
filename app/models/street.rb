@@ -13,6 +13,9 @@
 
 # -*- encoding : utf-8 -*-
 class Street < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
   attr_accessible :name, :city_id, :street_kind_id
   validates  :name, presence: true, uniqueness: {case_sensitive: false}, length: { minimum: 4 }
 

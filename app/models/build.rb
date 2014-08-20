@@ -13,6 +13,9 @@
 
 # -*- encoding : utf-8 -*-
 class Build < ActiveRecord::Base
+	include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
     attr_accessible :name, :street_id, :porch_count, :node_id
     validates  :name, presence: true#, uniqueness: true
     validates  :porch_count, presence: true

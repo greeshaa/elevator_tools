@@ -11,6 +11,9 @@
 
 # -*- encoding : utf-8 -*-
 class Mechanic < ActiveRecord::Base
+	include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
   attr_accessible :name, :foreman_id
   validates :name, presence: true, length: { minimum: 7, maximum: 24 }, uniqueness: true
   #validates :foreman_id, presence: true

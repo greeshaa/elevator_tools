@@ -16,6 +16,9 @@
 
 # -*- encoding : utf-8 -*-
 class Node < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
   attr_accessible :name, :description, :street_id, :build_id, :porch_id, :dataport, :soundport, :ip_addresses_attributes
 
   belongs_to :porch
@@ -29,8 +32,8 @@ class Node < ActiveRecord::Base
   has_many :porches, :through => :lifts
   has_many :builds, :through => :porches
   has_many :streets, :through => :builds
-  
-  
+
+
   accepts_nested_attributes_for :equipment
   accepts_nested_attributes_for :ip_addresses
 
@@ -41,7 +44,7 @@ class Node < ActiveRecord::Base
   def self.search(search)
     if search
       find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-      
+
       #street = Street.find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
       #if street.empty?
       #  find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
@@ -54,7 +57,7 @@ class Node < ActiveRecord::Base
        # end
         #find(:all, :conditions => [ @f1, @f2 ])
       #end
-      
+
     end
   end
 end

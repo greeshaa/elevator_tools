@@ -37,6 +37,9 @@
 
 # -*- encoding : utf-8 -*-
 class Lift < ActiveRecord::Base
+include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
     attr_accessible :node_id, :porch_id, :district_id, :tlr_id, :position, :lift_type_id, :elevator_control_station_id, :regnum, :sernum,
     				:contract_id, :mechanic_id, :inspection_at, :stopscount, :introduced_at, :overhaul_at, :standart_life, :function, :capacity
 

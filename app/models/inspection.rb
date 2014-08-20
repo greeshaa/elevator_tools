@@ -14,6 +14,9 @@
 # -*- encoding : utf-8 -*-
 # -*- encoding : utf-8 -*-
 class Inspection < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
   attr_accessible :inspection_at, :next_inspection_at, :active, :lift_id
 
 

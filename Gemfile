@@ -19,6 +19,9 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-rails'
 
+# Logging elevator tools
+gem 'public_activity'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
