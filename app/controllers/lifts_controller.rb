@@ -68,10 +68,10 @@ before_filter :signed_in_user
       @city_name   = 'Населенный пункт неизвестен'
 
     else
-  	@build  = @porch.build
-  	@street = @build.street
-    @city   = @street.city
-    @node   = @build.node
+      @build  = @porch.build
+      @street = @build.street
+      @city   = @street.city
+      @node   = @build.node
     end
 
     if @lift.introduced_at.nil?
@@ -196,7 +196,7 @@ before_filter :signed_in_user
       else
         Lift.update_all(["mechanic_id=?", params[:mechanic_id]], :id => params[:lift_ids])
       end
-      redirect_to @mechanic
+      redirect_to session.delete(:return_to)
     end
   end
 
@@ -258,6 +258,9 @@ before_filter :signed_in_user
       end
     end
     @lift   = Lift.find(params[:id])
+    @porch  = @lift.porch
+    @build  = @porch.build
+    @street = @build.street
   end
 
   def select_price_save

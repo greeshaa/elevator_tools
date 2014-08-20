@@ -38,6 +38,7 @@ before_filter :signed_in_user
 	end
 
 		def lift_move
+			session[:return_to] ||= request.referer
 		@mechanic = Mechanic.find(params[:id])
 		#@boss = @mechanic.
 		if current_user.foreman?

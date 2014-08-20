@@ -1,11 +1,15 @@
 <% provide(:title, 'Выбор стоимости обслуживания лифта') %>
+<p class="lead">Выбор стоимости обслуживания лифта</p>
+<hr>
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
     <div class="well bs-component">
       <%= form_for(@lift, url: {action: "select_price_save"}, html:{class:"form-horizontal", role:"form"}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <fieldset>
-        <legend>Выбор стоимости обслуживания лифта</legend>
+        <legend>
+        <%= @street.name + ", " + @build.name + " - " + @porch.name + " | " + @lift.function + " " + @lift.capacity.to_s + " кг. " + @lift.stopscount.to_s + " остановок" %>
+        </legend>
       	<table class="table table-bordered table-condensed table-striped" style="background: #FFF">
 						<thead>
 							<tr>
