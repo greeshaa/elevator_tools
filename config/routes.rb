@@ -62,6 +62,7 @@ ElevatorTools::Application.routes.draw do
   get 'nodes/:id/lift_move', to: 'nodes#lift_move', :as => :nodes_lifts_move
   get 'lifts/:id/select_price', to: 'lifts#select_price', :as => :select_price
   patch 'lifts/:id/select_price_save', to: 'lifts#select_price_save', :as => :select_price_save
+  get 'lifts/:id/select_price_cancel', to: 'lifts#select_price_cancel', :as => :select_price_cancel
   #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'

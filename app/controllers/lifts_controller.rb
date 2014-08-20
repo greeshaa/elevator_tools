@@ -271,4 +271,8 @@ before_filter :signed_in_user
     end
   end
 
+  def select_price_cancel
+    redirect_to session.delete(:return_to)
+  end
+
 end
