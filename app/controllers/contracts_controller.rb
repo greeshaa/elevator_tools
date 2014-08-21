@@ -2,7 +2,7 @@
 class ContractsController < ApplicationController
 before_filter :signed_in_user
 	def index
-		@contracts = Contract.all
+		@contracts = Contract.all.order(:number)
 	end
 
 	def show
