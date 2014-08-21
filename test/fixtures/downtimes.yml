@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lift_id: 1
+  dt_date: 2014-08-21
+  reason: MyString
+
+two:
+  lift_id: 1
+  dt_date: 2014-08-21
+  reason: MyString

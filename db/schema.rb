@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820160559) do
+ActiveRecord::Schema.define(version: 20140821091125) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(version: 20140820160559) do
 
   create_table "districts", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "downtimes", force: true do |t|
+    t.integer  "lift_id"
+    t.date     "dt_date"
+    t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -129,6 +137,15 @@ ActiveRecord::Schema.define(version: 20140820160559) do
 
   create_table "experts", force: true do |t|
     t.integer  "partner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "factory_calendars", force: true do |t|
+    t.integer  "month"
+    t.string   "month_name"
+    t.integer  "cal_days"
+    t.integer  "work_days"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

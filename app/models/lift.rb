@@ -56,12 +56,14 @@ include PublicActivity::Model
     belongs_to :tlr
     belongs_to :elevator_control_station
     belongs_to :price
+
     #belongs_to :manufacturer
 
     has_many :equipment
     has_many :inspections
     has_many :overhauls
     has_many :temp_serv_meches
+    has_many :downtimes
 
     accepts_nested_attributes_for :inspections
 

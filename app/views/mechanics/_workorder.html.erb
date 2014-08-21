@@ -1,5 +1,4 @@
-<% @liftsooo.each do |lift| %>
-  <tr>
+<tr>
   <% if lift[0].porch.nil? %>
     <td>
       <span class="label label-warning">Нет информации о расположении лифта</span>
@@ -27,4 +26,3 @@
    <td class="<%= 'danger-text' if lift[2] > 0 %>"><%= number_to_currency(lift[3], locale: :ru) %></td>
    <td><%= number_to_currency(lift[4], locale: :ru) %></td>
 </tr>
-<% end %>

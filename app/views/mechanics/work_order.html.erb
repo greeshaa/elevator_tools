@@ -63,9 +63,10 @@
                     <%= render "mechanics/liftzao" %>
                   </tbody>
                 </table>
+                <div class="pull-right">Итого: <%= number_to_currency(@totalzao, locale: :ru) %></div>
               </div>
           </div>
-          <% if @liftsooo.empty? %>
+          <% if @liftsooo.blank? %>
           <% else %>
           <div class="panel panel-default">
             <div class="panel-heading">ООО</div>
@@ -89,6 +90,7 @@
                     <%= render "mechanics/liftooo" %>
                   </tbody>
                 </table>
+                <div class="pull-right">Итого: <%= number_to_currency(@totalooo, locale: :ru) %></div>
               </div>
           </div>
           <% end %>
