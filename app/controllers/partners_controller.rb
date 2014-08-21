@@ -30,6 +30,16 @@ class PartnersController < ApplicationController
 		@partner = Partner.find(params[:id])
 	end
 
+	def update
+		@partner = Partner.find(params[:id])
+		if @partner.update_attributes(params[:partner])
+      flash[:success] = "Контрагент " + @partner.name + " обновлен"
+      redirect_to @partner
+    else
+      render 'edit'
+    end
+	end
+
 	def destroy
     partner = Partner.find(params[:id]).destroy
     flash[:success] = "Контрагент " + partner.name + " удален."

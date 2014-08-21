@@ -22,7 +22,7 @@
           <%= f.label :signed_at, "Дата подписания:", class:"col-md-4 control-label" %>
           <div class="col-md-6">
             <div class="input-daterange input-group"  id="datepicker">
-              <%= text_field_tag :signed_at, nil, class: "input-sm form-control" %>
+              <%= f.text_field :signed_at, nil, class: "input-sm form-control" %>
             </div>
           </div>
         </div>
