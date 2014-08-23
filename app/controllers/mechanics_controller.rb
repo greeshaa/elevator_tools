@@ -156,7 +156,7 @@ before_filter :signed_in_user
 						mech_work_days = smonth.business_days_until(tsm.end_at)
 					end
 				else
-					mech_work_days = tsm.start_attsm.end_at(emonth)
+					mech_work_days = tsm.start_at.business_days_until(emonth)
 				end
 
 				accrual = (l.price.cost / @work_days) * mech_work_days if l.price != nil # стоимость обслуживания лифта в день
@@ -194,7 +194,7 @@ before_filter :signed_in_user
 						mech_work_days = smonth.business_days_until(tsm.end_at)
 					end
 				else
-					mech_work_days = tsm.start_attsm.end_at(emonth)
+					mech_work_days = tsm.start_at.business_days_until(emonth)
 				end
 
 				accrual = (l.price.cost / @work_days) * mech_work_days if l.price != nil # стоимость обслуживания лифта в день
