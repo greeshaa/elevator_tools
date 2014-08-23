@@ -1,6 +1,6 @@
 <% @templiftsooo.each do |lift| %>
-<tr>
-  <% if lift.porch.nil? %>
+  <tr>
+  <% if lift[0].porch.nil? %>
     <td>
       <span class="label label-warning">Нет информации о расположении лифта</span>
     </td>
@@ -8,29 +8,23 @@
     </td>
   <% else %>
     <td>
-      <%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
+      <%= link_to lift[0].porch.build.street.name + ', '  + lift[0].porch.build.name + ' - '  + lift[0].porch.name, lift[0] %>
     </td>
-    <td><%= lift.function %></td>
-    <td><%= lift.capacity %></td>
-    <td><%= lift.stopscount %></td>
-    <% if lift.introduced_at.nil? %>
-      <td></td>
+    <td><%= lift[0].function %></td>
+    <td><%= lift[0].capacity %></td>
+    <td><%= lift[0].stopscount %></td>
+    <% if lift[0].price.nil? %>
+      <td><%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, select_price_path(lift[0]) if current_user.admin? || current_user.management? || current_user.foreman?%></td>
     <% else %>
-      <% if lift.introduced_at <= (Date.today.year - 25) %>
-      <td class="text-danger">
-        <%= lift.introduced_at + 25 %>
-      </td>
-      <% else %>
       <td>
-        <%= lift.introduced_at + 25 %>
+        <%= number_to_currency(lift[0].price.cost, locale: :ru) %> <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, select_price_path(lift[0]) if current_user.admin? || current_user.management? || current_user.foreman? %>
       </td>
-      <% end %>
     <% end %>
    <% end %>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
+   <td class="td_center"><%= lift[5] %></td>
+   <td><%= number_to_currency(lift[1], locale: :ru) %></td>
+   <td class="td_center"><%= lift[2] %></td>
+   <td class="<%= 'danger-text' if lift[2] > 0 %>"><%= number_to_currency(lift[3], locale: :ru) %></td>
+   <td><%= number_to_currency(lift[4], locale: :ru) %></td>
 </tr>
 <% end %>

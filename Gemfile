@@ -19,6 +19,8 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-rails'
 
+gem 'business_time'
+
 # Logging elevator tools
 gem 'public_activity'
 
