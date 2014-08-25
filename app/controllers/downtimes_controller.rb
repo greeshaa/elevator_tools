@@ -27,6 +27,15 @@ class DowntimesController < ApplicationController
 	end
 
 	def index
-
+		@title = 'Простои лифтов'
+		downtimes = Downtime.all
+		@downtimes = []
+		downtimes.each do |d|
+			downtime = []
+			downtime.push(d.lift)
+			downtime.push(d.dt_date)
+			downtime.push(d.reason)
+			@downtimes.push(downtime)
+		end
 	end
 end

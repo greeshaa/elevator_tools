@@ -1,0 +1,37 @@
+<% @downtimes.each do |downtime| %>
+<tr>
+	<% if downtime[0].porch.nil? %>
+  	<td>
+   		<span class="label label-warning">Нет информации о расположении лифта</span>
+   	</td>
+   	<td>
+   	</td>
+  <% else %>
+  	<td class="<%= 'text-muted' if downtime[0].node.id == 1 %>">
+   		<%= link_to downtime[0].porch.build.street.name + ', '  + downtime[0].porch.build.name + ' - '  + downtime[0].porch.name, downtime[0] %>
+   	</td>
+    <td class="td_center">
+      <%= downtime[1] %>
+    </td>
+    <td class="td_center">
+      <%= downtime[2] %>
+    </td>
+    <% if downtime[0].mechanic.nil? %>
+    <td></td>
+    <% else %>
+    <td class="td_center"><%= link_to downtime[0].mechanic.name, downtime[0].mechanic %></td>
+    <% end %>
+    <td class="td_center">
+    <% if downtime[0].contract.nil? %>
+      <span class="label label-warning">Нет информации</span>
+    <% else %>
+      <% if downtime[0].contract.partner.nil? %>
+        <span class="label label-warning">Нет информации</span>
+      <% else %>
+        <%= downtime[0].contract.partner.name %><br>
+      <% end %>
+    <% end %>
+    </td>
+  <% end %>
+</tr>
+<% end %>

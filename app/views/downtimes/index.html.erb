@@ -1,0 +1,27 @@
+<% provide(:title, @title) %>
+<p class="lead"><%= @title %></p>
+<hr>
+<% unless @downtimes.nil? %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 list" >
+    <% if @downtimes.empty? %>
+        <p class="lead search_result">Данных о простоях лифтов нет.</p>
+    <% else %>
+      <table id="datatables" class="table table-condensed table-striped">
+        <thead>
+          <th class="td_center">Адрес</th>
+          <th class="td_center">Дата</th>
+          <th class="td_center">Причина</th>
+          <th class="td_center">Механик</th>
+          <th class="td_center">Собств-к</th>
+          <th class="td_center"></th>
+          <th class="td_center"></th>
+        </thead>
+        <tbody>
+          <%= render 'downtimes/downtime' %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+<% end %>
