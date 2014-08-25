@@ -1,0 +1,29 @@
+<% provide(:title, 'Отметка о простое лифта') %>
+<p class="lead">Отметка о простое лифта</p>
+<hr>
+<div class="col-md-8 col-md-offset-2">
+  <legend>
+  	<% if @lift.porch.nil? %>
+			<% provide(:title, 'Неизвестный адрес') %>
+		<% else %>
+			<% provide(:title, @street.name + ' ' + @build.name  + ' ' + @porch.name) %>
+		<% end %>
+		<% if @porch.nil? %>
+ 		 <p class="text-warning">Неизвестный адрес</p>
+		<% else %>
+  		<p class="lead"><%= @city.name + ", ул. " + @street.name + ", д. " + @build.name + " - " + @porch.name %></p>
+		<% end %>
+	</legend>
+
+  <%= form_for(@downtime, html: {class:"form-horizontal" }) do |f| %>
+
+  <fieldset>
+    <div class="input-daterange input-group"  id="datepicker">
+      <%= f.text_field :dt_date, class: "input-sm form-control" %>
+    </div>
+
+    <%= f.submit "Добавить", class: "btn btn-default btn-sm pull-right" %>
+  </fieldset>
+
+
+  <% end %>

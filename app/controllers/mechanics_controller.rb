@@ -91,7 +91,7 @@ before_filter :signed_in_user
 				lift.push(accrual)
 				downtimes_count = l.downtimes.where( dt_date: smonth..emonth ).count # количество простоев
 				lift.push(downtimes_count)
-				deduction = (downtimes_count / @cal_days) * @mech_work_days # удержание за простои
+				deduction = (l.price.cost / @cal_days) * downtimes_count if l.price != nil # удержание за простои
 				lift.push(deduction)
 				if l.price != nil # итого к выплате
 					total = accrual - deduction
@@ -117,7 +117,7 @@ before_filter :signed_in_user
 				lift.push(accrual)
 				downtimes_count = l.downtimes.where({ dt_date: smonth..emonth }).count # количество простоев
 				lift.push(downtimes_count)
-				deduction = (downtimes_count / @cal_days) * @mech_work_days # удержание за простои
+				deduction = (l.price.cost / @cal_days) * downtimes_count if l.price != nil# удержание за простои
 				lift.push(deduction)
 				if l.price != nil # итого к выплате
 					total = accrual - deduction
@@ -167,7 +167,7 @@ before_filter :signed_in_user
 				lift.push(accrual)
 				downtimes_count = l.downtimes.where({ dt_date: smonth..emonth }).count # количество простоев
 				lift.push(downtimes_count)
-				deduction = (downtimes_count / @cal_days) * @mech_work_days # удержание за простои
+				deduction = (l.price.cost / @cal_days) * downtimes_count if l.price != nil# удержание за простои
 				lift.push(deduction)
 				if l.price != nil # итого к выплате
 					total = accrual - deduction
@@ -209,7 +209,7 @@ before_filter :signed_in_user
 				lift.push(accrual)
 				downtimes_count = l.downtimes.where({ dt_date: smonth..emonth }).count # количество простоев
 				lift.push(downtimes_count)
-				deduction = (downtimes_count / @cal_days) * @mech_work_days # удержание за простои
+				deduction = (l.price.cost / @cal_days) * downtimes_count if l.price != nil# удержание за простои
 				lift.push(deduction)
 				if l.price != nil # итого к выплате
 					total = accrual - deduction
