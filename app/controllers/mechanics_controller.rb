@@ -79,10 +79,10 @@ before_filter :signed_in_user
 		@mechanics = Mechanic.all.order(:name)
 		@lifts     = @mechanic.lifts.order(:tlr_id, :porch_id)
 		liftszao   = @lifts.where('tlr_id = ?', 1)
+		@liftszao = []
 		if liftszao.empty?
 			@totalzao = 0
 		else
-			@liftszao = []
 			@totalzao = 0
 			liftszao.each do |l|
 				lift = []
@@ -105,17 +105,17 @@ before_filter :signed_in_user
 		end
 
 		liftsooo = @lifts.where('tlr_id = ?', 2)
+		@liftsooo = []
 		if liftsooo.empty?
 			@totalooo = 0
 		else
-			@liftsooo = []
 			@totalooo = 0
 			liftsooo.each do |l|
 				lift = []
 				lift.push(l)
-				accrual = (l.price.cost / @cal_days) * @mech_work_days if l.price != nil # стоимость обслуживания лифта в день
+				accrual = (l.price.cost / @work_days) * @mech_work_days if l.price != nil # стоимость обслуживания лифта в день
 				lift.push(accrual)
-				downtimes_count = l.downtimes.where({ dt_date: smonth..emonth }).count # количество простоев
+				downtimes_count = l.downtimes.where( dt_date: smonth..emonth ).count # количество простоев
 				lift.push(downtimes_count)
 				deduction = (l.price.cost / @cal_days) * downtimes_count if l.price != nil# удержание за простои
 				lift.push(deduction)
@@ -140,10 +140,10 @@ before_filter :signed_in_user
 		end
 
 		templiftszao = @templift.find_all{|i| i.tlr_id == 1}
+		@templiftszao = []
 		if templiftszao.empty?
 			@totaltzao = 0
 		else
-			@templiftszao = []
 			@totaltzao = 0
 			templiftszao.each do |l|
 				lift = []
@@ -182,10 +182,10 @@ before_filter :signed_in_user
 		end
 
 		templiftsooo = @templift.find_all{|i| i.tlr_id == 2}
+		@templiftsooo = []
 		if templiftsooo.empty?
 			@totaltooo = 0
 		else
-			@templiftsooo = []
 			@totaltooo = 0
 			templiftsooo.each do |l|
 				lift = []
