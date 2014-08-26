@@ -59,6 +59,7 @@ ElevatorTools::Application.routes.draw do
   get 'last_inspections',  to: 'inspections#last'
   get 'mechanics/:id/work_order', to: 'mechanics#work_order', :as => :work_order
   get 'mechanics/:id/lift_move', to: 'mechanics#lift_move', :as => :mechanics_lift_move
+  get 'mechanics/:id/lift_move_zo', to: 'mechanics#lift_move_zo', :as => :mechanics_lift_move_zo
   get 'nodes/:id/lift_move', to: 'nodes#lift_move', :as => :nodes_lifts_move
   get 'contracts/:id/lift_move', to: 'contracts#lift_move', :as => :contracts_lifts_move
   get 'lifts/:id/select_price', to: 'lifts#select_price', :as => :select_price

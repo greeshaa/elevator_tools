@@ -37,10 +37,9 @@ before_filter :signed_in_user
 
 	end
 
-		def lift_move
-			session[:return_to] ||= request.referer
+	def lift_move
+		session[:return_to] ||= request.referer
 		@mechanic = Mechanic.find(params[:id])
-		#@boss = @mechanic.
 		if current_user.foreman?
 			foreman = Foreman.where('user_id = ?', current_user.id).first
 			@mechanics = Mechanic.all.where('foreman_id = ?', foreman.id).order(:name)
@@ -63,6 +62,13 @@ before_filter :signed_in_user
 		@zliftsum       = @zlcount + @ztempliftcount
 		@oliftsum       = @olcount + @otempliftcount
 
+	end
+
+	def lift_move_zo
+		session[:return_to] ||= request.referer
+		@mechanic = Mechanic.find(params[:id])
+		@tlr = Tlr.all
+		@lifts    = @mechanic.lifts.order(:tlr_id, :porch_id)
 	end
 
 	def work_order

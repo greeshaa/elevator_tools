@@ -178,22 +178,28 @@ before_filter :signed_in_user
   end
 
   def move
-    mech = params[:mechanic_id]
-    node = params[:node_id]
+    mech     = params[:mechanic_id]
+    node     = params[:node_id]
     contract = params[:contract_id]
+    tlr      = params[:tlr_id]
     if mech.nil?
       if node.nil?
         if contract.nil?
-
+          if tlr.nil?
+          else
+            @tlr = Tlr.find(params[:tlr_id])
+            Lift.update_all(["tlr_id=?", params[:tlr_id]], :id => params[:lift_ids])
+            redirect_to session.delete(:return_to)
+          end
         else
           @contract = Contract.find(params[:contract_id])
           Lift.update_all(["contract_id=?", params[:contract_id]], :id => params[:lift_ids])
-          redirect_to @contract
+          redirect_to session.delete(:return_to)
         end
       else
         @node = Node.find(params[:node_id])
         Lift.update_all(["node_id=?", params[:node_id]], :id => params[:lift_ids])
-        redirect_to @node
+        redirect_to session.delete(:return_to)
       end
     else
       @mechanic = Mechanic.find(params[:mechanic_id])
