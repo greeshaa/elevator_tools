@@ -28,6 +28,8 @@ ElevatorTools::Application.routes.draw do
   resources :partners
   resources :prices
   resources :downtimes
+  resources :time_sheets
+  resources :time_sheet_kinds
   resources :connections do
       resources :ip_address, shallow: true
   end
@@ -65,6 +67,7 @@ ElevatorTools::Application.routes.draw do
   patch 'lifts/:id/select_price_save', to: 'lifts#select_price_save', :as => :select_price_save
   get 'lifts/:id/select_price_cancel', to: 'lifts#select_price_cancel', :as => :select_price_cancel
   get 'lifts/:id/add_downtime', to: 'downtimes#new', :as => :add_downtime
+  get '/timesheet', to: 'time_sheets#timesheet', as: :timesheet
   #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'
