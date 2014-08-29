@@ -2,13 +2,25 @@
 <p class="lead"><%= @title %></p>
 <hr>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2 list" >
-      <table id="datatables" class="table table-condensed table-striped">
+  <div class="col-md-10 col-md-offset-1">
+    1. <%= link_to "Добавить отпуск", add_vacation_path %><br>
+    2. <%= link_to "Добавить больничный", add_sick_list_path %><br>
+    3. <%= link_to "Добавить отработанные часы", add_work_days_path %><br>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 list" >
+      <table id="datatables" class="table table-condensed table-striped table-bordered">
         <thead>
-          <th class="td_center">Механик</th>
-          <th class="td_center"></th>
+          <th class="td_center" style="width: 400px">Механик</th>
+          <% day =+1 %>
+          <% @days.times do %>
+            <th class="td_center" style="width: 50px"><%= day %></th>
+            <% day +=1 %>
+          <% end %>
         </thead>
         <tbody>
+        <%= render 'time_sheets/timesheet' %>
         </tbody>
       </table>
   </div>

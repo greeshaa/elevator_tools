@@ -1,0 +1,29 @@
+<% provide(:title, @title) %>
+<p class="lead"><%= @title %></p>
+<hr>
+<%= form_for @timesheet, url: {action: "work_days_save"}, html: {method:"get", class:"form-horizontal"} do |f| %>
+<fieldset>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 list">
+    <div class="form-group">
+      <%= f.label :mechanic_id, "Механик", class:"col-md-2 control-label" %>
+      <div class="col-md-4">
+        <%= f.select(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {class: "form-control  input-sm"} ) %>
+      </div>
+      <div class="input-daterange form-group input-group col-md-4" id="datepicker">
+        <span class="input-group-addon">&ensp;&ensp;с</span>
+          <%= f.text_field :start_at, class: "input-sm form-control" %>
+        <span class="input-group-addon">по</span>
+          <%= f.text_field :end_at, class: "input-sm form-control" %>
+      </div>
+      <div class="form-group">
+        <div class="col-md-3 col-md-offset-5">
+        <%= link_to " Отменить ", time_sheets_path, class: "btn btn-default btn-sm" %>
+        <%= f.submit "Добавить", class: "btn btn-primary btn-sm" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</fieldset>
+<% end %>

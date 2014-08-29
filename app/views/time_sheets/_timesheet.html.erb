@@ -1,0 +1,8 @@
+<% @timesheets.each do |i| %>
+<tr>
+	<td><%= i[0].name %></td>
+	<% i[1].each do |ts| %>
+	<td style="font-size: 8pt"><%= ts %> </td>
+	<% end %>
+</tr>
+<% end %>

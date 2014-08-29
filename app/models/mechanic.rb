@@ -20,5 +20,6 @@ class Mechanic < ActiveRecord::Base
   #before_save { name.capitalize! }
   has_many :lifts
   has_many :temp_serv_meches
+  has_many :time_sheets
   belongs_to :foreman
 end

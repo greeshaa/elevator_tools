@@ -68,6 +68,12 @@ ElevatorTools::Application.routes.draw do
   get 'lifts/:id/select_price_cancel', to: 'lifts#select_price_cancel', :as => :select_price_cancel
   get 'lifts/:id/add_downtime', to: 'downtimes#new', :as => :add_downtime
   get '/timesheet', to: 'time_sheets#timesheet', as: :timesheet
+  get '/add_vacation', to: 'time_sheets#add_vacation', as: :add_vacation
+  get '/vacation_save', to: 'time_sheets#vacation_save', as: :vacation_save
+  get '/add_sick_list', to: 'time_sheets#add_sick_list', as: :add_sick_list
+  get '/sick_list_save', to: 'time_sheets#sick_list_save', as: :sick_list_save
+  get '/add_work_days', to: 'time_sheets#add_work_days', as: :add_work_days
+  get '/work_days_save', to: 'time_sheets#work_days_save', as: :work_days_save
   #get 'equipment_relocation', to: 'equipment#relocation'
 
   get '/address_list', to: 'address#list'
