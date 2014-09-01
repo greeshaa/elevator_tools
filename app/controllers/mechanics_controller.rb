@@ -73,7 +73,7 @@ before_filter :signed_in_user
 
 	def work_order
 		@mechanic  = Mechanic.find(params[:id])
-		@month     = Date.today
+		@month     = Date.parse('2014-08-03')
 		smonth     = @month.at_beginning_of_month
 		emonth     = @month.at_end_of_month
 		cur_month  = @month.month
