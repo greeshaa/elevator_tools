@@ -1,0 +1,15 @@
+<% provide(:title, 'Отработка') %>
+<p class="lead">Отработка</p>
+<hr>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 list">
+    <% @timesheets.each do |t| %>
+      <%= link_to t.time_sheet_kind.title, t %><br>
+    <% end %>
+  </div>
+</div>

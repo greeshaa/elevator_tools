@@ -2,6 +2,37 @@
 class TimeSheetsController < ApplicationController
 	before_filter :signed_in_user
 
+	def index
+		@timesheets = TimeSheet.all
+	end
+
+	def new
+		@title = 'Добавление отработанных часов механика'
+		if current_user.foreman?
+			foreman = Foreman.where('user_id = ?', current_user.id).first
+			@mechanics = Mechanic.all.where('foreman_id = ?', foreman.id).order(:name)
+		else
+			@mechanics = Mechanic.all.order(:name)
+		end
+		@timesheet = TimeSheet.new
+	end
+
+	def create
+			mechanic = Mechanic.find(params[:time_sheet]["mechanic_id"])
+			date = DateTime.now
+			smonth = date.beginning_of_month
+			emonth = date.end_of_month
+			smonth.upto(emonth) do |day|
+				if day.cwday == 6 || day.cwday == 7
+				else
+					work_days_start = day.beginning_of_day.to_time + 8.hours
+					work_days_end = work_days_start.to_time + 8.hours
+					mechanic.time_sheets.create(time_sheet_kind_id: 1, start_at: work_days_start, end_at: work_days_end )
+				end
+			end
+			redirect_to timesheet_path
+	end
+
 	def timesheet
 		@title = 'Табель учета рабочего времени'
 		mechanics = Mechanic.all.order(:name)

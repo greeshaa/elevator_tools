@@ -73,7 +73,7 @@ before_filter :signed_in_user
 		cur_month  = @month.month
 		@cal_days  = FactoryCalendar.where('month = ?', cur_month ).first.cal_days
 		@work_days = FactoryCalendar.where('month = ?', cur_month ).first.work_days
-		@mech_work_days = 21
+		@mech_work_days = @mechanic.time_sheets.where("time_sheet_kind_id = ? AND start_at >=? AND end_at <=?", 1, smonth, emonth).count
 
 		#@boss = @mechanic.
 		@mechanics = Mechanic.all.order(:name)

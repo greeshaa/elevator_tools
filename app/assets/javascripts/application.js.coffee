@@ -3,10 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-  $('#datepicker').datepicker({
+  $('#datepicker, #datepicker2').datepicker({
   		format: 'yyyy-mm-dd',
   		todayBtn: "linked",
   		todayHighlight: true,
   		autoclose: true,
   		language: "ru"
   });
+
