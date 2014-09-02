@@ -34,7 +34,6 @@ ElevatorTools::Application.routes.draw do
       resources :ip_address, shallow: true
   end
 
-
   root :to => 'static_pages#main'
 
   match '/signup',  to: 'users#new',            via: :get

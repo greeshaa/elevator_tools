@@ -19,7 +19,7 @@ class TimeSheetsController < ApplicationController
 
 	def create
 			mechanic = Mechanic.find(params[:time_sheet]["mechanic_id"])
-			date = DateTime.now
+			date = DateTime.parse('2014-08-14')
 			smonth = date.beginning_of_month
 			emonth = date.end_of_month
 			smonth.upto(emonth) do |day|
@@ -36,7 +36,7 @@ class TimeSheetsController < ApplicationController
 	def timesheet
 		@title = 'Табель учета рабочего времени'
 		mechanics = Mechanic.all.order(:name)
-		date      = DateTime.now #parse('2014-04-14')
+		date = DateTime.now if params[:timesheet].nil?
 		smonth    = date.at_beginning_of_month
 		emonth    = date.at_end_of_month
 		@days 		= date.end_of_month.day

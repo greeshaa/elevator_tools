@@ -3,6 +3,12 @@
 <hr>
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
+  <%= form_tag url: {action: "timesheet"}, html: {method:"get", class:"form-horizontal"} do %>
+  <fieldset>
+  <div class="form-group input-group col-md-4" id="datepicker">
+  </div>
+  </fieldset>
+  <% end %>
     1. <%= link_to "Добавить отпуск", add_vacation_path %><br>
     2. <%= link_to "Добавить больничный", add_sick_list_path %><br>
     3. <%= link_to "Добавить отработанные часы", new_time_sheet_path %><br>
