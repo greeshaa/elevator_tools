@@ -2,6 +2,7 @@
 class InspectionsController < ApplicationController
 before_filter :signed_in_user
 	def new
+		session[:return_to] ||= request.referer
 		@lift = Lift.find(params[:lift_id])
 		@porch  = @lift.porch
     if @porch.nil?
@@ -37,7 +38,7 @@ before_filter :signed_in_user
 			@@lastinspection.update_attributes(active: false) if @@lastinspection != nil
 			okmessage = "Отметка о ТО успешно добавлена."
       flash[:success] = okmessage
-      redirect_to @lift
+      redirect_to session.delete(:return_to)
 		else
 			flash[:success] = "something is wrong"
       #render 'new'
