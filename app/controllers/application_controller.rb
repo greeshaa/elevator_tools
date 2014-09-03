@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
   protect_from_forgery
     include SessionsHelper
+    include MechanicsHelper
 
   # Force signout to prevent CSRF attacks
   def handle_unverified_request
