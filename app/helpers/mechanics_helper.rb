@@ -77,7 +77,7 @@ module MechanicsHelper
     	      temp_end_at   = l.temp_serv_meches.last.end_at
     	      all_downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count
     	      temp_downtimes_count = l.downtimes.where( dt_date: temp_start_at..temp_end_at ).count
-    	      downtimes_count = all_downtimes_count = temp_downtimes_count
+    	      downtimes_count = all_downtimes_count - temp_downtimes_count
 						lift.push(downtimes_count)
 						@totalooodowntimes += downtimes_count
 					end
