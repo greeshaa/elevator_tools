@@ -12,7 +12,7 @@ gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
-
+gem 'russian', '~> 0.6.0'
 gem 'protected_attributes'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'

@@ -7,7 +7,8 @@
     <p>Прораб: <%= @mechanic.foreman.user.runame %></p>
     <% end %>
     <%= link_to "Изменить данные", edit_mechanic_path %><br>
-    <%= link_to "Перезакрепить лифты", mechanics_lift_move_path %><br>
+    <%= link_to "Перезакрепить лифты между механиками", mechanics_lift_move_path %><br>
+    <%= link_to "Перезакрепить лифты ЗАО/ООО", mechanics_lift_move_zo_path %><br>
     <%= link_to "Расчет ЗП", work_order_path %><br>
   </div>
   <div class="col-md-2">

@@ -23,7 +23,7 @@
    <% end %>
    <td class="td_center"><%= lift[5] %></td>
    <td><%= number_to_currency(lift[1], locale: :ru) %></td>
-   <td class="td_center"><%= lift[2] %></td>
+   <td class="td_center"><%= lift[2] %> <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, add_downtime_path(lift[0]) if current_user.admin? || current_user.management? || current_user.foreman? %></td>
    <td class="<%= 'text-danger' if lift[2] != 0 %>"><%= number_to_currency(lift[3], locale: :ru) %></td>
    <td><%= number_to_currency(lift[4], locale: :ru) %></td>
 </tr>

@@ -33,6 +33,7 @@ ElevatorTools::Application.routes.draw do
   resources :connections do
       resources :ip_address, shallow: true
   end
+  resources :reports
 
   root :to => 'static_pages#main'
 
@@ -59,7 +60,9 @@ ElevatorTools::Application.routes.draw do
   get 'next_inspections',  to: 'inspections#next'
   get 'last_inspections',  to: 'inspections#last'
   get 'mechanics/:id/work_order', to: 'mechanics#work_order', :as => :work_order
+  get '/work_order', to: 'mechanics#work_order_for_all_mech', :as => :work_order_for_all_mech
   get 'mechanics/:id/lift_move', to: 'mechanics#lift_move', :as => :mechanics_lift_move
+  get 'mechanics/:id/lift_move_zo', to: 'mechanics#lift_move_zo', :as => :mechanics_lift_move_zo
   get 'nodes/:id/lift_move', to: 'nodes#lift_move', :as => :nodes_lifts_move
   get 'contracts/:id/lift_move', to: 'contracts#lift_move', :as => :contracts_lifts_move
   get 'lifts/:id/select_price', to: 'lifts#select_price', :as => :select_price

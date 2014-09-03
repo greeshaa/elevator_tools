@@ -178,22 +178,28 @@ before_filter :signed_in_user
   end
 
   def move
-    mech = params[:mechanic_id]
-    node = params[:node_id]
+    mech     = params[:mechanic_id]
+    node     = params[:node_id]
     contract = params[:contract_id]
+    tlr      = params[:tlr_id]
     if mech.nil?
       if node.nil?
         if contract.nil?
-
+          if tlr.nil?
+          else
+            @tlr = Tlr.find(params[:tlr_id])
+            Lift.update_all(["tlr_id=?", params[:tlr_id]], :id => params[:lift_ids])
+            redirect_to session.delete(:return_to)
+          end
         else
           @contract = Contract.find(params[:contract_id])
           Lift.update_all(["contract_id=?", params[:contract_id]], :id => params[:lift_ids])
-          redirect_to @contract
+          redirect_to session.delete(:return_to)
         end
       else
         @node = Node.find(params[:node_id])
         Lift.update_all(["node_id=?", params[:node_id]], :id => params[:lift_ids])
-        redirect_to @node
+        redirect_to session.delete(:return_to)
       end
     else
       @mechanic = Mechanic.find(params[:mechanic_id])
@@ -213,56 +219,58 @@ before_filter :signed_in_user
     prices = Price.all
     prices.each do |p|
       case p.floor
-      when 2
-        @prices2fl = [] if @prices2fl.nil?
-        @prices2fl.push(p)
-      when 3
-        @prices3fl = [] if @prices3fl.nil?
-        @prices3fl.push(p)
-      when 4
-        @prices4fl = [] if @prices4fl.nil?
-        @prices4fl.push(p)
-      when 5
-        @prices5fl = [] if @prices5fl.nil?
-        @prices5fl.push(p)
-      when 6
-        @prices6fl = [] if @prices6fl.nil?
-        @prices6fl.push(p)
-      when 7
-        @prices7fl = [] if @prices7fl.nil?
-        @prices7fl.push(p)
-      when 8
-        @prices8fl = [] if @prices8fl.nil?
-        @prices8fl.push(p)
-      when 9
-        @prices9fl = [] if @prices9fl.nil?
-        @prices9fl.push(p)
-      when 10
-        @prices10fl = [] if @prices10fl.nil?
-        @prices10fl.push(p)
-      when 11
-        @prices11fl = [] if @prices11fl.nil?
-        @prices11fl.push(p)
-      when 12
-        @prices12fl = [] if @prices12fl.nil?
-        @prices12fl.push(p)
-      when 13
-        @prices13fl = [] if @prices13fl.nil?
-        @prices13fl.push(p)
-      when 14
-        @prices14fl = [] if @prices14fl.nil?
-        @prices14fl.push(p)
-      when 15
-        @prices15fl = [] if @prices15fl.nil?
-        @prices15fl.push(p)
-      when 16
-        @prices16fl = [] if @prices16fl.nil?
-        @prices16fl.push(p)
-      when 17
-        @prices17fl = [] if @prices17fl.nil?
-        @prices17fl.push(p)
-      else
-
+        when 1
+          @pricesnull = [] if @pricesnull.nil?
+          @pricesnull.push(p)
+        when 2
+          @prices2fl = [] if @prices2fl.nil?
+          @prices2fl.push(p)
+        when 3
+          @prices3fl = [] if @prices3fl.nil?
+          @prices3fl.push(p)
+        when 4
+          @prices4fl = [] if @prices4fl.nil?
+          @prices4fl.push(p)
+        when 5
+          @prices5fl = [] if @prices5fl.nil?
+          @prices5fl.push(p)
+        when 6
+          @prices6fl = [] if @prices6fl.nil?
+          @prices6fl.push(p)
+        when 7
+          @prices7fl = [] if @prices7fl.nil?
+          @prices7fl.push(p)
+        when 8
+          @prices8fl = [] if @prices8fl.nil?
+          @prices8fl.push(p)
+        when 9
+          @prices9fl = [] if @prices9fl.nil?
+          @prices9fl.push(p)
+        when 10
+          @prices10fl = [] if @prices10fl.nil?
+          @prices10fl.push(p)
+        when 11
+          @prices11fl = [] if @prices11fl.nil?
+          @prices11fl.push(p)
+        when 12
+          @prices12fl = [] if @prices12fl.nil?
+          @prices12fl.push(p)
+        when 13
+          @prices13fl = [] if @prices13fl.nil?
+          @prices13fl.push(p)
+        when 14
+          @prices14fl = [] if @prices14fl.nil?
+          @prices14fl.push(p)
+        when 15
+          @prices15fl = [] if @prices15fl.nil?
+          @prices15fl.push(p)
+        when 16
+          @prices16fl = [] if @prices16fl.nil?
+          @prices16fl.push(p)
+        when 17
+          @prices17fl = [] if @prices17fl.nil?
+          @prices17fl.push(p)
+        else
       end
     end
     @lift   = Lift.find(params[:id])

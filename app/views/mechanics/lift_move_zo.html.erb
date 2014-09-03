@@ -1,0 +1,61 @@
+<% provide(:title, 'Механики') %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-1">
+    <p class="lead"><%= @mechanic.name %></p>
+    <% if @mechanic.foreman.nil? %>
+    <% else %>
+    <p>Прораб: <%= @mechanic.foreman.user.runame %></p>
+    <% end %>
+    <%= link_to "Изменить данные", edit_mechanic_path %>
+  </div>
+</div>
+<hr>
+<%= form_tag move_lifts_path, :method => :put, html: {class:"form-horizontal"} do %>
+<fieldset>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="form-group">
+      <%= label_tag :tlr_id, "Закрепить за", class:"col-md-2 control-label" %>
+      <div class="col-md-4">
+        <%= select_tag(:tlr_id, options_for_select(@tlr.collect {|tlr| [tlr.name, tlr.id] }), {class: "form-control  input-sm"} ) %>
+      </div>
+    </div>
+      <div class="form-group">
+        <div class="col-md-3 col-md-offset-5">
+        <%= link_to " Отменить ", mechanic_path, class: "btn btn-default btn-sm" %>
+        <%= submit_tag "Изменить", method: :put, data: { confirm: "Выбранные лифты будут закреплены. Вы уверены?" }, class: "btn btn-primary btn-sm" %>
+        </div>
+      </div>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="list">
+      <div class="panel panel-default">
+        <div class="panel-heading">Список закрепленных лифтов.</div>
+          <div class="panel-body">
+           <table class="table table-striped table-condensed">
+            <thead>
+              <tr>
+                <td></td>
+                <td>Адрес</td>
+                <td>Район</td>
+                <td>ТЛР</td>
+                <td>Тип</td>
+                <td>Груз-сть</td>
+                <td>Остановок</td>
+                <td>Дата вывода</td>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render "mechanics/lift" %>
+            </tbody>
+           </table>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</fieldset>
+<% end %>

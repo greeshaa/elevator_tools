@@ -1,0 +1,30 @@
+<% @outputarray.each do |i| %>
+<tr>
+  <td class="hidden-print"><%= link_to i[:mechanic].name, i[:mechanic] %></td>
+  <td class="visible-print"><%= i[:mechanic].name %></td>
+  <td align="center"><%= i[:all_lifts_count] %></td>
+  <td></td>
+  <td align="right"><%= number_to_currency(i[:all_lifts_accrual], locale: :ru) %></td>
+  <td align="center"><%= i[:all_lifts_downtimes] %></td>
+  <td align="right"><%= number_to_currency(i[:all_lifts_deduction], locale: :ru) %></td>
+  <td align="right"><%= number_to_currency(i[:all_lifts], locale: :ru) %></td>
+</tr>
+<tr>
+  <td align="center">Собственные</td>
+  <td align="center"><%= i[:own_lifts_count] %></td>
+  <td align="center"><%= i[:mech_work_days] %></td>
+  <td align="right"><%= number_to_currency(i[:own_lifts_accrual], locale: :ru) %></td>
+  <td align="center"><%= i[:own_lifts_downtimes] %></td>
+  <td align="right"><%= number_to_currency(i[:own_lifts_deduction], locale: :ru) %></td>
+  <td align="right"><%= number_to_currency(i[:own_lifts], locale: :ru) %></td>
+</tr>
+<tr>
+  <td align="center">Временные</td>
+  <td align="center"><%= i[:temp_lifts_count] %></td>
+  <td align="center"></td>
+  <td align="right"><%= number_to_currency(i[:temp_lifts_accrual], locale: :ru) %></td>
+  <td align="center"><%= i[:temp_lifts_downtimes] %></td>
+  <td align="right"><%= number_to_currency(i[:temp_lifts_deduction], locale: :ru) %></td>
+  <td align="right"><%= number_to_currency(i[:temp_lifts], locale: :ru) %></td>
+</tr>
+<% end %>

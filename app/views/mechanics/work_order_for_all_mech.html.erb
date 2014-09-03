@@ -1,0 +1,43 @@
+<% provide(:title, 'Расчет ЗП') %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-1">
+    <p class="lead">Расчет ЗП <%= @select %> за <%= @month.to_formatted_s(:month_and_year) %></p>
+    <% if @foreman.nil? %>
+    <% else %>
+    <p>Прораб: <%= @foreman.user.runame %></p>
+    <% end %>
+  </div>
+  <div class="hidden-print">
+    <%= form_tag work_order_for_all_mech_path, :method => :get, class:"form-inline" do %>
+    <fieldset>
+    <div class="form-group">
+      <%= label_tag :tlr_id, "", class:"control-label" %>
+        <%= select_tag(:tlr_id, options_for_select([['Общий', 0], ['ЗАО', 1], ['ООО', 2]]), {class: "form-control  input-sm"} ) %>
+    </div>
+        <%= submit_tag "Рассчитать", class: "btn btn-default btn-sm" %>
+        <%= link_to_function("Распечатать", "javascript:print()", class:"btn btn-default btn-sm") %>
+    </fieldset>
+    <% end %>
+  </div>
+</div>
+<hr class="hidden-print">
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <table class="table table-striped table-condensed table-bordered">
+      <thead>
+        <tr>
+          <td>Механик</td>
+          <td>Лифты</td>
+          <td>Отработано</td>
+          <td>Начислено</td>
+          <td>Простои</td>
+          <td>Удержано</td>
+          <td>Итог</td>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render "mechanics/workorder_for_all_mech" %>
+      </tbody>
+    </table>
+  </div>
+</div>

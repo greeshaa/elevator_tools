@@ -5,6 +5,9 @@ class PricesController < ApplicationController
 		prices = Price.all
 		prices.each do |p|
 			case p.floor
+			when 1
+				@pricesnull = [] if @pricesnull.nil?
+				@pricesnull.push(p)
 			when 2
 				@prices2fl = [] if @prices2fl.nil?
 				@prices2fl.push(p)
