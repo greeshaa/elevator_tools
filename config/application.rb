@@ -35,9 +35,9 @@ module ElevatorTools
     config.time_zone = 'Novosibirsk'
     config.active_record.default_timezone = :local
 
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    #config.i18n.default_locale = :ru
+    #The default locale is :ru and all translations from config/locales/*.rb,yml are auto loaded.
+    #config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.default_locale = :ru
     #config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     # Configure the default encoding used in templates for Ruby 1.9.
