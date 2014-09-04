@@ -73,7 +73,11 @@ before_filter :signed_in_user
 
 	def work_order
 		@mechanic  = Mechanic.find(params[:id])
-		@month     = Date.parse('2014-08-03')
+		if params[:date].nil?
+			@month = Date.today
+		else
+			@month = Date.parse(params[:date])
+		end
 		@smonth    = @month.at_beginning_of_month
 		@emonth    = @month.at_end_of_month
 		@cur_month = @month.month
@@ -105,7 +109,11 @@ before_filter :signed_in_user
 		#else
 		#	@month = Date.parse(params[:work_order_for_all_mech])
 		#end
-		@month = Date.parse('2014-08-08')
+		if params[:date].nil?
+			@month = Date.today
+		else
+			@month = Date.parse(params[:date])
+		end
 
 		if current_user.foreman?
 			foreman = Foreman.where('user_id = ?', current_user.id).first
