@@ -23,7 +23,7 @@ before_filter :signed_in_user
 		@lcount 	= @lifts.count
 		@zlcount 	= @lifts.where('tlr_id = ?', 1).count
 		@olcount 	= @lifts.where('tlr_id = ?', 2).count
-		@tsm = @mechanic.temp_serv_meches.where("start_at <? AND end_at >?", Time.now, Time.now)
+		@tsm = @mechanic.temp_serv_meches.where("start_at <? AND end_at >?", Date.today, Date.today)
 		@templift = []
 		@tsm.each do |tsm|
 			@templift.push(tsm.lift)
@@ -79,7 +79,7 @@ before_filter :signed_in_user
 		@cur_month = @month.month
 		@cal_days  = FactoryCalendar.where('month = ?', @cur_month ).first.cal_days
 		@work_days = FactoryCalendar.where('month = ?', @cur_month ).first.work_days
-		@mech_work_days = 21
+		@mech_work_days = @mechanic.time_sheets.where("time_sheet_kind_id = ? AND start_at >=? AND end_at <=?", 1, @smonth, @emonth).count
 
 		@lifts     = @mechanic.lifts.order(:tlr_id, :porch_id)
 		@lcount 	 = @lifts.count
@@ -125,7 +125,7 @@ before_filter :signed_in_user
 			outputhash = Hash.new
 			outputhash[:mechanic] = mechanic
 
-			@mech_work_days = 21
+			@mech_work_days = mechanic.time_sheets.where("time_sheet_kind_id = ? AND start_at >=? AND end_at <=?", 1, @smonth, @emonth).count
 			outputhash[:mech_work_days] = @mech_work_days
 
 			@lifts     = mechanic.lifts.order(:tlr_id, :porch_id)

@@ -7,40 +7,46 @@
       <%= form_for(@timesheet, html: {class:"form-horizontal"}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <fieldset>
-          <div class="form-group">
-            <%= f.label :mechanic_id, "Механик", class:"col-md-2 control-label" %>
-            <div class="col-md-8">
-              <%= f.select(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {}, {class: "input-sm form-control"} ) %>
+        <div class="form-group">
+          <%= label_tag :date, "Месяц", class:"col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= text_field_tag :date, 'Выберите месяц', class: "date input-sm form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :mechanic_id, "Механик", class:"col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= f.select(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {}, {class: "input-sm form-control"} ) %>
+          </div>
+        </div>
+        <div class="form-group">
+        <%= label_tag :vacation, "Отпуск", class:"col-md-3 control-label" %>
+          <div class="col-md-8">
+            <div class="input-daterange input-group vacation">
+              <span class="input-group-addon">&ensp;&ensp;с</span>
+                <%= text_field_tag :vacation_start_at, nil, class: "input-sm form-control" %>
+              <span class="input-group-addon">по</span>
+                <%= text_field_tag :vacation_end_at, nil, class: "input-sm form-control" %>
             </div>
           </div>
-          <div class="form-group">
-          <%= label_tag :sick_list, "Отпуск", class:"col-md-2 control-label" %>
-            <div class="col-md-8">
-              <div class="input-daterange input-group datepicker" id='datepicker'>
-                <span class="input-group-addon">&ensp;&ensp;с</span>
-                  <%= text_field_tag :vacation_start_at, nil, class: "input-sm form-control" %>
-                <span class="input-group-addon">по</span>
-                  <%= text_field_tag :vacation_end_at, nil, class: "input-sm form-control" %>
-              </div>
+        </div>
+        <div class="form-group">
+        <%= label_tag :sick_list, "Больничный", class:"col-md-3 control-label" %>
+          <div class="col-md-8">
+            <div class="input-daterange input-group sick-list">
+              <span class="input-group-addon">&ensp;&ensp;с</span>
+                <%= text_field_tag :sick_list_start_at, nil, class: "input-sm form-control" %>
+              <span class="input-group-addon">по</span>
+                <%= text_field_tag :sick_list_end_at, nil, class: "input-sm form-control" %>
             </div>
           </div>
-          <div class="form-group">
-          <%= label_tag :sick_list, "Больничный", class:"col-md-2 control-label" %>
-            <div class="col-md-8">
-              <div class="input-daterange input-group datepicker" id='datepicker2'>
-                <span class="input-group-addon">&ensp;&ensp;с</span>
-                  <%= text_field_tag :sick_list_start_at, nil, class: "input-sm form-control" %>
-                <span class="input-group-addon">по</span>
-                  <%= text_field_tag :sick_list_end_at, nil, class: "input-sm form-control" %>
-              </div>
-            </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 col-md-offset-4">
+          <%= link_to " Отменить ", time_sheets_path, class: "btn btn-default btn-sm" %>
+          <%= f.submit "Добавить", class: "btn btn-primary btn-sm" %>
           </div>
-          <div class="form-group">
-            <div class="col-md-4 col-md-offset-4">
-            <%= link_to " Отменить ", time_sheets_path, class: "btn btn-default btn-sm" %>
-            <%= f.submit "Добавить", class: "btn btn-primary btn-sm" %>
-            </div>
-          </div>
+        </div>
       </fieldset>
       <% end %>
     </div>

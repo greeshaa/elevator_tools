@@ -37,39 +37,30 @@
   </div>
 </div>
 <hr>
-<%= form_tag move_lifts_path, :method => :put, html: {class:"form-horizontal"} do %>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+<%= form_tag move_lifts_path, :method => :put, class:"form-inline" do %>
 <fieldset>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-
-            <div class="form-group">
-              <%= label_tag :mechanic_id, "Закрепить за", class:"col-md-2 control-label" %>
-              <div class="col-md-4">
-                <%= select_tag(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {class: "form-control  input-sm"} ) %>
-                <div class="checkbox">
-                  <label>
-                    <%= check_box_tag 'temporary' %> Временно
-                  </label>
-                </div>
-              </div>
-              <div class="input-daterange form-group input-group col-md-4" id="datepicker">
-                <span class="input-group-addon">&ensp;&ensp;с</span>
-                  <%= text_field_tag :start_at, nil, class: "input-sm form-control" %>
-                <span class="input-group-addon">по</span>
-                  <%= text_field_tag :end_at, nil, class: "input-sm form-control" %>
-              </div>
-              <div class="form-group">
-                <div class="col-md-3 col-md-offset-5">
-                <%= link_to " Отменить ", mechanic_path, class: "btn btn-default btn-sm" %>
-                <%= submit_tag "Изменить", method: :put, data: { confirm: "Выбранные лифты будут закреплены. Вы уверены?" }, class: "btn btn-primary btn-sm" %>
-                </div>
-              </div>
-            </div>
+    <div class="form-group">
+      <%= label_tag :mechanic_id, "Закрепить за", class:"control-label" %>
+      <%= select_tag(:mechanic_id, options_for_select(@mechanics.collect {|m| [m.name, m.id] }), {class: "form-control input-sm"} ) %>
     </div>
-</div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <div class="list">    
+    <div class="checkbox">
+      <label>
+        <%= check_box_tag 'temporary' %> Временно
+      </label>
+    </div>
+    <div class="form-group">
+      <div class="input-daterange input-group" id="datepicker">
+        <div class="input-group-addon">&ensp;&ensp;с</div>
+          <%= text_field_tag :start_at, nil, class: "input-sm form-control" %>
+        <div class="input-group-addon">по</div>
+          <%= text_field_tag :end_at, nil, class: "input-sm form-control" %>
+      </div>
+    </div>
+    <%= submit_tag "Изменить", method: :put, data: { confirm: "Вы уверены?" }, class: "btn btn-primary btn-sm" %>
+    <%= link_to " Отменить ", mechanic_path, class: "btn btn-default btn-sm" %>
+    <div class="list">
       <div class="panel panel-default">
         <div class="panel-heading">Список закрепленных лифтов.</div>
           <div class="panel-body">
@@ -114,7 +105,7 @@
           </div>
         </div>
     </div>
-  </div>
-</div>
 </fieldset>
 <% end %>
+  </div>
+</div>
