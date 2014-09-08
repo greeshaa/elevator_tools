@@ -25,10 +25,12 @@ module MechanicsHelper
 						lift.push(downtimes_count)
 						@totalzaodowntimes += downtimes_count
 					else
-						temp_start_at = l.temp_serv_meches.last.start_at
-    	      temp_end_at   = l.temp_serv_meches.last.end_at
-    	      all_downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count
-    	      temp_downtimes_count = l.downtimes.where( dt_date: temp_start_at..temp_end_at ).count
+						all_downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count
+						temp_serv = l.temp_serv_meches.where( start_at: @smonth..@emonth )
+						temp_downtimes_count = 0
+						temp_serv.each do |ts|
+							temp_downtimes_count += l.downtimes.where( dt_date: @smonth..@emonth ).count
+						end
     	      downtimes_count = all_downtimes_count - temp_downtimes_count
 						lift.push(downtimes_count)
 						@totalzaodowntimes += downtimes_count
@@ -73,10 +75,13 @@ module MechanicsHelper
 						lift.push(downtimes_count)
 						@totalooodowntimes += downtimes_count
 					else
-						temp_start_at = l.temp_serv_meches.last.start_at
-    	      temp_end_at   = l.temp_serv_meches.last.end_at
     	      all_downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count
-    	      temp_downtimes_count = l.downtimes.where( dt_date: temp_start_at..temp_end_at ).count
+    	      temp_serv = l.temp_serv_meches.where( start_at: @smonth..@emonth )
+						temp_downtimes_count = 0
+						temp_serv.each do |ts|
+							temp_downtimes_count += l.downtimes.where( dt_date: @smonth..@emonth ).count
+						end
+    	      #temp_downtimes_count = l.downtimes.where( dt_date: temp_start_at..temp_end_at ).count
     	      downtimes_count = all_downtimes_count - temp_downtimes_count
 						lift.push(downtimes_count)
 						@totalooodowntimes += downtimes_count
@@ -140,7 +145,7 @@ module MechanicsHelper
 					accrual = (l.price.cost / @work_days) * mech_work_days if l.price != nil # стоимость обслуживания лифта в день
 					lift.push(accrual)
 					@tempz_accrual += accrual if l.price != nil
-					downtimes_count = l.downtimes.where({ dt_date: tsm.start_at..tsm.end_at }).count # количество простоев
+					downtimes_count = l.downtimes.where({ dt_date: @smonth..@emonth }).count # количество простоев
 					lift.push(downtimes_count)
 					@totaltzaodowntimes += downtimes_count
 					deduction = (l.price.cost / @cal_days) * downtimes_count if l.price != nil# удержание за простои
@@ -194,7 +199,7 @@ module MechanicsHelper
 					accrual = (l.price.cost / @work_days) * mech_work_days if l.price != nil # стоимость обслуживания лифта в день
 					lift.push(accrual)
 					@tempo_accrual += accrual if l.price != nil
-					downtimes_count = l.downtimes.where({ dt_date: tsm.start_at..tsm.end_at }).count # количество простоев
+					downtimes_count = l.downtimes.where({ dt_date: @smonth..@emonth }).count # количество простоев
 					lift.push(downtimes_count)
 					@totaltooodowntimes += downtimes_count
 					deduction = (l.price.cost / @cal_days) * downtimes_count if l.price != nil# удержание за простои
