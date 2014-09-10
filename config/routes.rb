@@ -59,6 +59,7 @@ ElevatorTools::Application.routes.draw do
   get 'overdue_inspections',  to: 'inspections#overdue'
   get 'next_inspections',  to: 'inspections#next'
   get 'last_inspections',  to: 'inspections#last'
+  get 'month_inspections',  to: 'inspections#month', :as => :month_inspections
   get 'mechanics/:id/work_order', to: 'mechanics#work_order', :as => :work_order
   get '/work_order', to: 'mechanics#work_order_for_all_mech', :as => :work_order_for_all_mech
   get 'mechanics/:id/lift_move', to: 'mechanics#lift_move', :as => :mechanics_lift_move

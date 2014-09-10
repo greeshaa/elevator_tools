@@ -1,4 +1,20 @@
 <% provide(:title, @title) %>
+<% if params[:action] == 'month'%>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="hidden-print">
+      <%= form_tag month_inspections_path, :method => :get, class:"form-inline" do %>
+      <fieldset>
+      <div class="form-group">
+          <%= text_field_tag :date, 'Выберите месяц', class: "date input-sm form-control" %>
+        </div>
+          <%= submit_tag "Сформировать", class: "btn btn-default btn-sm" %>
+      </fieldset>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
 <p class="lead"><%= @title %></p>
 <hr>
 <div class="row">

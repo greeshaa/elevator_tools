@@ -66,4 +66,16 @@ before_filter :signed_in_user
 		@title = 'Лифты с ПТО на прошедшей неделе'
 		render 'index'
 	end
+
+	def month
+		if params[:date].nil?
+			@month = Date.today
+		else
+			@month = Date.parse(params[:date])
+		end
+		@smonth    = @month.at_beginning_of_month
+		@emonth    = @month.at_end_of_month
+		@inspections = Inspection.where(active: true).where(next_inspection_at: @smonth..@emonth)
+		render 'index'
+	end
 end
