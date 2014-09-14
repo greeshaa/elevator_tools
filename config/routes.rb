@@ -57,6 +57,7 @@ ElevatorTools::Application.routes.draw do
   get 'lifts_of_contract',  to: 'lifts#lifts_of_contract'
   get 'overdue_lifts',  to: 'lifts#overdue_lifts'
   get 'overdue_inspections',  to: 'inspections#overdue'
+  get 'rebuke_inspections',  to: 'inspections#rebuke'
   get 'next_inspections',  to: 'inspections#next'
   get 'last_inspections',  to: 'inspections#last'
   get 'month_inspections',  to: 'inspections#month', :as => :month_inspections
@@ -70,6 +71,7 @@ ElevatorTools::Application.routes.draw do
   patch 'lifts/:id/select_price_save', to: 'lifts#select_price_save', :as => :select_price_save
   get 'lifts/:id/select_price_cancel', to: 'lifts#select_price_cancel', :as => :select_price_cancel
   get 'lifts/:id/add_downtime', to: 'downtimes#new', :as => :add_downtime
+  get 'lifts/:id/add_inspections', to: 'inspections#new', :as => :add_inspections
   get '/timesheet', to: 'time_sheets#timesheet', as: :timesheet
   get '/add_vacation', to: 'time_sheets#add_vacation', as: :add_vacation
   get '/vacation_save', to: 'time_sheets#vacation_save', as: :vacation_save

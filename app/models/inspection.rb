@@ -12,14 +12,11 @@
 #
 
 # -*- encoding : utf-8 -*-
-# -*- encoding : utf-8 -*-
 class Inspection < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-  attr_accessible :inspection_at, :next_inspection_at, :active, :lift_id
-
-
+  attr_accessible :inspection_at, :next_inspection_at, :active, :lift_id, :rebuke, :comment
 
   belongs_to :lift
 
@@ -37,7 +34,11 @@ class Inspection < ActiveRecord::Base
   	#self.inspection_at = Date.today
     if self.inspection_at.nil?
     else
-      next_inspect_at = self.inspection_at.next_year()
+      if self.rebuke == true
+        next_inspect_at = self.inspection_at.next_day()
+      else
+        next_inspect_at = self.inspection_at.next_year()
+      end
       if next_inspect_at.cwday == 6
       	self.next_inspection_at = next_inspect_at.next_day(2)
       elsif next_inspect_at.cwday == 7

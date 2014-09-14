@@ -15,15 +15,19 @@
 		<% end %>
 	</legend>
 
-  <%= form_for @inspection do |f| %>
+  <%= form_for @inspection do %>
 
   <fieldset>
     <div class="input-daterange input-group"  id="datepicker">
       <%= text_field_tag :inspection_at, nil, class: "input-sm form-control" %>
     </div>
-
-    <%= f.submit "Добавить", class: "btn btn-default btn-sm pull-right" %>
+    <div class="checkbox">
+      <label>
+        <%= check_box_tag 'notes' %> Замечания/запрет на эксплуатацию
+      </label>
+    </div>
+    <%= submit_tag "Добавить", class: "btn btn-default btn-sm pull-right" %>
   </fieldset>
-  
+
 
   <% end %>

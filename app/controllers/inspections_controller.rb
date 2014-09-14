@@ -3,8 +3,8 @@ class InspectionsController < ApplicationController
 before_filter :signed_in_user
 	def new
 		session[:return_to] ||= request.referer
-		@lift = Lift.find(params[:lift_id])
-		@porch  = @lift.porch
+		@@lift = @lift = Lift.find(params[:id])
+		@porch = @lift.porch
     if @porch.nil?
       @build_name  = 'Номер здания неизвестен'
       @street_name = 'Улица неизвестна'
@@ -15,27 +15,19 @@ before_filter :signed_in_user
     	@city   = @street.city
     	@node   = @build.node
     end
-    @@lastinspection = @lift.inspections.last
-		@inspection = @@inspection = @lift.inspections.build
-
+		@inspection = Inspection.new
 	end
 
 	def create
-
-		@inspection = @@inspection
-		@lift = @inspection.lift
-
-		@inspection.update_attributes(inspection_at: params[:inspection_at])
-			next_inspect_at =  @inspection.inspection_at.next_year()
-    	if next_inspect_at.cwday == 6
-    	 	@inspection.next_inspection_at = next_inspect_at.next_day(2)
-    	elsif next_inspect_at.cwday == 7
-    		 @inspection.next_inspection_at = next_inspect_at.next_day()
-    	else
-      	@inspection.next_inspection_at = next_inspect_at
-    	end
+		@lastinspection = @@lift.inspections.last
+		if params[:notes] == "1"
+			@inspection = @@lift.inspections.create(inspection_at: params[:inspection_at], rebuke: true)
+		else
+			@inspection = @@lift.inspections.create(inspection_at: params[:inspection_at], rebuke: false)
+		end
+		@inspection.update_attributes(comment: params[:comment]) if params[:comment] != nil
 		if @inspection.save
-			@@lastinspection.update_attributes(active: false) if @@lastinspection != nil
+			@lastinspection.update_attributes(active: false) if @lastinspection != nil
 			okmessage = "Отметка о ТО успешно добавлена."
       flash[:success] = okmessage
       redirect_to session.delete(:return_to)
@@ -52,6 +44,12 @@ before_filter :signed_in_user
 	def overdue
 		@inspections = Inspection.where(active: true).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
 		@title = 'Лифты с просроченным ПТО'
+		render 'index'
+	end
+
+	def rebuke
+		@inspections = Inspection.where(active: true).where(rebuke: true)
+		@title = 'Лифты с запретом на эксплуатацию'
 		render 'index'
 	end
 

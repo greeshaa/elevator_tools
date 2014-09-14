@@ -4,5 +4,5 @@
 	<td><%= inspection.lift.capacity %></td>
 	<td class="td_center"><%= inspection.inspection_at.strftime("%d.%m.%Y") %></td>
 	<td class="td_center"><%= inspection.next_inspection_at.strftime("%d.%m.%Y") %></td>
-	<td class="td_center"><%= link_to '<i class="fa fa-calendar"></i>'.html_safe, new_inspection_path + '?lift_id=' + inspection.lift.id.to_s %></td>
+	<td class="td_center"><%= link_to '<i class="fa fa-calendar"></i>'.html_safe, add_inspections_path(inspection.lift)%></td>
 </tr>

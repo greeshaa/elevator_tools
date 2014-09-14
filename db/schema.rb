@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825073358) do
+ActiveRecord::Schema.define(version: 20140914074807) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -164,6 +164,8 @@ ActiveRecord::Schema.define(version: 20140825073358) do
     t.datetime "updated_at"
     t.date     "next_inspection_at"
     t.boolean  "active",             default: true
+    t.boolean  "rebuke"
+    t.string   "comment"
   end
 
   create_table "ip_addresses", force: true do |t|
