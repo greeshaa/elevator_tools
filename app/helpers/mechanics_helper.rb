@@ -20,15 +20,33 @@ module MechanicsHelper
 					accrual = (l.price.cost / @work_days) * @mech_work_days if l.price != nil # стоимость обслуживания лифта в день
 					lift.push(accrual)
 					@ownz_accrual += accrual if l.price != nil
-					if l.temp_serv_meches.empty?
-						downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count # количество простоев
+					all_downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count
+					l_tsm = l.temp_serv_meches.where('start_at BETWEEN ? AND ? OR end_at BETWEEN ? AND ?', @smonth, @emonth, @smonth, @emonth)
+					if l_tsm.empty?
+						downtimes_count = all_downtimes_count # количество простоев
 						lift.push(downtimes_count)
 						@totalzaodowntimes += downtimes_count
+						temp_downtimes_count = 0
 					else
-						temp_start_at = l.temp_serv_meches.last.start_at
-    	      temp_end_at   = l.temp_serv_meches.last.end_at
-    	      all_downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count
-    	      temp_downtimes_count = l.downtimes.where( dt_date: temp_start_at..temp_end_at ).count
+						temp_downtimes_count = 0
+						l_tsm.each do |i|
+							temp_start_at = i.start_at
+    	      	temp_end_at   = i.end_at
+    	      	if temp_start_at < @smonth
+    	      		if temp_end_at > @emonth
+    	      			t_d_count = all_downtimes_count
+    	      		else
+    	      			t_d_count = l.downtimes.where( dt_date: @smonth..temp_end_at ).count
+    	      		end
+    	      	else
+    	      		if temp_end_at > @emonth
+    	      			t_d_count = l.downtimes.where( dt_date: temp_start_at..@emonth ).count
+    	      		else
+    	      			t_d_count = l.downtimes.where( dt_date: temp_start_at..temp_end_at ).count
+    	      		end
+    	      	end
+    	      	temp_downtimes_count += t_d_count
+						end
     	      downtimes_count = all_downtimes_count - temp_downtimes_count
 						lift.push(downtimes_count)
 						@totalzaodowntimes += downtimes_count
@@ -68,15 +86,33 @@ module MechanicsHelper
 					accrual = (l.price.cost / @work_days) * @mech_work_days if l.price != nil # стоимость обслуживания лифта в день
 					lift.push(accrual)
 					@owno_accrual += accrual if l.price != nil
-					if l.temp_serv_meches.empty?
-						downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count # количество простоев
+					all_downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count
+					l_tsm = l.temp_serv_meches.where('start_at BETWEEN ? AND ? OR end_at BETWEEN ? AND ?', @smonth, @emonth, @smonth, @emonth)
+					if l_tsm.empty?
+						downtimes_count = all_downtimes_count # количество простоев
 						lift.push(downtimes_count)
 						@totalooodowntimes += downtimes_count
+						temp_downtimes_count = 0
 					else
-						temp_start_at = l.temp_serv_meches.last.start_at
-    	      temp_end_at   = l.temp_serv_meches.last.end_at
-    	      all_downtimes_count = l.downtimes.where( dt_date: @smonth..@emonth ).count
-    	      temp_downtimes_count = l.downtimes.where( dt_date: temp_start_at..temp_end_at ).count
+						temp_downtimes_count = 0
+						l_tsm.each do |i|
+							temp_start_at = i.start_at
+    	      	temp_end_at   = i.end_at
+    	      	if temp_start_at < @smonth
+    	      		if temp_end_at > @emonth
+    	      			t_d_count = all_downtimes_count
+    	      		else
+    	      			t_d_count = l.downtimes.where( dt_date: @smonth..temp_end_at ).count
+    	      		end
+    	      	else
+    	      		if temp_end_at > @emonth
+    	      			t_d_count = l.downtimes.where( dt_date: temp_start_at..@emonth ).count
+    	      		else
+    	      			t_d_count = l.downtimes.where( dt_date: temp_start_at..temp_end_at ).count
+    	      		end
+    	      	end
+    	      	temp_downtimes_count += t_d_count
+						end
     	      downtimes_count = all_downtimes_count - temp_downtimes_count
 						lift.push(downtimes_count)
 						@totalooodowntimes += downtimes_count

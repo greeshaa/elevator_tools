@@ -9,10 +9,6 @@
       <div class="form-group">
         <%= text_field_tag :date, 'Выберите месяц', class: "date input-sm form-control" %>
       </div>
-      <div class="form-group">
-        <%= label_tag :tlr_id, "", class:"control-label" %>
-        <%= select_tag(:tlr_id, options_for_select([['ЗАО', 1], ['ООО', 2]]), {class: "form-control  input-sm"} ) %>
-      </div>
           <%= submit_tag "Показать", class: "btn btn-default btn-sm" %>
           <%= link_to "Добавить отработанные часы", new_time_sheet_path, class: "btn btn-default btn-sm" %>
       </fieldset>

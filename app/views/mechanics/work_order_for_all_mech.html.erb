@@ -1,26 +1,30 @@
 <% provide(:title, 'Расчет ЗП') %>
 <div class="row">
-  <div class="col-md-4 col-md-offset-1">
+  <div class="col-md-5 col-md-offset-1">
     <p class="lead">Расчет ЗП <%= @select %> за <%= @month.to_formatted_s(:month_and_year) %></p>
     <% if @foreman.nil? %>
     <% else %>
     <p>Прораб: <%= @foreman.user.runame %></p>
     <% end %>
   </div>
-  <div class="hidden-print">
-    <%= form_tag work_order_for_all_mech_path, :method => :get, class:"form-inline" do %>
-    <fieldset>
-    <div class="form-group">
-        <%= text_field_tag :date, 'Выберите месяц', class: "date input-sm form-control" %>
+</div>
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+    <div class="hidden-print">
+      <%= form_tag work_order_for_all_mech_path, :method => :get, class:"form-inline" do %>
+      <fieldset>
+      <div class="form-group">
+          <%= text_field_tag :date, 'Выберите месяц', class: "date input-sm form-control" %>
+        </div>
+      <div class="form-group">
+        <%= label_tag :tlr_id, "", class:"control-label" %>
+          <%= select_tag(:tlr_id, options_for_select([['Общий', 0], ['ЗАО', 1], ['ООО', 2]]), {class: "form-control  input-sm"} ) %>
       </div>
-    <div class="form-group">
-      <%= label_tag :tlr_id, "", class:"control-label" %>
-        <%= select_tag(:tlr_id, options_for_select([['Общий', 0], ['ЗАО', 1], ['ООО', 2]]), {class: "form-control  input-sm"} ) %>
+          <%= submit_tag "Рассчитать", class: "btn btn-default btn-sm" %>
+          <%= link_to_function("Распечатать", "javascript:print()", class:"btn btn-default btn-sm") %>
+      </fieldset>
+      <% end %>
     </div>
-        <%= submit_tag "Рассчитать", class: "btn btn-default btn-sm" %>
-        <%= link_to_function("Распечатать", "javascript:print()", class:"btn btn-default btn-sm") %>
-    </fieldset>
-    <% end %>
   </div>
 </div>
 <hr class="hidden-print">
