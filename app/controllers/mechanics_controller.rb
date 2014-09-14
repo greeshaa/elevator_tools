@@ -133,7 +133,7 @@ before_filter :signed_in_user
 			outputhash = Hash.new
 			outputhash[:mechanic] = mechanic
 
-			@mech_work_days = mechanic.time_sheets.where("time_sheet_kind_id = ? AND start_at >=? AND end_at <=?", 1, @smonth, @emonth).count
+			@mech_work_days = mechanic.time_sheets.where("time_sheet_kind_id = ? AND start_at >=? AND end_at <=?", 1, @smonth.beginning_of_day, @emonth.end_of_day).count
 			outputhash[:mech_work_days] = @mech_work_days
 
 			@lifts     = mechanic.lifts.order(:tlr_id, :porch_id)
