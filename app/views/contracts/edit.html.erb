@@ -7,6 +7,12 @@
       <fieldset>
         <legend>Редактирование договора</legend>
         <div class="form-group">
+          <%= f.label :tlr_id, "Договор с :", class:"col-md-4 control-label"  %>
+          <div class="col-md-6">
+          <%= f.select(:tlr_id, options_for_select([['ЗАО', 1], ['ООО', 2]], Contract.find_by_id(params[:id]).tlr_id ), {}, {class:"form-control input-sm"} ) %>
+          </div>
+        </div>
+        <div class="form-group">
           <%= f.label :number, "Номер:", class:"col-md-4 control-label"  %>
           <div class="col-md-6">
             <%= f.text_field :number, {class: "form-control input-sm"} %>
@@ -15,14 +21,22 @@
         <div class="form-group">
           <%= f.label :partner_id, "Партнер:", class:"col-md-4 control-label"  %>
           <div class="col-md-6">
-            <%= f.select :partner_id, options_from_collection_for_select(@partners, :id, :name), {}, { class:"form-control input-sm" } %>
+            <%= f.select :partner_id, options_from_collection_for_select(@partners, :id, :name, Contract.find_by_id(params[:id]).partner_id ), {}, { class:"form-control input-sm" } %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :signed_at, "Дата подписания:", class:"col-md-4 control-label" %>
           <div class="col-md-6">
-            <div class="input-daterange input-group"  id="datepicker">
+            <div class="datepicker input-daterange input-group"  id="datepicker">
               <%= f.text_field :signed_at, class: "input-sm form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :lifetime, "Действует до:", class:"col-md-4 control-label" %>
+          <div class="col-md-6">
+            <div class="datepicker input-daterange input-group">
+              <%= f.text_field :lifetime, class: "input-sm form-control" %>
             </div>
           </div>
         </div>

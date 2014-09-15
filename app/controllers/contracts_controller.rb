@@ -34,7 +34,7 @@ before_filter :signed_in_user
 	def update
 		@contract = Contract.find(params[:id])
     if @contract.update_attributes(params[:contract])
-      flash[:success] = @contract.number + " обновлен"
+      flash[:success] = "Договор " + @contract.number + " обновлен"
       redirect_to @contract
     else
       render 'edit'

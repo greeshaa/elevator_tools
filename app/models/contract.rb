@@ -15,7 +15,8 @@
 
 # -*- encoding : utf-8 -*-
 class Contract < ActiveRecord::Base
-  attr_accessible :lifetime, :note, :number, :signed_at, :partner_id
+  attr_accessible :lifetime, :note, :number, :signed_at, :partner_id, :tlr_id
+  belongs_to :tlr
   belongs_to :partner
   has_many :lifts
 end

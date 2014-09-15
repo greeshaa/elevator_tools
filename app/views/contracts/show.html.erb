@@ -12,6 +12,10 @@
     		<div class="panel-body">
     			<table class="table table-condensed table-striped">
     				<tr>
+              <td>Договор</td>
+              <td><%= @contract.tlr.name + ' Томсклифтремонт' if @contract.tlr != nil %></td>
+            </tr>
+            <tr>
     					<td>Контрагент</td>
     					<td><%= @contract.partner.name if @contract.partner != nil %></td>
     				</tr>
