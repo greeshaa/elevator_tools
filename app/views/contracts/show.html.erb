@@ -25,7 +25,7 @@
     				</tr>
     				<tr>
     					<td>Срок действия</td>
-    					<td><%= @contract.lifetime %></td>
+    					<td><%= @contract.lifetime.strftime("%d.%m.%Y") if @contract.lifetime != nil %></td>
     				</tr>
     				<tr>
     					<td>Комментарии</td>
