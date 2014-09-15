@@ -194,7 +194,7 @@ before_filter :signed_in_user
         else
           @contract = Contract.find(params[:contract_id])
           Lift.update_all(["contract_id=?", params[:contract_id]], :id => params[:lift_ids])
-          redirect_to session.delete(:return_to)
+          redirect_to contracts_path
         end
       else
         @node = Node.find(params[:node_id])
