@@ -60,6 +60,7 @@ before_filter :signed_in_user
   end
 
   def show
+    store_location
   	@lift   = Lift.find(params[:id])
   	@porch  = @lift.porch
     if @porch.nil?
@@ -95,6 +96,7 @@ before_filter :signed_in_user
   end
 
   def index
+    store_location
   	#@lifts = Lift.search(params[:search])
     if (params[:search]).blank?
       @title = 'Информация по облуживаемым лифтам'
@@ -122,7 +124,6 @@ before_filter :signed_in_user
 
   def current_month
     inspections = Inspection.where(next_inspection_at: Date.today.prev_month()..Date.today.next_month())
-
   end
 
   def list
@@ -186,17 +187,17 @@ before_filter :signed_in_user
           else
             @tlr = Tlr.find(params[:tlr_id])
             Lift.update_all(["tlr_id=?", params[:tlr_id]], :id => params[:lift_ids])
-            redirect_to session.delete(:return_to)
+            redirect_back_or_default(store_location)
           end
         else
           @contract = Contract.find(params[:contract_id])
           Lift.update_all(["contract_id=?", params[:contract_id]], :id => params[:lift_ids])
-          redirect_to contracts_path
+          redirect_back_or_default(store_location)
         end
       else
         @node = Node.find(params[:node_id])
         Lift.update_all(["node_id=?", params[:node_id]], :id => params[:lift_ids])
-        redirect_to session.delete(:return_to)
+        redirect_back_or_default(store_location)
       end
     else
       @mechanic = Mechanic.find(params[:mechanic_id])
@@ -207,7 +208,7 @@ before_filter :signed_in_user
       else
         Lift.update_all(["mechanic_id=?", params[:mechanic_id]], :id => params[:lift_ids])
       end
-      redirect_to session.delete(:return_to)
+      redirect_back_or_default(store_location)
     end
   end
 

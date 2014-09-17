@@ -11,6 +11,14 @@ class ApplicationController < ActionController::Base
     super
   end
 
+  def store_location
+    session[:return_to] = request.fullpath if request.get? and controller_name != "sessions"
+  end
+
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+  end
+
   def search
     unless params[:search].nil?
       address = params[:search].split(', ')
@@ -66,6 +74,7 @@ class ApplicationController < ActionController::Base
   end
 
   end
+
 
   private
 

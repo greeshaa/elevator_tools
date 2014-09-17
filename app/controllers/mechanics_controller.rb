@@ -38,7 +38,7 @@ before_filter :signed_in_user
 	end
 
 	def lift_move
-		session[:return_to] ||= request.referer
+		store_location
 		@mechanic = Mechanic.find(params[:id])
 		if current_user.foreman?
 			foreman = Foreman.where('user_id = ?', current_user.id).first
@@ -65,7 +65,7 @@ before_filter :signed_in_user
 	end
 
 	def lift_move_zo
-		session[:return_to] ||= request.referer
+		store_location
 		@mechanic = Mechanic.find(params[:id])
 		@tlr = Tlr.all
 		@lifts    = @mechanic.lifts.order(:tlr_id, :porch_id)
