@@ -65,7 +65,7 @@
       <%= link_to '<i class="fa fa-calendar"></i>'.html_safe, new_overhaul_path + '?lift_id=' + lift.id.to_s %>
       <% @back_path = params[:action] %>
     <% else %>
-      <%= link_to '<i class="fa fa-calendar"></i>'.html_safe, new_inspection_path + '?lift_id=' + lift.id.to_s %>
+      <%= link_to '<i class="fa fa-calendar"></i>'.html_safe, add_inspections_path(lift) %>
     <% end %>
     </td>
    <% end %>

@@ -19,7 +19,7 @@
         <%= link_to "Все лифты здания", build_path(@build), class: "btn btn-default" %>
         <%= link_to "Все лифты узла", lifts_of_nodes_path + "?id=" + @lift.id.to_s, class: "btn btn-default" %>
         <%= link_to "Редактировать", edit_lift_path, class: "btn btn-default" %>
-        <%= link_to "Отметка о ПТО", new_inspection_path + '?lift_id=' +@lift.id.to_s, class: "btn btn-default" %>
+        <%= link_to "Отметка о ПТО", add_inspections_path(@lift), class: "btn btn-default" %>
       </div>
     </div>
   </div>
