@@ -7,7 +7,6 @@ one:
   phone_1: 1
   phone_2: 1
   e_mail: MyString
-  partner_id: 1
 
 two:
   name: MyString
@@ -16,4 +15,3 @@ two:
   phone_1: 1
   phone_2: 1
   e_mail: MyString
-  partner_id: 1

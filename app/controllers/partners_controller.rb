@@ -6,6 +6,7 @@ class PartnersController < ApplicationController
 	end
 
 	def show
+		store_location
 		@partner = Partner.find(params[:id])
 		@partnername = @partner.name if @partner.name != nil
 		@contracts = @partner.contracts

@@ -15,6 +15,6 @@ class Partner < ActiveRecord::Base
 
   attr_accessible :name
   has_many :contracts
-  has_many :contacts
   has_many :lifts, :through => :contracts
+  has_and_belongs_to_many :contacts,  join_table: :contacts_partners
 end

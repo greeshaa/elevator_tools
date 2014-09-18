@@ -1,4 +1,5 @@
 class Contact < ActiveRecord::Base
-	attr_accessible :name, :function, :note, :phone_1, :phone_2, :e_mail, :partner_id
-  belongs_to :partner
+	attr_accessible :name, :function, :phone_1, :phone_2, :e_mail, :note
+
+	has_and_belongs_to_many :partners, join_table: :contacts_partners
 end

@@ -3,7 +3,7 @@ class DowntimesController < ApplicationController
 	before_filter :signed_in_user
 
 	def new
-		session[:return_to] ||= request.referer
+		store_location
 		@lift   = Lift.find(params[:id])
 		@porch  = @lift.porch
     @build  = @porch.build
@@ -19,7 +19,7 @@ class DowntimesController < ApplicationController
 		if @downtime.save
 			okmessage = "Отметка о простое добавлена."
       flash[:success] = okmessage
-      redirect_to session.delete(:return_to)
+      redirect_back_or_default(store_location)
 		else
 			flash[:success] = "something is wrong"
       #render 'new'

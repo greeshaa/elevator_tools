@@ -70,10 +70,11 @@ ElevatorTools::Application.routes.draw do
   get 'contracts/:id/lift_move', to: 'contracts#lift_move', :as => :contracts_lifts_move
   get 'lifts/:id/select_price', to: 'lifts#select_price', :as => :select_price
   patch 'lifts/:id/select_price_save', to: 'lifts#select_price_save', :as => :select_price_save
-  get 'lifts/:id/select_price_cancel', to: 'lifts#select_price_cancel', :as => :select_price_cancel
   get 'lifts/:id/add_downtime', to: 'downtimes#new', :as => :add_downtime
   get 'lifts/:id/add_inspections', to: 'inspections#new', :as => :add_inspections
-  get 'partners/:id/add_contact', to: 'contacts#new', :as => :add_contact
+  get 'partners/:id/add_new_contact', to: 'contacts#new', :as => :add_new_contact
+  get 'partners/:id/add_existing_contact', to: 'contacts#add_existing', :as => :add_existing_contact
+  patch 'partners/:id/add_existing_contact_save', to: 'contacts#add_existing_save', :as => :add_existing_contact_save
   get '/timesheet', to: 'time_sheets#timesheet', as: :timesheet
   get '/add_vacation', to: 'time_sheets#add_vacation', as: :add_vacation
   get '/vacation_save', to: 'time_sheets#vacation_save', as: :vacation_save
@@ -81,9 +82,6 @@ ElevatorTools::Application.routes.draw do
   get '/sick_list_save', to: 'time_sheets#sick_list_save', as: :sick_list_save
   get '/add_work_days', to: 'time_sheets#add_work_days', as: :add_work_days
   get '/work_days_save', to: 'time_sheets#work_days_save', as: :work_days_save
-  #get 'equipment_relocation', to: 'equipment#relocation'
-  get '/back_to_contact', to: 'contacts#back', as: :contacts_back
-
   get '/address_list', to: 'address#list'
   get '/district', to: 'address#district'
   get '/add_street',  to: 'streets#new'

@@ -1,0 +1,24 @@
+<% provide(:title, 'Существующее контактное лицо') %>
+<div class="row">
+  <div class="span6 offset3">  <div class="col-md-6 col-md-offset-3">
+    <div class="well bs-component">
+      <%= form_tag add_existing_contact_save_path, method: "patch", html: {class:"form-horizontal" } do %>
+      <fieldset>
+        <legend>Существующее контактное лицо</legend>
+        <div class="form-group">
+          <%= label_tag :contact_id, "Партнер:", class:"col-md-4 control-label"  %>
+          <div class="col-md-6">
+            <%= select_tag :contact_id, options_from_collection_for_select(@contacts, :id, :name), { class:"form-control input-sm" } %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-10 col-md-offset-4">
+            <%= link_to " Отменить ", :back, class: "btn btn-default btn-sm" %>
+            <%= submit_tag "Сохранить", class: "btn btn-primary btn-sm" %>
+          </div>
+        </div>
+      </fieldset>
+      <% end %>
+    </div>
+  </div>
+</div>

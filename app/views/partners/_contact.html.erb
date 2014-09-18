@@ -6,5 +6,8 @@
     <td><%= to_phones(c.phone_2) %></td>
     <td><%= c.e_mail %></td>
     <td><%= c.note %></td>
+    <td><%= link_to "Изменить", edit_contact_path(c), class:"text-muted" %></td>
+    <td><%= link_to "Отвязать", "#", class:"text-muted" %></td>
+    <td><%= link_to "Удалить контакт", "#", class:"text-muted" if current_user.admin? %></td>
   </tr>
 <% end %>

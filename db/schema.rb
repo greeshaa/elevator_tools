@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918061448) do
+ActiveRecord::Schema.define(version: 20140918141502) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -59,10 +59,17 @@ ActiveRecord::Schema.define(version: 20140918061448) do
     t.integer  "phone_1"
     t.integer  "phone_2"
     t.string   "e_mail"
-    t.integer  "partner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "contacts_partners", id: false, force: true do |t|
+    t.integer "contact_id"
+    t.integer "partner_id"
+  end
+
+  add_index "contacts_partners", ["contact_id"], name: "index_contacts_partners_on_contact_id", using: :btree
+  add_index "contacts_partners", ["partner_id"], name: "index_contacts_partners_on_partner_id", using: :btree
 
   create_table "contracts", force: true do |t|
     t.integer  "partner_id"

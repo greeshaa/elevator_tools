@@ -24,7 +24,6 @@ module ApplicationHelper
     when 6
         s = i[0]+i[1]+"-"+i[2]+i[3]+"-"+i[4]+i[5]
     else
-        s = "wrong phone format"
     end
     s
   end
