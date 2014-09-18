@@ -9,6 +9,7 @@ class PartnersController < ApplicationController
 		@partner = Partner.find(params[:id])
 		@partnername = @partner.name if @partner.name != nil
 		@contracts = @partner.contracts
+		@contacts = @partner.contacts
 	end
 
 	def new

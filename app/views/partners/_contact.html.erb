@@ -1,0 +1,10 @@
+<% @contacts.each do |c| %>
+  <tr>
+    <td><%= c.name %></td>
+    <td><%= c.function %></td>
+    <td><%= to_phones(c.phone_1) %></td>
+    <td><%= to_phones(c.phone_2) %></td>
+    <td><%= c.e_mail %></td>
+    <td><%= c.note %></td>
+  </tr>
+<% end %>

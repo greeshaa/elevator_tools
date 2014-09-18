@@ -25,6 +25,7 @@ ElevatorTools::Application.routes.draw do
   end
   resources :foremen
   resources :contracts
+  resources :contacts
   resources :partners
   resources :prices
   resources :downtimes
@@ -72,6 +73,7 @@ ElevatorTools::Application.routes.draw do
   get 'lifts/:id/select_price_cancel', to: 'lifts#select_price_cancel', :as => :select_price_cancel
   get 'lifts/:id/add_downtime', to: 'downtimes#new', :as => :add_downtime
   get 'lifts/:id/add_inspections', to: 'inspections#new', :as => :add_inspections
+  get 'partners/:id/add_contact', to: 'contacts#new', :as => :add_contact
   get '/timesheet', to: 'time_sheets#timesheet', as: :timesheet
   get '/add_vacation', to: 'time_sheets#add_vacation', as: :add_vacation
   get '/vacation_save', to: 'time_sheets#vacation_save', as: :vacation_save
@@ -80,6 +82,7 @@ ElevatorTools::Application.routes.draw do
   get '/add_work_days', to: 'time_sheets#add_work_days', as: :add_work_days
   get '/work_days_save', to: 'time_sheets#work_days_save', as: :work_days_save
   #get 'equipment_relocation', to: 'equipment#relocation'
+  get '/back_to_contact', to: 'contacts#back', as: :contacts_back
 
   get '/address_list', to: 'address#list'
   get '/district', to: 'address#district'
