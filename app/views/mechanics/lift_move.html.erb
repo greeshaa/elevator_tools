@@ -51,11 +51,11 @@
       </label>
     </div>
     <div class="form-group">
-      <div class="input-daterange input-group" id="datepicker">
+      <div class="input-daterange input-group">
         <div class="input-group-addon">&ensp;&ensp;с</div>
-          <%= text_field_tag :start_at, nil, class: "input-sm form-control" %>
+          <%= text_field_tag :start_at, nil, class: "datepicker input-sm form-control" %>
         <div class="input-group-addon">по</div>
-          <%= text_field_tag :end_at, nil, class: "input-sm form-control" %>
+          <%= text_field_tag :end_at, nil, class: "datepicker input-sm form-control" %>
       </div>
     </div>
     <%= submit_tag "Изменить", method: :put, data: { confirm: "Вы уверены?" }, class: "btn btn-primary btn-sm" %>

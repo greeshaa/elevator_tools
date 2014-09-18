@@ -16,6 +16,17 @@ module ApplicationHelper
     @current_user = user
   end
 
-  
-  
+  def to_phones(phone)
+    i = phone.to_s.split('')
+    case i.length
+    when 11
+        s = i[0]+"-"+i[1]+i[2]+i[3]+"-"+i[4]+i[5]+i[6]+"-"+i[7]+i[8]+"-"+i[9]+i[10]
+    when 6
+        s = i[0]+i[1]+"-"+i[2]+i[3]+"-"+i[4]+i[5]
+    else
+        s = "wrong phone format"
+    end
+    s
+  end
+
 end
