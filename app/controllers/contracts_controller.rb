@@ -8,8 +8,10 @@ before_filter :signed_in_user
 	end
 
 	def show
+		store_location
 		@contract = Contract.find(params[:id])
 		@lifts = @contract.lifts
+		@contacts = @contract.partner.contacts
 	end
 
 	def new
