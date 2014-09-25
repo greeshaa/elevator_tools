@@ -217,13 +217,13 @@ module MechanicsHelper
 						if tsm.end_at > @emonth
 							mech_work_days = @mech_work_days
 						else
-							mech_work_days = @smonth.business_days_until(tsm.end_at)
+							mech_work_days = @smonth.business_days_until(tsm.end_at.next_day)
 						end
 					else
 						if tsm.end_at > @emonth
-							mech_work_days = tsm.start_at.business_days_until(@emonth)
+							mech_work_days = tsm.start_at.business_days_until(@emonth.next_day)
 						else
-							mech_work_days = tsm.start_at.business_days_until(tsm.end_at)
+							mech_work_days = tsm.start_at.business_days_until(tsm.end_at.next_day)
 						end
 					end
 
