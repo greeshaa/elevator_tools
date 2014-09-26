@@ -84,10 +84,10 @@ class TimeSheetsController < ApplicationController
 		end
 		if params[:date].nil?
 			date = DateTime.now
-			@date = I18n.t Date.today.to_formatted_s(:month_and_year)
+			@date = Date.today
 		else
-			date = DateTime.parse(params[:date])
-			@date = params[:date]
+			@date = date = DateTime.parse(params[:date])
+			# @date = params[:date]
 		end
 		smonth    = date.at_beginning_of_month
 		emonth    = date.at_end_of_month

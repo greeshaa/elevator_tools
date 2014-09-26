@@ -72,6 +72,7 @@ before_filter :signed_in_user
 	end
 
 	def work_order
+		store_location
 		@mechanic  = Mechanic.find(params[:id])
 		if params[:date].nil?
 			@month = Date.today

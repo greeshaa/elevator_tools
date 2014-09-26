@@ -17,7 +17,7 @@ class Street < ActiveRecord::Base
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   attr_accessible :name, :city_id, :street_kind_id
-  validates  :name, presence: true, uniqueness: {case_sensitive: false}, length: { minimum: 4 }
+  validates  :name, presence: true, uniqueness: {case_sensitive: false}
 
   belongs_to :city
   belongs_to :street_kind

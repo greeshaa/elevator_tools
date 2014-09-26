@@ -1,8 +1,4 @@
 ru:
-  activerecord:
-    attributes:
-      user:
-        password_digest: "Password"
   date:
     abbr_day_names:
     - Вс
@@ -38,6 +34,7 @@ ru:
       default: ! '%d.%m.%Y'
       long: ! '%-d %B %Y'
       short: ! '%-d %b'
+      month_and_year: ! '%B %Y'
     month_names:
     -
     - января
@@ -48,7 +45,7 @@ ru:
     - июня
     - июля
     - августа
-    - сентября
+    - cентября
     - октября
     - ноября
     - декабря

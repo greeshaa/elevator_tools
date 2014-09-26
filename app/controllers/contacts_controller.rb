@@ -14,7 +14,8 @@ class ContactsController < ApplicationController
       flash[:success] = okmessage
       redirect_back_or_default(store_location)
 		else
-			flash[:success] = "something is wrong"
+			render 'new', object: @@partner
+			#redirect_to add_new_contact_path(@@partner)
     end
 	end
 
@@ -31,7 +32,7 @@ class ContactsController < ApplicationController
       flash[:success] = okmessage
       redirect_back_or_default(store_location)
 		else
-			flash[:success] = "something is wrong"
+			render 'add_existing'
     end
 	end
 

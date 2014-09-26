@@ -3,7 +3,6 @@ class DowntimesController < ApplicationController
 	before_filter :signed_in_user
 
 	def new
-		store_location
 		@lift   = Lift.find(params[:id])
 		@porch  = @lift.porch
     @build  = @porch.build

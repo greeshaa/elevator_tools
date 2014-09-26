@@ -1,13 +1,11 @@
 ru:
   activerecord:
-    models:
-      street: Улица
     attributes:
-      profile:
+      street:
         name: "Название улицы"
-    models:
-      user: Пользователь
-    attributes:
-      profile:
-        name: "Отображаемое имя"
-        phone: Телефон
+      build:
+        name: "Номер здания"
+        porch_count: "Количество подъездов"
+      contact:
+        name: "Поле ФИО"
+        function: "Поле должность"

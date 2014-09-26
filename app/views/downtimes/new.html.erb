@@ -1,7 +1,7 @@
 <% provide(:title, 'Отметка о простое лифта') %>
 <p class="lead">Отметка о простое лифта</p>
 <hr>
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-4 col-md-offset-4">
   <legend>
   	<% if @lift.porch.nil? %>
 			<% provide(:title, 'Неизвестный адрес') %>
@@ -15,14 +15,13 @@
 		<% end %>
 	</legend>
 
-  <%= form_for(@downtime, html: {class:"form-horizontal" }) do |f| %>
+  <%= form_for(@downtime, html: {class:"form-inline" }) do |f| %>
 
   <fieldset>
-    <div class="input-daterange input-group"  id="datepicker">
-      <%= f.text_field :dt_date, class: "input-sm form-control" %>
+    <div class="datepicker input-daterange input-group">
+     <%= f.text_field :dt_date, class: "input-sm form-control" %>
     </div>
-
-    <%= f.submit "Добавить", class: "btn btn-default btn-sm pull-right" %>
+    <%= f.submit "Добавить", class: "btn btn-default btn-sm" %>
     <%= link_to " Отменить ", :back, class: "btn btn-default btn-sm" %>
   </fieldset>
 

@@ -18,8 +18,8 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-rails'
-
 gem 'business_time'
+gem 'russian', '~> 0.6.0'
 
 # Logging elevator tools
 gem 'public_activity'

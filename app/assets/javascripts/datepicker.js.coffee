@@ -1,9 +1,9 @@
 jQuery ->
   $('.date').datepicker({
-  		format: 'MM yyyy',
+  		format: 'mm yyyy',
   		minViewMode: 1,
   		autoclose: true,
-  		language: "en"
+  		language: "ru"
   });
 
 jQuery ->

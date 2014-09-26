@@ -1,11 +1,11 @@
 <% if object.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
-      Форма содержит <%= Russian.pluralize(object.errors.count, "ошибка") %>.
+      Форма содержит <%= object.errors.count.to_s + Russian.p(object.errors.count, " ошибку", " ошибки", " ошибок") %>.
     </div>
     <ul>
     <% object.errors.full_messages.each do |msg| %>
-      <li>* <%= msg %></li>
+      <li><%= t(msg) %></li>
     <% end %>
     </ul>
   </div>

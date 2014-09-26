@@ -18,7 +18,7 @@ class Build < ActiveRecord::Base
 
     attr_accessible :name, :street_id, :porch_count, :node_id
     validates  :name, presence: true#, uniqueness: true
-    validates  :porch_count, presence: true
+    validates  :porch_count, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to:20 }
 
     belongs_to :street
     belongs_to :node
