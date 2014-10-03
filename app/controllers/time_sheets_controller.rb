@@ -83,12 +83,11 @@ class TimeSheetsController < ApplicationController
 			mechanics = Mechanic.all.order(:name)
 		end
 		if params[:date].nil?
-			date = DateTime.now
-			@date = Date.today
+			date = Date.today
 		else
-			@date = date = DateTime.parse(params[:date])
-			# @date = params[:date]
+			date = Date.parse(params[:date])
 		end
+		@date = Russian::strftime(date, "%B") + ' ' + Russian::strftime(date, "%Y")
 		smonth    = date.at_beginning_of_month
 		emonth    = date.at_end_of_month
 		@days 		= date.end_of_month.day
