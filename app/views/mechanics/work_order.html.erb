@@ -1,7 +1,7 @@
 <% provide(:title, 'Расчет ЗП') %>
 <div class="row">
   <div class="col-md-4 col-md-offset-1">
-    <p class="lead">Расчет ЗП <%= @mechanic.name %> за <%= @month.to_formatted_s(:month_and_year) %></p>
+    <p class="lead">Расчет ЗП <%= @mechanic.name %> за <%= @month %></p>
     <% if @mechanic.foreman.nil? %>
     <% else %>
     <p>Прораб: <%= @mechanic.foreman.user.runame %></p>

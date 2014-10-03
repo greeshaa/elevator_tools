@@ -75,13 +75,14 @@ before_filter :signed_in_user
 		store_location
 		@mechanic  = Mechanic.find(params[:id])
 		if params[:date].nil?
-			@month = Date.today
+			date = Date.today
 		else
-			@month = Date.parse(params[:date])
+			date = Date.parse(params[:date])
 		end
-		@smonth    = @month.at_beginning_of_month
-		@emonth    = @month.at_end_of_month
-		@cur_month = @month.month
+		@month = Russian::strftime(date, "%B") + ' ' + Russian::strftime(date, "%Y")
+		@smonth    = date.at_beginning_of_month
+		@emonth    = date.at_end_of_month
+		@cur_month = date.month
 		@cal_days  = FactoryCalendar.where('month = ?', @cur_month ).first.cal_days
 		@work_days = FactoryCalendar.where('month = ?', @cur_month ).first.work_days
 		@mech_work_days = @mechanic.time_sheets.where("time_sheet_kind_id = ? AND start_at >=? AND end_at <=?", 1, @smonth.beginning_of_day, @emonth.end_of_day).count
@@ -105,16 +106,15 @@ before_filter :signed_in_user
 	end
 
 	def work_order_for_all_mech
-		#if params[:work_order_for_all_mech].nil?
-		#	@month = Date.today
-		#else
-		#	@month = Date.parse(params[:work_order_for_all_mech])
-		#end
 		if params[:date].nil?
-			@month = Date.today
+			date = Date.today
 		else
-			@month = Date.parse(params[:date])
+			date = Date.parse(params[:date])
 		end
+		@month = Russian::strftime(date, "%B") + ' ' + Russian::strftime(date, "%Y")
+		@smonth    = date.at_beginning_of_month
+		@emonth    = date.at_end_of_month
+		@cur_month = date.month
 
 		if current_user.foreman?
 			foreman = Foreman.where('user_id = ?', current_user.id).first
@@ -123,9 +123,6 @@ before_filter :signed_in_user
 			@mechanics = Mechanic.all.order(:name)
 		end
 
-		@smonth     = @month.at_beginning_of_month
-		@emonth     = @month.at_end_of_month
-		@cur_month  = @month.month
 		@cal_days  = FactoryCalendar.where('month = ?', @cur_month ).first.cal_days
 		@work_days = FactoryCalendar.where('month = ?', @cur_month ).first.work_days
 		@outputarray = []
