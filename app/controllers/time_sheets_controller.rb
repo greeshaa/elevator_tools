@@ -97,7 +97,7 @@ class TimeSheetsController < ApplicationController
 			array1 = []
 			array1.push(mechanic)
 
-			mechanic_timesheets = mechanic.time_sheets.where( start_at: smonth..emonth )
+			mechanic_timesheets = mechanic.time_sheets.where( start_at: smonth.beginning_of_day..emonth.end_of_day )
 			if mechanic_timesheets.empty?
 				array2 = []
 				@days.times do
