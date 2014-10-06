@@ -52,4 +52,11 @@ before_filter :signed_in_user
 		@lifts     = @contract.lifts
 	end
 
+	def lift_move_zo
+		store_location
+		@contract  = Contract.find(params[:id])
+		@tlr = Tlr.all
+		@lifts    = @contract.lifts.order(:tlr_id, :porch_id)
+	end
+
 end

@@ -1,6 +1,6 @@
 <% @lifts.each do |lift| %>
 <tr>
-  <% if (params[:controller] == 'contracts' and params[:action] == 'lift_move') %>
+  <% if (params[:controller] == 'contracts' and params[:action] == 'lift_move' or params[:action] == 'lift_move_zo') %>
   <td>
     <%= check_box_tag 'lift_ids[]', lift.id %>
   </td>
@@ -42,4 +42,3 @@
    <% end %>
 </tr>
 <% end %>
-

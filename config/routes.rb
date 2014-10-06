@@ -68,6 +68,7 @@ ElevatorTools::Application.routes.draw do
   get 'mechanics/:id/lift_move_zo', to: 'mechanics#lift_move_zo', :as => :mechanics_lift_move_zo
   get 'nodes/:id/lift_move', to: 'nodes#lift_move', :as => :nodes_lifts_move
   get 'contracts/:id/lift_move', to: 'contracts#lift_move', :as => :contracts_lifts_move
+  get 'contracts/:id/lift_move_zo', to: 'contracts#lift_move_zo', :as => :contracts_lift_move_zo
   get 'lifts/:id/select_price', to: 'lifts#select_price', :as => :select_price
   patch 'lifts/:id/select_price_save', to: 'lifts#select_price_save', :as => :select_price_save
   get 'lifts/:id/add_downtime', to: 'downtimes#new', :as => :add_downtime
