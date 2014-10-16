@@ -1,206 +1,140 @@
 <% if signed_in? %>
-<header class="hidden-print">
-  <nav class="navbar navbar-default">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "elevatorTools", main_path, class: "navbar-brand" %>
-    </div>
-    <div class="collapse navbar-collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav pull-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i> <%= @current_user.runame %> <b class="caret"></b></a>
-            <ul class="dropdown-menu pull-right">
-              <% if current_user.admin? %>
-              <li><%= link_to "Все пользователи", users_path %></li>
-              <li><%= link_to "Добавить пользователя", signup_path %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Профиль", current_user %></li>
-              <li><%= link_to "Настройки", edit_user_path(current_user) %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Выйти", signout_path, method: :delete %></li>
-              <% else %>
-              <li><%= link_to "Профиль", current_user %></li>
-              <li><%= link_to "Настройки", edit_user_path(current_user) %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Выйти", signout_path, method: :delete %></li>
-              <% end %>
-            </ul>
-          </li>
-        </ul>
-    </div>
-  </nav>
-<!--- Вывод меню для администрации ---->
-  <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-    <% if current_user.admin? or current_user.management? %><!--- администрация ---->
-    <li class="<%= 'active' if params[:controller] == 'static_pages' %>">
-      <%= link_to "Основная", main_path %></li>
-    <li class="<%= 'active' if params[:controller] == 'address' or params[:controller] == 'streets' or params[:controller] == ' builds' %>"><%= link_to "Адреса", address_index_path %></li>
-    <li class="<%= 'active' if params[:controller] == 'nodes' %>"><%= link_to "Связь", nodes_path %></li>
-    <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
-    <li class="<%= 'active' if params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == 'equipment_lists' %>"><%= link_to "Оборудование", equipment_index_path %></li>
-    <li class="<%= 'active' if params[:controller] == 'mechanics' %>"><%= link_to "Механики", mechanics_path %></li>
-    <li class="<%= 'active' if params[:controller] == 'conracts' or params[:controller] == 'partners' %>"><%= link_to "Договора", contracts_path %></li>
-    <% else %> <!--- все остальные ---->
-      <% if current_user.foreman?  %>
-      <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>">
-        <%= link_to "Основная", main_path %></li>
-      <li class="<%= 'active' if params[:controller] == 'address' %>"><%= link_to "Адреса", address_index_path %></li>
-      <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
-      <li class="<%= 'active' if params[:controller] == 'mechanics' %>"><%= link_to "Механики", mechanics_path %></li>
-      <% else %>
-      <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>">
-        <%= link_to "Основная", main_path %></li>
-      <li class="<%= 'active' if params[:controller] == 'address' %>"><%= link_to "Адреса", address_index_path %></li>
-      <li class="<%= 'active' if params[:controller] == 'lifts' %>"><%= link_to "Лифты", lifts_path %></li>
-      <li class="<%= 'active' if params[:controller] == 'conracts' or params[:controller] == 'partners' %>"><%= link_to "Договора", contracts_path %></li>
-      <% end %>
-    <% end %>
-    <% if current_user.admin? %>
-    <div class="col-md-4 pull-right pdr">
-      <%= form_tag({:controller => "address", :action => "index"}, :method => "get", role:"form") do %>
-      <div class="input-group input-group-sm">
-        <label class="sr-only" for="search">search</label>
-        <%= search_field_tag(:search, params[:search], {class:"form-control"}) %>
-        <div class="input-group-btn">
-          <button class='btn btn-default' style='width:40px;' type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-         </div>
-      </div>
-      <% end %>
-    </div>
-    <% end %>
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%= link_to "elevatorTools", main_path, class: "navbar-brand" %>
+  </div>
+  <!-- /.navbar-header -->
+  <ul class="nav navbar-top-links navbar-right">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-user fa-fw"></i> <%= @current_user.runame %> <i class="fa fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-user">
+        <li><%= link_to ("<i class='fa fa-user fa-fw'></i> Профиль").html_safe, current_user %></li>
+        <li><%= link_to ("<i class='fa fa-gear fa-fw'></i> Настройки").html_safe, edit_user_path(current_user) %></li>
+        <li class="divider"></li>
+        <li><%= link_to ("<i class='fa fa-sign-out fa-fw'></i>Выйти").html_safe, signout_path, method: :delete %></li>
+        <% if current_user.admin? %>
+        <li class="divider"></li>
+        <li><%= link_to ("<i class='fa fa-users'></i> Все пользователи").html_safe, users_path %></li>
+        <li><%= link_to ("<i class='fa fa-plus-circle'></i> Добавить пользователя").html_safe, signup_path %></li>
+        <% end %>
+      </ul>
+      <!-- /.dropdown-user -->
+    </li>
+    <!-- /.dropdown -->
   </ul>
-<!--- Меню контроллеров ---->
-  <% if params[:controller] == 'static_pages'%>
-    <ul class="breadcrumb pull-right pdr">
-      <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'main') %>"><%= link_to "Сводка",    main_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'statistics') %>"><%= link_to "    Статистика", statistics_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook') %>"><%= link_to "    Справочник", handbook_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'static_pages' and params[:action] == 'about') %>">
-          <%= link_to "?", about_path %></li>
-    </ul>
-  <% end %>
-  <% if (params[:controller] == 'address' or params[:controller] == 'streets' or params[:controller] == 'builds')%>
-    <ul class="breadcrumb pull-right pdr">
-      <li class="<%= 'active' if (params[:controller] == 'streets'  and params[:action] == 'index') %>"><%= link_to "Все улицы",      streets_path  %></li>
-      <li class="<%= 'active' if (params[:controller] == 'address'  and params[:action] == 'list') %>"><%= link_to "Все адреса",    address_list_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'address'  and params[:action] == 'district') %>"><%= link_to "Районы",    district_path %></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          + <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><%= link_to "Добавить улицу",  add_street_path %></li>
-          <li><%= link_to "Добавить адрес", add_build_path %></li>
-        </ul>
-      </li>
-    </ul>
-  <% end %>
-  <% if (params[:controller] == 'nodes' or params[:controller] == 'providers' or params[:controller] == 'connections')%>
-    <ul class="breadcrumb pull-right pdr">
-      <li class="<%= 'active' if (params[:controller] == 'nodes'  and params[:action] == 'list') %>"><%= link_to "УМ",    nodes_all_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'providers'  and params[:action] == 'index') %>"><%= link_to "Подключения",    connections_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'providers'  and params[:action] == 'index') %>"><%= link_to "Провайдеры",    providers_path %></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          + <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><%= link_to "Добавить УМ", add_node_path %></li>
-          <li><%= link_to "Добавить подключение", new_connection_path %></li>
-          <li><%= link_to "Добавить провайдера", new_provider_path %></li>
-        </ul>
-      </li>
-    </ul>
-  <% end %>
-  <% if (params[:controller] == 'lifts' )%>
-    <ul class="breadcrumb pull-right pdr">
-      <li class="<%= 'active' if (params[:controller] == 'lifts'  and params[:action] == 'list') %>"><%= link_to "Все лифты",     lifts_list_path %></li>
-      <li><%= link_to "Ремонты", overhauls_path %></li>
-      <li><%= link_to "Простои", downtimes_path %></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          ПТО <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><%= link_to "По месяцам", month_inspections_path %></li>
-          <li><%= link_to "Сформировать", lifts_inspections_path %></li>
-          <li><%= link_to "Выгрузить (excel)", lifts_inspections_path(format: "xls") %></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          Единый реестр <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><%= link_to "Сформировать", fulliftsdata_path %></li>
-          <li><%= link_to "Выгрузить (excel)", fulliftsdata_path(format: "xls") %></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          + <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><%= link_to "Добавить лифт", add_lift_path %></li>
-        </ul>
-      </li>
-    </ul>
-  <% end %>
-  <% if (params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == 'equipment_lists')%>
-    <ul class="breadcrumb pull-right pdr">
-      <li class="<%= 'active' if (params[:controller] == 'equipment'  and params[:action] == 'store') %>"><%= link_to "Исправное",    equipment_store_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'equipment'  and params[:action] == 'broken') %>"><%= link_to "Неисправное   ", equipment_broken_path %></li>
-      <li class="<%= 'active' if (params[:controller] == 'equipment'  and params[:action] == 'stats') %>"><%= link_to "Статистика",    equipment_stats_path %></li>
-      <li class="<%= 'active' if params[:controller] == 'equipment_types' %>"><%= link_to "Категории", equipment_types_path %></li>
-      <li class="<%= 'active' if params[:controller] == 'equipment_lists' %>"><%= link_to "Типы", equipment_lists_path %></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          + <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><%= link_to "Добавить устройство", add_equipment_path %></li>
-          <li><%= link_to "Добавить новый тип", add_e_list_path %></li>
-          <li><%= link_to "Добавить новую категорию", add_e_type_path %></li>
-        </ul>
-      </li>
-    </ul>
-  <% end %>
-  <% if (params[:controller] == 'mechanics' or params[:controller] == 'time_sheets')%>
-    <ul class="breadcrumb pull-right pdr">
-      <li><%= link_to "Учет р. времени", timesheet_path %></li>
-      <li><%= link_to "Расчет ЗП", work_order_for_all_mech_path %></li>
-      <li><%= link_to "Расценки", prices_path %></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          + <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><%= link_to "Добавить механика", new_mechanic_path %></li>
-        </ul>
-      </li>
-    </ul>
-  <% end %>
-  <% if (params[:controller] == 'contracts' or params[:controller] == 'partners')%>
-    <ul class="breadcrumb pull-right pdr">
-      <li><%= link_to "Контрагенты", partners_path %></li>
-      <li><%= link_to "Договора", contracts_path %></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          + <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><%= link_to "Новый контрагент", new_partner_path %></li>
-          <li><%= link_to "Новый договор", new_contract_path %></li>
-        </ul>
-      </li>
-    </ul>
-  <% end %>
-
-</header>
+  <!-- /.navbar-top-links -->
+  <div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+      <ul class="nav" id="side-menu">
+        <li class="sidebar-search">
+          <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Поиск...">
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <i class="fa fa-search"></i>
+              </button>
+              </span>
+          </div>
+          <!-- /input-group -->
+        </li>
+        <li>
+          <%= link_to ("<i class='fa fa-dashboard fa-fw'></i> Основная панель").html_safe, main_path,
+                      class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'main')) %>
+        </li>
+        <li>
+          <%= link_to ("<i class='fa fa-building fa-fw'></i> Адреса <span class='fa arrow'></span>").html_safe, "#" %>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to "Все улицы", streets_path, class: ('active' if (params[:controller] == 'streets' and params[:action] == 'index')) %>
+            </li>
+            <li>
+              <%= link_to "Все адреса", address_list_path, class: ('active' if (params[:controller] == 'address' and params[:action] == 'list')) %>
+            </li>
+            <li>
+              <%= link_to ("<i class='fa fa-plus-circle'></i> Добавить адрес").html_safe, add_build_path %>
+            </li>
+            <li>
+              <%= link_to ("<i class='fa fa-plus-circle'></i> Добавить улицу").html_safe, add_street_path %>
+            </li>
+          </ul>
+          <!-- /.nav-second-level -->
+        </li>
+        <li>
+          <%= link_to ("<i class='fa fa-building-o fa-fw'></i> Лифты <span class='fa arrow'></span>").html_safe, "#",
+                        class:('active' if params[:controller] == 'lifts') %>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to "Все лифты", lifts_list_path, class: ('active' if (params[:controller] == 'lifts' and params[:action] == 'list')) %>
+            </li>
+            <li>
+              <a href="#">ПТО <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level">
+                  <li><%= link_to "По месяцам", month_inspections_path %></li>
+                  <li><%= link_to "Сформировать", lifts_inspections_path %></li>
+                  <li><%= link_to "Выгрузить (excel)", lifts_inspections_path(format: "xls") %></li>
+                </ul>
+              <!-- /.nav-third-level -->
+            </li>
+            <li>
+              <a href="#">Единый реестр <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level">
+                  <li><%= link_to "Сформировать", fulliftsdata_path %></li>
+                  <li><%= link_to "Выгрузить (excel)", fulliftsdata_path(format: "xls") %></li>
+                </ul>
+              <!-- /.nav-third-level -->
+            </li>
+            <li><%= link_to "Ремонты", overhauls_path %></li>
+            <li><%= link_to "Простои", downtimes_path %></li>
+            <li><%= link_to ("<i class='fa fa-plus-circle'></i> Добавить лифт").html_safe, add_lift_path if current_user.admin? %></li>
+          </ul>
+          <!-- /.nav-second-level -->
+        </li>
+        <li>
+          <%= link_to ("<i class='fa fa-sitemap fa-fw'></i> Связь <span class='fa arrow'></span>").html_safe, "#",
+          class: ('active' if params[:controller] == 'nodes') %>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to "УМ", nodes_all_path,
+                  class: ('active' if (params[:controller] == 'nodes' and params[:action] == 'list')) %>
+            </li>
+            <li>
+              <%= link_to "Подключения", connections_path,
+                  class: ('active' if (params[:controller] == 'connections' and params[:action] == 'index')) %>
+            </li>
+            <li>
+              <%= link_to "Провайдеры", providers_path,
+                  class: ('active' if (params[:controller] == 'providers' and params[:action] == 'index')) %>
+            </li>
+          </ul>
+        </li>
+        <li class="<%= 'active' if params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == '   equipment_lists' %>">
+          <%= link_to ("<i class='fa fa-hdd-o fa-fw'></i> Оборудование <span class='fa arrow'></span>").html_safe, "#" %>
+        </li>
+        <li class="<%= 'active' if params[:controller] == 'mechanics' %>">
+          <%= link_to ("<i class='fa fa-users fa-fw'></i> Механики <span class='fa arrow'></span>").html_safe, "#" %>
+        </li>
+        <li class="<%= 'active' if params[:controller] == 'conracts' or params[:controller] == 'partners' %>">
+          <%= link_to ("<i class='fa fa-file-text-o fa-fw'></i> Договора <span class='fa arrow'></span>").html_safe, "#" %>
+        </li>
+        <li><%= link_to ("<i class='fa fa-pie-chart fa-fw'></i> Статистика").html_safe, statistics_path,
+                 class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'statistics')) %></li>
+        <li><%= link_to ("<i class='fa fa-book fa-fw'></i> Справочник").html_safe, handbook_path,
+                 class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook')) %></li>
+        <li><%= link_to ("<i class='fa fa-question fa-fw'></i>").html_safe, about_path,
+                 class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'about')) %></li>
+      </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+  </div>
+  <!-- /.navbar-static-side -->
+</nav>
 <% end %>

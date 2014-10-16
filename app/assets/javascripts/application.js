@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
-//= require dataTables/jquery.dataTables.bootstrap3
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require_tree .
 // Loads all Bootstrap javascripts
 //= require bootstrap
@@ -22,3 +22,6 @@
 //= require bootstrap/dropdown
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.ru.js
+//= require metisMenu
+//= require metisMenu.min.js
+//= require sb-admin-2.js

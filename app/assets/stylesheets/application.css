@@ -9,9 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require dataTables/jquery.dataTables.bootstrap3
- *= require_tree .
  *= require bootstrap
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require bootstrap-datepicker3
  *= require font-awesome
+ *= require sb-admin-2
+ *= require metisMenu.min
+ *= require_tree .
  */

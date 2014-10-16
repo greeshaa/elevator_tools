@@ -1,6 +1,120 @@
 <% provide(:title, 'Главная') %>
-<p class="lead">Основная информационная панель</p>
-<hr>
+<% provide(:header, 'Основная информационная панель') %>
+<div class="row">
+  <% if @lift_overdue.empty? %>
+  <% else %>
+  <div class="col-lg-3 col-md-4">
+    <div class="panel panel-red">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-ban fa-5x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge"><%= @lift_overdue_count %></div>
+            <div><%= Russian.p(@lift_overdue_count, "лифт", "лифта", "лифтов") %></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-right">
+            <div>с истекшим сроком экспл-и</div>
+          </div>
+        </div>
+      </div>
+      <%= link_to ("<div class='panel-footer'>
+                    <span class='pull-left'>Подробнее</span>
+                    <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
+                    <div class='clearfix'></div>
+                    </div>").html_safe, overdue_lifts_path %>
+    </div>
+  </div>
+  <% end %>
+  <% if @inspection_rebuke.empty? %>
+  <% else %>
+  <div class="col-lg-3 col-md-4">
+    <div class="panel panel-yellow">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-exclamation-triangle fa-5x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge"><%= @inspection_rebuke_count %></div>
+            <div>ПТО</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-right">
+            <div>с замечаниями</div>
+          </div>
+        </div>
+      </div>
+      <%= link_to ("<div class='panel-footer'>
+                    <span class='pull-left'>Подробнее</span>
+                    <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
+                    <div class='clearfix'></div>
+                    </div>").html_safe, rebuke_inspections_path %>
+    </div>
+  </div>
+  <% end %>
+  <% if @inspection_overdue.empty? %>
+  <% else %>
+  <div class="col-lg-3 col-md-4">
+    <div class="panel panel-yellow">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-clock-o fa-5x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge"><%= @inspection_overdue_count %></div>
+            <div>ПТО</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-right">
+            <div>просрочено</div>
+          </div>
+        </div>
+      </div>
+      <%= link_to ("<div class='panel-footer'>
+                    <span class='pull-left'>Подробнее</span>
+                    <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
+                    <div class='clearfix'></div>
+                    </div>").html_safe, overdue_inspections_path %>
+    </div>
+  </div>
+  <% end %>
+  <% if @inspection_next.empty? %>
+  <% else %>
+  <div class="col-lg-3 col-md-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-clock-o fa-5x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge"><%= @inspection_next_count %></div>
+            <div>ПТО</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-right">
+            <div>запланированно на неделе</div>
+          </div>
+        </div>
+      </div>
+      <%= link_to ("<div class='panel-footer'>
+                    <span class='pull-left'>Подробнее</span>
+                    <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
+                    <div class='clearfix'></div>
+                    </div>").html_safe, next_inspections_path %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
 <!--- <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
@@ -27,70 +141,11 @@
     </div>
   </div>
 </div> ---->
+
 <div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading">Лифты</div>
-    <div class="panel-body">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">Лифты с истекшим сроком эксплуатации (всего: <%= link_to @lift_overdue_count, overdue_lifts_path %>)</div>
-          <div class="panel-body">
-            <% if @lift_overdue.empty? %>
-              <p class="text-info">Лифты с истекшим сроком эксплуатации нет</p>
-            <% else %>
-            <% @lift_overdue.each do |lift| %>
-                <%= link_to lift.porch.build.street.name + ', ' + lift.porch.build.name + ' - ' + lift.porch.name, lift, class: "text-danger"       %> &nbsp;&nbsp;&nbsp;&nbsp;год вывода: <%= (lift.introduced_at + 25) %><br>
-            <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">ПТО с замечаниями (всего: <%= link_to @inspection_rebuke_count, rebuke_inspections_path %>)</div>
-      <div class="panel-body">
-        <% if @inspection_rebuke.empty? %>
-          <p class="text-info">ПТО с замечаниями нет<br><br></p>
-        <% else %>
-          <% @inspection_rebuke.each do |il| %>
-            <%= link_to il.lift.porch.build.street.street_kind.name + ' ' + il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.  name + ', ' + il.lift.porch.name, il.lift, class: "text-danger" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Дата ПТО по плану: <%=  il.next_inspection_at.strftime("%d.%m.%Y") + ' ' %></br>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">Просроченные ПТО (всего: <%= link_to @inspection_overdue_count, overdue_inspections_path %>)</div>
-      <div class="panel-body">
-        <% if @inspection_overdue.empty? %>
-          <p class="text-info">Просроченных ПТО нет<br><br></p>
-        <% else %>
-          <% @inspection_overdue.each do |il| %>
-            <%= link_to il.lift.porch.build.street.street_kind.name + ' ' + il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name, il.lift, class: "text-danger" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Дата ПТО по плану: <%= il.next_inspection_at.strftime("%d.%m.%Y") + ' ' %></br>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">Ближайшие запланированные ПТО (всего: <%= link_to @inspection_next_count, next_inspections_path %>)</div>
-      <div class="panel-body">
-        <% if @inspection_next.empty? %>
-          <p class="text-info">На ближайшее время ПТО не запланировано<br><br></p>
-        <% else %>
-          <% @inspection_next.each do |il| %>
-            <%= il.next_inspection_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' + il.lift.porch.build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name %></br>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+
+
+
   <div class="col-md-6 offset-col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">Последние отметки о ПТО (всего: <%= link_to @inspection_last_count, last_inspections_path %>)</div>

@@ -12,6 +12,14 @@ module ApplicationHelper
     end
   end
 
+  def page_header(page_title)
+    if page_title.empty?
+      "??? Нет названия ???"
+    else
+      "#{page_title}"
+    end
+  end
+
   def current_user=(user)
     @current_user = user
   end
