@@ -1,20 +1,13 @@
-<% provide(:title, 'Список улиц') %>
-<p class="lead">Адреса расположения УМ и обслуживаемых лифтов.</p>
-<hr>
+<% provide(:title, 'Улицы') %>
+<% provide(:header, 'Улицы') %>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= render "address/address_search" %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2 list">
-    <table class="table table-condensed table-striped search search_result">
-      <caption>Перечень всех улиц</caption>
+  <div class="col-md-12">
+    <table class="datatable display" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <td>Название улицы</td>
-          <td>Здания</td>
-          <td>Лифты</td>
+          <th>Название улицы</th>
+          <th>Здания</th>
+          <th>Лифты</th>
         </tr>
       </thead>
       <tbody>

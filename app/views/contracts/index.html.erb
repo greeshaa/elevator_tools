@@ -1,9 +1,8 @@
 <% provide(:title, 'Договора') %>
-<p class="lead">Договора</p>
-<hr>
+<% provide(:header, 'Договора') %>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2 list">
-  	<table id="datatables" class="table table-condensed table-striped">
+  <div class="col-md-12">
+  	<table class="datatable display" cellspacing="0" width="100%">
   		<thead>
   			<tr>
   				<th class="td_center">Номер</th>
@@ -13,12 +12,10 @@
   				<th class="td_center">Количество лифтов</th>
   				<th></th>
   				<th></th>
+          <th></th>
   			</tr>
   		</thead>
   		<tbody>
-        <tr>
-          <td colspan="7" align="center" class="success"> ЗАО Томсклифтремонт</td>
-        </tr>
     		<% @contracts_zao.each do |c| %>
     		<tr>
     			<td class="td_center"><%= link_to c.number, c %></td>
@@ -26,13 +23,11 @@
     			<td class="td_center"><%= c.signed_at.strftime("%d.%m.%Y") if c.signed_at != nil %></td>
     			<td class="td_center"><%= c.lifetime.strftime("%d.%m.%Y") if c.lifetime != nil %></td>
     			<td class="td_center"><%= link_to c.lifts.count, lifts_of_contract_path + "?id=" + c.id.to_s %></td>
+          <td align="center" class="success"> ЗАО Томсклифтремонт</td>
     			<td><%= link_to "Изменить", edit_contract_path(c), class:"text-muted" %></td>
     			<td><%= link_to "Удалить", c, method: :delete, data: { confirm: "Вы уверены?" }, class:"text-muted" if current_user.admin? %></td>
     		</tr>
     		<% end %>
-        <tr>
-          <td colspan="7" align="center" class="success"> ООО Томсклифтремонт</td>
-        </tr>
         <% @contracts_ooo.each do |c| %>
         <tr>
           <td class="td_center"><%= link_to c.number, c %></td>
@@ -40,13 +35,11 @@
           <td class="td_center"><%= c.signed_at.strftime("%d.%m.%Y") if c.signed_at != nil %></td>
           <td class="td_center"><%= c.lifetime.strftime("%d.%m.%Y") if c.lifetime != nil %></td>
           <td class="td_center"><%= link_to c.lifts.count, lifts_of_contract_path + "?id=" + c.id.to_s %></td>
+          <td align="center" class="success"> ООО Томсклифтремонт</td>
           <td><%= link_to "Изменить", edit_contract_path(c), class:"text-muted" %></td>
           <td><%= link_to "Удалить", c, method: :delete, data: { confirm: "Вы уверены?" }, class:"text-muted" if current_user.admin? %></td>
         </tr>
         <% end %>
-        <tr>
-          <td colspan="7" align="center" class="success"> Нуждаются в редакции</td>
-        </tr>
         <% @contracts_other.each do |c| %>
         <tr>
           <td class="td_center"><%= link_to c.number, c %></td>
@@ -54,6 +47,7 @@
           <td class="td_center"><%= c.signed_at.strftime("%d.%m.%Y") if c.signed_at != nil %></td>
           <td class="td_center"><%= c.lifetime.strftime("%d.%m.%Y") if c.lifetime != nil %></td>
           <td class="td_center"><%= link_to c.lifts.count, lifts_of_contract_path + "?id=" + c.id.to_s %></td>
+          <td align="center" class="success"> Нуждаются в редакции</td>
           <td><%= link_to "Изменить", edit_contract_path(c), class:"text-muted" %></td>
           <td><%= link_to "Удалить", c, method: :delete, data: { confirm: "Вы уверены?" }, class:"text-muted" if current_user.admin? %></td>
         </tr>

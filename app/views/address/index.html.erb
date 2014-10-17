@@ -1,19 +1,12 @@
 <% provide(:title, 'Адреса') %>
-<p class="lead">Адреса расположения УМ и обслуживаемых лифтов.</p>
-<hr>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= render "address/address_search" %>
-  </div>
-</div>
+<% provide(:header, 'Адреса') %>
 <% unless @address.nil? %>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2 list" >
+  <div class="col-md-12" >
       <% if @address.empty? %>
           <p class="lead search_result">Адреса удовлетворяющие запросу не найдены.</p>
       <% else %>
-      <table class="table table-condensed table-striped search_result">
-        <caption>Результаты поиска</caption>
+      <table class="datatable display" cellspacing="0" width="100%">
         <thead>
           <tr>
             <td>Адрес</td>

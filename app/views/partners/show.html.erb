@@ -1,10 +1,9 @@
 <% provide(:title, 'Данные контрагента') %>
-<p class="lead">Данные контрагента</p>
-<hr>
+<% provide(:header, 'Данные контрагента') %>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-6">
   	<div class="panel panel-default">
-    	<div class="panel-heading">Данные контрагента
+    	<div class="panel-heading">Реквизиты
         <div class="btn-group btn-group-xs pull-right">
           <%= link_to "Изменить", edit_partner_path, class:"btn btn-default btn-xs" %>
         </div>
@@ -30,6 +29,8 @@
     			</table>
     	</div>
     </div>
+  </div>
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">Контакты
         <div class="btn-group btn-group-xs pull-right">
@@ -55,6 +56,8 @@
         </table>
       </div>
     </div>
+  </div>
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">Договора</div>
       <div class="panel-body">

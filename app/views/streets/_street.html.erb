@@ -1,5 +1,5 @@
-<tr>
-	<td class="td_address" style="width:60%;"><%= link_to street.name + " " + street.street_kind.full_name, street %></td>
-	<td style="width:20%;"><%= street.builds.count.to_s %></td>
-	<td style="width:20%;"><%= street.lifts.count.to_s %></td>
-</tr>
+      <tr>
+				<td><%= link_to street.name + " " + street.street_kind.full_name, street %></td>
+				<td><%= street.builds.count.to_s %></td>
+				<td><%= street.lifts.count.to_s %></td>
+			</tr>

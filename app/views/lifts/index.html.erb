@@ -1,28 +1,22 @@
 <% provide(:title, @title) %>
-<p class="lead"><%= @title %></p>
-<hr>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= render "lifts/lift_search" %>
-  </div>
-</div>
+<% provide(:header, @title) %>
 <% unless @lifts.nil? %>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2 list" >
+  <div class="col-md-12" >
     <% if @lifts.empty? %>
         <p class="lead search_result">Лифты удовлетворяющие запросу не найдены.</p>
     <% else %>
-      <table id="datatables" class="table table-condensed table-striped">
+      <table class="datatable display" cellspacing="0" width="100%">
         <thead>
-          <th class="td_center">Адрес</th>
-          <th class="td_center">Рег.номер</th>
-          <th class="td_center">Груз-ть</th>
-          <th class="td_center">К. ост.</th>
-          <th class="td_center">Механик</th>
-          <th class="td_center">Собств-к</th>
-          <th class="td_center">Вывод</th>
-          <th class="td_center">След-ее ПТО</th>
-          <th class="td_center"><%= @link_name %></th>
+          <th>Адрес</th>
+          <th>Рег.номер</th>
+          <th>Груз-ть</th>
+          <th>К. ост.</th>
+          <th>Механик</th>
+          <th>Собств-к</th>
+          <th>Вывод</th>
+          <th>След-ее ПТО</th>
+          <th><%= @link_name %></th>
         </thead>
         <tbody>
           <%= render @lifts %>

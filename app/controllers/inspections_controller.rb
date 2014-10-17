@@ -71,13 +71,14 @@ before_filter :signed_in_user
 	def month
 		store_location
 		if params[:date].nil?
-			@month = Date.today
+			date = Date.today
 		else
-			@month = Date.parse(params[:date])
+			date = Date.parse(params[:date])
 		end
-		@smonth    = @month.at_beginning_of_month
-		@emonth    = @month.at_end_of_month
-		@inspections = Inspection.where(active: true).where(next_inspection_at: @smonth..@emonth)
+		smonth    = date.at_beginning_of_month
+		emonth    = date.at_end_of_month
+		@inspections = Inspection.where(active: true).where(next_inspection_at: smonth..emonth)
+		@title = 'Лифты с ПТО запланированными на ' + Russian::strftime(date, "%B") + ' ' + Russian::strftime(date, "%Y")
 		render 'index'
 	end
 end

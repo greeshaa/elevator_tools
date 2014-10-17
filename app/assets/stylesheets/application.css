@@ -10,7 +10,10 @@
  *
  *= require_self
  *= require bootstrap
+ *= require dataTables/jquery.dataTables
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require dataTables/extras/dataTables.scroller
+ *= require dataTables/extras/dataTables.tableTools
  *= require bootstrap-datepicker3
  *= require font-awesome
  *= require sb-admin-2

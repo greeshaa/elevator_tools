@@ -1,7 +1,8 @@
 <% provide(:title, @title) %>
+<% provide(:header, @title) %>
 <% if params[:action] == 'month'%>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-12">
     <div class="hidden-print">
       <%= form_tag month_inspections_path, :method => :get, class:"form-inline" do %>
       <fieldset>
@@ -15,19 +16,17 @@
   </div>
 </div>
 <% end %>
-<p class="lead"><%= @title %></p>
-<hr>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-  	<table class="table table-striped table-condensed">
+  <div class="col-md-12">
+  	<table class="datatable display" cellspacing="0" width="100%">
   		<thead>
   			<tr>
-  				<th class="td_center">Дата записи</th>
-  				<th class="td_center">Адрес лифта</th>
-          <th class="td_center">ГП</th>
-  				<th class="td_center">Дата последнего ПТО</th>
-  				<th class="td_center">Дата следующего ПТО</th>
-          <th class="td_center">Отметка о ПТО</th>
+  				<th>Дата записи</th>
+  				<th>Адрес лифта</th>
+          <th>ГП</th>
+  				<th>Дата последнего ПТО</th>
+  				<th>Дата следующего ПТО</th>
+          <th>Отметка о ПТО</th>
   			</tr>
   		</thead>
   		<tbody>
