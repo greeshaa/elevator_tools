@@ -1,5 +1,4 @@
 <% if signed_in? %>
-<!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -10,7 +9,6 @@
     </button>
     <%= link_to "elevatorTools", main_path, class: "navbar-brand" %>
   </div>
-  <!-- /.navbar-header -->
   <ul class="nav navbar-top-links navbar-right">
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -27,11 +25,8 @@
         <li><%= link_to ("<i class='fa fa-plus-circle'></i> Добавить пользователя").html_safe, signup_path %></li>
         <% end %>
       </ul>
-      <!-- /.dropdown-user -->
     </li>
-    <!-- /.dropdown -->
   </ul>
-  <!-- /.navbar-top-links -->
   <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
       <ul class="nav" id="side-menu">
@@ -44,12 +39,16 @@
               </button>
               </span>
           </div>
-          <!-- /input-group -->
         </li>
         <li>
           <%= link_to ("<i class='fa fa-dashboard fa-fw'></i> Основная панель").html_safe, main_path,
-                      class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'main')) %>
+               class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'main')) %>
         </li>
+        <li>
+          <%= link_to ("<i class='fa fa-pie-chart fa-fw'></i> Статистика").html_safe, statistics_path,
+               class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'statistics')) %>
+        </li>
+        <!-- Адреса -->
         <li>
           <%= link_to ("<i class='fa fa-building fa-fw'></i> Адреса <span class='fa arrow'></span>").html_safe, "#" %>
           <ul class="nav nav-second-level">
@@ -68,6 +67,7 @@
           </ul>
           <!-- /.nav-second-level -->
         </li>
+        <!-- Лифты -->
         <li>
           <%= link_to ("<i class='fa fa-building-o fa-fw'></i> Лифты <span class='fa arrow'></span>").html_safe, "#",
                         class:('active' if params[:controller] == 'lifts') %>
@@ -98,6 +98,7 @@
           </ul>
           <!-- /.nav-second-level -->
         </li>
+        <!-- Связь -->
         <li>
           <%= link_to ("<i class='fa fa-sitemap fa-fw'></i> Связь <span class='fa arrow'></span>").html_safe, "#",
           class: ('active' if params[:controller] == 'nodes') %>
@@ -116,25 +117,63 @@
             </li>
           </ul>
         </li>
-        <li class="<%= 'active' if params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == '   equipment_lists' %>">
-          <%= link_to ("<i class='fa fa-hdd-o fa-fw'></i> Оборудование <span class='fa arrow'></span>").html_safe, "#" %>
+        <!-- Оборудование -->
+        <li>
+          <%= link_to ("<i class='fa fa-hdd-o fa-fw'></i> Оборудование <span class='fa arrow'></span>").html_safe, "#",
+               class: ('active' if params[:controller] == 'equipment' or params[:controller] == 'equipment_types' or params[:controller] == 'equipment_lists') %>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to "Исправное", equipment_store_path,
+                  class: ('active' if params[:controller] == 'equipment' and params[:action] == 'store') %>
+            </li>
+            <li class="<%= 'active' if (params[:controller] == 'equipment' and params[:action] == 'broken') %>"><%= link_to "Неисправное   ", equipment_broken_path %></li>
+            <li class="<%= 'active' if (params[:controller] == 'equipment' and params[:action] == 'stats') %>"><%= link_to "Статистика",    equipment_stats_path %></li>
+            <li class="<%= 'active' if params[:controller] == 'equipment_types' %>"><%= link_to "Категории", equipment_types_path %></li>
+            <li class="<%= 'active' if params[:controller] == 'equipment_lists' %>"><%= link_to "Типы", equipment_lists_path %></li>
+            <li><%= link_to "Добавить устройство", add_equipment_path %></li>
+            <li><%= link_to "Добавить новый тип", add_e_list_path %></li>
+            <li><%= link_to "Добавить новую категорию", add_e_type_path %></li>
+          </ul>
         </li>
-        <li class="<%= 'active' if params[:controller] == 'mechanics' %>">
-          <%= link_to ("<i class='fa fa-users fa-fw'></i> Механики <span class='fa arrow'></span>").html_safe, "#" %>
+        <!-- Механики -->
+        <li>
+          <%= link_to ("<i class='fa fa-users fa-fw'></i> Механики <span class='fa arrow'></span>").html_safe, "#",
+               class: ('active' if params[:controller] == 'mechanics') %>
+          <ul class="nav nav-second-level">
+            <li>
+              <a href="#">Зарплата<span class="fa arrow"></span></a>
+              <ul class="nav nav-third-level">
+                <li><%= link_to "Учет р. времени", timesheet_path %></li>
+                <li><%= link_to "Расчет ЗП", work_order_for_all_mech_path %></li>
+                <li><%= link_to "Расценки", prices_path %></li>
+              </ul>
+            </li>
+          </ul>
         </li>
-        <li class="<%= 'active' if params[:controller] == 'conracts' or params[:controller] == 'partners' %>">
-          <%= link_to ("<i class='fa fa-file-text-o fa-fw'></i> Договора <span class='fa arrow'></span>").html_safe, "#" %>
+        <!-- Договора -->
+        <li>
+          <%= link_to ("<i class='fa fa-file-text-o fa-fw'></i> Договора <span class='fa arrow'></span>").html_safe, "#",
+               class: ('active' if (params[:controller] == 'conracts' and params[:action] == 'partners')) %>
+          <ul class="nav nav-second-level">
+            <li><%= link_to "Контрагенты", partners_path %></li>
+            <li><%= link_to "Договора", contracts_path %></li>
+            <li><%= link_to ("<i class='fa fa-plus-circle'></i> Добавить контрагента").html_safe, new_partner_path %></li>
+            <li><%= link_to ("<i class='fa fa-plus-circle'></i> Добавить договор").html_safe, new_contract_path %></li>
+          </ul>
         </li>
-        <li><%= link_to ("<i class='fa fa-pie-chart fa-fw'></i> Статистика").html_safe, statistics_path,
-                 class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'statistics')) %></li>
-        <li><%= link_to ("<i class='fa fa-book fa-fw'></i> Справочник").html_safe, handbook_path,
-                 class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook')) %></li>
-        <li><%= link_to ("<i class='fa fa-question fa-fw'></i>").html_safe, about_path,
-                 class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'about')) %></li>
+        <!-- Справочник -->
+        <li>
+          <%= link_to ("<i class='fa fa-book fa-fw'></i> Справочник <span class='fa arrow'></span>").html_safe, handbook_path,
+               class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'handbook')) %>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to ("<i class='fa fa-question fa-fw'></i>").html_safe, about_path,
+                   class: ('active' if (params[:controller] == 'static_pages' and params[:action] == 'about')) %>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
-    <!-- /.sidebar-collapse -->
   </div>
-  <!-- /.navbar-static-side -->
 </nav>
 <% end %>

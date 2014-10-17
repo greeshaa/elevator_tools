@@ -159,17 +159,7 @@ before_filter :signed_in_user
   end
 
   def overdue_lifts
-    lifts = Lift.where('introduced_at <= ?', Date.today.year - 25 ).order(:introduced_at)
-    @lifts = []
-    lifts.each do |l|
-      if l.overhauls.empty?
-        @lifts.push(l)
-      else
-        if l.overhauls.last.produced_at < (Date.today.year - l.overhauls.last.new_lifetime)
-          @lifts.push(l)
-        end
-      end
-    end
+    @lifts = Lift.overdue_lifts
     @title = 'Лифты с истекшим сроком эксплуатации'
     @link_name = 'Ремонт'
     render "index"

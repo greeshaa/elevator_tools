@@ -69,6 +69,21 @@ include PublicActivity::Model
 
     validates  :node_id, :porch_id, presence: true
 
+    def self.overdue_lifts
+      lifts = self.where('introduced_at <= ?', Date.today.year - 25).order(:introduced_at)
+      lift_overdue = []
+      lifts.each do |l|
+        if l.overhauls.empty?
+          lift_overdue.push(l)
+        else
+          if l.overhauls.last.produced_at < (Date.today.year - l.overhauls.last.new_lifetime)
+            lift_overdue.push(l)
+          end
+        end
+      end
+      lift_overdue
+    end
+
     def self.search(search)
       if search
         find(:all, :conditions => ['regnum LIKE ? OR sernum LIKE ?', "%#{search}%", "%#{search}%"])

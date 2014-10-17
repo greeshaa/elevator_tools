@@ -1,168 +1,33 @@
 <% provide(:title, 'Главная') %>
 <% provide(:header, 'Основная информационная панель') %>
 <div class="row">
-  <% if @lift_overdue.empty? %>
-  <% else %>
-  <div class="col-lg-3 col-md-4">
-    <div class="panel panel-red">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-ban fa-5x"></i>
+  <% @main_page_banners.each do |i| %>
+    <div class="col-lg-3 col-md-4">
+      <div class="panel panel-<%= i[:color] %>">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa <%= i[:icon] %> fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge"><%= i[:count] %></div>
+              <div><%= i[:name] %></div>
+            </div>
           </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge"><%= @lift_overdue_count %></div>
-            <div><%= Russian.p(@lift_overdue_count, "лифт", "лифта", "лифтов") %></div>
+          <div class="row">
+            <div class="col-xs-12 text-right">
+              <div><%= i[:note] %></div>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12 text-right">
-            <div>с истекшим сроком экспл-и</div>
-          </div>
-        </div>
+        <%= link_to ("<div class='panel-footer'><span class='pull-left'>Подробнее</span><span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
+                      <div class='clearfix'></div></div>").html_safe, i[:link] %>
       </div>
-      <%= link_to ("<div class='panel-footer'>
-                    <span class='pull-left'>Подробнее</span>
-                    <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
-                    <div class='clearfix'></div>
-                    </div>").html_safe, overdue_lifts_path %>
     </div>
-  </div>
-  <% end %>
-  <% if @inspection_rebuke.empty? %>
-  <% else %>
-  <div class="col-lg-3 col-md-4">
-    <div class="panel panel-yellow">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-exclamation-triangle fa-5x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge"><%= @inspection_rebuke_count %></div>
-            <div>ПТО</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 text-right">
-            <div>с замечаниями</div>
-          </div>
-        </div>
-      </div>
-      <%= link_to ("<div class='panel-footer'>
-                    <span class='pull-left'>Подробнее</span>
-                    <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
-                    <div class='clearfix'></div>
-                    </div>").html_safe, rebuke_inspections_path %>
-    </div>
-  </div>
-  <% end %>
-  <% if @inspection_overdue.empty? %>
-  <% else %>
-  <div class="col-lg-3 col-md-4">
-    <div class="panel panel-yellow">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-clock-o fa-5x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge"><%= @inspection_overdue_count %></div>
-            <div>ПТО</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 text-right">
-            <div>просрочено</div>
-          </div>
-        </div>
-      </div>
-      <%= link_to ("<div class='panel-footer'>
-                    <span class='pull-left'>Подробнее</span>
-                    <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
-                    <div class='clearfix'></div>
-                    </div>").html_safe, overdue_inspections_path %>
-    </div>
-  </div>
-  <% end %>
-  <% if @inspection_next.empty? %>
-  <% else %>
-  <div class="col-lg-3 col-md-8">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-clock-o fa-5x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge"><%= @inspection_next_count %></div>
-            <div>ПТО</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 text-right">
-            <div>запланированно на неделе</div>
-          </div>
-        </div>
-      </div>
-      <%= link_to ("<div class='panel-footer'>
-                    <span class='pull-left'>Подробнее</span>
-                    <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
-                    <div class='clearfix'></div>
-                    </div>").html_safe, next_inspections_path %>
-    </div>
-  </div>
   <% end %>
 </div>
-
-<!--- <div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">Информационные сообщения</div>
-      <div class="panel-body">
-        <% if @infomessages.empty? %>
-          <p class="">Новостей на сегодня нет</p>
-        <% else %>
-          <%= render @infomessages %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 offset-col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">Задачи</div>
-      <div class="panel-body">
-        <% if @infomessages.empty? %>
-          <p class="">Задач на сегодня нет</p>
-        <% else %>
-          <%= render @infomessages %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div> ---->
-
 <div class="row">
-
-
-
-  <div class="col-md-6 offset-col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">Последние отметки о ПТО (всего: <%= link_to @inspection_last_count, last_inspections_path %>)</div>
-      <div class="panel-body">
-        <% if @inspection_last.empty? %>
-          <p class="text-info">Нет информации об отметках ПТО за прошедшую неделю<br><br></p>
-        <% else %>
-          <% @inspection_last.each do |il| %>
-            <%= il.created_at.strftime("%d.%m.%Y") + ' ' + il.lift.porch.build.street.street_kind.name + ' ' +il.lift.porch. build.street.name + ' - ' + il.lift.porch.build.name + ', ' + il.lift.porch.name + ' дата ПТО: ' + il.inspection_at.strftime("%d.%m.%Y") %></br>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><%= link_to 'Перемещения оборудования', equipment_movements_path %></div>
       <div class="panel-body">
@@ -176,14 +41,14 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">Изменения в УМ</div>
       <div class="panel-body">
         <% if @nodes_last.nil? %>
           <p class="text-info">Изменений нет</p>
         <% else %>
-        <p class="text-muted">
+        <div class="text-muted">
           <% @nodes_last.each do |nl| %>
             <strong><%= nl.created_at.strftime("%d.%m.%Y") %></strong>
             Добавлен
@@ -193,9 +58,8 @@
             <strong>&nbsp;<%= link_to  'УМ ' + nl.name , nl %>&nbsp;&nbsp;</strong>
             <% end %>
             <%= nl.porch.build.street.street_kind.name + ' ' + nl.porch.build.street.name + ', ' + nl.porch.build.name %><br>
-
           <% end %>
-        </p>
+        </div>
         <% end %>
       </div>
     </div>
