@@ -1,27 +1,12 @@
 <% provide(:title, 'Узловые модули') %>
-<p class="lead">Информация о узловых модулях.</p>
-<hr>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-		<%= form_tag(nodes_path, method:"get", role:"form") do %>
-			<div class="input-group input-group-sm">
-		    <label class="sr-only" for="search">nodes</label>
-		    <%= search_field_tag(:search, params[:search], {class:"form-control", placeholder:"Поиск по адресу или номеру УМ"}) %>
-		    <div class="input-group-btn">
-		    	<%= submit_tag("Найти", class:"btn btn-default") %>
-		    </div>
-		  </div>
-		<% end %>
-	</div>
-</div>
+<% provide(:header, 'Узловые модули') %>
 <% unless @nodes.nil? %>
 <div class="row">
-	<div class="col-md-8 col-md-offset-2 list" >
+	<div class="col-md-12" >
 		<% if @nodes.empty? %>
 			<p class="lead search_result">УМ удовлетворяющие запросу не найдены.</p>
 		<% else %>
-			<table class="table table-condensed table-striped search_result">
-
+			<table class="datatable display" cellspacing="0" width="100%">
         <thead>
           <tr>
             <td>Узловой модуль</td>
@@ -35,7 +20,7 @@
 					<%= render @nodes %>
 				</tbody>
 			</table>
-		<% end %>			
+		<% end %>
 	</div>
 </div>
 <% end %>
