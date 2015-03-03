@@ -120,6 +120,10 @@ before_filter :signed_in_user
 
   def inspections
     @lifts = Lift.all
+    respond_to do |format|
+      format.html
+      format.xls # { render text: @lifts.to_csv }
+    end
   end
 
   def current_month
