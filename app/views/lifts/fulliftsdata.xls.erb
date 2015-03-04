@@ -29,8 +29,13 @@
 			</Row>
 		<% @lifts.each do |l| %>
 			<Row>
+				<% if l.porch.nil? %>
+				<Cell><Data ss:Type="String">Нет информации о расположении лифта</Data></Cell>
+				<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
 				<Cell><Data ss:Type="String"><%= l.porch.build.street.name + ', ' + l.porch.build.name %></Data></Cell>
 				<Cell><Data ss:Type="String"><%= l.porch.name %></Data></Cell>
+				<% end %>
 				<Cell><Data ss:Type="String"><%= l.manufacturer %></Data></Cell>
 				<Cell><Data ss:Type="String"></Data></Cell>
 				<Cell><Data ss:Type="String"><%= l.regnum %></Data></Cell>
@@ -63,14 +68,14 @@
 				<% else %>
 				<Cell><Data ss:Type="String"><%= l.contract.partner.name %></Data></Cell>
 				<Cell><Data ss:Type="String"><%= l.contract.number %></Data></Cell>
-				<% end %> 
+				<% end %>
 				<Cell><Data ss:Type="String"><%= l.service_payment %></Data></Cell>
 				<% if l.expert.nil? %>
 				<Cell><Data ss:Type="String"></Data></Cell>
 				<% else %>
 				<Cell><Data ss:Type="String"><%= l.expert.partner.name %></Data></Cell>
 				<% end %>
-				<% if l.inspections.last.nil? %> 
+				<% if l.inspections.last.nil? %>
 				<Cell><Data ss:Type="String"></Data></Cell>
 				<Cell><Data ss:Type="String"></Data></Cell>
 				<% else %>
