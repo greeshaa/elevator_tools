@@ -29,7 +29,7 @@ before_filter :signed_in_user
 
   def update
     @node = Node.find(params[:id])
-    if @node.update_attributes(params[:node]) 
+    if @node.update_attributes(params[:node])
       flash[:success] = @node.name + " обновлен"
       redirect_to @node
     else
@@ -51,7 +51,9 @@ before_filter :signed_in_user
     else
       if @node.porch.nil?
         @address = "ул." + @node.street.name + ", д." + @node.build.name
-      else
+      elsif @node.porch.id == 2
+        @address = "ул." + @node.street.name + ", д." + @node.build.name
+        else
         @address = "ул." + @node.street.name + ", д." + @node.build.name + ", " + @node.porch.name
       end
     end
@@ -64,7 +66,7 @@ before_filter :signed_in_user
       @klsh_count  = @klsh.count
       @monoblk     = 1
     end
-     
+
     @lifts_count   = @lifts.count
     @address_stack = @klsh_count * 31
     @free_address  = @address_stack - @lifts.count
@@ -85,8 +87,8 @@ before_filter :signed_in_user
             @nodes.push(n)
           end
         end
-      end   
-    end 
+      end
+    end
   end
 
   def all
@@ -112,13 +114,13 @@ before_filter :signed_in_user
         @address = "ул." + @node.street.name + ", д." + @node.build.name + ", " + @node.porch.name
       end
     end
- 
-    @lifts    = @node.lifts.order(:tlr_id, :porch_id)    
+
+    @lifts    = @node.lifts.order(:tlr_id, :porch_id)
   end
 
   private
   def node_params
-    params.require(:node).permit(:name, :description, :street_id, :build_id, :porch_id, :dataport, :soundport, 
+    params.require(:node).permit(:name, :description, :street_id, :build_id, :porch_id, :dataport, :soundport,
       ip_addresses_attributes: [:id, :name, :ip, :mask, :gate, :provider_id])
   end
 

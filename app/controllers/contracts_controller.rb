@@ -55,6 +55,7 @@ before_filter :signed_in_user
 	def lift_move_zo
 		store_location
 		@contract  = Contract.find(params[:id])
+		@contracts = Contract.all.order(:number)
 		@tlr = Tlr.all
 		@lifts    = @contract.lifts.order(:tlr_id, :porch_id)
 	end

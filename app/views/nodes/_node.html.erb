@@ -1,4 +1,3 @@
-
 <tr>
 	<% if node.id == 1 || node.id == 2 %>
 	<td>
@@ -27,13 +26,16 @@
 		<%= node.lifts.count %>
 	</td>
 	<%
+		if node.porch.nil?
+		else
 		@equipment     = node.porch.equipment
     @lifts         = node.lifts
-    @klsh_count    = @equipment.where("equipment_list_id=? or equipment_list_id=?", 10, 18).count 
+    @klsh_count    = @equipment.where("equipment_list_id=? or equipment_list_id=?", 10, 18).count
     @klsh_count    = @equipment.where("equipment_list_id=? or equipment_list_id=?", 12, 13).count if  @klsh_count == 0
     @lifts_count   = @lifts.count
     @address_stack = @klsh_count * 31
     @free_address  = @address_stack - @lifts.count
+  	end
 	%>
 	<td class="<%= 'danger' if @free_address < 3 %>" ><%= @free_address %></td>
 	<td ><%= @klsh_count %></td>

@@ -57,7 +57,7 @@
             <% else %>
             <strong>&nbsp;<%= link_to  'УМ ' + nl.name , nl %>&nbsp;&nbsp;</strong>
             <% end %>
-            <%= nl.porch.build.street.street_kind.name + ' ' + nl.porch.build.street.name + ', ' + nl.porch.build.name %><br>
+            <%= nl.porch.build.street.street_kind.name + ' ' + nl.porch.build.street.name + ', ' + nl.porch.build.name  if nl.porch != nil%><br>
           <% end %>
         </div>
         <% end %>

@@ -4,6 +4,6 @@
 <%= number_to_currency(price.cost, locale: :ru) %>
 <% else %>
 <%= number_to_currency(price.cost, locale: :ru) %>
-<%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, edit_price_path(price) if current_user.admin? %>
+<%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, edit_price_path(price) if current_user.admin? or current_user.management? %>
 <% end %>
 </td>

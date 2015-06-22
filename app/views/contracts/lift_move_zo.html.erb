@@ -1,4 +1,4 @@
-<% provide(:title, 'Договор №' + @contract.number) %>
+<% provide(:page_title, 'Договор №' + @contract.number) %>
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-default">
@@ -40,8 +40,8 @@
 <%= form_tag move_lifts_path, :method => :put, class:"form-inline" do %>
 <fieldset>
   <div class="form-group">
-    <%= label_tag :tlr_id, "Закрепить за", class:"control-label" %>
-    <%= select_tag(:tlr_id, options_for_select(@tlr.collect {|tlr| [tlr.name, tlr.id] }), {class: "form-control input-sm"} ) %>
+    <%= label_tag :tlr_id, "Привязать к договору", class:"control-label" %>
+    <%= select_tag(:contract_id, options_for_select(@contracts.collect {|n| [n.number, n.id] }), {class: "form-control input-sm"} ) %>
   </div>
   <%= submit_tag "Изменить", method: :put, data: { confirm: "Вы уверены?" }, class: "btn btn-primary btn-sm" %>
   <%= link_to " Отменить ", @contract, class: "btn btn-default btn-sm" %>

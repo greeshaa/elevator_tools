@@ -126,10 +126,10 @@
       <div class="panel panel-default">
         <div class="panel-heading">Информация об обслуживании</div>
         <div class="panel-body">
-          <% if @lift.tlr.nil? %>
+          <% if @lift.contract.tlr.nil? %>
             <span class="label label-warning">Нет информации о ЗАО/ООО</span><br>
           <% else %>
-            <%= @lift.tlr.name %>&nbsp;Томсклифтремонт<br>
+            <%= @lift.contract.tlr.name %>&nbsp;Томсклифтремонт<br>
           <% end %>
           <% if @lift.district.nil? %>
             <span class="label label-warning">Нет информации принадлежности к участку</span><br>
