@@ -19,7 +19,7 @@ class TimeSheetsController < ApplicationController
 
 	def create
 			mechanic = Mechanic.find(params[:time_sheet]["mechanic_id"])
-			if params[:date].nil?
+			if params[:date].nil? || params[:date] == "Выберите месяц"
 				date = DateTime.now
 				@date = date.to_s
 			else
@@ -75,7 +75,7 @@ class TimeSheetsController < ApplicationController
 					else
 						work_day_start = day.beginning_of_day.to_time + 2.hours
 						if day.in?(shortdays)
-							work_day_end = work_day_start.to_time + 4.hours
+							work_day_end = work_day_start.to_time + 7.hours
 						else
 							work_day_end = work_day_start.to_time + 8.hours
 						end
@@ -95,7 +95,7 @@ class TimeSheetsController < ApplicationController
 		else
 			mechanics = Mechanic.all.order(:name)
 		end
-		if params[:date].nil?
+		if params[:date].nil? || params[:date].blank?
 			date = Date.today
 		else
 			date = Date.parse(params[:date])
