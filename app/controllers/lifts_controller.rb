@@ -262,7 +262,11 @@ before_filter :signed_in_user
         when 17
           @prices17fl = [] if @prices17fl.nil?
           @prices17fl.push(p)
+        when 18
+          @prices_pod_esk = [] if @prices_pod_esk.nil?
+          @prices_pod_esk.push(p)
         else
+
       end
     end
     @lift   = Lift.find(params[:id])
