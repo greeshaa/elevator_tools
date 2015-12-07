@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       if address[0] != nil && address[1] != nil
         street = Street.where('LOWER(name) LIKE ?', "%#{address[0]}%")
         if street.nil?
-          okmessage = "Улица ненайдена."
+          okmessage = "Улица не найдена."
           flash[:success] = okmessage
           redirect_to 'index'
         else
@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
       elsif address[0] != nil && address[1].nil?
         street = Street.where('LOWER(name) LIKE ?', "%#{address[0]}%")
         if street.nil?
-          okmessage = "Улица ненайдена."
+          okmessage = "Улица не найдена."
           flash[:success] = okmessage
           redirect_to 'index'
         else
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
         if equip.empty?
           equiplist = EquipmentList.where('LOWER(name) LIKE ? OR LOWER(manufacturer) LIKE ? OR LOWER(description) LIKE ?', "%#{address[0]}%", "%#{address[0]}%", "%#{address[0]}%")
           if equiplist.empty?
-            okmessage = "девайс ненайдена."
+            okmessage = "девайс не найдена."
             flash[:success] = okmessage
             redirect_to 'index'
           else

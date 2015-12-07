@@ -1,0 +1,84 @@
+<% provide(:title, 'ПТО') %>
+<p class="lead">ПТО</p>
+<hr>
+  <div class="row">
+   <div class="col-md-10 col-md-offset-1">
+      <table id="lifts" class="table table-striped table-bordered table-condensed bigtables">
+        <thead>
+        <tr>
+          <th>Лифт</th>
+          <th>Район</th>
+          <th>Собственник</th>
+          <th>№ дог.</th>
+          <th>ЗАО/ООО</th>
+          <th>Эксперт</th>
+          <th>Оплата</th>
+          <th>Дата посл. ПТО</th>
+          <th>Дата след. ПТО</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @lifts.each do |lift| %>
+        <tr>
+          <td class="firstcol">
+            <% if lift.porch.nil? %>
+            <span class="label label-warning">Нет информации о расположении лифта</span>
+            <% else %>
+            <%= link_to lift.porch.build.street.name + ', '  + lift.porch.build.name + ' - '  + lift.porch.name, lift %>
+            <% end %>
+          </td>
+          <td>
+            <% if lift.district.nil? %>
+            <% else %>
+            <%= lift.district.name %></td>
+            <% end %>
+          <td>
+            <% if lift.contract.nil? %>
+            <span class="label label-warning">Собственник неизвестен</span>
+            <% else %>
+              <% if lift.contract.partner.nil? %>
+              <span class="label label-warning">Собственник неизвестен</span>
+              <% else %>
+              <%= lift.contract.partner.name %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% if lift.contract.nil? %>
+            <span class="label label-warning">Договор неизвестен</span>
+            <% else %>
+            <%= lift.contract.number %>
+            <% end %>
+          </td>
+          <td>
+            <% if lift.tlr.nil? %>
+            <% else %>
+            <%= lift.tlr.name %>
+            <% end %>
+          </td>
+          <td>
+            <% if lift.expert.nil? %>
+            <% else %>
+            <%= lift.expert.partner.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= lift.service_payment %>
+          </td>
+          <% if lift.inspections.last.nil? %>
+          <td></td>
+          <td></td>
+          <% else %>
+          <% if lift.inspections.last.next_inspection_at.nil? %>
+          <td></td>
+          <% else %>
+          <td><%= lift.inspections.last.inspection_at.strftime("%d.%m.%Y") %></td>
+          <% end %>
+          <td><%= lift.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></td>
+          <% end %>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+   </div>

@@ -78,7 +78,7 @@ before_filter :signed_in_user
     if @lift.introduced_at.nil?
     else
       if @lift.overhauls.empty?
-        @date_of_decommiss = @lift.introduced_at + @lift.standart_life
+        @date_of_decommiss = @lift.introduced_at + 25 #@lift.standart_life
       else
         @date_of_decommiss = (@lift.overhauls.last.produced_at + @lift.overhauls.last.new_lifetime*365).strftime("%Y")
       end
@@ -114,7 +114,7 @@ before_filter :signed_in_user
         end
       end
       @title = 'Результаты поиска по запросу "' + params[:search] + '"'
-      @link_name = 'ПТО'
+      @link_name = 'ЕТО'
     end
   end
 
@@ -123,6 +123,14 @@ before_filter :signed_in_user
     respond_to do |format|
       format.html
       format.xls # { render text: @lifts.to_csv }
+    end
+  end
+
+  def schedule_chart
+    @lifts = Lift.all
+    respond_to do |format|
+      format.html
+      format.xls
     end
   end
 

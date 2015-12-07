@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+	xmlns:o="urn:schemas-microsoft-com:office:office"
+	xmlns:x="urn:schemas-microsoft-com:office:excel"
+	xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+	xmlns:html="http://www.w3.org/TR/REC-html40">
+	<Worksheet ss:Name="План-график">
+		<Table>
+		<% i = 0 %>
+			<Row>
+				<Cell><Data ss:Type="String">№ пп</Data></Cell>
+				<Cell><Data ss:Type="String">Рег.№</Data></Cell>
+				<Cell><Data ss:Type="String">Владелец</Data></Cell>
+				<Cell><Data ss:Type="String">Адрес</Data></Cell>
+				<Cell><Data ss:Type="String">Подъезд</Data></Cell>
+				<Cell><Data ss:Type="String">Кол-во остановок</Data></Cell>
+				<Cell><Data ss:Type="String">Назн.</Data></Cell>
+				<Cell><Data ss:Type="String">Г/п</Data></Cell>
+				<Cell><Data ss:Type="String">Первое испытание</Data></Cell>
+				<Cell><Data ss:Type="String">Эксперт</Data></Cell>
+				<Cell><Data ss:Type="String">ЗАО/ООО</Data></Cell>
+				<Cell><Data ss:Type="String">Месяц</Data></Cell>
+				<Cell><Data ss:Type="String">№ договора</Data></Cell>
+				<Cell><Data ss:Type="String">Дата ТО</Data></Cell>
+			</Row>
+		<% @lifts.each do |l| %>
+			<Row>
+				<% i += 1 %>
+			    <Cell><Data ss:Type="Number"><%= i %></Data></Cell>
+					<Cell><Data ss:Type="String"><%= l.regnum %></Data></Cell>
+
+				<% if l.contract.nil? %>
+					<Cell><Data ss:Type="String">n/a</Data></Cell>
+				<% elsif l.contract.partner.nil? %>
+					<Cell><Data ss:Type="String">n/a</Data></Cell>
+				<% else %>
+					<Cell><Data ss:Type="String"><%= l.contract.partner.name %></Data></Cell>
+				<% end %>
+
+				<% if l.porch.nil? %>
+					<Cell><Data ss:Type="String">n/a</Data></Cell>
+					<Cell><Data ss:Type="String">n/a</Data></Cell>
+				<% else %>
+					<Cell><Data ss:Type="String"><%= l.porch.build.street.name + ', ' + l.porch.build.name %></Data></Cell>
+					<Cell><Data ss:Type="String"><%= l.porch.name %></Data></Cell>
+				<% end %>
+
+					<Cell><Data ss:Type="Number"><%= l.stopscount %></Data></Cell>
+					<Cell><Data ss:Type="String"><%= l.function %></Data></Cell>
+					<Cell><Data ss:Type="Number"><%= l.capacity %></Data></Cell>
+					<Cell><Data ss:Type="String"><%= l.introduced_at %></Data></Cell>
+
+				<% if l.expert.nil? %>
+					<Cell><Data ss:Type="String">n/a</Data></Cell>
+				<% else %>
+					<Cell><Data ss:Type="String"><%= l.expert.partner.name %></Data></Cell>
+				<% end %>
+
+				<% if l.tlr.nil? %>
+					<Cell><Data ss:Type="String">n/a</Data></Cell>
+				<% else %>
+					<Cell><Data ss:Type="String"><%= l.tlr.name %></Data></Cell>
+				<% end %>
+
+				<% if l.inspections.last.nil? %>
+					<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+      		<Cell><Data ss:Type="String"><%= Russian::strftime(l.inspections.last.inspection_at, "%B") %></Data></Cell>
+      	<% end %>
+
+      	<% if l.contract.nil? %>
+					<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+					<Cell><Data ss:Type="String"><%= l.contract.number %></Data></Cell>
+				<% end %>
+
+				<% if l.inspections.last.nil? %>
+					<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+      		<Cell><Data ss:Type="String"><%= Russian::strftime(l.inspections.last.inspection_at, "%d %B %Y г.") %></Data></Cell>
+      	<% end %>
+
+				</Row>
+			<% end %>
+		</Table>
+	</Worksheet>
+</Workbook>

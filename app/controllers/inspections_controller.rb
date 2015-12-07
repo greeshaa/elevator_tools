@@ -43,7 +43,7 @@ before_filter :signed_in_user
 	def overdue
 		store_location
 		@inspections = Inspection.where(active: true).where(next_inspection_at: (Date.today - Time.now.to_a[7])..(Date.today - 1.day))
-		@title = 'Лифты с просроченным ПТО'
+		@title = 'Лифты с просроченным ЕТО'
 		render 'index'
 	end
 
@@ -57,14 +57,14 @@ before_filter :signed_in_user
 	def next
 		store_location
 		@inspections = Inspection.where(next_inspection_at: Date.today..(Date.today + 7.day)).order(:next_inspection_at)
-		@title = 'Лифты с ПТО запланированным на следующую неделю'
+		@title = 'Лифты с ЕТО запланированным на следующую неделю'
 		render 'index'
 	end
 
 	def last
 		store_location
 		@inspections = Inspection.where(created_at: (Date.today - 7.day)..Date.today + 1.day).order(:created_at)
-		@title = 'Лифты с ПТО на прошедшей неделе'
+		@title = 'Лифты с ЕТО на прошедшей неделе'
 		render 'index'
 	end
 
@@ -78,7 +78,7 @@ before_filter :signed_in_user
 		smonth    = date.at_beginning_of_month
 		emonth    = date.at_end_of_month
 		@inspections = Inspection.where(active: true).where(next_inspection_at: smonth..emonth)
-		@title = 'Лифты с ПТО запланированными на ' + Russian::strftime(date, "%B") + ' ' + Russian::strftime(date, "%Y")
+		@title = 'Лифты с ЕТО запланированными на ' + Russian::strftime(date, "%B") + ' ' + Russian::strftime(date, "%Y")
 		render 'index'
 	end
 end

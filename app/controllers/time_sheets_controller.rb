@@ -20,22 +20,25 @@ class TimeSheetsController < ApplicationController
 	def create
 			mechanic = Mechanic.find(params[:time_sheet]["mechanic_id"])
 			if params[:date].nil? || params[:date] == "Выберите месяц"
-				date = DateTime.now
+				date  = DateTime.now
 				@date = date.to_s
 			else
-				date = DateTime.parse(params[:date])
+				date  = DateTime.parse(params[:date])
 				@date = params[:date]
 			end
 			smonth = date.beginning_of_month
 			emonth = date.end_of_month
-			holidays = []
+			holidays  = []
 			shortdays = []
-			holidays  << DateTime.parse('01.05.2015')
 			holidays  << DateTime.parse('04.05.2015')
 			holidays  << DateTime.parse('11.05.2015')
 			holidays  << DateTime.parse('12.06.2015')
+			holidays  << DateTime.parse('04.11.2015')
+			holidays  << DateTime.parse('01.05.2015')
+			holidays  << DateTime.parse('12.06.2015')
 			shortdays << DateTime.parse('08.05.2015')
 			shortdays << DateTime.parse('11.06.2015')
+			shortdays << DateTime.parse('31.12.2015')
 
 			if params[:vacation_start_at].blank? && params[:vacation_end_at].blank?
 				vacation_start = DateTime.parse('1970-01-01')

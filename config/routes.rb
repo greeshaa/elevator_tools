@@ -47,7 +47,9 @@ ElevatorTools::Application.routes.draw do
   get '/about',   to: 'static_pages#about'
   get '/handbook',   to: 'static_pages#handbook'
   get '/test',   to: 'static_pages#test'
+  #get '/#',   to: '#', :as => :grill
   get 'lifts_inspections',   to: 'lifts#inspections'
+  get 'lifts_schedule_chart',   to: 'lifts#schedule_chart'
   get 'lifts_list',   to: 'lifts#list'
   get 'fulliftsdata',   to: 'lifts#fulliftsdata'
   get 'equipment_stats', to: 'equipment#stats'

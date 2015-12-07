@@ -76,11 +76,12 @@
               <%= link_to "Все лифты", lifts_list_path, class: ('active' if (params[:controller] == 'lifts' and params[:action] == 'list')) %>
             </li>
             <li>
-              <a href="#">ПТО <span class="fa arrow"></span></a>
+              <a href="#">ЕТО <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level">
                   <li><%= link_to "По месяцам", month_inspections_path %></li>
                   <li><%= link_to "Сформировать", lifts_inspections_path %></li>
-                  <li><%= link_to "Выгрузить (excel)", lifts_inspections_path(format: "xls") %></li>
+                  <li><%= link_to "План-график", '#' %></li>
+                  <li><%= link_to "План-график (excel)", lifts_schedule_chart_path(format: "xls") %></li>
                 </ul>
               <!-- /.nav-third-level -->
             </li>
