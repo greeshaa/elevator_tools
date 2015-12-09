@@ -65,7 +65,21 @@
 				<% if l.inspections.last.nil? %>
 					<Cell><Data ss:Type="String"></Data></Cell>
 				<% else %>
+					<% if l.inspections.last.inspection_at.nil? %>
+						<Cell><Data ss:Type="String"></Data></Cell>
+					<% else %>
       		<Cell><Data ss:Type="String"><%= Russian::strftime(l.inspections.last.inspection_at, "%B") %></Data></Cell>
+      		<% end %>
+      	<% end %>
+
+				<% if l.inspections.last.nil? %>
+					<Cell><Data ss:Type="String"></Data></Cell>
+				<% else %>
+					<% if l.inspections.last.inspection_at.nil? %>
+						<Cell><Data ss:Type="String"></Data></Cell>
+					<% else %>
+      		<Cell><Data ss:Type="String"><%= Russian::strftime(l.inspections.last.inspection_at, "%B") %></Data></Cell>
+      		<% end %>
       	<% end %>
 
       	<% if l.contract.nil? %>
