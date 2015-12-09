@@ -14,7 +14,6 @@ module ApplicationHelper
 
   def page_header(page_title)
     if page_title.empty?
-      "??? Нет названия ???"
     else
       "#{page_title}"
     end

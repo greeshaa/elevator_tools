@@ -76,7 +76,7 @@
               <%= link_to "Все лифты", lifts_list_path, class: ('active' if (params[:controller] == 'lifts' and params[:action] == 'list')) %>
             </li>
             <li>
-              <a href="#">ЕТО <span class="fa arrow"></span></a>
+              <a href="#">ПТО <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level">
                   <li><%= link_to "По месяцам", month_inspections_path %></li>
                   <li><%= link_to "Сформировать", lifts_inspections_path %></li>
@@ -93,9 +93,11 @@
                 </ul>
               <!-- /.nav-third-level -->
             </li>
+            <!-- /
             <li><%= link_to "Ремонты", overhauls_path %></li>
             <li><%= link_to "Простои", downtimes_path %></li>
             <li><%= link_to ("<i class='fa fa-plus-circle'></i> Добавить лифт").html_safe, add_lift_path if current_user.admin? %></li>
+            -->
           </ul>
           <!-- /.nav-second-level -->
         </li>
@@ -141,12 +143,19 @@
           <%= link_to ("<i class='fa fa-users fa-fw'></i> Механики <span class='fa arrow'></span>").html_safe, "#",
                class: ('active' if params[:controller] == 'mechanics') %>
           <ul class="nav nav-second-level">
-            <li>
+          <li>
               <a href="#">Зарплата<span class="fa arrow"></span></a>
               <ul class="nav nav-third-level">
                 <li><%= link_to "Учет р. времени", timesheet_path %></li>
                 <li><%= link_to "Расчет ЗП", work_order_for_all_mech_path %></li>
                 <li><%= link_to "Расценки", prices_path %></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">Сервис<span class="fa arrow"></span></a>
+              <ul class="nav nav-third-level">
+                <li><%= link_to "Список", mechanics_all_path %></li>
+                <li><%= link_to "Добавить механика", new_mechanic_path %></li>
               </ul>
             </li>
           </ul>
