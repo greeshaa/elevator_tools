@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+	<?xml version="1.0" encoding="UTF-8"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
 	xmlns:o="urn:schemas-microsoft-com:office:office"
 	xmlns:x="urn:schemas-microsoft-com:office:excel"
@@ -78,7 +78,7 @@
 					<Cell><Data ss:Type="String"><%= l.contract.number %></Data></Cell>
 				<% end %>
 
-				<% if l.inspections.last.nil? %>
+				<% if l.inspections.last.inspection_at.nil? %>
 					<Cell><Data ss:Type="String"></Data></Cell>
 				<% else %>
       		<Cell><Data ss:Type="String"><%= Russian::strftime(l.inspections.last.inspection_at, "%d %B %Y г.") %></Data></Cell>
