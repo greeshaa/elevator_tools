@@ -6,7 +6,9 @@
 	xmlns:html="http://www.w3.org/TR/REC-html40">
 	<Worksheet ss:Name="Единый реестр">
 		<Table>
+		<% i = 0 %>
 			<Row>
+				<Cell><Data ss:Type="String">№ пп</Data></Cell>
 				<Cell><Data ss:Type="String">Адрес</Data></Cell>
 				<Cell><Data ss:Type="String">Подъезд</Data></Cell>
 				<Cell><Data ss:Type="String">Производитель</Data></Cell>
@@ -29,6 +31,8 @@
 			</Row>
 		<% @lifts.each do |l| %>
 			<Row>
+				<% i += 1 %>
+			    <Cell><Data ss:Type="Number"><%= i %></Data></Cell>
 				<% if l.porch.nil? %>
 				<Cell><Data ss:Type="String">Нет информации о расположении лифта</Data></Cell>
 				<Cell><Data ss:Type="String"></Data></Cell>
@@ -76,11 +80,14 @@
 				<Cell><Data ss:Type="String"><%= l.expert.partner.name %></Data></Cell>
 				<% end %>
 				<% if l.inspections.last.nil? %>
-				<Cell><Data ss:Type="String"></Data></Cell>
-				<Cell><Data ss:Type="String"></Data></Cell>
 				<% else %>
-      	<Cell><Data ss:Type="String"><%= l.inspections.last.inspection_at.strftime("%d.%m.%Y") %></Data></Cell>
-      	<Cell><Data ss:Type="String"><%= l.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></Data></Cell>
+					<% if l.inspections.last.inspection_at.nil? %>
+						<Cell><Data ss:Type="String"></Data></Cell>
+						<Cell><Data ss:Type="String"></Data></Cell>
+					<% else %>
+      			<Cell><Data ss:Type="String"><%= l.inspections.last.inspection_at.strftime("%d.%m.%Y") %></Data></Cell>
+      			<Cell><Data ss:Type="String"><%= l.inspections.last.next_inspection_at.strftime("%d.%m.%Y") %></Data></Cell>
+      		<% end %>
       	<% end %>
 			</Row>
 		<% end %>
