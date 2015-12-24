@@ -93,7 +93,7 @@ ElevatorTools::Application.routes.draw do
   get '/list_street',  to: 'streets#list'
   get '/add_build',  to: 'builds#new'
   get '/add_node',  to: 'nodes#new'
-  get '/add_lift', to: 'lifts#new'
+  get '/add_lift', to: 'lifts#new', as: :add_lift
   get '/add_e_type', to: 'equipment_types#new'
   get '/add_e_list', to: 'equipment_lists#new'
   get '/add_equipment', to: 'equipment#new'

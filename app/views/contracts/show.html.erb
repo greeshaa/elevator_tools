@@ -11,7 +11,11 @@
     			<table class="table table-condensed table-striped">
     				<tr>
               <td>Договор</td>
+              <% if @contract.tlr.id == 3 %>
+              <td><%= @contract.tlr.name + ' Томсклифтремонт' if @contract.tlr.id == 3 %></td>
+              <% else %>
               <td><%= @contract.tlr.name + ' Томсклифтремонт' if @contract.tlr != nil %></td>
+              <% end %>
             </tr>
             <tr>
     					<td>Контрагент</td>
@@ -60,6 +64,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">Обслуживаемые лифты
         <div class="btn-group btn-group-xs pull-right">
+          <%= link_to "Добавить лифт к договору", add_lift_path, class:"btn btn-default btn-xs" %>
           <%= link_to "Привязать лифты к другому договору", contracts_lift_move_zo_path, class:"btn btn-default btn-xs" %>
           <%= link_to "Изменить", contracts_lifts_move_path, class:"btn btn-default btn-xs" %>
         </div>

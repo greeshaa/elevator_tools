@@ -46,6 +46,12 @@ before_filter :signed_in_user
 
 	end
 
+	def destroy
+    @contract = Contract.find(params[:id]).destroy
+    flash[:success] = "Договор " + @contract.number + " успешно удален"
+    redirect_back_or_default(store_location)
+  end
+
 	def lift_move
 		@contract  = Contract.find(params[:id])
 		@contracts = Contract.all.order(:number)

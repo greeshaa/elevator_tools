@@ -54,9 +54,13 @@
       <% end %>
     <% end %>
     <% if lift.inspections.last != nil %>
-    <td class="td_center <%= 'danger' if lift.inspections.last.next_inspection_at < Date.today %> <%= 'warning' if lift.inspections.last.next_inspection_at == Date.today %>" >
-      <%= lift.inspections.last.next_inspection_at.strftime("%d.%m.%Y")  if lift.inspections.last != nil %>
-    </td>
+      <% if lift.inspections.last.next_inspection_at.nil? %>
+      <% else %>
+      <td class="td_center <%= 'danger' if lift.inspections.last.next_inspection_at < Date.today %>
+                           <%= 'warning' if lift.inspections.last.next_inspection_at == Date.today %>" >
+      <%= lift.inspections.last.next_inspection_at.strftime("%d.%m.%Y") if lift.inspections.last != nil %>
+      </td>
+      <% end %>
     <% else %>
     <td><span class="label label-warning">Нет информации</span></td>
     <% end %>

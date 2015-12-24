@@ -7,6 +7,12 @@
       <fieldset>
         <legend>Новый договор</legend>
         <div class="form-group">
+          <%= f.label :tlr_id, "Договор с :", class:"col-md-4 control-label"  %>
+          <div class="col-md-6">
+          <%= f.select :tlr_id, options_for_select([['ЗАО', 1], ['ООО', 2], ['ООО ЛС', 3]]), {}, class:"form-control input-sm" %>
+          </div>
+        </div>
+        <div class="form-group">
           <%= f.label :number, "Номер:", class:"col-md-4 control-label"  %>
           <div class="col-md-6">
             <%= f.text_field :number, {class: "form-control input-sm"} %>
